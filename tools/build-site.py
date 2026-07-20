@@ -13,6 +13,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / "_site"
 
+CONTACT_EMAIL = "wheldfo23@gmail.com"
+# GoatCounter 코드 (가입 후 예: "jasonsconsulting" → 자동으로 방문 통계 삽입, 비우면 미삽입)
+GOATCOUNTER_CODE = ""
+
 DEMOS = [
     {"slug": "pilates-studio", "name": "고요 필라테스", "industry": "필라테스 · 성수", "glyph": "高",
      "grad": "linear-gradient(150deg,#3F5138,#5E7351)", "desc": "1:1 프라이빗 스튜디오 — 체험 예약 전환 중심"},
@@ -75,7 +79,8 @@ __CARDS__
   <div class="pitch">
     <h3 class="serif">내 가게 버전이 궁금하다면</h3>
     <p>업체명과 연락처만 알려주세요. 48시간 안에 샘플을 만들어 보내드립니다.</p>
-    <a class="cta" href="mailto:hello@example.com?subject=%EB%9E%9C%EB%94%A9%ED%8E%98%EC%9D%B4%EC%A7%80%20%EC%83%98%ED%94%8C%20%EC%9A%94%EC%B2%AD">무료 샘플 요청하기</a>
+    <a class="cta" href="mailto:__EMAIL__?subject=%EB%9E%9C%EB%94%A9%ED%8E%98%EC%9D%B4%EC%A7%80%20%EC%83%98%ED%94%8C%20%EC%9A%94%EC%B2%AD&body=%EC%97%85%EC%B2%B4%EB%AA%85%3A%20%0A%EC%97%85%EC%A2%85%3A%20%0A%EC%97%B0%EB%9D%BD%EC%B2%98%3A%20">무료 샘플 요청하기</a>
+    <p style="margin-top:14px;font-size:13px;color:var(--muted)">이메일: __EMAIL__ · 업체명·업종만 보내주시면 됩니다</p>
   </div>
 </main>
 <footer>© 2026 Jason's Consulting · 데모의 업체는 모두 가상입니다</footer>
@@ -94,12 +99,20 @@ CARD = """    <a class="card" href="{slug}/">
     </a>"""
 
 
+def analytics_snippet() -> str:
+    if not GOATCOUNTER_CODE:
+        return ""
+    return (f'<script data-goatcounter="https://{GOATCOUNTER_CODE}.goatcounter.com/count" '
+            'async src="//gc.zgo.at/count.js"></script>')
+
+
 def main() -> None:
     if SITE.exists():
         shutil.rmtree(SITE)
     SITE.mkdir()
     (SITE / ".nojekyll").write_text("")
 
+    snippet = analytics_snippet()
     missing = []
     for d in DEMOS:
         src = ROOT / "demo" / d["slug"]
@@ -107,9 +120,16 @@ def main() -> None:
             missing.append(d["slug"])
             continue
         shutil.copytree(src, SITE / d["slug"])
+        if snippet:  # 배포본에만 방문 통계 삽입 (원본 데모는 깨끗하게 유지)
+            page = SITE / d["slug"] / "index.html"
+            page.write_text(page.read_text(encoding="utf-8").replace(
+                "</body>", snippet + "\n</body>"), encoding="utf-8")
 
     cards = "\n".join(CARD.format(**d) for d in DEMOS if d["slug"] not in missing)
-    (SITE / "index.html").write_text(HUB.replace("__CARDS__", cards), encoding="utf-8")
+    hub = HUB.replace("__CARDS__", cards).replace("__EMAIL__", CONTACT_EMAIL)
+    if snippet:
+        hub = hub.replace("</body>", snippet + "\n</body>")
+    (SITE / "index.html").write_text(hub, encoding="utf-8")
 
     # 광고 영상도 함께 배포 — 폰에서 바로 내려받아 릴스/쇼츠에 올릴 수 있는 공개 URL
     ad_video = ROOT / "tools/video-ad/jasons-ad-15s.mp4"

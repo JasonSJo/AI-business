@@ -430,7 +430,20 @@ $('#btnExport').onclick = () => {
   const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'});
   const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: 'jc-kpi-백업-' + new Date().toISOString().slice(0,10) + '.json' });
   a.click(); URL.revokeObjectURL(a.href);
+  localStorage.setItem('jc-kpi-last-export', Date.now());
+  const w = document.getElementById('backupWarn'); if(w) w.remove();
 };
+// 백업 리마인더: 기록이 있는데 7일 넘게 내보내기를 안 했으면 경고 (데이터는 이 브라우저에만 있으므로)
+(function(){
+  if(!state.entries.length) return;
+  const last = +localStorage.getItem('jc-kpi-last-export') || 0;
+  if(Date.now() - last < 7*24*3600*1000) return;
+  const bar = document.createElement('div');
+  bar.id = 'backupWarn';
+  bar.style.cssText = 'max-width:1080px;margin:14px auto 0;padding:10px 16px;background:var(--warn-bg);color:var(--warn-ink);border-radius:10px;font-size:13px;font-weight:600';
+  bar.textContent = '⚠ 백업한 지 7일이 지났습니다 — 데이터는 이 브라우저에만 저장되니 아래 "JSON 내보내기"로 백업하세요.';
+  document.querySelector('header').after(bar);
+})();
 $('#btnImport').onclick = () => $('#importFile').click();
 $('#importFile').onchange = ev => {
   const f = ev.target.files[0]; if(!f) return;
