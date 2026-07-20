@@ -31,6 +31,7 @@ python3 pipeline.py --leads tools/cold-email-generator/leads.sample.csv --sender
 ## 문서
 
 - **[30일 첫 수익 실행 로드맵](docs/30일-수익-실행-로드맵.md)** — 무엇을 팔지, 누구에게, 얼마에, 어디서 찾을지 + 일별 실행 계획과 복붙 템플릿.
+- **[결제 세팅 가이드](docs/결제-세팅-가이드.md)** — 사업자등록·계좌 분리·현금영수증·카드 링크결제·세금 달력 + 입금 요청 메시지 템플릿.
 
 ## 영업용 데모 (4종)
 
@@ -48,6 +49,7 @@ python3 pipeline.py --leads tools/cold-email-generator/leads.sample.csv --sender
 - **[랜딩페이지 생성기](tools/landing-generator/)** — 고객 정보 JSON → 랜딩페이지 자동 생성. 새 고객 페이지 10분 컷.
 - **[콜드 아웃리치 생성기](tools/cold-email-generator/)** — 리드 CSV → 업종·채널별 개인화 메시지 대량 생성 + 발송 체크리스트. 한국어 조사 자동 처리.
 - **[KPI 대시보드](tools/kpi-dashboard/)** — 발송→응답→미팅→계약 퍼널을 매일 기록, 병목 자동 진단 + 처방. 단일 HTML(브라우저에서 바로 열기).
+- **[견적서·청구서](tools/invoice/청구서.html)** — 클릭해서 수정 → 인쇄/PDF. 부가세 자동 계산, 계좌·사업자 정보 자동 저장, 견적서↔청구서 전환.
 
 ## 로드맵
 
