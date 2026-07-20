@@ -52,6 +52,7 @@ python3 pipeline.py --leads tools/cold-email-generator/leads.sample.csv --sender
 - **[콜드 아웃리치 생성기](tools/cold-email-generator/)** — 리드 CSV → 업종·채널별 개인화 메시지 대량 생성 + 발송 체크리스트. 한국어 조사 자동 처리.
 - **[KPI 대시보드](tools/kpi-dashboard/)** — 발송→응답→미팅→계약 퍼널을 매일 기록, 병목 자동 진단 + 처방. 단일 HTML(브라우저에서 바로 열기).
 - **[견적서·청구서](tools/invoice/청구서.html)** — 클릭해서 수정 → 인쇄/PDF. 부가세 자동 계산, 계좌·사업자 정보 자동 저장, 견적서↔청구서 전환.
+- **[광고 런처](tools/ads-launcher/)** — config 하나로 유튜브(구글 애즈)·인스타(메타) 캠페인 실행 시트 자동 생성. 계정 로그인/카드 등록(본인만 가능한 15분)을 빼면 전부 붙여넣기.
 
 ## 로드맵
 
