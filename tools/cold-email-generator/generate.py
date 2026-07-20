@@ -32,6 +32,14 @@ from pathlib import Path
 
 BASE = Path(__file__).resolve().parent
 
+# 업종 → 배포된 데모 경로 (--base-url 사용 시 자동 매핑)
+DEMO_PATHS = {
+    "dental": "dental-clinic/",
+    "salon": "hair-salon/",
+    "cafe": "cafe/",
+    "pilates": "pilates-studio/",
+}
+
 
 def safe_name(text: str) -> str:
     return re.sub(r'[\\/:*?"<>|\s]+', "-", text).strip("-") or "무제"
@@ -74,6 +82,9 @@ def main() -> None:
     ap.add_argument("--sender", required=True, help="발신자 이름 (서명에 들어감)")
     ap.add_argument("--demo-url", default="(데모 URL을 넣으세요)",
                     help="기본 데모 링크 (리드별 demo_url 컬럼이 우선)")
+    ap.add_argument("--base-url", default=None,
+                    help="배포 사이트 루트 URL — 업종별 데모 경로를 자동으로 붙인다 "
+                         "(예: https://jasonsjo.github.io/AI-business/)")
     ap.add_argument("--out", default=str(BASE / "out"), help="출력 폴더 (기본: out/)")
     args = ap.parse_args()
 
@@ -91,6 +102,7 @@ def main() -> None:
         "| # | 업체 | 채널 | 연락처 | 파일 | 발송 | 응답 |",
         "|---|---|---|---|---|---|---|",
     ]
+    center_leads = []
     skipped = 0
     for i, lead in enumerate(rows, 1):
         business = (lead.get("business") or "").strip()
@@ -102,8 +114,13 @@ def main() -> None:
         industry = lead.get("industry") or "default"
         tpl = pick_template(templates, channel, industry)
 
-        subject = fill(tpl.get("subject", ""), lead, args.sender, args.demo_url)
-        body = fill(tpl["body"], lead, args.sender, args.demo_url)
+        # 데모 링크 우선순위: 리드별 demo_url > base_url+업종경로 > --demo-url
+        demo_url = args.demo_url
+        if args.base_url:
+            demo_url = args.base_url.rstrip("/") + "/" + DEMO_PATHS.get(industry, "")
+
+        subject = fill(tpl.get("subject", ""), lead, args.sender, demo_url)
+        body = fill(tpl["body"], lead, args.sender, demo_url)
 
         parts = [f"[받는 곳] {lead.get('contact') or '(연락처 미입력)'}",
                  f"[채널] {channel} / [업종 템플릿] {industry}"]
@@ -118,13 +135,31 @@ def main() -> None:
         index_lines.append(
             f"| {i} | {business} | {channel} | {lead.get('contact') or '-'} | {fname} | ☐ | ☐ |"
         )
+        center_leads.append({
+            "business": business,
+            "contact": lead.get("contact") or "",
+            "channel": channel,
+            "subject": subject,
+            "body": body,
+            "warn": not lead.get("observation"),
+        })
 
     (out_dir / "전체목록.md").write_text("\n".join(index_lines) + "\n", encoding="utf-8")
+
+    # 발송 센터 HTML — 클릭 발송(mailto)/복사 + 완료 체크 + KPI 내보내기
+    center_tpl = (BASE / "send-center-template.html").read_text(encoding="utf-8")
+    today = __import__("datetime").date.today().isoformat()
+    center = (center_tpl
+              .replace("__DATA__", json.dumps(center_leads, ensure_ascii=False))
+              .replace("__DATE__", today))
+    (out_dir / "발송센터.html").write_text(center, encoding="utf-8")
+
     made = len(rows) - skipped
     print(f"생성 완료: {made}건 → {out_dir}/")
     if skipped:
         print(f"건너뜀: 업체명 없는 행 {skipped}건")
     print(f"발송 체크리스트: {out_dir / '전체목록.md'}")
+    print(f"발송 센터:      {out_dir / '발송센터.html'}  ← 브라우저로 여세요")
 
 
 if __name__ == "__main__":

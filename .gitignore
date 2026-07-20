@@ -7,3 +7,4 @@ tools/cold-email-generator/*.csv
 
 # 실제 고객 납품물
 clients/
+_site/

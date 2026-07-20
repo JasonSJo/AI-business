@@ -438,8 +438,14 @@ $('#importFile').onchange = ev => {
     try{
       const s = JSON.parse(t);
       if(!Array.isArray(s.entries)) throw 0;
-      Object.assign(state, { entries: s.entries, goalRev: s.goalRev || state.goalRev, goalSent: s.goalSent || state.goalSent });
+      // 병합: 같은 id는 새 값으로 덮고, 나머지는 유지 (발송센터 KPI JSON도 그대로 합쳐진다)
+      const map = new Map(state.entries.map(e => [e.id, e]));
+      s.entries.forEach(e => { if(e && e.id && e.d) map.set(e.id, e); });
+      state.entries = [...map.values()];
+      if(s.goalRev) state.goalRev = s.goalRev;
+      if(s.goalSent) state.goalSent = s.goalSent;
       save(); renderAll();
+      alert('가져오기 완료: 현재 ' + state.entries.length + '건 (같은 id는 갱신, 나머지는 유지)');
     }catch{ alert('올바른 백업 파일이 아닙니다.'); }
   });
   ev.target.value = '';

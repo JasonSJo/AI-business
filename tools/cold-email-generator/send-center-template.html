@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>발송 센터 · Jason's Consulting</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root{--cream:#F4EFE6;--ink:#23281F;--soft:#4B4E42;--muted:#8A8474;--line:rgba(35,40,31,.12);
+        --teal:#00806A;--clay:#C0784F;--clay-d:#A5603A;--good-bg:#DFF0E7;--good-ink:#1D5B41}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Pretendard',sans-serif;background:var(--cream);color:var(--ink);line-height:1.55;padding-bottom:70px;-webkit-font-smoothing:antialiased}
+  .serif{font-family:'Gowun Batang',serif}
+  .wrap{max-width:860px;margin:0 auto;padding:0 18px}
+  header{padding:34px 0 18px}
+  h1{font-size:21px}
+  .sub{font-size:13px;color:var(--muted);margin-top:3px}
+  .bar{position:sticky;top:0;z-index:10;background:rgba(244,239,230,.92);backdrop-filter:blur(10px);
+       border-bottom:1px solid var(--line);padding:12px 0;margin-bottom:18px}
+  .bar-in{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .count{font-family:'Gowun Batang',serif;font-size:22px}
+  .count small{font-size:13px;color:var(--muted);font-family:'Pretendard'}
+  .btn{border:none;cursor:pointer;font:inherit;font-weight:600;border-radius:100px;transition:.2s;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+  .btn-kpi{background:var(--ink);color:var(--cream);padding:10px 18px;font-size:13px;margin-left:auto}
+  .btn-kpi:hover{background:#3F5138}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:12px;transition:.25s}
+  .card.done{opacity:.55}
+  .row1{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .biz{font-weight:700;font-size:16px}
+  .tag{font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:100px;background:var(--cream);color:var(--soft);border:1px solid var(--line)}
+  .tag.email{color:var(--teal)}
+  .tag.dm{color:var(--clay-d)}
+  .contact{font-size:12.5px;color:var(--muted)}
+  .subj{font-size:13.5px;color:var(--soft);margin-top:8px}
+  details{margin-top:8px}
+  summary{font-size:12.5px;color:var(--muted);cursor:pointer;user-select:none}
+  pre{white-space:pre-wrap;font:inherit;font-size:13.5px;color:var(--soft);background:var(--cream);border-radius:10px;padding:12px 14px;margin-top:8px}
+  .acts{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+  .b-open{background:var(--clay);color:#fff;padding:9px 18px;font-size:13px}
+  .b-open:hover{background:var(--clay-d)}
+  .b-copy{background:transparent;border:1px solid var(--line);color:var(--soft);padding:9px 16px;font-size:13px}
+  .b-copy:hover{border-color:var(--ink);color:var(--ink)}
+  .b-done{background:transparent;border:1px solid var(--line);color:var(--soft);padding:9px 16px;font-size:13px}
+  .card.done .b-done{background:var(--good-bg);color:var(--good-ink);border-color:transparent}
+  .note{font-size:12px;color:var(--muted);margin:20px 0 40px;text-align:center}
+  .warnrow{font-size:12px;color:#8A4B08;background:#FBEAD3;border-radius:8px;padding:6px 10px;margin-top:8px;display:inline-block}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1 class="serif">발송 센터</h1>
+    <div class="sub">생성일 __DATE__ · 버튼 한 번으로 발송하고, 완료를 체크하면 KPI로 내보낼 수 있습니다</div>
+  </header>
+  <div class="bar"><div class="wrap bar-in">
+    <span class="count"><b id="done">0</b>/<span id="total">0</span> <small>발송 완료</small></span>
+    <button class="btn btn-kpi" id="kpiBtn">✓ 완료분 KPI JSON 내보내기</button>
+  </div></div>
+  <div id="list"></div>
+  <p class="note">KPI JSON은 대시보드(tools/kpi-dashboard)의 "JSON 가져오기"로 불러오면 오늘 발송 건수로 합쳐집니다.<br>완료 체크는 이 브라우저에 저장됩니다.</p>
+</div>
+<script>
+const LEADS = __DATA__;
+const SKEY = 'jc-send-' + '__DATE__';
+let doneSet = new Set(JSON.parse(localStorage.getItem(SKEY) || '[]'));
+const $ = s => document.querySelector(s);
+
+function render(){
+  $('#total').textContent = LEADS.length;
+  $('#done').textContent = doneSet.size;
+  $('#list').innerHTML = LEADS.map((l, i) => {
+    const isDone = doneSet.has(i);
+    const mailto = l.channel === 'email' && l.contact.includes('@')
+      ? 'mailto:' + encodeURIComponent(l.contact) + '?subject=' + encodeURIComponent(l.subject) + '&body=' + encodeURIComponent(l.body)
+      : null;
+    return '<div class="card' + (isDone ? ' done' : '') + '" id="c' + i + '">' +
+      '<div class="row1"><span class="biz">' + esc(l.business) + '</span>' +
+      '<span class="tag ' + l.channel + '">' + (l.channel === 'email' ? '이메일' : 'DM') + '</span>' +
+      '<span class="contact">' + esc(l.contact || '연락처 없음') + '</span></div>' +
+      (l.subject ? '<div class="subj">제목: ' + esc(l.subject) + '</div>' : '') +
+      '<details><summary>본문 보기</summary><pre>' + esc(l.body) + '</pre></details>' +
+      (l.warn ? '<span class="warnrow">⚠ 개인화 한 줄이 비었습니다 — 채워서 보내세요</span>' : '') +
+      '<div class="acts">' +
+      (mailto ? '<a class="btn b-open" href="' + mailto + '">✉ 메일 열기</a>' : '') +
+      '<button class="btn b-copy" data-copy="' + i + '">본문 복사</button>' +
+      '<button class="btn b-done" data-done="' + i + '">' + (isDone ? '✓ 발송 완료' : '완료 표시') + '</button>' +
+      '</div></div>';
+  }).join('');
+}
+function esc(t){ const d = document.createElement('div'); d.textContent = t || ''; return d.innerHTML; }
+
+document.addEventListener('click', ev => {
+  const c = ev.target.closest('[data-copy]');
+  if(c){
+    navigator.clipboard.writeText(LEADS[+c.dataset.copy].body).then(() => {
+      c.textContent = '복사됨 ✓'; setTimeout(() => c.textContent = '본문 복사', 1200);
+    });
+  }
+  const d = ev.target.closest('[data-done]');
+  if(d){
+    const i = +d.dataset.done;
+    doneSet.has(i) ? doneSet.delete(i) : doneSet.add(i);
+    localStorage.setItem(SKEY, JSON.stringify([...doneSet]));
+    render();
+  }
+});
+
+$('#kpiBtn').onclick = () => {
+  if(!doneSet.size){ alert('완료 표시된 발송이 없습니다.'); return; }
+  const today = new Date().toISOString().slice(0,10);
+  const payload = { entries: [{
+    id: 'sc-' + today, d: today,
+    sent: doneSet.size, rep: 0, mtg: 0, deal: 0, rev: 0,
+    memo: '발송센터 기록 (' + '__DATE__' + ' 생성분)'
+  }]};
+  const blob = new Blob([JSON.stringify(payload, null, 2)], {type: 'application/json'});
+  const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: 'kpi-발송기록-' + today + '.json' });
+  a.click(); URL.revokeObjectURL(a.href);
+};
+
+render();
+</script>
+</body>
+</html>

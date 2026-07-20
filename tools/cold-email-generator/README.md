@@ -6,12 +6,20 @@
 
 ```bash
 cd tools/cold-email-generator
+# 배포 사이트가 있으면 --base-url: 업종별 데모 링크가 자동으로 붙는다
+python3 generate.py leads.sample.csv --sender 제이슨 \
+    --base-url https://jasonsjo.github.io/AI-business/
+
+# 배포 전이면 단일 링크로
 python3 generate.py leads.sample.csv --sender 제이슨 --demo-url https://내데모주소
 ```
 
 출력:
-- `out/NNN-업체명.txt` — 리드별 발송용 메시지 (복사해서 바로 발송)
+- **`out/발송센터.html`** — 브라우저로 열어 **클릭 발송**: 이메일 리드는 "메일 열기"(제목·본문 자동 입력), DM 리드는 "본문 복사". 완료 체크 후 "KPI JSON 내보내기" → 대시보드 "JSON 가져오기"로 오늘 발송량이 자동 기록된다.
+- `out/NNN-업체명.txt` — 리드별 발송용 메시지 (수동 발송용)
 - `out/전체목록.md` — 발송/응답 체크리스트
+
+`--base-url` 지정 시 업종→데모 매핑: dental→`dental-clinic/`, salon→`hair-salon/`, cafe→`cafe/`, pilates→`pilates-studio/` (그 외는 허브 루트).
 
 ## 리드 CSV 작성법
 
