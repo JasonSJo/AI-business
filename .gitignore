@@ -8,3 +8,6 @@ tools/cold-email-generator/*.csv
 # 실제 고객 납품물
 clients/
 _site/
+
+# 영상 녹화 중간 산출물
+tools/video-ad/out/
