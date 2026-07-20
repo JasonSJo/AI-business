@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Jason's Consulting — 배포용 사이트 빌더.
+"""Jason's Consulting — 배포용 사이트 빌더 (Pages 자동 배포용).
 
 demo/ 폴더의 데모들을 _site/로 모으고, 포트폴리오 허브(index.html)를 생성한다.
 GitHub Actions(Pages 배포)와 로컬 미리보기 양쪽에서 쓴다.
