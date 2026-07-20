@@ -5,7 +5,7 @@ demo/ 폴더의 데모들을 _site/로 모으고, 포트폴리오 허브(index.h
 GitHub Actions(Pages 배포)와 로컬 미리보기 양쪽에서 쓴다.
 
 사용법:
-    python3 tools/build-site.py            # 저장소 루트에서 실행 → _site/ 생성
+    python3 tools/build-site.py            # 저장소 루트에서 실행 → _site/ 생성 (Pages 워크플로가 사용)
 """
 import shutil
 from pathlib import Path
