@@ -53,6 +53,7 @@ python3 pipeline.py --leads tools/cold-email-generator/leads.sample.csv --sender
 - **[KPI 대시보드](tools/kpi-dashboard/)** — 발송→응답→미팅→계약 퍼널을 매일 기록, 병목 자동 진단 + 처방. 단일 HTML(브라우저에서 바로 열기).
 - **[견적서·청구서](tools/invoice/청구서.html)** — 클릭해서 수정 → 인쇄/PDF. 부가세 자동 계산, 계좌·사업자 정보 자동 저장, 견적서↔청구서 전환.
 - **[광고 런처](tools/ads-launcher/)** — config 하나로 유튜브(구글 애즈)·인스타(메타) 캠페인 실행 시트 자동 생성. 계정 로그인/카드 등록(본인만 가능한 15분)을 빼면 전부 붙여넣기.
+- **[유튜브 자동 업로더](tools/youtube-uploader/)** — 공식 OAuth 기기 인증으로 영상 자동 업로드 (비밀번호 불사용). 최초 1회 코드 승인 후엔 명령 한 줄. ⚠ 미검증 API 프로젝트는 업로드가 비공개로 잠기는 유튜브 정책 참고.
 
 ## 로드맵
 

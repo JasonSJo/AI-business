@@ -11,3 +11,7 @@ _site/
 
 # 영상 녹화 중간 산출물
 tools/video-ad/out/
+
+# 유튜브 업로더 자격증명 (커밋 금지)
+tools/youtube-uploader/client_secret.json
+tools/youtube-uploader/token.json
