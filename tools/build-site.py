@@ -111,6 +111,12 @@ def main() -> None:
     cards = "\n".join(CARD.format(**d) for d in DEMOS if d["slug"] not in missing)
     (SITE / "index.html").write_text(HUB.replace("__CARDS__", cards), encoding="utf-8")
 
+    # 광고 영상도 함께 배포 — 폰에서 바로 내려받아 릴스/쇼츠에 올릴 수 있는 공개 URL
+    ad_video = ROOT / "tools/video-ad/jasons-ad-15s.mp4"
+    if ad_video.exists():
+        (SITE / "ad").mkdir(exist_ok=True)
+        shutil.copy2(ad_video, SITE / "ad" / "jasons-ad-15s.mp4")
+
     print(f"빌드 완료: {SITE} (데모 {len(DEMOS) - len(missing)}종 + 허브)")
     if missing:
         print(f"[경고] 누락된 데모: {', '.join(missing)} — tools/landing-generator로 먼저 생성하세요")
