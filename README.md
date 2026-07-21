@@ -51,6 +51,7 @@ python3 pipeline.py --leads tools/cold-email-generator/leads.sample.csv --sender
 ## 도구
 
 - **[랜딩페이지 생성기](tools/landing-generator/)** — 고객 정보 JSON → 랜딩페이지 자동 생성. 새 고객 페이지 10분 컷.
+- **[리드 수집기](tools/lead-collector/)** — 지도·인스타 보다가 20초 캡처(업종 칩·관찰 문구 탭) → 생성기 형식 CSV 내보내기. 브라우저 저장.
 - **[콜드 아웃리치 생성기](tools/cold-email-generator/)** — 리드 CSV → 업종·채널별 개인화 메시지 대량 생성 + 발송 체크리스트. 한국어 조사 자동 처리.
 - **[KPI 대시보드](tools/kpi-dashboard/)** — 발송→응답→미팅→계약 퍼널을 매일 기록, 병목 자동 진단 + 처방. 단일 HTML(브라우저에서 바로 열기).
 - **[견적서·청구서](tools/invoice/청구서.html)** — 클릭해서 수정 → 인쇄/PDF. 부가세 자동 계산, 계좌·사업자 정보 자동 저장, 견적서↔청구서 전환.
