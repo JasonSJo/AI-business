@@ -16,6 +16,8 @@ SITE = ROOT / "_site"
 CONTACT_EMAIL = "wheldfo23@gmail.com"
 # GoatCounter 코드 (가입 후 예: "jasonsconsulting" → 자동으로 방문 통계 삽입, 비우면 미삽입)
 GOATCOUNTER_CODE = ""
+# 커스텀 도메인 (예: "jasonsconsulting.kr") — tools/set-domain.py 가 설정. 비우면 github.io 사용
+CUSTOM_DOMAIN = ""
 
 DEMOS = [
     {"slug": "pilates-studio", "name": "고요 필라테스", "industry": "필라테스 · 성수", "glyph": "高",
@@ -118,6 +120,8 @@ def main() -> None:
         shutil.rmtree(SITE)
     SITE.mkdir()
     (SITE / ".nojekyll").write_text("")
+    if CUSTOM_DOMAIN:  # GitHub Pages 커스텀 도메인 바인딩
+        (SITE / "CNAME").write_text(CUSTOM_DOMAIN + "\n")
 
     snippet = analytics_snippet()
     missing = []
