@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="shared.css" />
+<style>
+  html,body{width:1080px;height:1080px}
+  .stage{position:absolute;inset:0;display:grid;place-items:center}
+  /* 인장 — 동심원 시스템 */
+  svg{position:absolute;inset:0}
+  .seal{
+    position:relative;width:560px;height:560px;border-radius:50%;
+    background:
+      radial-gradient(140% 120% at 30% 20%, var(--pine-l), var(--pine) 58%, #2E3C29 100%);
+    display:grid;place-items:center;
+    box-shadow:0 40px 90px -40px rgba(35,40,31,.55), inset 0 2px 0 rgba(255,255,255,.14);
+  }
+  .seal .j{
+    font-family:'Gowun Batang',serif;font-size:300px;color:var(--cream);line-height:1;
+    transform:translateY(-12px);
+  }
+  .seal .dot{
+    position:absolute;right:74px;bottom:86px;width:56px;height:56px;border-radius:50%;
+    background:var(--clay);box-shadow:inset 0 2px 3px rgba(255,255,255,.3);
+  }
+  .word{position:absolute;left:0;right:0;bottom:118px;text-align:center}
+  .word .nm{font-family:'DM Mono',monospace;font-size:34px;letter-spacing:.42em;text-indent:.42em;color:var(--ink)}
+</style>
+</head>
+<body>
+  <!-- 관측 링 -->
+  <svg viewBox="0 0 1080 1080" fill="none">
+    <circle cx="540" cy="516" r="380" stroke="rgba(35,40,31,.14)" stroke-width="1.5"/>
+    <circle cx="540" cy="516" r="440" stroke="rgba(35,40,31,.08)" stroke-width="1.5"/>
+    <circle cx="540" cy="516" r="440" stroke="#C0784F" stroke-width="2.5"
+            stroke-dasharray="120 2645" stroke-linecap="round" transform="rotate(-64 540 516)"/>
+    <!-- 눈금 60개 -->
+    <g stroke="rgba(35,40,31,.22)" stroke-width="1.5">
+      <g id="t"><line x1="540" y1="96" x2="540" y2="112"/></g>
+    </g>
+  </svg>
+  <script>
+    // 60개 눈금을 정확한 각도로 복제 — 관측 일지의 반복
+    const svg = document.querySelector('svg'); const g = svg.querySelector('g g');
+    for(let i=1;i<60;i++){
+      const c = g.cloneNode(true);
+      c.setAttribute('transform', `rotate(${i*6} 540 516)`);
+      g.parentNode.appendChild(c);
+    }
+  </script>
+  <div class="stage">
+    <div class="seal">
+      <span class="j">J</span>
+      <span class="dot"></span>
+    </div>
+  </div>
+  <div class="word"><div class="nm">JASON'S</div></div>
+</body>
+</html>

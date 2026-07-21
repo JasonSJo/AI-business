@@ -35,6 +35,13 @@ HUB = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Jason's Consulting — 소상공인 랜딩페이지 포트폴리오</title>
 <meta name="description" content="예약·문의를 받는 랜딩페이지를 48시간 안에. 업종별 실제 데모를 확인하세요." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="예약받는 랜딩페이지, 48시간 안에." />
+<meta property="og:description" content="병원·미용실·카페·필라테스 — 무료 샘플 먼저, 결제는 나중에." />
+<meta property="og:image" content="https://jasonsjo.github.io/AI-business/assets/og-1200x630.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" type="image/png" href="assets/favicon-192.png" />
+<link rel="apple-touch-icon" href="assets/favicon-192.png" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet" />
 <style>
@@ -136,6 +143,13 @@ def main() -> None:
     if ad_video.exists():
         (SITE / "ad").mkdir(exist_ok=True)
         shutil.copy2(ad_video, SITE / "ad" / "jasons-ad-15s.mp4")
+
+    # 브랜드 자산 (og 미리보기 이미지 · 파비콘) 배포
+    brand = ROOT / "assets/brand"
+    (SITE / "assets").mkdir(exist_ok=True)
+    for name in ("og-1200x630.png", "favicon-192.png", "profile-1080.png"):
+        if (brand / name).exists():
+            shutil.copy2(brand / name, SITE / "assets" / name)
 
     print(f"빌드 완료: {SITE} (데모 {len(DEMOS) - len(missing)}종 + 허브)")
     if missing:

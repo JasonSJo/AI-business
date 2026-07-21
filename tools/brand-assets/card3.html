@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="shared.css" />
+<style>
+  html,body{width:1080px;height:1350px}
+  .head{position:absolute;top:96px;left:96px;right:96px;display:flex;justify-content:space-between;align-items:center}
+  /* 인주 인장 — 약속의 도장 */
+  .stampzone{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%)}
+  .stampzone svg{display:block}
+  .stamp{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-4deg);
+    width:360px;height:360px;border-radius:50%;
+    background:radial-gradient(135% 120% at 32% 24%, #D08A5F, var(--clay) 55%, var(--clay-d));
+    display:grid;place-items:center;
+    box-shadow:0 40px 90px -36px rgba(165,96,58,.65), inset 0 2px 0 rgba(255,255,255,.25);
+  }
+  .stamp .t{
+    font-family:'Gowun Batang',serif;font-size:104px;color:var(--cream);font-weight:700;
+    line-height:1.14;text-align:center;transform:translateY(-4px);
+  }
+  h1{
+    position:absolute;left:96px;right:96px;bottom:280px;
+    font-family:'Gowun Batang',serif;font-size:84px;line-height:1.28;font-weight:700;
+  }
+  h1 em{font-style:normal;color:var(--clay-d)}
+  .sub{position:absolute;left:96px;bottom:206px;font-size:30px;color:var(--muted)}
+  .foot{position:absolute;left:96px;right:96px;bottom:96px;display:flex;justify-content:space-between;align-items:center}
+  .cta{
+    display:inline-flex;align-items:center;gap:14px;background:var(--ink);color:var(--cream);
+    font-size:30px;font-weight:700;padding:24px 44px;border-radius:200px;
+  }
+</style>
+</head>
+<body>
+  <div class="head">
+    <span class="label">FIELD NOTE — 03</span>
+    <span class="label">JASON'S</span>
+  </div>
+
+  <div class="stampzone">
+    <svg width="640" height="640" viewBox="0 0 640 640" fill="none">
+      <circle cx="320" cy="320" r="298" stroke="rgba(35,40,31,.16)" stroke-width="2"/>
+      <circle cx="320" cy="320" r="252" stroke="rgba(35,40,31,.08)" stroke-width="1.5"/>
+      <circle cx="320" cy="320" r="298" stroke="#3F5138" stroke-width="3"
+              stroke-dasharray="70 1802" stroke-linecap="round" transform="rotate(52 320 320)"/>
+    </svg>
+    <div class="stamp"><div class="t">무료<br>샘플</div></div>
+  </div>
+
+  <h1>먼저 보고,<br>결제는 <em>나중에.</em></h1>
+  <div class="sub">내 가게 이름으로 만든 샘플 — 마음에 안 들면 안 쓰셔도 됩니다</div>
+  <div class="foot">
+    <span class="cta">프로필 링크 ↑</span>
+    <span class="label">03 / 03</span>
+  </div>
+</body>
+</html>

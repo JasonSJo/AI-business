@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="shared.css" />
+<style>
+  html,body{width:1080px;height:1350px}
+  .head{position:absolute;top:96px;left:96px;right:96px;display:flex;justify-content:space-between;align-items:center}
+  .dial{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%)}
+  .dial svg{display:block}
+  .num{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-56%);
+    font-family:'DM Mono',monospace;font-size:300px;color:var(--ink);line-height:1;letter-spacing:-.04em;
+  }
+  .hour{
+    position:absolute;left:50%;top:calc(50% + 118px);transform:translateX(-50%);
+    font-family:'Gowun Batang',serif;font-size:56px;color:var(--pine);
+  }
+  /* 네 업종의 궤도 표식 */
+  .orb{position:absolute;width:74px;height:74px;border-radius:50%;display:grid;place-items:center;
+       font-family:'Gowun Batang',serif;font-size:34px;color:var(--cream);
+       box-shadow:0 14px 30px -14px rgba(35,40,31,.45)}
+  h1{
+    position:absolute;left:96px;right:96px;bottom:210px;
+    font-family:'Gowun Batang',serif;font-size:86px;line-height:1.28;font-weight:700;
+  }
+  h1 em{font-style:normal;color:var(--clay-d)}
+  .foot{position:absolute;left:96px;right:96px;bottom:96px;display:flex;justify-content:space-between;align-items:center}
+  .foot .msg{font-size:28px;color:var(--muted)}
+</style>
+</head>
+<body>
+  <div class="head">
+    <span class="label">FIELD NOTE — 02</span>
+    <span class="label">JASON'S</span>
+  </div>
+
+  <div class="dial">
+    <svg width="660" height="660" viewBox="0 0 660 660" fill="none">
+      <circle cx="330" cy="330" r="310" stroke="rgba(35,40,31,.18)" stroke-width="2"/>
+      <circle cx="330" cy="330" r="310" stroke="#C0784F" stroke-width="4"
+              stroke-dasharray="974 974" stroke-linecap="round" transform="rotate(-90 330 330)"/>
+      <g id="tk" stroke="rgba(35,40,31,.25)" stroke-width="1.5">
+        <line x1="330" y1="34" x2="330" y2="52"/>
+      </g>
+    </svg>
+    <script>
+      const g = document.getElementById('tk');
+      for(let i=1;i<48;i++){
+        const c = g.cloneNode(true); c.removeAttribute('id');
+        c.setAttribute('transform', `rotate(${i*7.5} 330 330)`);
+        g.parentNode.appendChild(c);
+      }
+    </script>
+    <span class="num">48</span>
+    <span class="hour serif">시간</span>
+    <span class="orb" style="left:-16px;top:118px;background:linear-gradient(150deg,#3F5138,#5E7351)">高</span>
+    <span class="orb" style="right:-14px;top:86px;background:linear-gradient(150deg,#1F5F55,#35796D)">笑</span>
+    <span class="orb" style="left:36px;bottom:64px;background:linear-gradient(150deg,#6E3B4F,#8A5468)">溫</span>
+    <span class="orb" style="right:44px;bottom:34px;background:linear-gradient(150deg,#4E342A,#6B4A3B)">香</span>
+  </div>
+
+  <h1>예약받는 페이지,<br><em>이틀</em>이면 됩니다.</h1>
+  <div class="foot">
+    <span class="msg">병원 · 미용실 · 카페 · 필라테스</span>
+    <span class="label">02 / 03</span>
+  </div>
+</body>
+</html>
