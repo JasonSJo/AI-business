@@ -12,7 +12,7 @@
     python3 pipeline.py                                    # 데모 + 사이트만
     python3 pipeline.py --leads my-leads.csv --sender 제이슨   # 아웃리치까지
     python3 pipeline.py --leads my-leads.csv --sender 제이슨 \
-        --base-url https://jasonsjo.github.io/AI-business/
+        --base-url https://jasons-consulting.com/
 
 외부 의존성 없음.
 """
@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-PAGES_URL = "https://jasonsjo.github.io/AI-business/"
+PAGES_URL = "https://jasons-consulting.com/"
 
 
 def run(title: str, cmd: list[str], cwd: Path) -> bool:

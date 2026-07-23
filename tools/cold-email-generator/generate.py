@@ -38,6 +38,8 @@ DEMO_PATHS = {
     "salon": "hair-salon/",
     "cafe": "cafe/",
     "pilates": "pilates-studio/",
+    "us": "studio-en/",
+    "jp": "studio-en/",
 }
 
 

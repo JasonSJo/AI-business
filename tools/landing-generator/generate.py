@@ -100,6 +100,16 @@ def render_loc_rows(rows: list[dict]) -> str:
     )
 
 
+# UI 라벨 기본값 (한국어) — config의 "labels" 로 언어별 재정의 가능
+DEFAULT_LABELS = {
+    "reviews": "후기", "directions": "오시는 길",
+    "call_btn": "전화로 예약", "chat_btn": "카카오톡 상담",
+    "quicklinks": "바로가기", "contact": "예약·문의",
+    "demo_note": "데모용 가상 업체입니다.", "demo_tag": "랜딩페이지 데모",
+    "bar_call": "전화", "bar_chat": "카톡",
+}
+
+
 def build(cfg_path: Path) -> Path:
     cfg = json.loads(cfg_path.read_text(encoding="utf-8"))
     tpl = (BASE / "template.html").read_text(encoding="utf-8")
@@ -107,6 +117,7 @@ def build(cfg_path: Path) -> Path:
     theme = cfg["theme"]
     hero = cfg["hero"]
     contact = cfg["contact"]
+    labels = {**DEFAULT_LABELS, **cfg.get("labels", {})}
 
     mapping = {
         "TITLE": cfg["meta"]["title"],
@@ -159,6 +170,11 @@ def build(cfg_path: Path) -> Path:
         "HOURS": contact.get("hours", ""),
         "CTA_BAR_BOOK": cfg.get("cta_bar_book", "예약하기"),
         "FOOT_NOTE": cfg["footer"]["note"],
+        "L_REVIEWS": labels["reviews"], "L_DIRECTIONS": labels["directions"],
+        "L_CALL_BTN": labels["call_btn"], "L_CHAT_BTN": labels["chat_btn"],
+        "L_QUICKLINKS": labels["quicklinks"], "L_CONTACT": labels["contact"],
+        "L_DEMO_NOTE": labels["demo_note"], "L_DEMO_TAG": labels["demo_tag"],
+        "L_BAR_CALL": labels["bar_call"], "L_BAR_CHAT": labels["bar_chat"],
     }
 
     html = tpl

@@ -1,0 +1,110 @@
+{
+  "output": "../../../demo/studio-en",
+  "brand": { "name": "Willow Pilates", "mark": "W" },
+  "meta": {
+    "title": "Willow Pilates · Austin | One hour a day, just for you",
+    "description": "Private 1-on-1 pilates studio in Austin. Intro session $39. Book in one tap."
+  },
+  "theme": {
+    "cream": "#F4EFE6",
+    "cream_deep": "#EBE3D5",
+    "ink": "#23281F",
+    "ink_soft": "#4B4E42",
+    "primary": "#3F5138",
+    "primary_light": "#5E7351",
+    "accent": "#C0784F",
+    "accent_deep": "#A5603A",
+    "muted": "#8A8474"
+  },
+  "nav": { "why": "Studio", "price": "Pricing", "cta": "Book intro" },
+  "labels": {
+    "reviews": "Reviews", "directions": "Find us",
+    "call_btn": "Call to book", "chat_btn": "Text us",
+    "quicklinks": "Quick links", "contact": "Contact",
+    "demo_note": "This is a fictional demo studio.", "demo_tag": "Landing page demo",
+    "bar_call": "Call", "bar_chat": "Text"
+  },
+  "hero": {
+    "eyebrow": "Austin · Private Pilates Studio",
+    "headline": "One hour a day,<br><em>just for you.</em>",
+    "lede": "Not another mirror-wall gym. A 1-on-1 session with an instructor who knows your body and meets you where you are today.",
+    "cta_primary": "Book intro — $39",
+    "cta_secondary": "See the studio",
+    "trust": "Google reviews <strong>4.9</strong> · <strong>92%</strong> re-book rate",
+    "badge1_n": "1:1",
+    "badge1_t": "Private sessions",
+    "badge2": "Openings today",
+    "card_glyph": "W",
+    "card_sm": "WILLOW STUDIO · AUSTIN, TX",
+    "card_lg": "Move quietly, grow strong"
+  },
+  "marquee": ["Posture reset", "Core strength", "Desk-neck relief", "Pre & postnatal", "Rehab pilates", "Reformer classes"],
+  "why": {
+    "tag": "Why Willow",
+    "title": "Not all studios are the same.",
+    "sub": "Machines don't watch you — people do. Your instructor tracks how your shoulders feel today, not just your membership.",
+    "cards": [
+      { "icon": "align", "title": "Programs built for you", "desc": "A posture assessment on your first visit, then a plan made for your body. No copy-paste classes." },
+      { "icon": "person", "title": "Certified instructors", "desc": "Rehab and pre/postnatal certified. Safe alignment first, never forced reps." },
+      { "icon": "heart", "title": "A calm, private room", "desc": "Three minutes from the Domain. No crowds, no waiting — one room, one focus: you." }
+    ]
+  },
+  "pricing": {
+    "tag": "Pricing",
+    "title": "Start with a single hour.",
+    "plans": [
+      {
+        "tier": "Intro session",
+        "price": "$39",
+        "per": "one time",
+        "items": ["Posture assessment included", "50-min private session", "Full reformer access"],
+        "cta": "Book intro"
+      },
+      {
+        "tier": "10-pack",
+        "price": "$590",
+        "per": "$59 / session",
+        "items": ["Dedicated instructor", "Progress tracking", "Valid 3 months"],
+        "featured": true,
+        "pill": "Popular",
+        "cta": "Start 10-pack"
+      },
+      {
+        "tier": "20-pack",
+        "price": "$1,080",
+        "per": "$54 / session",
+        "items": ["Best per-session rate", "Monthly posture re-check", "Valid 6 months"],
+        "cta": "Talk to us first"
+      }
+    ]
+  },
+  "reviews": {
+    "tag": "Reviews",
+    "title": "What members actually say.",
+    "sub": "Pulled straight from Google reviews.",
+    "items": [
+      { "quote": "Two months in and my desk-neck pain is basically gone. My instructor remembers exactly where my body was last session.", "initial": "S", "name": "Sarah M.", "meta": "3 months · posture reset" },
+      { "quote": "Postpartum core rebuild done safely and patiently. If you're anywhere near Austin, this is the place.", "initial": "J", "name": "Jenna K.", "meta": "6 months · postnatal" },
+      { "quote": "Private means no one watching, no pressure, my own pace. First workout I've ever stuck with.", "initial": "D", "name": "David R.", "meta": "4 months · core strength" }
+    ]
+  },
+  "location": {
+    "title": "Three minutes from the Domain.",
+    "rows": [
+      { "k": "Address", "v": "1200 Willow Ln, Austin, TX (map shown for demo)" },
+      { "k": "Hours", "v": "Mon–Fri 7am–9pm · Sat–Sun 9am–5pm" },
+      { "k": "Phone", "v": "(512) 000-0000" },
+      { "k": "Parking", "v": "Free on-site parking" }
+    ]
+  },
+  "contact": {
+    "phone": "(512) 000-0000",
+    "tel": "5120000000",
+    "kakao_url": "sms:5120000000",
+    "kakao_label": "Text (512) 000-0000",
+    "book_url": "#price",
+    "hours": "Mon–Fri 7–9 · Weekends 9–5"
+  },
+  "cta_bar_book": "Book intro",
+  "footer": { "note": "A private pilates studio in Austin. One hour that belongs to you." }
+}

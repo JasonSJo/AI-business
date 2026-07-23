@@ -8,7 +8,7 @@
 cd tools/cold-email-generator
 # 배포 사이트가 있으면 --base-url: 업종별 데모 링크가 자동으로 붙는다
 python3 generate.py leads.sample.csv --sender 제이슨 \
-    --base-url https://jasonsjo.github.io/AI-business/
+    --base-url https://jasons-consulting.com/
 
 # 배포 전이면 단일 링크로
 python3 generate.py leads.sample.csv --sender 제이슨 --demo-url https://내데모주소

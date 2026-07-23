@@ -20,7 +20,7 @@ python3 pipeline.py --leads tools/cold-email-generator/leads.sample.csv --sender
 
 `git push` 하면 GitHub Actions가 데모 4종 + 포트폴리오 허브를 GitHub Pages에 자동 배포한다
 (최초 1회 저장소 Settings → Pages → Source를 **GitHub Actions**로 설정).
-배포 URL: `https://jasonsjo.github.io/AI-business/`
+배포 URL: `https://jasons-consulting.com/`
 
 **매일 루틴 (자동화 후 남는 일):**
 1. 리드 CSV에 오늘 연락할 업체 추가 (개인화 한 줄 필수)
@@ -33,6 +33,7 @@ python3 pipeline.py --leads tools/cold-email-generator/leads.sample.csv --sender
 - **[30일 첫 수익 실행 로드맵](docs/30일-수익-실행-로드맵.md)** — 무엇을 팔지, 누구에게, 얼마에, 어디서 찾을지 + 일별 실행 계획과 복붙 템플릿.
 - **[결제 세팅 가이드](docs/결제-세팅-가이드.md)** — 사업자등록·계좌 분리·현금영수증·카드 링크결제·세금 달력 + 입금 요청 메시지 템플릿.
 - **[광고 세팅 가이드](docs/광고-세팅-가이드.md)** — 네이버 검색광고·메타 광고 세팅 순서, 키워드·광고 문구(복붙용), 예산·CPL 판단 기준, UTM 추적.
+- **[글로벌 아웃바운드 가이드](docs/글로벌-아웃바운드-가이드.md)** — 미국·일본 이메일 영업: CAN-SPAM·特定電子メール법 준수 템플릿, 리드 소스, 발송 시간대, USD/JPY 가격, PayPal 수금.
 - **[숏폼 광고 가이드](docs/숏폼-광고-가이드.md)** — 쇼츠·릴스 전략, 촬영용 대본 4편, 캡션·해시태그, 운영 룰 + **완성된 15초 광고 영상**([mp4](tools/video-ad/jasons-ad-15s.mp4) · [재생성 도구](tools/video-ad/)).
 - **[영업 전환 스크립트](docs/영업-전환-스크립트.md)** — 무료 샘플 → 결제 전환 대화, 이의 대응 3종(비싸요/생각해볼게요/무료로), 후기·유지보수 업셀.
 - **[납품 체크리스트](docs/납품-체크리스트.md)** — 가짜 후기 제거(표시광고법) 등 법적 필수 + 연결·품질·절차 확인.

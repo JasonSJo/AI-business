@@ -42,7 +42,7 @@ DEFAULTS = {
         "검색해도 안 나오는 가게는, 없는 가게랑 같습니다.\n"
         "예약 버튼 달린 한 페이지 — 48시간이면 됩니다.\n"
         "내 가게 이름으로 무료 샘플부터 받아보세요:\n"
-        "https://jasonsjo.github.io/AI-business/?utm_source=youtube&utm_medium=cpc&utm_campaign=landing-v1\n\n"
+        "https://jasons-consulting.com/?utm_source=youtube&utm_medium=cpc&utm_campaign=landing-v1\n\n"
         "#소상공인 #자영업 #홈페이지제작 #랜딩페이지"
     ),
     "tags": ["소상공인", "자영업", "홈페이지제작", "랜딩페이지", "마케팅"],
