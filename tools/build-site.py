@@ -67,6 +67,7 @@ LOCALES = {
         "lede": "Live demos below. We'll build a free sample with your business name — if you don't love it, you don't pay.",
         "pitch_h": "Want one with your name on it?",
         "pitch_p": "Send your business name and city. A free sample lands in your inbox within 48 hours.",
+        "price_note": "Flat price: <strong>$490</strong> per page · optional care plan $39/mo — pay only after you love the sample.",
         "cta": "Request a free sample",
         "mail_subject": "Free%20sample%20request",
         "mail_body": "Business%20name%3A%20%0ACity%3A%20%0AWebsite%2FInstagram%3A%20",
@@ -83,6 +84,7 @@ LOCALES = {
         "lede": "下記はデモです。貴店の名前で無料サンプルをお作りします — 気に入らなければ、お支払いは不要です。",
         "pitch_h": "貴店バージョンをご覧になりますか？",
         "pitch_p": "店名と所在地をお送りください。48時間以内に無料サンプルをお届けします。",
+        "price_note": "料金は一律 <strong>¥69,800</strong>（1ページ）· 保守 月¥5,500 — お支払いはサンプルをお気に召した場合のみ。",
         "cta": "無料サンプルを依頼する",
         "mail_subject": "%E7%84%A1%E6%96%99%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E4%BE%9D%E9%A0%BC",
         "mail_body": "%E5%BA%97%E5%90%8D%3A%20%0A%E6%89%80%E5%9C%A8%E5%9C%B0%3A%20%0AWeb%2FInstagram%3A%20",
@@ -99,6 +101,7 @@ LOCALES = {
         "lede": "아래는 업종별 데모입니다(가상 업체). 사장님 가게 이름으로 만든 샘플을 무료로 보여드립니다 — 마음에 안 들면 안 쓰셔도 됩니다.",
         "pitch_h": "내 가게 버전이 궁금하다면",
         "pitch_p": "업체명과 연락처만 알려주세요. 48시간 안에 샘플을 만들어 보내드립니다.",
+        "price_note": "제작 <strong>49만원</strong> (1페이지) · 유지보수 월 3.3만원 — 결제는 샘플 확인 후, 마음에 들 때만.",
         "cta": "무료 샘플 요청하기",
         "mail_subject": "%EB%9E%9C%EB%94%A9%ED%8E%98%EC%9D%B4%EC%A7%80%20%EC%83%98%ED%94%8C%20%EC%9A%94%EC%B2%AD",
         "mail_body": "%EC%97%85%EC%B2%B4%EB%AA%85%3A%20%0A%EC%97%85%EC%A2%85%3A%20%0A%EC%97%B0%EB%9D%BD%EC%B2%98%3A%20",
@@ -154,6 +157,9 @@ HUB = """<!DOCTYPE html>
   .cta{display:inline-block;margin-top:20px;background:var(--clay);color:#fff;font-weight:600;padding:14px 30px;border-radius:100px;text-decoration:none;transition:.25s}
   .cta:hover{background:var(--clay-d)}
   .mailnote{margin-top:14px;font-size:13px;color:var(--muted)}
+  .price-note{margin-top:14px;font-size:14.5px;color:var(--ink);background:var(--cream);border-radius:12px;
+    display:inline-block;padding:10px 18px}
+  .price-note strong{color:var(--clay-d)}
   footer{text-align:center;color:var(--muted);font-size:12.5px;padding:0 0 46px}
 </style>
 </head>
@@ -171,6 +177,7 @@ __CARDS__
   <div class="pitch">
     <h3 class="serif">__PITCH_H__</h3>
     <p>__PITCH_P__</p>
+    <p class="price-note">__PRICE_NOTE__</p>
     <a class="cta" href="mailto:__EMAIL__?subject=__MSUBJ__&body=__MBODY__">__CTA__</a>
     <p class="mailnote">__EMAIL_NOTE__</p>
   </div>
@@ -213,6 +220,7 @@ def build_hub(loc: dict, missing: set, snippet: str) -> str:
             .replace("__EYEBROW__", loc["eyebrow"]).replace("__H1__", loc["h1"])
             .replace("__LEDE__", loc["lede"]).replace("__CARDS__", cards)
             .replace("__PITCH_H__", loc["pitch_h"]).replace("__PITCH_P__", loc["pitch_p"])
+            .replace("__PRICE_NOTE__", loc["price_note"])
             .replace("__MSUBJ__", loc["mail_subject"]).replace("__MBODY__", loc["mail_body"])
             .replace("__CTA__", loc["cta"]).replace("__EMAIL_NOTE__", loc["email_note"])
             .replace("__EMAIL__", CONTACT_EMAIL).replace("__FOOT__", loc["foot"]))
