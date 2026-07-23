@@ -1,0 +1,110 @@
+{
+  "output": "../../../demo/cafe-en",
+  "brand": { "name": "Driftwood Coffee", "mark": "D" },
+  "meta": {
+    "title": "Driftwood Coffee · Austin | Your third place on the east side",
+    "description": "A neighborhood coffee shop in East Austin. Single-origin roasts, real mugs, room to stay."
+  },
+  "theme": {
+    "cream": "#F4EFE6",
+    "cream_deep": "#EAE0D0",
+    "ink": "#241C15",
+    "ink_soft": "#4E4237",
+    "primary": "#4E342A",
+    "primary_light": "#6B4A3B",
+    "accent": "#C0784F",
+    "accent_deep": "#A5603A",
+    "muted": "#8A7D6E"
+  },
+  "nav": { "why": "The shop", "price": "Menu & more", "cta": "Find us" },
+  "labels": {
+    "reviews": "Reviews", "directions": "Find us",
+    "call_btn": "Call us", "chat_btn": "Text us",
+    "quicklinks": "Quick links", "contact": "Visit & contact",
+    "demo_note": "This is a fictional demo cafe.", "demo_tag": "Landing page demo",
+    "bar_call": "Call", "bar_chat": "Text"
+  },
+  "hero": {
+    "eyebrow": "East Austin · Neighborhood Coffee",
+    "headline": "Your third place<br><em>on the east side.</em>",
+    "lede": "Single-origin beans roasted weekly, mugs you can hold with two hands, and nobody rushing you off the table by the window.",
+    "cta_primary": "See menu & hours",
+    "cta_secondary": "Book the back room",
+    "trust": "Google reviews <strong>4.8</strong> · <strong>300+</strong> regulars on subscription",
+    "badge1_n": "6am",
+    "badge1_t": "Open early, every day",
+    "badge2": "Back room bookable",
+    "card_glyph": "D",
+    "card_sm": "DRIFTWOOD · EAST AUSTIN, TX",
+    "card_lg": "Slow coffee, fast wifi"
+  },
+  "marquee": ["Single-origin espresso", "Pour-over bar", "House-baked pastries", "Bean subscription", "Back-room events", "Oat milk everything"],
+  "why": {
+    "tag": "Why Driftwood",
+    "title": "A coffee shop that remembers you.",
+    "sub": "Chains optimize for lines. We optimize for the second visit — your order, your seat, your name.",
+    "cards": [
+      { "icon": "coffee", "title": "Roasted this week", "desc": "We roast small batches every Monday. The bag on the shelf is never older than seven days." },
+      { "icon": "heart", "title": "Stay as long as you like", "desc": "Real mugs, wide tables, outlets at every seat. Laptop hours until 3pm, human hours after." },
+      { "icon": "sparkle", "title": "A back room for your people", "desc": "Book clubs, team offsites, birthday pour-overs — a 16-seat room you can reserve free with any catering order." }
+    ]
+  },
+  "pricing": {
+    "tag": "Menu & more",
+    "title": "Three ways to make it a habit.",
+    "plans": [
+      {
+        "tier": "Tasting flight",
+        "price": "$12",
+        "per": "3 origins, 20 min",
+        "items": ["Three single-origins, brewed side by side", "Tasting card to take home", "Any weekday after 1pm"],
+        "cta": "Try a flight"
+      },
+      {
+        "tier": "Bean subscription",
+        "price": "$22",
+        "per": "per month",
+        "items": ["Fresh 12oz bag every 2 weeks", "Free drip refill with pickup", "Pause or swap anytime"],
+        "featured": true,
+        "pill": "300+ members",
+        "cta": "Start subscription"
+      },
+      {
+        "tier": "Back-room events",
+        "price": "$150",
+        "per": "2 hrs · up to 16 people",
+        "items": ["Private 16-seat room", "Coffee & pastry service", "Free with $200+ catering"],
+        "cta": "Check dates"
+      }
+    ]
+  },
+  "reviews": {
+    "tag": "Reviews",
+    "title": "What the neighborhood says.",
+    "sub": "Pulled straight from Google reviews.",
+    "items": [
+      { "quote": "They had my order ready when I walked in on visit three. It's the only place I actually feel like a regular.", "initial": "A", "name": "Aaron D.", "meta": "regular · 2 years" },
+      { "quote": "Booked the back room for our book club every month. They set up the pour-over bar for us without asking.", "initial": "C", "name": "Carmen S.", "meta": "back-room host" },
+      { "quote": "The subscription ruined grocery store coffee for me forever. Worth it.", "initial": "T", "name": "Tom W.", "meta": "subscriber · 14 months" }
+    ]
+  },
+  "location": {
+    "title": "On E 6th, under the big pecan tree.",
+    "rows": [
+      { "k": "Address", "v": "2900 E 6th St, Austin, TX (map shown for demo)" },
+      { "k": "Hours", "v": "Every day 6am–6pm · kitchen until 2pm" },
+      { "k": "Phone", "v": "(512) 000-0000" },
+      { "k": "Parking", "v": "Lot behind the building + bike racks" }
+    ]
+  },
+  "contact": {
+    "phone": "(512) 000-0000",
+    "tel": "5120000000",
+    "kakao_url": "sms:5120000000",
+    "kakao_label": "Text (512) 000-0000",
+    "book_url": "#price",
+    "hours": "Every day 6–6"
+  },
+  "cta_bar_book": "Find us",
+  "footer": { "note": "A neighborhood coffee shop in East Austin. Slow coffee, fast wifi." }
+}

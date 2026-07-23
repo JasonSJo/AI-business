@@ -1,0 +1,110 @@
+{
+  "output": "../../../demo/salon-en",
+  "brand": { "name": "Ember & Oak Salon", "mark": "E" },
+  "meta": {
+    "title": "Ember & Oak Salon · Portland | Hair that feels like you",
+    "description": "A boutique hair salon in Portland, OR. Signature cut $65. Book in one tap."
+  },
+  "theme": {
+    "cream": "#F6F0EA",
+    "cream_deep": "#EDE2D6",
+    "ink": "#2A2226",
+    "ink_soft": "#524449",
+    "primary": "#6E3B4F",
+    "primary_light": "#8A5468",
+    "accent": "#C0784F",
+    "accent_deep": "#A5603A",
+    "muted": "#8E8078"
+  },
+  "nav": { "why": "Salon", "price": "Pricing", "cta": "Book a chair" },
+  "labels": {
+    "reviews": "Reviews", "directions": "Find us",
+    "call_btn": "Call to book", "chat_btn": "Text us",
+    "quicklinks": "Quick links", "contact": "Contact",
+    "demo_note": "This is a fictional demo salon.", "demo_tag": "Landing page demo",
+    "bar_call": "Call", "bar_chat": "Text"
+  },
+  "hero": {
+    "eyebrow": "Portland · Boutique Hair Salon",
+    "headline": "Hair that feels<br><em>like you.</em>",
+    "lede": "No assembly-line blowouts. A stylist who studies your face shape, your routine, and how much time you actually have in the morning.",
+    "cta_primary": "Book a chair — $65",
+    "cta_secondary": "See our work",
+    "trust": "Google reviews <strong>4.9</strong> · <strong>84%</strong> rebook rate",
+    "badge1_n": "1:1",
+    "badge1_t": "One stylist, start to finish",
+    "badge2": "Openings this week",
+    "card_glyph": "E",
+    "card_sm": "EMBER & OAK · PORTLAND, OR",
+    "card_lg": "Cut once, love it for months"
+  },
+  "marquee": ["Precision cuts", "Lived-in color", "Balayage", "Curly hair specialists", "Gloss & tone", "Bridal styling"],
+  "why": {
+    "tag": "Why Ember & Oak",
+    "title": "Not every chair is the same.",
+    "sub": "Chain salons sell speed. We sell the cut you stop thinking about — because it grows out right.",
+    "cards": [
+      { "icon": "scissors", "title": "Face-shape first", "desc": "Every visit starts with a 10-minute consult on your face shape, hair texture, and routine — then we cut." },
+      { "icon": "person", "title": "One stylist, start to finish", "desc": "No hand-offs to juniors. The stylist who consults you washes, cuts, and finishes you." },
+      { "icon": "heart", "title": "A calm, unhurried room", "desc": "Six chairs, never double-booked. Your appointment time is actually yours." }
+    ]
+  },
+  "pricing": {
+    "tag": "Pricing",
+    "title": "Simple prices, no surprise add-ons.",
+    "plans": [
+      {
+        "tier": "Signature cut",
+        "price": "$65",
+        "per": "60 min",
+        "items": ["Face-shape consult included", "Wash, cut & style", "Grow-out guarantee"],
+        "cta": "Book a cut"
+      },
+      {
+        "tier": "Cut + gloss",
+        "price": "$120",
+        "per": "90 min",
+        "items": ["Everything in Signature", "Tone & shine gloss", "Take-home care guide"],
+        "featured": true,
+        "pill": "Popular",
+        "cta": "Book cut + gloss"
+      },
+      {
+        "tier": "Full balayage",
+        "price": "$220",
+        "per": "3 hrs · consult first",
+        "items": ["Custom lived-in color", "Bond treatment included", "Free 2-week adjust"],
+        "cta": "Talk to us first"
+      }
+    ]
+  },
+  "reviews": {
+    "tag": "Reviews",
+    "title": "What clients actually say.",
+    "sub": "Pulled straight from Google reviews.",
+    "items": [
+      { "quote": "First salon where the cut still looked good six weeks later. The consult is not a gimmick — she noticed things about my hair I never had.", "initial": "R", "name": "Rachel T.", "meta": "8 months · signature cut" },
+      { "quote": "As a curly girl I've been burned everywhere. They cut it dry, curl by curl. Never going anywhere else.", "initial": "M", "name": "Maya L.", "meta": "1 year · curly specialist" },
+      { "quote": "Balayage came out exactly like the photos we discussed. Zero brassiness two months in.", "initial": "J", "name": "Jess K.", "meta": "6 months · balayage" }
+    ]
+  },
+  "location": {
+    "title": "On Alberta Street, next to the good bakery.",
+    "rows": [
+      { "k": "Address", "v": "2200 NE Alberta St, Portland, OR (map shown for demo)" },
+      { "k": "Hours", "v": "Tue–Sat 10am–7pm · Sun–Mon closed" },
+      { "k": "Phone", "v": "(503) 000-0000" },
+      { "k": "Parking", "v": "Free street parking on 22nd Ave" }
+    ]
+  },
+  "contact": {
+    "phone": "(503) 000-0000",
+    "tel": "5030000000",
+    "kakao_url": "sms:5030000000",
+    "kakao_label": "Text (503) 000-0000",
+    "book_url": "#price",
+    "hours": "Tue–Sat 10–7"
+  },
+  "cta_bar_book": "Book a chair",
+  "footer": { "note": "A boutique hair salon in Portland. Hair that grows out right." }
+}

@@ -38,8 +38,13 @@ DEMO_PATHS = {
     "salon": "hair-salon/",
     "cafe": "cafe/",
     "pilates": "pilates-studio/",
+    "nail": "nail-salon/",
     "us": "studio-en/",
+    "us-salon": "salon-en/",
+    "us-cafe": "cafe-en/",
     "jp": "studio-ja/",
+    "jp-salon": "salon-ja/",
+    "jp-cafe": "cafe-ja/",
 }
 
 
@@ -57,7 +62,9 @@ def josa(word: str, with_batchim: str, without_batchim: str) -> str:
 
 def pick_template(templates: dict, channel: str, industry: str) -> dict:
     ch = templates.get(channel) or templates["email"]
-    return ch.get(industry) or ch.get("default") or templates["email"]["default"]
+    # "us-salon" 처럼 세분화된 업종은 "us" 템플릿으로 폴백
+    return (ch.get(industry) or ch.get(industry.split("-")[0])
+            or ch.get("default") or templates["email"]["default"])
 
 
 def fill(text: str, lead: dict, sender: str, demo_url: str) -> str:
