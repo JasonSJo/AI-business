@@ -56,6 +56,14 @@ python3 tools/set-domain.py <new-domain>
 - push 전 반드시 `git pull --rebase origin <branch>` — 여러 에이전트가 병행 작업 중이다.
 - 커밋 메시지는 영어 제목 + 필요시 본문. 데모/사이트 변경은 배포됨을 감안해 검증 후 커밋.
 
+## 관련 외부 자산
+
+- Codex로 제작한 별도 사이트(원본 호스팅, 삭제 금지):
+  https://jasons-consulting-ai.rsr8f9vz55.chatgpt.site/
+  — 과거 jasons-consulting.com 루트가 이 주소로 URL 포워딩되고 있었다.
+  현재 루트는 GitHub Pages 신규 사이트로 전환됐으며, 필요시 서브도메인
+  (예: ai.jasons-consulting.com) 포워딩으로 다시 연결한다.
+
 ## 현재 상태 (2026-07-23)
 
 - 새 3개 국어 사이트(영어 루트 + /ja/ + /kr/, 데모 6종)가 github.io에 배포됨.
