@@ -58,18 +58,18 @@ python3 tools/set-domain.py <new-domain>
 
 ## 관련 외부 자산
 
-- Codex로 제작한 별도 사이트(원본 호스팅, 삭제 금지):
+- Codex(ChatGPT Sites)로 제작한 메인 사이트(OpenAI 호스팅, 삭제 금지):
   https://jasons-consulting-ai.rsr8f9vz55.chatgpt.site/
-  — 사용자 결정(2026-07-23)으로 jasons-consulting.com 루트는 이 주소로
-  **URL 포워딩**된다(Porkbun). 이 저장소의 사이트는 github.io 주소로 서비스하며
-  `CUSTOM_DOMAIN`은 빈 문자열로 유지한다 — 사용자 지시 없이 되돌리지 마라.
+  — 사용자 결정(2026-07-23): **두 사이트를 함께 사용한다.**
+  `jasons-consulting.com` = Codex 사이트 (Porkbun DNS: A @ 162.159.143.30 / 172.66.3.26,
+  ChatGPT Sites 커스텀 도메인 값), 데모 포트폴리오 = github.io 기본 주소로 서비스.
+  `CUSTOM_DOMAIN`은 빈 문자열로 유지한다 — 사용자 지시 없이 바꾸지 마라.
 
 ## 현재 상태 (2026-07-23)
 
-- 사용자 결정(2026-07-23): **자체 배포 사이트는 내림.** github.io 주소는
-  `site-redirect/`(Codex 사이트로 리다이렉트)만 배포한다. 데모·허브 빌드 도구는
-  보존하되 배포하지 않는다 — 워크플로를 되돌리려면 사용자 지시가 필요하다.
-- `jasons-consulting.com` 루트는 Codex 사이트로 URL 포워딩(위 참고).
+- 데모 포트폴리오(3개 국어 허브 + 데모 6종)는 https://jasonsjo.github.io/AI-business
+  로 서비스한다. 메인 도메인은 Codex 사이트(위 "관련 외부 자산" 참고).
+- 아웃리치 메시지의 데모 링크는 github.io, 회사 소개 링크는 jasons-consulting.com 을 쓴다.
 - 아웃바운드: 국내 인스타 DM 진행 중, 미국·일본 이메일은 리드 12건 생성 완료(발송 전).
 
 ## 디자인 시스템

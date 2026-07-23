@@ -6,7 +6,8 @@ on:
       - main
       - claude/video-content-monetization-idjfzc
     paths:
-      - "site-redirect/**"
+      - "demo/**"
+      - "tools/build-site.py"
       - ".github/workflows/deploy-demos.yml"
   workflow_dispatch:
 
@@ -24,11 +25,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      # 사용자 결정(2026-07-23): 자체 사이트 대신 Codex 사이트로 리다이렉트만 배포
+      - name: Build site (demos + portfolio hub)
+        run: python3 tools/build-site.py
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: site-redirect
+          path: _site
 
   deploy:
     needs: build
