@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / "_site"
 
 CONTACT_EMAIL = "wheldfo23@gmail.com"
-GOATCOUNTER_CODE = ""
+GOATCOUNTER_CODE = "jasons-consulting"
 CUSTOM_DOMAIN = ""
 SITE_URL = f"https://{CUSTOM_DOMAIN}" if CUSTOM_DOMAIN else "https://jasonsjo.github.io/AI-business"
 
