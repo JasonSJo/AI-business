@@ -66,8 +66,9 @@ python3 tools/set-domain.py <new-domain>
 
 ## 현재 상태 (2026-07-23)
 
-- 새 3개 국어 사이트(영어 루트 + /ja/ + /kr/, 데모 6종)는
-  https://jasonsjo.github.io/AI-business 로 서비스한다.
+- 사용자 결정(2026-07-23): **자체 배포 사이트는 내림.** github.io 주소는
+  `site-redirect/`(Codex 사이트로 리다이렉트)만 배포한다. 데모·허브 빌드 도구는
+  보존하되 배포하지 않는다 — 워크플로를 되돌리려면 사용자 지시가 필요하다.
 - `jasons-consulting.com` 루트는 Codex 사이트로 URL 포워딩(위 참고).
 - 아웃바운드: 국내 인스타 DM 진행 중, 미국·일본 이메일은 리드 12건 생성 완료(발송 전).
 
