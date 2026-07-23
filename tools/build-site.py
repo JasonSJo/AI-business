@@ -22,6 +22,10 @@ DEMOS = [
     {"slug": "studio-en", "glyph": "W", "grad": "linear-gradient(150deg,#3F5138,#5E7351)",
      "en": ("Willow Pilates", "Pilates · Austin, TX", "1-on-1 studio — built to convert intro bookings"),
      "kr": ("Willow Pilates", "필라테스 · 오스틴(미국형)", "미국 시장용 영어 데모")},
+    {"slug": "studio-ja", "glyph": "椿", "grad": "linear-gradient(150deg,#3F5138,#5E7351)",
+     "en": ("Tsubaki Pilates", "Pilates · Meguro, Tokyo", "Japanese-market sample — private studio"),
+     "ja": ("つばきピラティス", "ピラティス · 目黒", "マンツーマン — 体験予約につながる設計"),
+     "kr": ("츠바키 필라테스", "필라테스 · 도쿄(일본형)", "일본 시장용 일본어 데모")},
     {"slug": "pilates-studio", "glyph": "高", "grad": "linear-gradient(150deg,#3F5138,#5E7351)",
      "en": ("Goyo Pilates", "Pilates · Seoul", "Korean-market sample — private studio"),
      "kr": ("고요 필라테스", "필라테스 · 성수", "1:1 프라이빗 스튜디오 — 체험 예약 전환 중심")},
@@ -54,7 +58,7 @@ LOCALES = {
         "switch": '<a href="ja/">日本語</a> · <a href="kr/">한국어</a>',
     },
     "ja": {
-        "path": "ja/", "lang": "ja", "demo_key": "en",
+        "path": "ja/", "lang": "ja", "demo_key": "ja",
         "title": "Jason's Consulting — 予約が入るLPを48時間で",
         "desc": "地域ビジネスのための予約特化ランディングページを48時間で制作。まず無料サンプル、気に入らなければ費用はかかりません。",
         "eyebrow": "JASON'S CONSULTING",
@@ -182,7 +186,9 @@ def build_hub(loc: dict, missing: set, snippet: str) -> str:
     key = loc["demo_key"]
     cards = "\n".join(
         CARD.replace("__REL__", rel).format(slug=d["slug"], grad=d["grad"], glyph=d["glyph"],
-                                            name=d[key][0], ind=d[key][1], desc=d[key][2])
+                                            name=(d.get(key) or d["en"])[0],
+                                            ind=(d.get(key) or d["en"])[1],
+                                            desc=(d.get(key) or d["en"])[2])
         for d in DEMOS if d["slug"] not in missing)
     html = (HUB.replace("__LANG__", loc["lang"]).replace("__TITLE__", loc["title"])
             .replace("__DESC__", loc["desc"]).replace("__SITEURL__", SITE_URL)

@@ -39,7 +39,7 @@ DEMO_PATHS = {
     "cafe": "cafe/",
     "pilates": "pilates-studio/",
     "us": "studio-en/",
-    "jp": "studio-en/",
+    "jp": "studio-ja/",
 }
 
 
