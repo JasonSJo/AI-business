@@ -15,7 +15,7 @@ SITE = ROOT / "_site"
 
 CONTACT_EMAIL = "wheldfo23@gmail.com"
 GOATCOUNTER_CODE = ""
-CUSTOM_DOMAIN = "jasons-consulting.com"
+CUSTOM_DOMAIN = ""  # DNS 전환 확인 후 "jasons-consulting.com" 으로 복원
 SITE_URL = f"https://{CUSTOM_DOMAIN}" if CUSTOM_DOMAIN else "https://jasonsjo.github.io/AI-business"
 
 DEMOS = [
