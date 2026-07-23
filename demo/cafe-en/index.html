@@ -12,13 +12,14 @@
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Space+Mono:wght@400;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500;1,9..144,600&family=Space+Mono:wght@400;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
   :root{
     --kraft:#E7DCC7;
     --kraft-deep:#DBCDB2;
     --kraft-card:#EFE7D6;
     --paper:#F3ECDD;
+    --oat:#F7F2E7;
     --espresso:#2A211A;
     --espresso-soft:#4A3C30;
     --terra:#B5623A;
@@ -26,308 +27,264 @@
     --sage:#7C8060;
     --sage-deep:#636848;
     --ink-mute:#7A6E5C;
-    --line:rgba(42,33,26,.18);
+    --line:rgba(42,33,26,.20);
     --line-soft:rgba(42,33,26,.10);
-    --stamp:0 2px 0 rgba(42,33,26,.12);
-    --lift:0 24px 50px -30px rgba(42,33,26,.55);
+    --lift:0 30px 60px -34px rgba(42,33,26,.7);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{
-    font-family:'Archivo',sans-serif;
-    color:var(--espresso);
-    background:var(--kraft);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
+    font-family:'Archivo',sans-serif;color:var(--espresso);background:var(--kraft);
+    line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
   }
   a{color:inherit;text-decoration:none}
   img,svg{max-width:100%;display:block}
   .serif{font-family:'Fraunces',serif}
   .mono{font-family:'Space Mono',monospace}
-  .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
 
-  /* kraft paper grain */
   body::before{
     content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.05;mix-blend-mode:multiply;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  /* mono spec label */
-  .spec{
-    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;
-    color:var(--terra-deep);font-weight:700;
-  }
-  .spec-line{display:inline-flex;align-items:center;gap:10px}
-  .spec-line::before{content:"";width:22px;height:2px;background:var(--terra)}
+  .k{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--terra-deep);font-weight:700}
+  .v-mono{font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.02em}
 
   /* ---------- header ---------- */
-  header{
-    position:fixed;top:0;left:0;right:0;z-index:100;transition:.4s ease;
-    border-bottom:1.5px solid transparent;
-  }
-  header.scrolled{
-    background:color-mix(in srgb, var(--kraft) 90%, transparent);
-    backdrop-filter:blur(10px);
-    border-bottom:1.5px solid var(--line);
-  }
-  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0;transition:.4s}
-  header.scrolled .nav{padding:11px 0}
-  .brand{display:flex;align-items:center;gap:11px;font-family:'Fraunces',serif;font-weight:600;font-size:19px;letter-spacing:-.01em}
-  .brand .seal{
-    width:38px;height:38px;flex-shrink:0;
-  }
-  .nav-links{display:flex;gap:30px;align-items:center}
-  .nav-links a{font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.04em;color:var(--espresso-soft);position:relative}
+  header{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--kraft) 92%,transparent);backdrop-filter:blur(9px);border-bottom:1.5px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:13px 0;gap:14px}
+  .brand{display:flex;align-items:center;gap:11px;font-family:'Fraunces',serif;font-weight:600;font-size:18px;letter-spacing:-.01em}
+  .seal{width:36px;height:36px;flex-shrink:0}
+  .nav-links{display:flex;gap:26px;align-items:center}
+  .nav-links a{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.03em;color:var(--espresso-soft);position:relative}
   .nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:2px;background:var(--terra);transition:.3s}
   .nav-links a:hover::after{width:100%}
-  .nav-cta{
-    display:inline-flex;align-items:center;gap:8px;background:var(--espresso);color:var(--kraft);
-    padding:10px 18px;border-radius:2px;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;
-    letter-spacing:.04em;transition:.25s;
-  }
-  .nav-cta:hover{background:var(--terra-deep);transform:translateY(-1px)}
-  @media(max-width:860px){.nav-links{display:none}}
+  .nav-cta{display:inline-flex;align-items:center;gap:8px;background:var(--espresso);color:var(--kraft);padding:9px 16px;font-family:'Space Mono',monospace;font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;transition:.25s}
+  .nav-cta:hover{background:var(--terra-deep)}
+  @media(max-width:820px){.nav-links{display:none}}
 
-  /* ---------- hero ---------- */
-  .hero{position:relative;padding:132px 0 70px;overflow:hidden}
-  .hero::after{
-    content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.5;
-    background-image:
-      repeating-linear-gradient(90deg, transparent 0 39px, var(--line-soft) 39px 40px);
-    mask-image:linear-gradient(180deg,transparent,#000 40%,#000 70%,transparent);
-  }
-  .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.08fr .92fr;gap:52px;align-items:center}
-  .hero-eyebrow{margin-bottom:26px}
-  h1.title{
-    font-family:'Fraunces',serif;font-weight:600;font-size:clamp(44px,7.2vw,86px);line-height:.98;
-    letter-spacing:-.02em;color:var(--espresso);
-  }
-  h1.title em{font-style:italic;font-weight:500;color:var(--terra-deep)}
-  .lede{margin-top:24px;font-size:clamp(15.5px,1.9vw,18px);color:var(--espresso-soft);max-width:40ch}
-  .hero-actions{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
-  .btn{
-    display:inline-flex;align-items:center;gap:10px;padding:15px 26px;
-    font-family:'Space Mono',monospace;font-weight:700;font-size:13px;letter-spacing:.05em;
-    text-transform:uppercase;cursor:pointer;border:none;transition:.28s cubic-bezier(.2,.7,.3,1);border-radius:2px;
-  }
+  /* ---------- shared button ---------- */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 24px;font-family:'Space Mono',monospace;font-weight:700;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;border:none;transition:.26s cubic-bezier(.2,.7,.3,1)}
   .btn-primary{background:var(--terra);color:#fff;box-shadow:4px 4px 0 var(--espresso)}
   .btn-primary:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--espresso)}
   .btn-ghost{background:transparent;color:var(--espresso);border:2px solid var(--espresso)}
   .btn-ghost:hover{background:var(--espresso);color:var(--kraft)}
-  .hero-trust{margin-top:32px;display:flex;align-items:center;gap:14px;font-size:13px;color:var(--ink-mute);flex-wrap:wrap}
-  .stars{color:var(--terra);letter-spacing:1px}
-  .hero-trust strong{color:var(--espresso)}
 
-  /* hero coffee bag */
-  .hero-visual{position:relative;display:flex;justify-content:center}
-  .bag{
-    position:relative;width:100%;max-width:360px;aspect-ratio:5/7;
-    background:
-      linear-gradient(178deg, var(--kraft-card), var(--kraft-deep));
-    border:2px solid var(--espresso);
-    box-shadow:var(--lift);
-    padding:26px 24px;display:flex;flex-direction:column;
-  }
-  .bag::before{ /* top crimp */
-    content:"";position:absolute;top:-12px;left:-2px;right:-2px;height:14px;
-    background:repeating-linear-gradient(90deg,var(--espresso) 0 6px,var(--kraft-deep) 6px 12px);
-    border:2px solid var(--espresso);
-  }
+  /* ========== PRODUCT HERO (PDP) ========== */
+  .pdp{padding:34px 0 12px}
+  .crumb{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--ink-mute);text-transform:uppercase;margin-bottom:22px}
+  .crumb b{color:var(--terra-deep)}
+  .pdp-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:start}
+
+  /* --- gallery / bag --- */
+  .gallery{position:relative}
+  .stage{position:relative;background:radial-gradient(120% 90% at 50% 18%,var(--oat),var(--kraft-deep));border:2px solid var(--espresso);padding:48px 24px 40px;display:flex;justify-content:center;overflow:hidden}
+  .stage::before{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,transparent 0 33px,var(--line-soft) 33px 34px);opacity:.5;pointer-events:none}
+  .bag{position:relative;z-index:2;width:100%;max-width:270px;aspect-ratio:5/7;background:linear-gradient(174deg,var(--kraft-card) 0%,var(--kraft-deep) 100%);border:2px solid var(--espresso);box-shadow:var(--lift);padding:22px 20px;display:flex;flex-direction:column}
+  .bag::before{content:"";position:absolute;top:-11px;left:-2px;right:-2px;height:13px;background:repeating-linear-gradient(90deg,var(--espresso) 0 6px,var(--kraft-deep) 6px 12px);border:2px solid var(--espresso)}
+  .bag::after{content:"";position:absolute;top:14px;left:14px;right:14px;bottom:14px;border:1px solid var(--line-soft);pointer-events:none}
   .bag-top{display:flex;justify-content:space-between;align-items:flex-start}
-  .bag-lot{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.14em;line-height:1.7;color:var(--espresso-soft)}
-  .bag-seal{width:66px;height:66px;flex-shrink:0}
-  .bag-mid{flex:1;display:flex;flex-direction:column;justify-content:center;text-align:center;padding:8px 0}
-  .bag-mid .glyph{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(62px,20vw,104px);line-height:1;color:var(--espresso)}
-  .bag-mid .kind{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--terra-deep);margin-top:10px}
-  .bag-mid .kind-lg{font-family:'Fraunces',serif;font-style:italic;font-size:22px;color:var(--espresso-soft);margin-top:14px}
-  .bag-foot{border-top:1.5px dashed var(--line);padding-top:14px;display:flex;justify-content:space-between;align-items:center}
-  .bag-foot .wt{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.14em;color:var(--espresso-soft)}
-  .bag-foot .roast{display:flex;gap:4px;align-items:center}
-  .bag-foot .roast i{width:7px;height:7px;border-radius:50%;background:var(--espresso);display:block}
-  .bag-foot .roast i.off{background:transparent;border:1.5px solid var(--line)}
-  /* floating tags */
-  .tag-badge{
-    position:absolute;z-index:5;background:var(--paper);border:2px solid var(--espresso);
-    padding:10px 14px;box-shadow:3px 3px 0 var(--espresso);
-  }
-  .tag-open{top:6px;left:-26px;transform:rotate(-5deg)}
-  .tag-open .n{font-family:'Fraunces',serif;font-weight:600;font-size:26px;line-height:1;color:var(--terra-deep)}
-  .tag-open .t{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--espresso-soft);margin-top:3px}
-  .tag-book{bottom:38px;right:-30px;transform:rotate(4deg);display:flex;align-items:center;gap:8px}
-  .tag-book .dot{width:9px;height:9px;border-radius:50%;background:var(--sage-deep);box-shadow:0 0 0 4px rgba(99,104,72,.22)}
-  .tag-book .t{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.02em}
+  .bag-lot{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.1em;line-height:1.8;color:var(--espresso-soft)}
+  .bag-seal{width:54px;height:54px;flex-shrink:0}
+  .bag-mid{flex:1;display:flex;flex-direction:column;justify-content:center;text-align:center}
+  .bag-mid .glyph{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(52px,17vw,82px);line-height:1;color:var(--espresso)}
+  .bag-mid .kind{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--terra-deep);margin-top:8px}
+  .bag-mid .kind-lg{font-family:'Fraunces',serif;font-style:italic;font-size:17px;color:var(--espresso-soft);margin-top:10px}
+  .bag-foot{border-top:1.5px dashed var(--line);padding-top:11px;display:flex;justify-content:space-between;align-items:center}
+  .bag-foot .wt{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--espresso-soft)}
+  .roast{display:flex;gap:4px;align-items:center}
+  .roast i{width:6px;height:6px;border-radius:50%;background:var(--espresso);display:block}
+  .roast i.off{background:transparent;border:1.4px solid var(--line)}
 
-  @media(max-width:860px){
-    .hero{padding:112px 0 50px}
-    .hero-grid{grid-template-columns:1fr;gap:44px}
-    .hero-visual{max-width:320px;margin:0 auto}
-    .tag-open{left:-14px}.tag-book{right:-14px}
+  /* --- spec labels around bag (desktop absolute) --- */
+  .spec-tag{position:absolute;z-index:4;background:var(--paper);border:1.5px solid var(--espresso);padding:8px 11px;max-width:150px}
+  .spec-tag .k{font-size:9.5px;letter-spacing:.14em}
+  .spec-tag .val{font-family:'Fraunces',serif;font-size:15px;font-weight:600;line-height:1.15;margin-top:3px}
+  .st-1{top:22px;left:-8px}
+  .st-2{top:22px;right:-8px;text-align:right}
+  .st-3{bottom:26px;left:-8px}
+  .st-4{bottom:26px;right:-8px;text-align:right}
+  .spec-list-m{display:none}
+
+  /* --- buy box --- */
+  .buy .eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--terra-deep);font-weight:700}
+  .buy .eyebrow::before{content:"";width:22px;height:2px;background:var(--terra)}
+  .buy h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(36px,5.4vw,58px);line-height:.98;letter-spacing:-.02em;margin:16px 0 0}
+  .buy h1 em{font-style:italic;font-weight:500;color:var(--terra-deep)}
+  .rating{display:flex;align-items:center;gap:12px;margin-top:18px;flex-wrap:wrap}
+  .stars{color:var(--terra);letter-spacing:2px;font-size:15px}
+  .rating .txt{font-family:'Space Mono',monospace;font-size:12px;color:var(--espresso-soft)}
+  .rating .txt strong{color:var(--espresso)}
+  .desc{margin-top:20px;font-size:16px;color:var(--espresso-soft);max-width:44ch}
+
+  .chips-label{margin-top:26px;margin-bottom:11px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.03em;padding:6px 12px;border:1.5px solid var(--espresso);background:var(--kraft-card);border-radius:100px;transition:.2s}
+  .chip:hover{background:var(--espresso);color:var(--kraft)}
+
+  .buy-actions{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+  .buy-meta{display:flex;gap:0;margin-top:26px;border:1.5px solid var(--line);background:var(--oat)}
+  .buy-meta div{flex:1;padding:13px 14px;border-right:1.5px solid var(--line)}
+  .buy-meta div:last-child{border-right:none}
+  .buy-meta .k{font-size:9.5px}
+  .buy-meta .m{font-family:'Fraunces',serif;font-weight:600;font-size:16px;margin-top:4px}
+
+  @media(max-width:880px){
+    .pdp-grid{grid-template-columns:1fr;gap:34px}
+    .spec-tag{display:none}
+    .spec-list-m{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:16px;border:1.5px solid var(--line)}
+    .spec-list-m div{padding:12px 13px;border-right:1.5px solid var(--line);border-bottom:1.5px solid var(--line)}
+    .spec-list-m div:nth-child(2n){border-right:none}
+    .spec-list-m div:nth-child(n+3){border-bottom:none}
+    .spec-list-m .k{font-size:9.5px}
+    .spec-list-m .val{font-family:'Fraunces',serif;font-size:15px;font-weight:600;margin-top:3px}
+    .buy h1{font-size:clamp(34px,10vw,48px)}
   }
 
-  /* ---------- marquee ---------- */
-  .marquee{border-top:2px solid var(--espresso);border-bottom:2px solid var(--espresso);padding:14px 0;overflow:hidden;background:var(--espresso)}
-  .marquee-track{display:flex;gap:0;white-space:nowrap;animation:slide 30s linear infinite;will-change:transform}
-  .marquee-track span{
-    font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--kraft);
-    padding:0 26px;display:inline-flex;align-items:center;gap:26px;
-  }
-  .marquee-track span::after{content:"✦";color:var(--terra)}
-  @keyframes slide{to{transform:translateX(-50%)}}
+  /* ========== SPEC STRIP ========== */
+  .strip{background:var(--espresso);border-top:2px solid var(--espresso);border-bottom:2px solid var(--espresso);margin-top:30px}
+  .strip .wrap{display:flex;flex-wrap:wrap;gap:0;padding-top:0;padding-bottom:0}
+  .strip .cell{flex:1 1 auto;min-width:150px;padding:16px 20px;border-right:1.5px dashed rgba(231,220,199,.22)}
+  .strip .cell:last-child{border-right:none}
+  .strip .k{color:var(--terra)}
+  .strip .val{font-family:'Space Mono',monospace;font-size:14px;color:var(--kraft);margin-top:5px;letter-spacing:.02em}
 
-  /* ---------- section base ---------- */
-  section.pad{padding:90px 0}
-  .sec-head{max-width:660px;margin-bottom:52px}
-  .sec-tag{margin-bottom:16px}
-  .sec-title{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(30px,4.4vw,50px);line-height:1.05;letter-spacing:-.02em}
+  /* ========== SECTION BASE ========== */
+  section.pad{padding:78px 0}
+  .sec-head{max-width:640px;margin-bottom:44px}
+  .sec-tag{display:inline-flex;align-items:center;gap:9px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--terra-deep);font-weight:700;margin-bottom:15px}
+  .sec-tag::before{content:"";width:22px;height:2px;background:var(--terra)}
+  .sec-title{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(28px,4.2vw,46px);line-height:1.06;letter-spacing:-.02em}
   .sec-title em{font-style:italic;font-weight:500;color:var(--terra-deep)}
-  .sec-sub{margin-top:16px;color:var(--espresso-soft);font-size:16px;max-width:52ch}
+  .sec-sub{margin-top:14px;color:var(--espresso-soft);font-size:16px;max-width:52ch}
 
-  /* why — coffee tiles grid */
-  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2px solid var(--espresso);background:var(--espresso)}
-  .why-card{
-    background:var(--kraft-card);padding:36px 30px 34px;position:relative;transition:.35s;
-  }
-  .why-card:not(:last-child){border-right:2px solid var(--espresso)}
-  .why-card:hover{background:var(--paper)}
-  .why-card .idx{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--terra-deep);font-weight:700}
-  .why-card .stamp{width:58px;height:58px;margin:20px 0 22px}
-  .why-card h3{font-family:'Fraunces',serif;font-weight:600;font-size:22px;line-height:1.15;margin-bottom:10px}
-  .why-card p{color:var(--espresso-soft);font-size:14.5px}
-  @media(max-width:820px){
-    .why-grid{grid-template-columns:1fr}
-    .why-card:not(:last-child){border-right:none;border-bottom:2px solid var(--espresso)}
+  /* ========== PLANS (bag-label cards + selection) ========== */
+  .plans-sec{background:var(--kraft-deep);border-top:2px solid var(--espresso);border-bottom:2px solid var(--espresso)}
+  .plan-hint{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--ink-mute);margin:-30px 0 26px;display:flex;align-items:center;gap:8px}
+  .plan-hint svg{width:14px;height:14px;color:var(--terra-deep)}
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .plan{position:relative;background:var(--kraft-card);border:2px solid var(--espresso);padding:0;display:flex;flex-direction:column;cursor:pointer;transition:.28s;text-align:left;font:inherit;color:inherit;overflow:hidden}
+  .plan:hover{transform:translateY(-4px);box-shadow:var(--lift)}
+  .plan-strip{background:repeating-linear-gradient(90deg,var(--espresso) 0 7px,transparent 7px 14px);height:9px;border-bottom:2px solid var(--espresso)}
+  .plan-body{padding:24px 24px 26px;display:flex;flex-direction:column;flex:1}
+  .plan .tier{font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--terra-deep)}
+  .plan .price-row{display:flex;align-items:baseline;gap:8px;margin:12px 0 2px}
+  .plan .amt{font-family:'Fraunces',serif;font-weight:600;font-size:46px;line-height:1}
+  .plan .per{font-family:'Space Mono',monospace;font-size:11.5px;color:var(--ink-mute)}
+  .plan .dash{border-top:1.5px dashed var(--line);margin:20px 0 18px}
+  .plan ul{list-style:none;display:flex;flex-direction:column;gap:11px;flex:1}
+  .plan li{display:flex;gap:10px;font-size:14px;align-items:flex-start;line-height:1.45}
+  .plan li svg{width:15px;height:15px;flex-shrink:0;margin-top:4px;color:var(--terra)}
+  .plan .select{margin-top:22px;display:flex;align-items:center;justify-content:space-between;border-top:1.5px dashed var(--line);padding-top:16px}
+  .plan .sel-label{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--espresso-soft)}
+  .radio{width:22px;height:22px;border:2px solid var(--espresso);border-radius:50%;display:grid;place-items:center;flex-shrink:0}
+  .radio::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--terra);transform:scale(0);transition:.2s}
+  .plan .pill{position:absolute;top:14px;right:0;background:var(--terra);color:#fff;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.06em;padding:5px 12px;text-transform:uppercase;border:2px solid var(--espresso);border-right:none}
+  .plan[aria-pressed="true"]{background:var(--paper);box-shadow:0 0 0 3px var(--espresso),var(--lift)}
+  .plan[aria-pressed="true"] .radio::after{transform:scale(1)}
+  .plan[aria-pressed="true"] .sel-label{color:var(--terra-deep)}
+  .plan-cta{margin-top:26px;display:flex;justify-content:center}
+  .plan-cta .btn{min-width:280px}
+  @media(max-width:860px){.plans{grid-template-columns:1fr;gap:20px}.plan-hint{margin-top:-26px}}
+
+  /* ========== STAMP BADGES (why) ========== */
+  .stamps{display:grid;grid-template-columns:repeat(3,1fr);gap:34px}
+  .stamp-card{text-align:center;display:flex;flex-direction:column;align-items:center}
+  .stamp-badge{width:132px;height:132px;position:relative}
+  .stamp-badge svg{width:100%;height:100%}
+  .stamp-num{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--terra-deep);font-weight:700;margin:20px 0 8px}
+  .stamp-card h3{font-family:'Fraunces',serif;font-weight:600;font-size:21px;line-height:1.15;margin-bottom:9px;max-width:16ch}
+  .stamp-card p{color:var(--espresso-soft);font-size:14.5px;max-width:32ch}
+  @media(max-width:820px){.stamps{grid-template-columns:1fr;gap:40px}}
+
+  /* ========== REVIEWS (verified one-liners) ========== */
+  .rev-sec{background:var(--paper);border-top:2px solid var(--espresso);border-bottom:2px solid var(--espresso)}
+  .rev-list{display:flex;flex-direction:column;border:2px solid var(--espresso);background:var(--kraft-card)}
+  .rev-item{display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;padding:22px 26px;border-bottom:1.5px dashed var(--line)}
+  .rev-item:last-child{border-bottom:none}
+  .rev-av{width:44px;height:44px;flex-shrink:0;background:var(--espresso);color:var(--kraft);display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:600;font-size:18px}
+  .rev-main .rstars{color:var(--terra);letter-spacing:1.5px;font-size:13px;margin-bottom:5px}
+  .rev-main .rq{font-family:'Fraunces',serif;font-size:17px;line-height:1.4;color:var(--espresso)}
+  .rev-main .rq em{font-style:normal;color:var(--espresso)}
+  .rev-who{font-family:'Space Mono',monospace;font-size:11px;color:var(--ink-mute);margin-top:6px}
+  .rev-who b{color:var(--espresso)}
+  .verified{display:inline-flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--sage-deep);white-space:nowrap}
+  .verified svg{width:15px;height:15px}
+  @media(max-width:720px){
+    .rev-item{grid-template-columns:auto 1fr;gap:14px;padding:20px}
+    .rev-verified-cell{grid-column:2;margin-top:2px}
   }
 
-  /* pricing — kraft tickets */
-  .price-sec{background:var(--kraft-deep);border-top:2px solid var(--espresso);border-bottom:2px solid var(--espresso)}
-  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
-  .ticket{
-    position:relative;background:var(--paper);border:2px solid var(--espresso);
-    padding:30px 26px 28px;display:flex;flex-direction:column;transition:.3s;
-  }
-  .ticket::before,.ticket::after{ /* punch holes */
-    content:"";position:absolute;width:20px;height:20px;border-radius:50%;background:var(--kraft-deep);
-    border:2px solid var(--espresso);top:74px;
-  }
-  .ticket::before{left:-11px}
-  .ticket::after{right:-11px}
-  .ticket:hover{transform:translateY(-5px);box-shadow:var(--lift)}
-  .ticket.featured{background:var(--espresso);color:var(--kraft)}
-  .ticket.featured::before,.ticket.featured::after{background:var(--kraft-deep)}
-  .ticket .tier{font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra-deep)}
-  .ticket.featured .tier{color:var(--terra)}
-  .ticket .amt{font-family:'Fraunces',serif;font-weight:600;font-size:52px;line-height:1;margin:14px 0 4px}
-  .ticket .per{font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.04em;color:var(--ink-mute)}
-  .ticket.featured .per{color:color-mix(in srgb,var(--kraft) 72%,transparent)}
-  .ticket .dash{border-top:1.5px dashed var(--line);margin:22px 0 20px}
-  .ticket.featured .dash{border-color:rgba(231,220,199,.3)}
-  .ticket ul{list-style:none;display:flex;flex-direction:column;gap:12px;flex:1}
-  .ticket li{display:flex;gap:10px;font-size:14px;align-items:flex-start;line-height:1.45}
-  .ticket li svg{width:16px;height:16px;flex-shrink:0;margin-top:3px;color:var(--terra)}
-  .ticket.featured li svg{color:var(--terra)}
-  .ticket .pill{
-    position:absolute;top:-14px;right:20px;background:var(--terra);color:#fff;
-    font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.08em;
-    padding:5px 12px;border:2px solid var(--espresso);text-transform:uppercase;
-  }
-  .ticket .btn{width:100%;justify-content:center;margin-top:24px}
-  .ticket .btn-tk{background:var(--espresso);color:var(--kraft);box-shadow:none}
-  .ticket .btn-tk:hover{background:var(--terra-deep);transform:translateY(-2px)}
-  .ticket.featured .btn-tk{background:var(--terra);color:#fff}
-  .ticket.featured .btn-tk:hover{background:var(--terra-deep)}
-  @media(max-width:820px){.price-grid{grid-template-columns:1fr;gap:30px}}
+  /* ========== SHIPPING LABEL + MAP ========== */
+  .ship-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:stretch}
+  .label{background:var(--oat);border:2px solid var(--espresso);display:flex;flex-direction:column}
+  .label-top{display:flex;justify-content:space-between;align-items:center;background:var(--espresso);color:var(--kraft);padding:12px 20px}
+  .label-top .lt{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+  .label-top .lt b{color:var(--terra)}
+  .barcode{display:flex;gap:2px;height:26px;align-items:stretch}
+  .barcode i{display:block;width:2px;background:var(--kraft)}
+  .barcode i.w{width:4px}.barcode i.g{background:transparent;width:3px}
+  .label-body{padding:22px 24px 8px}
+  .label h3{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(24px,3.4vw,32px);line-height:1.08;letter-spacing:-.01em;margin-bottom:20px}
+  .label h3 em{font-style:italic;color:var(--terra-deep)}
+  .lrow{display:grid;grid-template-columns:92px 1fr;gap:14px;padding:13px 0;border-bottom:1.5px dashed var(--line);align-items:baseline}
+  .lrow:last-of-type{border-bottom:none}
+  .lrow .k{font-size:10px}
+  .lrow .val{font-size:15px;color:var(--espresso)}
+  .label-actions{display:flex;gap:12px;padding:18px 24px 24px;flex-wrap:wrap}
+  .label-actions .btn{flex:1;min-width:130px}
+  .map{border:2px solid var(--espresso);position:relative;overflow:hidden;background:#241d16;min-height:280px}
+  .map svg{width:100%;height:100%;display:block}
+  .map .pin{position:absolute;top:44%;left:50%;width:44px;height:44px;transform:translate(-50%,-100%);color:var(--terra);filter:drop-shadow(0 6px 6px rgba(0,0,0,.5))}
+  .map-tag{position:absolute;bottom:14px;left:14px;background:var(--oat);color:var(--espresso);font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px;border:1.5px solid var(--espresso)}
+  @media(max-width:860px){.ship-grid{grid-template-columns:1fr}}
 
-  /* reviews */
-  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-  .rev{
-    background:var(--kraft-card);border:2px solid var(--espresso);padding:28px 26px;
-    display:flex;flex-direction:column;position:relative;transition:.3s;
-  }
-  .rev:hover{transform:translateY(-4px);box-shadow:8px 8px 0 var(--espresso)}
-  .rev .quo{font-family:'Fraunces',serif;font-size:64px;line-height:.6;color:var(--terra);opacity:.5;height:34px}
-  .rev .q{font-family:'Fraunces',serif;font-size:17.5px;line-height:1.5;color:var(--espresso);flex:1}
-  .rev .who{margin-top:22px;display:flex;align-items:center;gap:12px;border-top:1.5px dashed var(--line);padding-top:18px}
-  .rev .av{
-    width:42px;height:42px;flex-shrink:0;background:var(--espresso);color:var(--kraft);
-    display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:600;font-size:18px;
-  }
-  .rev .nm{font-weight:700;font-size:14px}
-  .rev .mt{font-family:'Space Mono',monospace;font-size:11px;color:var(--ink-mute);letter-spacing:.02em;margin-top:2px}
-  @media(max-width:820px){.rev-grid{grid-template-columns:1fr}}
-
-  /* location */
-  .loc-sec{background:var(--espresso);color:var(--kraft);border-top:2px solid var(--espresso)}
-  .loc-sec .spec{color:var(--terra)}
-  .loc-sec .spec-line::before{background:var(--terra)}
-  .loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-  .loc-info h3{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(28px,3.8vw,40px);line-height:1.06;margin:16px 0 26px;letter-spacing:-.01em}
-  .loc-info h3 em{font-style:italic;color:var(--terra)}
-  .loc-row{display:flex;gap:18px;padding:15px 0;border-bottom:1.5px dashed rgba(231,220,199,.22);align-items:baseline}
-  .loc-row .k{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);width:82px;flex-shrink:0}
-  .loc-row .v{font-size:15px;color:color-mix(in srgb,var(--kraft) 92%,transparent)}
-  .loc-actions{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
-  .loc-actions .btn-primary{box-shadow:4px 4px 0 var(--terra-deep)}
-  .loc-actions .btn-primary:hover{box-shadow:6px 6px 0 var(--terra-deep)}
-  .loc-actions .btn-line{background:transparent;color:var(--kraft);border:2px solid var(--kraft)}
-  .loc-actions .btn-line:hover{background:var(--kraft);color:var(--espresso)}
-  .map{
-    border:2px solid var(--kraft);aspect-ratio:1/1;position:relative;overflow:hidden;
-    background:#241d16;
-  }
-  .map svg{width:100%;height:100%}
-  .map .pin{position:absolute;top:44%;left:50%;width:46px;height:46px;transform:translate(-50%,-100%);color:var(--terra);filter:drop-shadow(0 6px 6px rgba(0,0,0,.5))}
-  .map-tag{position:absolute;bottom:14px;left:14px;background:var(--paper);color:var(--espresso);font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px;border:1.5px solid var(--espresso)}
-  @media(max-width:820px){.loc-grid{grid-template-columns:1fr;gap:32px}}
-
-  /* footer */
-  footer{background:var(--kraft-deep);color:var(--espresso-soft);padding:60px 0 120px;border-top:2px solid var(--espresso)}
+  /* ========== FOOTER ========== */
+  footer{background:var(--kraft-deep);color:var(--espresso-soft);padding:56px 0 116px;border-top:2px solid var(--espresso)}
   .foot-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:34px}
-  .foot-brand{max-width:30ch}
+  .foot-brand{max-width:32ch}
   .foot-brand .brand{color:var(--espresso);margin-bottom:12px}
   .foot-brand .fnote{font-size:14px}
   .fcol h4{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--terra-deep);margin-bottom:14px;font-weight:700}
   .fcol a,.fcol p{display:block;font-size:14px;padding:4px 0;transition:.2s}
   .fcol a:hover{color:var(--terra-deep)}
-  .copyr{margin-top:44px;padding-top:22px;border-top:1.5px dashed var(--line);font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.03em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;color:var(--ink-mute)}
+  .copyr{margin-top:42px;padding-top:22px;border-top:1.5px dashed var(--line);font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.03em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;color:var(--ink-mute)}
 
-  /* sticky mobile bar */
-  .cta-bar{
-    position:fixed;left:0;right:0;bottom:0;z-index:200;
-    background:var(--espresso);border-top:2px solid var(--terra);
-    padding:10px 12px;display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:9px;
-  }
-  .cta-bar a{
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
-    padding:9px 4px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.04em;
-    text-transform:uppercase;transition:.2s;border-radius:2px;
-  }
+  /* ========== STICKY MOBILE BAR ========== */
+  .cta-bar{position:fixed;left:0;right:0;bottom:0;z-index:200;background:var(--espresso);border-top:2px solid var(--terra);padding:10px 12px;display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:9px}
+  .cta-bar a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:9px 4px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;transition:.2s}
   .cta-bar .c-call{background:transparent;color:var(--kraft);border:1.5px solid rgba(231,220,199,.35)}
   .cta-bar .c-txt{background:var(--sage);color:#fff}
   .cta-bar .c-book{background:var(--terra);color:#fff}
   .cta-bar a:active{transform:scale(.96)}
   .cta-bar svg{width:18px;height:18px}
-  @media(min-width:900px){.cta-bar{display:none}}
-  @media(max-width:899px){footer{padding-bottom:120px}}
+  @media(min-width:861px){.cta-bar{display:none}}
+  @media(max-width:860px){footer{padding-bottom:116px}}
 
-  /* reveal / stamp animation */
-  .reveal{opacity:0;transform:translateY(24px);transition:.75s cubic-bezier(.2,.7,.2,1)}
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(24px);transition:.7s cubic-bezier(.2,.7,.2,1)}
   .reveal.in{opacity:1;transform:none}
-  .stampin{opacity:0;transform:scale(.7) rotate(-8deg)}
-  .stampin.in{opacity:1;transform:none;transition:.6s cubic-bezier(.2,1.3,.4,1)}
-  .hero-eyebrow,.hero h1,.hero .lede,.hero-actions,.hero-trust{opacity:0;animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
-  .hero h1{animation-delay:.08s}.hero .lede{animation-delay:.2s}
-  .hero-actions{animation-delay:.32s}.hero-trust{animation-delay:.44s}
-  .hero-visual{opacity:0;animation:stampdrop 1s cubic-bezier(.2,1.15,.4,1) .18s forwards}
-  @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
-  @keyframes stampdrop{from{opacity:0;transform:scale(.86) rotate(-3deg)}to{opacity:1;transform:none}}
-  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal,.stampin{opacity:1;transform:none}}
+  .stampin{opacity:0;transform:scale(.72) rotate(-8deg)}
+  .stampin.in{opacity:1;transform:none;transition:.62s cubic-bezier(.2,1.3,.4,1)}
+  .pdp .buy>*{opacity:0;animation:rise .85s cubic-bezier(.2,.7,.2,1) forwards}
+  .pdp .buy>*:nth-child(2){animation-delay:.06s}
+  .pdp .buy>*:nth-child(3){animation-delay:.12s}
+  .pdp .buy>*:nth-child(4){animation-delay:.18s}
+  .pdp .buy>*:nth-child(5){animation-delay:.24s}
+  .pdp .buy>*:nth-child(6){animation-delay:.3s}
+  .pdp .buy>*:nth-child(7){animation-delay:.36s}
+  .pdp .buy>*:nth-child(8){animation-delay:.42s}
+  .gallery{opacity:0;animation:stampdrop 1s cubic-bezier(.2,1.15,.4,1) .1s forwards}
+  @keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+  @keyframes stampdrop{from{opacity:0;transform:scale(.9) rotate(-2deg)}to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal,.stampin,.gallery,.pdp .buy>*{opacity:1;transform:none}}
 </style>
 </head>
 <body>
 
 <!-- ===== HEADER ===== -->
-<header id="hdr">
+<header>
   <div class="wrap nav">
     <a href="#" class="brand">
       <svg class="seal" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -338,242 +295,349 @@
       Driftwood Coffee
     </a>
     <nav class="nav-links">
-      <a href="#why">The shop</a>
-      <a href="#price">Menu &amp; more</a>
-      <a href="#review">Reviews</a>
-      <a href="#location">Find us</a>
+      <a href="#plans">Menu &amp; more</a>
+      <a href="#shop">The shop</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#find">Find us</a>
     </nav>
-    <a href="#location" class="nav-cta">Find us
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-    </a>
+    <a href="#find" class="nav-cta">Find us</a>
   </div>
 </header>
 
-<!-- ===== HERO ===== -->
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <div class="hero-eyebrow spec spec-line">East Austin · Neighborhood Coffee</div>
-      <h1 class="title">Your third place<br><em>on the east side.</em></h1>
-      <p class="lede">Single-origin beans roasted weekly, mugs you can hold with two hands, and nobody rushing you off the table by the window.</p>
-      <div class="hero-actions">
-        <a href="#price" class="btn btn-primary">See menu &amp; hours
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <a href="#location" class="btn btn-ghost">Book the back room</a>
-      </div>
-      <div class="hero-trust">
-        <span class="stars">★★★★★</span>
-        <span>Google reviews <strong>4.8</strong> · <strong>300+</strong> regulars on subscription</span>
-      </div>
-    </div>
+<!-- ===== PRODUCT HERO ===== -->
+<section class="pdp">
+  <div class="wrap">
+    <div class="crumb">East Austin · Neighborhood Coffee / <b>The Driftwood Bag</b></div>
+    <div class="pdp-grid">
 
-    <div class="hero-visual">
-      <div class="tag-badge tag-open">
-        <div class="n serif">6am</div>
-        <div class="t">Open early, every day</div>
-      </div>
-      <div class="bag">
-        <div class="bag-top">
-          <div class="bag-lot">LOT / 002<br>ORIGIN / ETHIOPIA<br>PROCESS / WASHED</div>
-          <svg class="bag-seal" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="50" cy="50" r="47" stroke="#2A211A" stroke-width="2"/>
-            <circle cx="50" cy="50" r="40" stroke="#2A211A" stroke-width="1" stroke-dasharray="2 3"/>
-            <path id="arc" d="M50 50 m-32 0 a32 32 0 1 1 64 0" fill="none"/>
-            <text font-family="Space Mono,monospace" font-size="8.5" letter-spacing="2.6" fill="#9A4E2C" font-weight="700">
-              <textPath href="#arc" startOffset="4%">ROASTED FRESH · SMALL BATCH ·</textPath>
-            </text>
-            <text x="50" y="56" text-anchor="middle" font-family="Fraunces,serif" font-weight="600" font-size="22" fill="#2A211A">EST</text>
-          </svg>
+      <!-- gallery / coffee bag -->
+      <div class="gallery">
+        <div class="stage">
+          <div class="spec-tag st-1"><div class="k">Origin</div><div class="val">Ethiopia</div></div>
+          <div class="spec-tag st-2"><div class="k">Roast date</div><div class="val">Every Monday</div></div>
+          <div class="spec-tag st-3"><div class="k">Process</div><div class="val">Washed</div></div>
+          <div class="spec-tag st-4"><div class="k">Notes</div><div class="val">Cocoa · Citrus</div></div>
+
+          <div class="bag">
+            <div class="bag-top">
+              <div class="bag-lot">LOT / 002<br>SINGLE ORIGIN<br>SMALL BATCH</div>
+              <svg class="bag-seal" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="50" cy="50" r="47" stroke="#2A211A" stroke-width="2"/>
+                <circle cx="50" cy="50" r="40" stroke="#2A211A" stroke-width="1" stroke-dasharray="2 3"/>
+                <path id="arc" d="M50 50 m-32 0 a32 32 0 1 1 64 0" fill="none"/>
+                <text font-family="Space Mono,monospace" font-size="8.4" letter-spacing="2.4" fill="#9A4E2C" font-weight="700">
+                  <textPath href="#arc" startOffset="3%">ROASTED FRESH · EAST AUSTIN ·</textPath>
+                </text>
+                <text x="50" y="56" text-anchor="middle" font-family="Fraunces,serif" font-weight="600" font-size="21" fill="#2A211A">EST</text>
+              </svg>
+            </div>
+            <div class="bag-mid">
+              <div class="glyph">D</div>
+              <div class="kind">Driftwood · East Austin, TX</div>
+              <div class="kind-lg serif">Slow coffee, fast wifi</div>
+            </div>
+            <div class="bag-foot">
+              <div class="wt">NET WT · 12 OZ (340g)</div>
+              <div class="roast" title="Medium roast"><i></i><i></i><i></i><i class="off"></i><i class="off"></i></div>
+            </div>
+          </div>
         </div>
-        <div class="bag-mid">
-          <div class="glyph">D</div>
-          <div class="kind">Driftwood · East Austin, TX</div>
-          <div class="kind-lg serif">Slow coffee, fast wifi</div>
-        </div>
-        <div class="bag-foot">
-          <div class="wt">NET WT · 12 OZ (340g)</div>
-          <div class="roast" title="Medium roast"><i></i><i></i><i></i><i class="off"></i><i class="off"></i></div>
+
+        <!-- mobile spec fallback -->
+        <div class="spec-list-m">
+          <div><div class="k">Origin</div><div class="val">Ethiopia</div></div>
+          <div><div class="k">Roast date</div><div class="val">Every Monday</div></div>
+          <div><div class="k">Process</div><div class="val">Washed</div></div>
+          <div><div class="k">Notes</div><div class="val">Cocoa · Citrus</div></div>
         </div>
       </div>
-      <div class="tag-badge tag-book">
-        <span class="dot"></span>
-        <span class="t">Back room bookable</span>
+
+      <!-- buy box -->
+      <div class="buy">
+        <div class="eyebrow">East Austin · Neighborhood Coffee</div>
+        <h1>Your third place <em>on the east side.</em></h1>
+        <div class="rating">
+          <span class="stars">★★★★★</span>
+          <span class="txt">Google reviews <strong>4.8</strong> · <strong>300+</strong> regulars on subscription</span>
+        </div>
+        <p class="desc">Single-origin beans roasted weekly, mugs you can hold with two hands, and nobody rushing you off the table by the window.</p>
+
+        <div>
+          <div class="chips-label k">Tasting notes</div>
+          <div class="chips">
+            <span class="chip">Cocoa</span>
+            <span class="chip">Citrus peel</span>
+            <span class="chip">Brown sugar</span>
+            <span class="chip">Stone fruit</span>
+            <span class="chip">Clean finish</span>
+          </div>
+        </div>
+
+        <div class="buy-actions">
+          <a href="#plans" class="btn btn-primary">See menu &amp; hours
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#find" class="btn btn-ghost">Book the back room</a>
+        </div>
+
+        <div class="buy-meta">
+          <div><div class="k">Roast</div><div class="m">Medium</div></div>
+          <div><div class="k">Weight</div><div class="m">12 oz</div></div>
+          <div><div class="k">Open</div><div class="m">6am daily</div></div>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- ===== MARQUEE ===== -->
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    <span>Single-origin espresso</span><span>Pour-over bar</span><span>House-baked pastries</span><span>Bean subscription</span><span>Back-room events</span><span>Oat milk everything</span>
-    <span>Single-origin espresso</span><span>Pour-over bar</span><span>House-baked pastries</span><span>Bean subscription</span><span>Back-room events</span><span>Oat milk everything</span>
+<!-- ===== SPEC STRIP ===== -->
+<div class="strip" aria-hidden="false">
+  <div class="wrap">
+    <div class="cell"><div class="k">Origin</div><div class="val">Single-origin</div></div>
+    <div class="cell"><div class="k">Bar</div><div class="val">Pour-over</div></div>
+    <div class="cell"><div class="k">Kitchen</div><div class="val">House-baked</div></div>
+    <div class="cell"><div class="k">Refill</div><div class="val">Bean subscription</div></div>
+    <div class="cell"><div class="k">Room</div><div class="val">Back-room events</div></div>
+    <div class="cell"><div class="k">Milk</div><div class="val">Oat everything</div></div>
   </div>
 </div>
 
-<!-- ===== WHY ===== -->
-<section class="pad" id="why">
+<!-- ===== PLANS ===== -->
+<section class="pad plans-sec" id="plans">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="sec-tag spec spec-line">Why Driftwood</div>
-      <h2 class="sec-title">A coffee shop that <em>remembers you.</em></h2>
-      <p class="sec-sub">Chains optimize for lines. We optimize for the second visit — your order, your seat, your name.</p>
+      <div class="sec-tag">Menu &amp; more</div>
+      <h2 class="sec-title">Three ways to <em>make it a habit.</em></h2>
     </div>
-    <div class="why-grid">
-      <div class="why-card reveal">
-        <span class="idx">/ 01</span>
-        <svg class="stamp stampin" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="50" cy="50" r="47" stroke="#2A211A" stroke-width="2.5"/>
-          <circle cx="50" cy="50" r="39" stroke="#B5623A" stroke-width="1.2" stroke-dasharray="3 3"/>
-          <g stroke="#2A211A" stroke-width="3" stroke-linecap="round">
-            <path d="M36 40h26v14a13 13 0 0 1-13 13h0a13 13 0 0 1-13-13z"/>
-            <path d="M62 43h6a5 5 0 0 1 0 10h-6M43 28v6M50 26v6"/>
-          </g>
-        </svg>
-        <h3>Roasted this week</h3>
-        <p>We roast small batches every Monday. The bag on the shelf is never older than seven days.</p>
-      </div>
-      <div class="why-card reveal" style="transition-delay:.08s">
-        <span class="idx">/ 02</span>
-        <svg class="stamp stampin" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="50" cy="50" r="47" stroke="#2A211A" stroke-width="2.5"/>
-          <circle cx="50" cy="50" r="39" stroke="#7C8060" stroke-width="1.2" stroke-dasharray="3 3"/>
-          <path d="M50 68s-16-10-16-22a9 9 0 0 1 16-5 9 9 0 0 1 16 5c0 12-16 22-16 22z" stroke="#2A211A" stroke-width="3" stroke-linejoin="round"/>
-        </svg>
-        <h3>Stay as long as you like</h3>
-        <p>Real mugs, wide tables, outlets at every seat. Laptop hours until 3pm, human hours after.</p>
-      </div>
-      <div class="why-card reveal" style="transition-delay:.16s">
-        <span class="idx">/ 03</span>
-        <svg class="stamp stampin" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="50" cy="50" r="47" stroke="#2A211A" stroke-width="2.5"/>
-          <circle cx="50" cy="50" r="39" stroke="#B5623A" stroke-width="1.2" stroke-dasharray="3 3"/>
-          <path d="M50 30l5 14 15 1-11.5 9.5L67 68l-17-8-17 8 8.5-13.5L30 45l15-1z" stroke="#2A211A" stroke-width="3" stroke-linejoin="round"/>
-        </svg>
-        <h3>A back room for your people</h3>
-        <p>Book clubs, team offsites, birthday pour-overs — a 16-seat room you can reserve free with any catering order.</p>
-      </div>
+    <div class="plan-hint reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+      Tap a label to pick your habit
+    </div>
+
+    <div class="plans">
+      <button type="button" class="plan reveal" aria-pressed="false" data-plan>
+        <div class="plan-strip"></div>
+        <div class="plan-body">
+          <div class="tier">Tasting flight</div>
+          <div class="price-row"><span class="amt serif">$12</span></div>
+          <div class="per">3 origins, 20 min</div>
+          <div class="dash"></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Three single-origins, brewed side by side</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Tasting card to take home</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Any weekday after 1pm</li>
+          </ul>
+          <div class="select">
+            <span class="sel-label">Try a flight</span>
+            <span class="radio" aria-hidden="true"></span>
+          </div>
+        </div>
+      </button>
+
+      <button type="button" class="plan reveal" aria-pressed="true" data-plan style="transition-delay:.07s">
+        <span class="pill">300+ members</span>
+        <div class="plan-strip"></div>
+        <div class="plan-body">
+          <div class="tier">Bean subscription</div>
+          <div class="price-row"><span class="amt serif">$22</span></div>
+          <div class="per">per month</div>
+          <div class="dash"></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Fresh 12oz bag every 2 weeks</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Free drip refill with pickup</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Pause or swap anytime</li>
+          </ul>
+          <div class="select">
+            <span class="sel-label">Start subscription</span>
+            <span class="radio" aria-hidden="true"></span>
+          </div>
+        </div>
+      </button>
+
+      <button type="button" class="plan reveal" aria-pressed="false" data-plan style="transition-delay:.14s">
+        <div class="plan-strip"></div>
+        <div class="plan-body">
+          <div class="tier">Back-room events</div>
+          <div class="price-row"><span class="amt serif">$150</span></div>
+          <div class="per">2 hrs · up to 16 people</div>
+          <div class="dash"></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Private 16-seat room</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Coffee &amp; pastry service</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Free with $200+ catering</li>
+          </ul>
+          <div class="select">
+            <span class="sel-label">Check dates</span>
+            <span class="radio" aria-hidden="true"></span>
+          </div>
+        </div>
+      </button>
+    </div>
+
+    <div class="plan-cta reveal">
+      <a href="#find" class="btn btn-primary" id="planCta">Start subscription
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- ===== PRICING ===== -->
-<section class="pad price-sec" id="price">
+<!-- ===== STAMP BADGES (why) ===== -->
+<section class="pad" id="shop">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="sec-tag spec spec-line">Menu &amp; more</div>
-      <h2 class="sec-title">Three ways to <em>make it a habit.</em></h2>
+      <div class="sec-tag">Why Driftwood</div>
+      <h2 class="sec-title">A coffee shop that <em>remembers you.</em></h2>
+      <p class="sec-sub">Chains optimize for lines. We optimize for the second visit — your order, your seat, your name.</p>
     </div>
-    <div class="price-grid">
-      <div class="ticket reveal">
-        <div class="tier">Tasting flight</div>
-        <div class="amt serif">$12</div>
-        <div class="per">3 origins, 20 min</div>
-        <div class="dash"></div>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Three single-origins, brewed side by side</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Tasting card to take home</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Any weekday after 1pm</li>
-        </ul>
-        <a href="#location" class="btn btn-tk">Try a flight</a>
+    <div class="stamps">
+
+      <div class="stamp-card reveal">
+        <div class="stamp-badge">
+          <svg class="stampin" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="50" cy="50" r="47" stroke="#2A211A" stroke-width="2.5"/>
+            <circle cx="50" cy="50" r="39" stroke="#B5623A" stroke-width="1.2" stroke-dasharray="3 3"/>
+            <path id="a1" d="M50 50 m-30 0 a30 30 0 1 1 60 0" fill="none"/>
+            <text font-family="Space Mono,monospace" font-size="7" letter-spacing="2" fill="#9A4E2C" font-weight="700"><textPath href="#a1" startOffset="6%">ROASTED · MONDAY · FRESH ·</textPath></text>
+            <g stroke="#2A211A" stroke-width="3" stroke-linecap="round">
+              <path d="M38 44h24v11a12 12 0 0 1-12 12h0a12 12 0 0 1-12-12z"/>
+              <path d="M62 47h5a4.5 4.5 0 0 1 0 9h-5M44 32v6M51 30v6"/>
+            </g>
+          </svg>
+        </div>
+        <div class="stamp-num">/ 01</div>
+        <h3>Roasted this week</h3>
+        <p>We roast small batches every Monday. The bag on the shelf is never older than seven days.</p>
       </div>
-      <div class="ticket featured reveal" style="transition-delay:.08s">
-        <span class="pill">300+ members</span>
-        <div class="tier">Bean subscription</div>
-        <div class="amt serif">$22</div>
-        <div class="per">per month</div>
-        <div class="dash"></div>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Fresh 12oz bag every 2 weeks</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Free drip refill with pickup</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Pause or swap anytime</li>
-        </ul>
-        <a href="#location" class="btn btn-tk">Start subscription</a>
+
+      <div class="stamp-card reveal" style="transition-delay:.08s">
+        <div class="stamp-badge">
+          <svg class="stampin" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="50" cy="50" r="47" stroke="#2A211A" stroke-width="2.5"/>
+            <circle cx="50" cy="50" r="39" stroke="#7C8060" stroke-width="1.2" stroke-dasharray="3 3"/>
+            <path id="a2" d="M50 50 m-30 0 a30 30 0 1 1 60 0" fill="none"/>
+            <text font-family="Space Mono,monospace" font-size="7" letter-spacing="2" fill="#636848" font-weight="700"><textPath href="#a2" startOffset="7%">STAY AWHILE · REAL MUGS ·</textPath></text>
+            <path d="M50 68s-16-10-16-22a9 9 0 0 1 16-5 9 9 0 0 1 16 5c0 12-16 22-16 22z" stroke="#2A211A" stroke-width="3" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="stamp-num">/ 02</div>
+        <h3>Stay as long as you like</h3>
+        <p>Real mugs, wide tables, outlets at every seat. Laptop hours until 3pm, human hours after.</p>
       </div>
-      <div class="ticket reveal" style="transition-delay:.16s">
-        <div class="tier">Back-room events</div>
-        <div class="amt serif">$150</div>
-        <div class="per">2 hrs · up to 16 people</div>
-        <div class="dash"></div>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Private 16-seat room</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Coffee &amp; pastry service</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Free with $200+ catering</li>
-        </ul>
-        <a href="#location" class="btn btn-tk">Check dates</a>
+
+      <div class="stamp-card reveal" style="transition-delay:.16s">
+        <div class="stamp-badge">
+          <svg class="stampin" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="50" cy="50" r="47" stroke="#2A211A" stroke-width="2.5"/>
+            <circle cx="50" cy="50" r="39" stroke="#B5623A" stroke-width="1.2" stroke-dasharray="3 3"/>
+            <path id="a3" d="M50 50 m-30 0 a30 30 0 1 1 60 0" fill="none"/>
+            <text font-family="Space Mono,monospace" font-size="7" letter-spacing="2" fill="#9A4E2C" font-weight="700"><textPath href="#a3" startOffset="8%">16 SEATS · BOOK FREE ·</textPath></text>
+            <path d="M50 30l5 14 15 1-11.5 9.5L67 68l-17-8-17 8 8.5-13.5L30 45l15-1z" stroke="#2A211A" stroke-width="3" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="stamp-num">/ 03</div>
+        <h3>A back room for your people</h3>
+        <p>Book clubs, team offsites, birthday pour-overs — a 16-seat room you can reserve free with any catering order.</p>
       </div>
+
     </div>
   </div>
 </section>
 
 <!-- ===== REVIEWS ===== -->
-<section class="pad" id="review">
+<section class="pad rev-sec" id="reviews">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="sec-tag spec spec-line">Reviews</div>
+      <div class="sec-tag">Reviews</div>
       <h2 class="sec-title">What the <em>neighborhood</em> says.</h2>
       <p class="sec-sub">Pulled straight from Google reviews.</p>
     </div>
-    <div class="rev-grid">
-      <div class="rev reveal">
-        <div class="quo serif">“</div>
-        <p class="q">They had my order ready when I walked in on visit three. It's the only place I actually feel like a regular.</p>
-        <div class="who"><span class="av">A</span>
-          <div><div class="nm">Aaron D.</div><div class="mt">regular · 2 years</div></div>
+    <div class="rev-list reveal">
+
+      <div class="rev-item">
+        <span class="rev-av">A</span>
+        <div class="rev-main">
+          <div class="rstars">★★★★★</div>
+          <div class="rq">They had my order ready when I walked in on visit three. It's the only place I actually feel like a regular.</div>
+          <div class="rev-who"><b>Aaron D.</b> · regular · 2 years</div>
         </div>
+        <div class="rev-verified-cell"><span class="verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Verified</span></div>
       </div>
-      <div class="rev reveal" style="transition-delay:.08s">
-        <div class="quo serif">“</div>
-        <p class="q">Booked the back room for our book club every month. They set up the pour-over bar for us without asking.</p>
-        <div class="who"><span class="av">C</span>
-          <div><div class="nm">Carmen S.</div><div class="mt">back-room host</div></div>
+
+      <div class="rev-item">
+        <span class="rev-av">C</span>
+        <div class="rev-main">
+          <div class="rstars">★★★★★</div>
+          <div class="rq">Booked the back room for our book club every month. They set up the pour-over bar for us without asking.</div>
+          <div class="rev-who"><b>Carmen S.</b> · back-room host</div>
         </div>
+        <div class="rev-verified-cell"><span class="verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Verified</span></div>
       </div>
-      <div class="rev reveal" style="transition-delay:.16s">
-        <div class="quo serif">“</div>
-        <p class="q">The subscription ruined grocery store coffee for me forever. Worth it.</p>
-        <div class="who"><span class="av">T</span>
-          <div><div class="nm">Tom W.</div><div class="mt">subscriber · 14 months</div></div>
+
+      <div class="rev-item">
+        <span class="rev-av">T</span>
+        <div class="rev-main">
+          <div class="rstars">★★★★★</div>
+          <div class="rq">The subscription ruined grocery store coffee for me forever. Worth it.</div>
+          <div class="rev-who"><b>Tom W.</b> · subscriber · 14 months</div>
         </div>
+        <div class="rev-verified-cell"><span class="verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Verified</span></div>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- ===== LOCATION / CONTACT ===== -->
-<section class="pad loc-sec" id="location">
-  <div class="wrap loc-grid">
-    <div class="loc-info reveal">
-      <div class="spec spec-line">Find us</div>
-      <h3>On E 6th, under the <em>big pecan tree.</em></h3>
-      <div class="loc-row"><span class="k">Address</span><span class="v">2900 E 6th St, Austin, TX (map shown for demo)</span></div>
-      <div class="loc-row"><span class="k">Hours</span><span class="v">Every day 6am–6pm · kitchen until 2pm</span></div>
-      <div class="loc-row"><span class="k">Phone</span><span class="v">(512) 000-0000</span></div>
-      <div class="loc-row"><span class="k">Parking</span><span class="v">Lot behind the building + bike racks</span></div>
-      <div class="loc-actions">
-        <a href="tel:5120000000" class="btn btn-primary">Call us
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.4-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg>
-        </a>
-        <a href="sms:5120000000" class="btn btn-line">Text us</a>
-      </div>
+<!-- ===== SHIPPING LABEL + MAP ===== -->
+<section class="pad" id="find">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Find us</div>
+      <h2 class="sec-title">On E 6th, under the <em>big pecan tree.</em></h2>
     </div>
-    <div class="map reveal">
-      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <rect width="400" height="400" fill="#241d16"/>
-        <g stroke="#3a3025" stroke-width="10">
-          <path d="M0 132 H400"/><path d="M0 272 H400"/>
-          <path d="M138 0 V400"/><path d="M292 0 V400"/>
-        </g>
-        <path d="M0 132 H400" stroke="#B5623A" stroke-width="3" opacity=".6"/>
-        <path d="M138 0 V400" stroke="#7C8060" stroke-width="3" opacity=".5"/>
-        <rect x="150" y="150" width="120" height="102" rx="4" fill="#332a20"/>
-        <rect x="28" y="292" width="92" height="72" rx="4" fill="#332a20"/>
-        <rect x="302" y="38" width="70" height="72" rx="4" fill="#332a20"/>
-        <circle cx="200" cy="200" r="9" fill="#7C8060"/>
-      </svg>
-      <svg class="pin" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.4 8 12 8 12s8-6.6 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg>
-      <span class="map-tag">Demo map · not to scale</span>
+    <div class="ship-grid">
+
+      <div class="label reveal">
+        <div class="label-top">
+          <div class="lt"><b>SHIP TO ·</b> YOUR THIRD PLACE</div>
+          <div class="barcode" aria-hidden="true">
+            <i></i><i class="w"></i><i></i><i class="g"></i><i></i><i></i><i class="w"></i><i class="g"></i><i class="w"></i><i></i><i></i><i class="g"></i><i class="w"></i><i></i><i class="w"></i><i class="g"></i><i></i><i></i><i class="w"></i><i></i><i class="g"></i><i class="w"></i><i></i><i></i>
+          </div>
+        </div>
+        <div class="label-body">
+          <h3>Driftwood Coffee</h3>
+          <div class="lrow"><span class="k">Address</span><span class="val">2900 E 6th St, Austin, TX (map shown for demo)</span></div>
+          <div class="lrow"><span class="k">Hours</span><span class="val">Every day 6am–6pm · kitchen until 2pm</span></div>
+          <div class="lrow"><span class="k">Phone</span><span class="val">(512) 000-0000</span></div>
+          <div class="lrow"><span class="k">Parking</span><span class="val">Lot behind the building + bike racks</span></div>
+        </div>
+        <div class="label-actions">
+          <a href="tel:5120000000" class="btn btn-primary">Call us
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.4-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg>
+          </a>
+          <a href="sms:5120000000" class="btn btn-ghost">Text us</a>
+        </div>
+      </div>
+
+      <div class="map reveal">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+          <rect width="400" height="400" fill="#241d16"/>
+          <g stroke="#3a3025" stroke-width="10">
+            <path d="M0 132 H400"/><path d="M0 272 H400"/>
+            <path d="M138 0 V400"/><path d="M292 0 V400"/>
+          </g>
+          <path d="M0 132 H400" stroke="#B5623A" stroke-width="3" opacity=".6"/>
+          <path d="M138 0 V400" stroke="#7C8060" stroke-width="3" opacity=".5"/>
+          <rect x="150" y="150" width="120" height="102" rx="4" fill="#332a20"/>
+          <rect x="28" y="292" width="92" height="72" rx="4" fill="#332a20"/>
+          <rect x="302" y="38" width="70" height="72" rx="4" fill="#332a20"/>
+          <circle cx="200" cy="200" r="9" fill="#7C8060"/>
+        </svg>
+        <svg class="pin" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.4 8 12 8 12s8-6.6 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg>
+        <span class="map-tag">Demo map · not to scale</span>
+      </div>
+
     </div>
   </div>
 </section>
@@ -595,10 +659,10 @@
       </div>
       <div class="fcol">
         <h4>Quick links</h4>
-        <a href="#why">The shop</a>
-        <a href="#price">Menu &amp; more</a>
-        <a href="#review">Reviews</a>
-        <a href="#location">Find us</a>
+        <a href="#plans">Menu &amp; more</a>
+        <a href="#shop">The shop</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#find">Find us</a>
       </div>
       <div class="fcol">
         <h4>Visit &amp; contact</h4>
@@ -608,13 +672,13 @@
       </div>
     </div>
     <div class="copyr">
-      <span>© 2026 Driftwood Coffee · This is a fictional demo cafe.</span>
-      <span>Made by Jason's Consulting · Landing page demo</span>
+      <span>© 2026 Driftwood Coffee · Landing page demo · fictional business</span>
+      <span>Made by Jason's Consulting</span>
     </div>
   </div>
 </footer>
 
-<!-- ===== STICKY MOBILE CTA ===== -->
+<!-- ===== STICKY MOBILE BAR ===== -->
 <div class="cta-bar">
   <a class="c-call" href="tel:5120000000">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.4-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg>
@@ -624,19 +688,30 @@
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7-.2.7-.7 2.6-.8 3-.1.5.2.5.4.4.2-.1 2.6-1.8 3.6-2.5.7.1 1.4.2 2.1.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>
     Text
   </a>
-  <a class="c-book" href="#location">
+  <a class="c-book" href="#find">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.4 8 12 8 12s8-6.6 8-12c0-4.4-3.6-8-8-8z"/><circle cx="12" cy="10" r="2.6"/></svg>
     Find us
   </a>
 </div>
 
 <script>
-  const hdr=document.getElementById('hdr');
-  addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>20),{passive:true});
+  // reveal on scroll
   const io=new IntersectionObserver((es)=>{
     es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
   },{threshold:.16});
   document.querySelectorAll('.reveal,.stampin').forEach(el=>io.observe(el));
+
+  // plan selection (radio behaviour) -> updates sticky plan CTA
+  const plans=document.querySelectorAll('[data-plan]');
+  const planCta=document.getElementById('planCta');
+  plans.forEach(p=>{
+    p.addEventListener('click',()=>{
+      plans.forEach(x=>x.setAttribute('aria-pressed','false'));
+      p.setAttribute('aria-pressed','true');
+      const label=p.querySelector('.sel-label').textContent.trim();
+      planCta.childNodes[0].nodeValue=label+' ';
+    });
+  });
 </script>
 </body>
 </html>

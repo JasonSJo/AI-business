@@ -13,668 +13,633 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;1,9..144,200;1,9..144,300&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet" />
 <style>
   :root{
     --bg:#F3F1EC;
-    --bg-2:#EDEAE2;
+    --bg-2:#ECE8DF;
     --sage:#4A5A45;
     --sage-soft:#6E7D68;
     --stone:#B8AE9E;
     --stone-deep:#9A8F7C;
     --ink:#26261F;
-    --ink-2:#54544B;
-    --line:rgba(38,38,31,.14);
-    --hair:rgba(38,38,31,.09);
+    --ink-2:#565549;
+    --line:rgba(38,38,31,.13);
+    --hair:rgba(38,38,31,.08);
+    --pad:clamp(22px,5vw,64px);
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
+  html,body{height:100%}
   body{
     font-family:'Pretendard',sans-serif;
     color:var(--ink);
     background:var(--bg);
-    line-height:1.85;
+    line-height:1.8;
     font-weight:400;
     -webkit-font-smoothing:antialiased;
     text-rendering:optimizeLegibility;
-    overflow-x:hidden;
+    overflow:hidden;
   }
   a{color:inherit;text-decoration:none}
   ::selection{background:var(--sage);color:var(--bg)}
-
   .fr{font-family:'Fraunces',serif;font-weight:300}
   .gb{font-family:'Gowun Batang',serif;font-weight:400}
 
-  .wrap{max-width:1180px;margin:0 auto;padding:0 32px}
-  @media(max-width:640px){.wrap{padding:0 22px}}
-
-  /* ---- one slow-drifting sage blob ---- */
-  .blob{
-    position:fixed;z-index:0;pointer-events:none;
-    width:78vw;max-width:820px;aspect-ratio:1;
-    top:-14vw;right:-16vw;
-    background:radial-gradient(circle at 42% 40%,
-      rgba(74,90,69,.28), rgba(110,125,104,.14) 46%, rgba(184,174,158,.06) 66%, transparent 74%);
-    filter:blur(30px);
-    border-radius:48% 52% 55% 45% / 55% 46% 54% 45%;
-    animation:drift 34s ease-in-out infinite;
-    opacity:0;
-    animation-name:drift, blobIn;
-    animation-duration:34s,2.4s;
-    animation-timing-function:ease-in-out,ease-out;
-    animation-iteration-count:infinite,1;
-    animation-fill-mode:none,forwards;
-  }
-  @keyframes blobIn{to{opacity:1}}
-  @keyframes drift{
-    0%{transform:translate(0,0) rotate(0deg) scale(1)}
-    33%{transform:translate(-4vw,5vh) rotate(8deg) scale(1.06)}
-    66%{transform:translate(3vw,2vh) rotate(-6deg) scale(.97)}
-    100%{transform:translate(0,0) rotate(0deg) scale(1)}
-  }
-
-  /* faint grain for tactility */
-  body::after{
-    content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:.03;mix-blend-mode:multiply;
+  /* faint grain */
+  .grain{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.03;mix-blend-mode:multiply;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  main,header,footer{position:relative;z-index:1}
-
-  /* ---------- header ---------- */
-  header{
-    position:fixed;top:0;left:0;right:0;z-index:100;
-    padding:26px 0;transition:padding .5s ease, background .5s ease, box-shadow .5s ease;
+  /* ============ scroll deck ============ */
+  .deck{
+    height:100dvh;overflow-y:scroll;overflow-x:hidden;
+    scroll-snap-type:y mandatory;
+    scroll-behavior:smooth;
+    scrollbar-width:none;
   }
-  header.scrolled{
-    padding:15px 0;
-    background:color-mix(in srgb, var(--bg) 78%, transparent);
-    backdrop-filter:blur(16px) saturate(1.1);
-    box-shadow:0 1px 0 var(--hair);
-  }
-  .nav{display:flex;align-items:center;justify-content:space-between}
-  .brand{display:flex;align-items:baseline;gap:11px;letter-spacing:.01em}
-  .brand .mark{
-    font-family:'Gowun Batang',serif;font-size:21px;color:var(--sage);
-    border:1px solid var(--line);border-radius:50%;
-    width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;
-    line-height:1;flex-shrink:0;transform:translateY(2px);
-  }
-  .brand .bn{font-family:'Gowun Batang',serif;font-size:18px;color:var(--ink);letter-spacing:.02em}
-  .nav-links{display:flex;gap:38px;font-size:13.5px;color:var(--ink-2);letter-spacing:.02em}
-  .nav-links a{position:relative;padding-bottom:3px}
-  .nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--sage);transition:width .4s ease}
-  .nav-links a:hover::after{width:100%}
-  .nav-cta{
-    font-size:13px;letter-spacing:.04em;color:var(--sage);
-    border-bottom:1px solid var(--sage);padding-bottom:2px;transition:opacity .3s;
-  }
-  .nav-cta:hover{opacity:.6}
-  @media(max-width:860px){.nav-links{display:none}.nav-cta{display:none}}
-
-  /* ---------- hero ---------- */
-  .hero{padding:190px 0 120px;position:relative}
-  .hero-eyebrow{
-    display:flex;align-items:center;gap:16px;font-size:12px;letter-spacing:.34em;
-    text-transform:uppercase;color:var(--sage-soft);margin-bottom:52px;
-  }
-  .hero-eyebrow::before{content:"";width:44px;height:1px;background:var(--stone-deep)}
-  h1.hero-title{
-    font-family:'Gowun Batang',serif;font-weight:400;
-    font-size:clamp(46px,10.5vw,124px);
-    line-height:1.14;letter-spacing:-.02em;color:var(--ink);
-    max-width:16ch;
-  }
-  h1.hero-title em{
-    font-family:'Fraunces',serif;font-weight:300;font-style:italic;
-    color:var(--sage);letter-spacing:0;
-  }
-  .hero-lede{
-    margin-top:48px;font-size:clamp(16px,2.1vw,19px);color:var(--ink-2);
-    max-width:44ch;line-height:1.95;font-weight:400;
-  }
-  .hero-actions{display:flex;align-items:center;gap:30px;margin-top:56px;flex-wrap:wrap}
-  .btn-fill{
-    display:inline-flex;align-items:center;gap:14px;
-    background:var(--sage);color:var(--bg);
-    padding:19px 40px;border-radius:100px;
-    font-size:15px;letter-spacing:.02em;
-    transition:transform .5s cubic-bezier(.2,.7,.2,1), background .4s;
-  }
-  .btn-fill svg{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
-  .btn-fill:hover{background:var(--ink);transform:translateY(-2px)}
-  .btn-fill:hover svg{transform:translateX(5px)}
-  .btn-line{
-    display:inline-flex;align-items:center;gap:9px;font-size:15px;color:var(--ink);
-    border-bottom:1px solid var(--line);padding-bottom:5px;transition:.4s;
-  }
-  .btn-line:hover{border-color:var(--sage);color:var(--sage)}
-  .hero-trust{
-    margin-top:64px;padding-top:34px;border-top:1px solid var(--hair);
-    display:flex;align-items:center;gap:20px;font-size:13.5px;color:var(--ink-2);
-    letter-spacing:.01em;flex-wrap:wrap;
-  }
-  .hero-trust .stars{color:var(--stone-deep);letter-spacing:3px;font-size:13px}
-  .hero-trust strong{color:var(--sage);font-weight:700}
-
-  @media(max-width:640px){
-    .hero{padding:150px 0 90px}
-    .hero-eyebrow{margin-bottom:38px;letter-spacing:.26em;gap:12px}
-    .hero-eyebrow::before{width:30px}
-    .hero-lede{margin-top:36px}
-    .hero-actions{gap:22px;margin-top:44px}
-    .btn-fill{padding:17px 34px}
-  }
-
-  /* animated word-mark line under hero */
-  .breath{
-    border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
-    overflow:hidden;padding:26px 0;
-  }
-  .breath-track{
-    display:flex;gap:0;white-space:nowrap;width:max-content;
-    animation:marq 46s linear infinite;
-  }
-  .breath-track span{
-    font-family:'Fraunces',serif;font-weight:300;font-style:italic;
-    font-size:clamp(20px,3vw,30px);color:var(--stone-deep);
-    padding:0 34px;display:inline-flex;align-items:center;
-  }
-  .breath-track span::after{content:"·";margin-left:34px;color:var(--stone);font-style:normal}
-  @keyframes marq{to{transform:translateX(-50%)}}
-
-  /* ---------- section scaffolding ---------- */
-  section.pad{padding:130px 0}
-  @media(max-width:640px){section.pad{padding:88px 0}}
-  .sec-index{
-    font-family:'Fraunces',serif;font-weight:300;font-size:14px;color:var(--stone-deep);
-    letter-spacing:.28em;text-transform:uppercase;margin-bottom:22px;display:block;
-  }
-  .sec-title{
-    font-family:'Gowun Batang',serif;font-weight:400;
-    font-size:clamp(30px,5vw,54px);line-height:1.28;letter-spacing:-.01em;
-    max-width:20ch;
-  }
-  .sec-sub{margin-top:26px;color:var(--ink-2);font-size:16.5px;max-width:48ch;line-height:1.9}
-
-  /* ---------- why (stacked hairline rows, asymmetric) ---------- */
-  .why-head{max-width:640px;margin-bottom:78px}
-  .why-list{border-top:1px solid var(--line)}
-  .why-item{
-    display:grid;grid-template-columns:0.5fr 2.4fr 2.6fr;gap:40px;align-items:start;
-    padding:52px 0;border-bottom:1px solid var(--line);position:relative;
-  }
-  .why-num{font-family:'Fraunces',serif;font-weight:300;font-size:26px;color:var(--stone-deep);line-height:1}
-  .why-icn{display:flex;gap:22px;align-items:flex-start}
-  .why-icn .ring{
-    width:46px;height:46px;border:1px solid var(--line);border-radius:50%;
-    display:grid;place-items:center;color:var(--sage);flex-shrink:0;transition:.5s;
-  }
-  .why-item:hover .ring{background:var(--sage);color:var(--bg);border-color:var(--sage)}
-  .why-h{font-family:'Gowun Batang',serif;font-size:23px;line-height:1.4;padding-top:9px}
-  .why-desc{color:var(--ink-2);font-size:16px;line-height:1.95;max-width:42ch}
-  @media(max-width:820px){
-    .why-item{grid-template-columns:1fr;gap:18px;padding:42px 0}
-    .why-num{font-size:20px}
-    .why-desc{max-width:none}
-  }
-
-  /* ---------- pricing ---------- */
-  .price-head{max-width:640px;margin-bottom:70px}
-  .price-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
-  .plan{
-    display:grid;grid-template-columns:1.3fr 1.1fr 2.2fr 0.9fr;gap:36px;align-items:center;
-    padding:46px 4px;border-bottom:1px solid var(--line);
-    transition:padding-left .5s cubic-bezier(.2,.7,.2,1), background .5s;
+  .deck::-webkit-scrollbar{display:none}
+  .panel{
+    min-height:100dvh;width:100%;
+    scroll-snap-align:start;scroll-snap-stop:always;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:clamp(96px,14vh,150px) var(--pad) clamp(88px,12vh,120px);
     position:relative;
   }
-  .plan:hover{padding-left:22px;background:linear-gradient(90deg,rgba(74,90,69,.045),transparent 60%)}
-  .plan.feat{background:linear-gradient(90deg,rgba(74,90,69,.07),transparent 72%)}
-  .plan.feat:hover{padding-left:22px}
-  .plan-tier{display:flex;flex-direction:column;gap:10px}
-  .plan-tier .t{font-family:'Gowun Batang',serif;font-size:24px;color:var(--ink)}
-  .plan-tier .pill{
-    align-self:flex-start;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--sage);border:1px solid var(--sage);border-radius:100px;padding:3px 12px;
-  }
-  .plan-price{display:flex;align-items:baseline;gap:6px;white-space:nowrap}
-  .plan-price .p{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(30px,4vw,42px);color:var(--sage);line-height:1}
-  .plan-price .per{font-size:13px;color:var(--ink-2);letter-spacing:.02em}
-  .plan-items{list-style:none;display:flex;flex-wrap:wrap;gap:8px 20px}
-  .plan-items li{
-    font-size:14px;color:var(--ink-2);display:flex;align-items:center;gap:9px;line-height:1.6;
-  }
-  .plan-items li::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--stone-deep);flex-shrink:0}
-  .plan-cta{
-    justify-self:end;display:inline-flex;align-items:center;gap:9px;
-    font-size:14px;color:var(--ink);border-bottom:1px solid var(--line);padding-bottom:4px;
-    transition:.4s;white-space:nowrap;
-  }
-  .plan-cta svg{transition:transform .4s}
-  .plan-cta:hover{color:var(--sage);border-color:var(--sage)}
-  .plan-cta:hover svg{transform:translateX(4px)}
-  @media(max-width:960px){
-    .plan{grid-template-columns:1fr 1fr;gap:22px 30px;padding:38px 4px}
-    .plan-items{grid-column:1/-1;order:3}
-    .plan-cta{grid-column:1/-1;order:4;justify-self:start;margin-top:4px}
-  }
-  @media(max-width:560px){
-    .plan{grid-template-columns:1fr;gap:16px}
-    .plan-price{gap:8px}
+  @media(max-width:760px){
+    .deck{scroll-snap-type:y proximity}
+    .panel{scroll-snap-stop:normal;padding:110px var(--pad) 118px}
   }
 
-  /* ---------- reviews ---------- */
-  .rev-head{max-width:640px;margin-bottom:78px}
-  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
-  .rev{
-    padding:0 40px;border-left:1px solid var(--line);
-    display:flex;flex-direction:column;
+  /* ============ fixed chrome ============ */
+  .brand{
+    position:fixed;top:clamp(20px,3vw,34px);left:var(--pad);z-index:50;
+    display:flex;align-items:baseline;gap:11px;
   }
-  .rev:first-child{padding-left:0;border-left:none}
-  .rev .mark{font-family:'Fraunces',serif;font-weight:300;font-size:56px;color:var(--stone);line-height:.6;margin-bottom:22px}
-  .rev .q{font-family:'Gowun Batang',serif;font-size:17px;line-height:1.95;color:var(--ink);flex:1}
-  .rev .who{margin-top:34px;padding-top:26px;border-top:1px solid var(--hair);display:flex;align-items:center;gap:14px}
-  .rev .av{
-    width:44px;height:44px;border-radius:50%;border:1px solid var(--line);
-    display:grid;place-items:center;font-family:'Gowun Batang',serif;font-size:17px;color:var(--sage);flex-shrink:0;
+  .brand .mark{
+    font-family:'Gowun Batang',serif;font-size:19px;color:var(--sage);
+    border:1px solid var(--line);border-radius:50%;
+    width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;
+    line-height:1;flex-shrink:0;transform:translateY(3px);
+    background:color-mix(in srgb,var(--bg) 55%,transparent);backdrop-filter:blur(6px);
   }
-  .rev .nm{font-size:14.5px;color:var(--ink);letter-spacing:.01em}
-  .rev .mt{font-size:12.5px;color:var(--stone-deep);margin-top:2px}
+  .brand .bn{font-family:'Gowun Batang',serif;font-size:16px;color:var(--ink);letter-spacing:.02em}
+  .book-top{
+    position:fixed;top:clamp(22px,3vw,36px);right:var(--pad);z-index:50;
+    font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);
+    display:inline-flex;align-items:center;gap:9px;
+  }
+  .book-top .dotp{width:6px;height:6px;border-radius:50%;background:var(--sage);
+    animation:pulse 2.6s ease-in-out infinite}
+  .book-top span{border-bottom:1px solid var(--line);padding-bottom:2px;transition:border-color .4s}
+  .book-top:hover span{border-color:var(--sage)}
+  @keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+  @media(max-width:760px){.brand .bn{display:none}.book-top{display:none}}
+
+  /* progress rail */
+  .rail{
+    position:fixed;top:50%;right:clamp(14px,2.4vw,30px);transform:translateY(-50%);
+    z-index:50;display:flex;flex-direction:column;gap:20px;
+  }
+  .rail button{
+    all:unset;cursor:pointer;display:flex;align-items:center;gap:11px;
+    justify-content:flex-end;color:var(--stone-deep);
+  }
+  .rail .rn{
+    font-family:'Fraunces',serif;font-weight:300;font-size:11px;letter-spacing:.1em;
+    opacity:0;transform:translateX(6px);transition:.5s;
+  }
+  .rail .rd{
+    width:7px;height:7px;border-radius:50%;background:transparent;
+    border:1px solid var(--stone-deep);transition:.5s;flex-shrink:0;
+  }
+  .rail button:hover .rn{opacity:.7;transform:none}
+  .rail button.on .rn{opacity:1;transform:none;color:var(--sage)}
+  .rail button.on .rd{background:var(--sage);border-color:var(--sage);transform:scale(1.25)}
+  @media(max-width:760px){.rail{gap:14px;right:12px}.rail .rn{display:none}}
+
+  /* ============ panel-in reveal ============ */
+  .stg{opacity:0;transform:translateY(26px);
+    transition:opacity 1.4s cubic-bezier(.2,.7,.2,1),transform 1.4s cubic-bezier(.2,.7,.2,1)}
+  .panel.active .stg{opacity:1;transform:none}
+  .panel.active .stg.s1{transition-delay:.05s}
+  .panel.active .stg.s2{transition-delay:.28s}
+  .panel.active .stg.s3{transition-delay:.5s}
+  .panel.active .stg.s4{transition-delay:.72s}
+  .panel.active .stg.s5{transition-delay:.94s}
+  .panel.active .stg.s6{transition-delay:1.16s}
+
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:14px;font-size:11.5px;letter-spacing:.34em;
+    text-transform:uppercase;color:var(--sage-soft);
+  }
+  .eyebrow::before{content:"";width:40px;height:1px;background:var(--stone-deep)}
+  .measure{max-width:1160px;margin:0 auto;width:100%}
+
+  /* ---- PANEL 1 : HERO ---- */
+  .p-hero{overflow:hidden}
+  .blob{
+    position:absolute;z-index:0;pointer-events:none;
+    width:min(86vw,760px);aspect-ratio:1;
+    top:6%;right:-14%;
+    background:radial-gradient(circle at 42% 40%,
+      rgba(74,90,69,.30),rgba(110,125,104,.15) 46%,rgba(184,174,158,.06) 66%,transparent 74%);
+    filter:blur(34px);
+    border-radius:48% 52% 55% 45% / 55% 46% 54% 45%;
+    animation:drift 40s ease-in-out infinite;
+  }
+  @keyframes drift{
+    0%{transform:translate(0,0) rotate(0deg) scale(1)}
+    33%{transform:translate(-5vw,4vh) rotate(9deg) scale(1.07)}
+    66%{transform:translate(3vw,-3vh) rotate(-6deg) scale(.96)}
+    100%{transform:translate(0,0) rotate(0deg) scale(1)}
+  }
+  .hero-in{position:relative;z-index:1}
+  .hero-eye{margin-bottom:clamp(40px,7vh,72px)}
+  .hero-title{
+    font-family:'Gowun Batang',serif;font-weight:400;
+    font-size:clamp(44px,10vw,138px);line-height:1.08;letter-spacing:-.02em;color:var(--ink);
+    max-width:14ch;
+  }
+  .hero-title em{
+    font-family:'Fraunces',serif;font-weight:200;font-style:italic;color:var(--sage);letter-spacing:0;
+  }
+  .hero-foot{
+    margin-top:clamp(48px,8vh,86px);display:flex;align-items:flex-end;justify-content:space-between;
+    gap:24px;flex-wrap:wrap;
+  }
+  .hero-foot .trust{font-size:13.5px;color:var(--ink-2);letter-spacing:.01em}
+  .hero-foot .trust .stars{color:var(--stone-deep);letter-spacing:3px;margin-right:8px}
+  .hero-foot .trust strong{color:var(--sage);font-weight:700}
+  .scrollcue{
+    display:inline-flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--stone-deep);
+  }
+  .scrollcue .ln{width:1px;height:38px;background:linear-gradient(var(--stone-deep),transparent);
+    position:relative;overflow:hidden}
+  .scrollcue .ln::after{content:"";position:absolute;top:-40%;left:0;width:1px;height:40%;
+    background:var(--sage);animation:trickle 2.6s ease-in-out infinite}
+  @keyframes trickle{0%{top:-40%}60%,100%{top:120%}}
+
+  /* ---- PANEL 2 : PHILOSOPHY ---- */
+  .p-phil{background:var(--bg-2)}
+  .phil{max-width:22ch;margin:0 auto;text-align:center}
+  .phil .lead{
+    font-family:'Gowun Batang',serif;font-weight:400;
+    font-size:clamp(28px,5.2vw,62px);line-height:1.42;letter-spacing:-.01em;color:var(--ink);
+  }
+  .phil .lead b{color:var(--sage);font-weight:400}
+  .phil .tail{
+    margin-top:clamp(30px,5vh,54px);font-size:clamp(15px,2vw,18px);color:var(--ink-2);
+    line-height:1.9;max-width:40ch;margin-left:auto;margin-right:auto;
+  }
+  .phil .idx{display:block;margin-bottom:36px}
+
+  /* ---- PANEL 3 : THREE POINTS ---- */
+  .pts{max-width:1000px;margin:0 auto;width:100%}
+  .pts-head{text-align:center;margin-bottom:clamp(44px,7vh,78px)}
+  .pts-head .idx{margin-bottom:22px;display:block}
+  .pts-head h2{
+    font-family:'Gowun Batang',serif;font-weight:400;font-size:clamp(26px,4.4vw,46px);
+    line-height:1.3;letter-spacing:-.01em;
+  }
+  .pt{
+    display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,4vw,54px);align-items:baseline;
+    padding:clamp(24px,3.4vh,40px) 0;border-top:1px solid var(--line);
+  }
+  .pt:last-child{border-bottom:1px solid var(--line)}
+  .pt .n{
+    font-family:'Fraunces',serif;font-weight:200;font-size:clamp(30px,4.4vw,52px);
+    color:var(--stone);line-height:.9;
+  }
+  .pt .body{max-width:60ch}
+  .pt .t{
+    font-family:'Gowun Batang',serif;font-size:clamp(19px,2.6vw,27px);color:var(--ink);
+    line-height:1.4;margin-bottom:10px;
+  }
+  .pt .d{font-size:clamp(14px,1.7vw,16px);color:var(--ink-2);line-height:1.85}
+  @media(max-width:620px){
+    .pt{grid-template-columns:1fr;gap:8px}
+    .pt .n{font-size:26px}
+  }
+
+  /* ---- PANEL 4 : PRICING (single card + toggle) ---- */
+  .p-price{background:var(--bg-2)}
+  .price-wrap{max-width:600px;margin:0 auto;width:100%;text-align:center}
+  .price-wrap .idx{display:block;margin-bottom:20px}
+  .price-wrap h2{
+    font-family:'Gowun Batang',serif;font-weight:400;font-size:clamp(26px,4.4vw,46px);
+    line-height:1.3;letter-spacing:-.01em;margin-bottom:clamp(34px,5vh,52px);
+  }
+  .seg{
+    display:inline-flex;position:relative;background:var(--bg);
+    border:1px solid var(--line);border-radius:100px;padding:5px;margin:0 auto clamp(34px,5vh,50px);
+  }
+  .seg .thumb{
+    position:absolute;top:5px;bottom:5px;border-radius:100px;background:var(--sage);
+    transition:transform .55s cubic-bezier(.5,1.3,.4,1),width .55s cubic-bezier(.5,1.3,.4,1);
+    z-index:0;
+  }
+  .seg button{
+    all:unset;cursor:pointer;position:relative;z-index:1;
+    padding:11px clamp(16px,4vw,30px);font-size:14px;letter-spacing:.02em;color:var(--ink-2);
+    transition:color .4s;white-space:nowrap;
+  }
+  .seg button.on{color:var(--bg)}
+
+  .card{
+    background:var(--bg);border:1px solid var(--line);border-radius:6px;
+    padding:clamp(34px,5vw,58px) clamp(26px,5vw,54px);position:relative;
+    box-shadow:0 50px 100px -60px rgba(38,38,31,.4);
+    text-align:left;
+  }
+  .card .pill{
+    position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+    font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--bg);
+    background:var(--sage);border-radius:100px;padding:6px 16px;
+    opacity:0;transition:opacity .4s;
+  }
+  .card.has-pill .pill{opacity:1}
+  .card .tier{
+    font-family:'Gowun Batang',serif;font-size:clamp(19px,3vw,25px);color:var(--ink);
+    margin-bottom:18px;
+  }
+  .card .amount{display:flex;align-items:baseline;gap:9px;margin-bottom:clamp(28px,4vh,40px);
+    padding-bottom:clamp(24px,3.6vh,34px);border-bottom:1px solid var(--hair)}
+  .card .amount .p{
+    font-family:'Fraunces',serif;font-weight:200;font-size:clamp(44px,8vw,74px);
+    color:var(--sage);line-height:.9;letter-spacing:-.01em;
+  }
+  .card .amount .per{font-size:14px;color:var(--ink-2);letter-spacing:.02em}
+  .card ul{list-style:none;display:flex;flex-direction:column;gap:13px;margin-bottom:clamp(30px,4.5vh,44px)}
+  .card li{font-size:15px;color:var(--ink-2);display:flex;align-items:flex-start;gap:13px;line-height:1.6}
+  .card li svg{flex-shrink:0;margin-top:4px;color:var(--sage-soft)}
+  .card .go{
+    display:flex;align-items:center;justify-content:center;gap:12px;
+    background:var(--sage);color:var(--bg);border-radius:100px;padding:18px 32px;
+    font-size:15px;letter-spacing:.02em;transition:background .4s,transform .5s cubic-bezier(.2,.7,.2,1);
+  }
+  .card .go svg{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+  .card .go:hover{background:var(--ink);transform:translateY(-2px)}
+  .card .go:hover svg{transform:translateX(5px)}
+  /* fade content on switch */
+  .card .swap{transition:opacity .35s ease}
+  .card.switching .swap{opacity:0}
+
+  /* ---- PANEL 5 : REVIEWS + VISIT ---- */
+  .p-visit{padding-top:clamp(92px,12vh,120px)}
+  .visit{max-width:1080px;margin:0 auto;width:100%}
+  .quotebox{text-align:center;max-width:24ch;margin:0 auto clamp(40px,6vh,64px)}
+  .quotebox .idx{display:block;margin-bottom:26px}
+  .quotebox .qmark{font-family:'Fraunces',serif;font-weight:200;font-size:64px;color:var(--stone);
+    line-height:.4;margin-bottom:20px;display:block}
+  .qslot{position:relative;min-height:clamp(150px,22vh,210px)}
+  .qitem{
+    position:absolute;inset:0;opacity:0;transform:translateY(14px);pointer-events:none;
+    transition:opacity .9s ease,transform .9s ease;
+    display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  }
+  .qitem.on{opacity:1;transform:none;pointer-events:auto}
+  .qitem .q{
+    font-family:'Gowun Batang',serif;font-size:clamp(18px,2.7vw,27px);line-height:1.7;
+    color:var(--ink);letter-spacing:-.01em;
+  }
+  .qitem .who{margin-top:26px;display:flex;align-items:center;gap:13px}
+  .qitem .av{
+    width:40px;height:40px;border-radius:50%;border:1px solid var(--line);
+    display:grid;place-items:center;font-family:'Gowun Batang',serif;font-size:16px;color:var(--sage);
+  }
+  .qitem .nm{font-size:14px;color:var(--ink)}
+  .qitem .mt{font-size:12px;color:var(--stone-deep);margin-top:2px}
+  .qdots{display:flex;gap:9px;justify-content:center;margin-top:clamp(20px,3vh,30px)}
+  .qdots button{all:unset;cursor:pointer;width:7px;height:7px;border-radius:50%;
+    background:transparent;border:1px solid var(--stone-deep);transition:.4s}
+  .qdots button.on{background:var(--sage);border-color:var(--sage);width:20px;border-radius:100px}
+
+  .visit-foot{
+    margin-top:clamp(38px,5.5vh,58px);padding-top:clamp(30px,4vh,44px);
+    border-top:1px solid var(--line);
+    display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(28px,5vw,64px);align-items:center;
+  }
+  .visit-foot h3{
+    font-family:'Gowun Batang',serif;font-weight:400;font-size:clamp(22px,3.4vw,34px);
+    line-height:1.3;letter-spacing:-.01em;margin-bottom:22px;max-width:12ch;
+  }
+  .lrows{display:grid;grid-template-columns:1fr 1fr;gap:14px 28px}
+  .lrow .k{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage-soft);
+    margin-bottom:5px}
+  .lrow .v{font-size:14px;color:var(--ink);line-height:1.55}
+  .visit-cta{display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+  .visit-cta .big{
+    display:inline-flex;align-items:center;gap:13px;width:100%;justify-content:center;
+    background:var(--sage);color:var(--bg);border-radius:100px;padding:18px 30px;
+    font-size:15px;letter-spacing:.02em;transition:background .4s,transform .5s cubic-bezier(.2,.7,.2,1);
+  }
+  .visit-cta .big:hover{background:var(--ink);transform:translateY(-2px)}
+  .visit-cta .sub{
+    display:inline-flex;align-items:center;gap:9px;font-size:13.5px;color:var(--ink-2);
+    border-bottom:1px solid var(--line);padding-bottom:3px;transition:.4s;align-self:center;
+  }
+  .visit-cta .sub:hover{color:var(--sage);border-color:var(--sage)}
   @media(max-width:820px){
-    .rev-grid{grid-template-columns:1fr;gap:0}
-    .rev{padding:44px 0;border-left:none;border-top:1px solid var(--line)}
-    .rev:first-child{padding-top:0;border-top:none}
+    .visit-foot{grid-template-columns:1fr;gap:30px}
+    .visit-cta .big{justify-content:center}
   }
+  @media(max-width:520px){.lrows,.lrows{}.lrow{}.lrows{}}
 
-  /* ---------- location ---------- */
-  .loc-wrap{background:var(--bg-2)}
-  .loc-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:80px;align-items:center}
-  .loc-info .sec-index{margin-bottom:22px}
-  .loc-info h3{
-    font-family:'Gowun Batang',serif;font-size:clamp(28px,4vw,42px);line-height:1.35;
-    letter-spacing:-.01em;margin-bottom:44px;max-width:14ch;
+  .demo-note{
+    text-align:center;margin-top:clamp(28px,4vh,40px);
+    font-size:11.5px;letter-spacing:.06em;color:var(--stone-deep);line-height:1.7;
   }
-  .loc-row{
-    display:grid;grid-template-columns:78px 1fr;gap:20px;align-items:baseline;
-    padding:22px 0;border-top:1px solid var(--hair);
-  }
-  .loc-row:last-of-type{border-bottom:1px solid var(--hair)}
-  .loc-row .k{
-    font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage-soft);
-  }
-  .loc-row .v{font-size:15.5px;color:var(--ink);line-height:1.7}
-  .loc-actions{display:flex;align-items:center;gap:28px;margin-top:44px;flex-wrap:wrap}
+  .demo-note .sep{margin:0 8px;color:var(--stone)}
 
-  /* map — soft topographic SVG */
-  .map{
-    aspect-ratio:4/5;border-radius:4px;overflow:hidden;position:relative;
-    box-shadow:0 40px 90px -50px rgba(38,38,31,.4);
-    background:var(--bg);
-  }
-  .map svg{width:100%;height:100%;display:block}
-  .map .pin{
-    position:absolute;top:44%;left:52%;width:14px;height:14px;transform:translate(-50%,-50%);
-  }
-  .map .pin::before{
-    content:"";position:absolute;inset:0;border-radius:50%;background:var(--sage);
-    box-shadow:0 0 0 6px rgba(74,90,69,.18);
-  }
-  .map .pin::after{
-    content:"";position:absolute;inset:-14px;border-radius:50%;border:1px solid var(--sage);
-    opacity:.5;animation:ping 3.2s ease-out infinite;
-  }
-  @keyframes ping{0%{transform:scale(.4);opacity:.6}100%{transform:scale(1.5);opacity:0}}
-  .map .tag{
-    position:absolute;bottom:20px;left:20px;font-size:11px;letter-spacing:.14em;
-    text-transform:uppercase;color:var(--sage-soft);background:color-mix(in srgb,var(--bg) 82%,transparent);
-    backdrop-filter:blur(4px);padding:7px 13px;border-radius:100px;
-  }
-  @media(max-width:860px){
-    .loc-grid{grid-template-columns:1fr;gap:52px}
-    .map{aspect-ratio:5/4;max-height:400px}
-  }
-
-  /* ---------- closing / footer ---------- */
-  footer{background:var(--ink);color:color-mix(in srgb,var(--bg) 66%,transparent);padding:110px 0 130px}
-  .foot-cta{max-width:20ch;margin-bottom:80px}
-  .foot-cta .k{font-family:'Fraunces',serif;font-weight:300;font-size:13px;letter-spacing:.28em;text-transform:uppercase;color:var(--stone-deep);display:block;margin-bottom:24px}
-  .foot-cta h3{font-family:'Gowun Batang',serif;font-weight:400;font-size:clamp(30px,5vw,52px);line-height:1.3;color:var(--bg);letter-spacing:-.01em}
-  .foot-cta .btn-fill{margin-top:44px;background:var(--bg);color:var(--ink)}
-  .foot-cta .btn-fill:hover{background:var(--stone);color:var(--ink)}
-  .foot-grid{
-    display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;
-    padding-top:64px;border-top:1px solid rgba(243,241,236,.12);
-  }
-  .foot-brand .b{display:flex;align-items:baseline;gap:11px;margin-bottom:18px}
-  .foot-brand .mark{font-family:'Gowun Batang',serif;font-size:20px;color:var(--stone);border:1px solid rgba(243,241,236,.24);border-radius:50%;width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;transform:translateY(2px)}
-  .foot-brand .bn{font-family:'Gowun Batang',serif;font-size:18px;color:var(--bg)}
-  .foot-brand p{font-size:14px;max-width:32ch;line-height:1.85}
-  .fcol h4{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone-deep);margin-bottom:20px;font-weight:400}
-  .fcol a,.fcol p{display:block;font-size:14.5px;padding:6px 0;line-height:1.6;transition:color .3s}
-  .fcol a:hover{color:var(--stone)}
-  .copyr{
-    margin-top:70px;padding-top:26px;border-top:1px solid rgba(243,241,236,.12);
-    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
-    font-size:12.5px;color:color-mix(in srgb,var(--bg) 46%,transparent);letter-spacing:.02em;
-  }
-  @media(max-width:760px){.foot-grid{grid-template-columns:1fr;gap:44px}}
-  @media(max-width:900px){footer{padding-bottom:150px}}
-
-  /* ---------- sticky mobile bar ---------- */
+  /* ---- sticky mobile bar ---- */
   .cta-bar{
-    position:fixed;left:0;right:0;bottom:0;z-index:200;
-    background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(18px);
-    border-top:1px solid var(--line);padding:12px 16px;
-    display:grid;grid-template-columns:1fr 1.7fr;gap:12px;align-items:center;
+    position:fixed;left:0;right:0;bottom:0;z-index:80;
+    background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(18px);
+    border-top:1px solid var(--line);padding:11px 16px;
+    display:grid;grid-template-columns:1fr 1.7fr;gap:11px;align-items:center;
   }
   .cta-bar .cb-call{
-    display:flex;align-items:center;justify-content:center;gap:9px;
-    font-size:14px;color:var(--ink);border:1px solid var(--line);border-radius:100px;padding:14px;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    font-size:14px;color:var(--ink);border:1px solid var(--line);border-radius:100px;padding:13px;
   }
-  .cta-bar .cb-call svg{width:17px;height:17px}
+  .cta-bar .cb-call svg{width:16px;height:16px}
   .cta-bar .cb-book{
-    display:flex;align-items:center;justify-content:center;gap:9px;
-    background:var(--sage);color:var(--bg);border-radius:100px;padding:14px;font-size:14px;letter-spacing:.02em;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    background:var(--sage);color:var(--bg);border-radius:100px;padding:13px;font-size:14px;letter-spacing:.02em;
   }
   .cta-bar a:active{transform:scale(.97)}
-  @media(min-width:900px){.cta-bar{display:none}}
-
-  /* ---------- motion / reveal ---------- */
-  .rise{opacity:0;transform:translateY(30px);transition:opacity 1.3s cubic-bezier(.2,.7,.2,1), transform 1.3s cubic-bezier(.2,.7,.2,1)}
-  .rise.in{opacity:1;transform:none}
-
-  /* hero staged load */
-  .load{opacity:0;transform:translateY(26px);animation:fadeUp 1.5s cubic-bezier(.2,.7,.2,1) forwards}
-  .d1{animation-delay:.15s}.d2{animation-delay:.4s}.d3{animation-delay:.7s}.d4{animation-delay:1s}.d5{animation-delay:1.3s}
-  @keyframes fadeUp{to{opacity:1;transform:none}}
+  @media(min-width:761px){.cta-bar{display:none}}
 
   @media(prefers-reduced-motion:reduce){
-    *{animation:none!important;transition:none!important}
-    .load,.rise{opacity:1!important;transform:none!important}
-    .blob{opacity:1!important}
+    *{animation:none!important}
+    .stg{opacity:1!important;transform:none!important;transition:none!important}
+    .deck{scroll-behavior:auto}
   }
 </style>
 </head>
 <body>
 
-<div class="blob" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
 
-<!-- ===== HEADER ===== -->
-<header id="hdr">
-  <div class="wrap nav">
-    <a href="#" class="brand">
-      <span class="mark">高</span>
-      <span class="bn">고요 필라테스</span>
-    </a>
-    <nav class="nav-links">
-      <a href="#why">스튜디오</a>
-      <a href="#price">프로그램</a>
-      <a href="#review">후기</a>
-      <a href="#location">오시는 길</a>
-    </nav>
-    <a href="#price" class="nav-cta">체험 예약</a>
-  </div>
-</header>
+<a href="#p1" class="brand" data-goto="0">
+  <span class="mark">高</span>
+  <span class="bn">고요 필라테스</span>
+</a>
+<a href="#p4" class="book-top" data-goto="3"><span class="dotp"></span><span>예약</span></a>
 
-<main>
+<nav class="rail" aria-label="섹션 이동">
+  <button class="on" data-goto="0" aria-label="01 처음"><span class="rn">01</span><span class="rd"></span></button>
+  <button data-goto="1" aria-label="02 철학"><span class="rn">02</span><span class="rd"></span></button>
+  <button data-goto="2" aria-label="03 이유"><span class="rn">03</span><span class="rd"></span></button>
+  <button data-goto="3" aria-label="04 가격"><span class="rn">04</span><span class="rd"></span></button>
+  <button data-goto="4" aria-label="05 후기와 방문"><span class="rn">05</span><span class="rd"></span></button>
+</nav>
 
-<!-- ===== HERO ===== -->
-<section class="hero">
-  <div class="wrap">
-    <div class="hero-eyebrow load d1">성수동 · 프라이빗 필라테스</div>
-    <h1 class="hero-title load d2">하루 한 시간,<br><em>나를 위한</em> 정렬.</h1>
-    <p class="hero-lede load d3">거울 앞 혼자가 아니라, 내 몸을 아는 선생님과 함께. 1:1 맞춤 레슨으로 오늘의 컨디션에 딱 맞춰 움직입니다.</p>
-    <div class="hero-actions load d4">
-      <a href="#price" class="btn-fill">
-        첫 체험 3만원 예약
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-      <a href="#why" class="btn-line">스튜디오 둘러보기</a>
-    </div>
-    <div class="hero-trust load d5">
-      <span class="stars">★★★★★</span>
-      <span>네이버 리뷰 <strong>4.9</strong> · 회원 재등록률 <strong>92%</strong></span>
-    </div>
-  </div>
-</section>
+<main class="deck" id="deck">
 
-<!-- ===== BREATH LINE ===== -->
-<div class="breath" aria-hidden="true">
-  <div class="breath-track">
-    <span>자세 교정</span><span>코어 강화</span><span>라운드 숄더</span><span>산전·산후</span><span>재활 필라테스</span><span>다이어트</span>
-    <span>자세 교정</span><span>코어 강화</span><span>라운드 숄더</span><span>산전·산후</span><span>재활 필라테스</span><span>다이어트</span>
-  </div>
-</div>
-
-<!-- ===== WHY ===== -->
-<section class="pad" id="why">
-  <div class="wrap">
-    <div class="why-head rise">
-      <span class="sec-index">01 — Why 고요</span>
-      <h2 class="sec-title">동네 필라테스,<br>다 같지 않습니다.</h2>
-      <p class="sec-sub">기구가 아니라 사람이 봅니다. 오늘 당신의 어깨가 어떤지, 어디가 뭉쳤는지 아는 선생님과 함께합니다.</p>
-    </div>
-    <div class="why-list">
-      <div class="why-item rise">
-        <div class="why-num">01</div>
-        <div class="why-icn">
-          <span class="ring"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3v18M5 8l7-5 7 5M5 8v8l7 5 7-5V8"/></svg></span>
-          <span class="why-h">1:1 맞춤 설계</span>
-        </div>
-        <p class="why-desc">첫 방문 체형 분석 후, 당신의 몸에 맞춘 프로그램을 짭니다. 남 따라 하는 수업은 없습니다.</p>
-      </div>
-      <div class="why-item rise">
-        <div class="why-num">02</div>
-        <div class="why-icn">
-          <span class="ring"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
-          <span class="why-h">10년 경력 강사진</span>
-        </div>
-        <p class="why-desc">재활·산전산후 지도 자격을 갖춘 전문 강사. 무리한 동작 대신 안전한 정렬부터.</p>
-      </div>
-      <div class="why-item rise">
-        <div class="why-num">03</div>
-        <div class="why-icn">
-          <span class="ring"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21s-7-4.35-9.5-8.5C.5 9 2.5 5 6 5c2 0 3.5 1.5 6 4 2.5-2.5 4-4 6-4 3.5 0 5.5 4 3.5 7.5C19 16.65 12 21 12 21z"/></svg></span>
-          <span class="why-h">조용하고 편안한 공간</span>
-        </div>
-        <p class="why-desc">성수역 3분, 프라이빗 룸. 눈치 볼 사람도, 기다릴 필요도 없이 온전히 나에게 집중합니다.</p>
+  <!-- ===== 01 HERO ===== -->
+  <section class="panel p-hero active" id="p1">
+    <span class="blob" aria-hidden="true"></span>
+    <div class="measure hero-in">
+      <div class="hero-eye eyebrow stg s1">성수동 · 프라이빗 필라테스</div>
+      <h1 class="hero-title stg s2">하루 한 시간,<br><em>나를 위한</em> 정렬.</h1>
+      <div class="hero-foot stg s3">
+        <div class="trust"><span class="stars">★★★★★</span>네이버 리뷰 <strong>4.9</strong> · 회원 재등록률 <strong>92%</strong></div>
+        <div class="scrollcue">Scroll<span class="ln"></span></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== PRICING ===== -->
-<section class="pad" id="price">
-  <div class="wrap">
-    <div class="price-head rise">
-      <span class="sec-index">02 — Programs</span>
-      <h2 class="sec-title">부담 없이,<br>첫 한 시간부터.</h2>
+  <!-- ===== 02 PHILOSOPHY ===== -->
+  <section class="panel p-phil" id="p2">
+    <div class="phil">
+      <span class="eyebrow idx stg s1">Why 고요</span>
+      <p class="lead stg s2">기구가 아니라 <b>사람</b>이 봅니다.</p>
+      <p class="tail stg s3">오늘 당신의 어깨가 어떤지, 어디가 뭉쳤는지 아는 선생님과 함께합니다. 거울 앞 혼자가 아니라, 내 몸을 아는 손길과 함께.</p>
     </div>
-    <div class="price-list">
-      <div class="plan rise">
-        <div class="plan-tier"><span class="t">체험</span></div>
-        <div class="plan-price"><span class="p fr">30,000</span><span class="per">원 / 1회</span></div>
-        <ul class="plan-items">
-          <li>체형 분석 상담 포함</li>
-          <li>1:1 프라이빗 50분</li>
-          <li>기구·소도구 전체 이용</li>
-        </ul>
-        <a href="#location" class="plan-cta">체험 예약하기 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
-      <div class="plan feat rise">
-        <div class="plan-tier"><span class="pill">인기</span><span class="t">10회 정기권</span></div>
-        <div class="plan-price"><span class="p fr">450,000</span><span class="per">원 / 10회</span></div>
-        <ul class="plan-items">
-          <li>회당 45,000원 (10% 할인)</li>
-          <li>담당 강사 고정 배정</li>
-          <li>운동 기록·컨디션 관리</li>
-          <li>유효기간 3개월</li>
-        </ul>
-        <a href="#location" class="plan-cta">정기권 시작하기 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
-      <div class="plan rise">
-        <div class="plan-tier"><span class="t">20회 정기권</span></div>
-        <div class="plan-price"><span class="p fr">800,000</span><span class="per">원 / 20회</span></div>
-        <ul class="plan-items">
-          <li>회당 40,000원 (최대 할인)</li>
-          <li>담당 강사 고정 배정</li>
-          <li>월 1회 체형 재측정</li>
-          <li>유효기간 6개월</li>
-        </ul>
-        <a href="#location" class="plan-cta">상담 후 결정하기 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== REVIEWS ===== -->
-<section class="pad" id="review">
-  <div class="wrap">
-    <div class="rev-head rise">
-      <span class="sec-index">03 — Reviews</span>
-      <h2 class="sec-title">회원님들의<br>진짜 이야기.</h2>
-      <p class="sec-sub">네이버 예약 · 방문자 리뷰에서 그대로 옮겨왔습니다.</p>
-    </div>
-    <div class="rev-grid">
-      <div class="rev rise">
-        <div class="mark fr">"</div>
-        <p class="q">거북목 때문에 늘 어깨가 아팠는데, 두 달 만에 자세가 확 달라졌어요. 선생님이 제 몸 상태를 매번 기억하고 봐주셔서 믿음이 갑니다.</p>
-        <div class="who">
-          <span class="av">김</span>
-          <div><div class="nm">김민서 회원님</div><div class="mt">3개월째 · 자세 교정</div></div>
+  <!-- ===== 03 THREE POINTS ===== -->
+  <section class="panel" id="p3">
+    <div class="pts">
+      <div class="pts-head stg s1">
+        <span class="eyebrow idx">동네 필라테스, 다 같지 않습니다</span>
+        <h2>고요를 고른 세 가지 이유.</h2>
+      </div>
+      <div class="pt stg s2">
+        <div class="n">01</div>
+        <div class="body">
+          <div class="t">1:1 맞춤 설계</div>
+          <div class="d">첫 방문 체형 분석 후, 당신의 몸에 맞춘 프로그램을 짭니다. 남 따라 하는 수업은 없습니다.</div>
         </div>
       </div>
-      <div class="rev rise">
-        <div class="mark fr">"</div>
-        <p class="q">출산 후 무너진 코어를 안전하게 되살렸어요. 산후 회원 지도를 정말 잘하십니다. 성수 근처라면 무조건 추천!</p>
-        <div class="who">
-          <span class="av">이</span>
-          <div><div class="nm">이지현 회원님</div><div class="mt">6개월째 · 산후 재활</div></div>
+      <div class="pt stg s3">
+        <div class="n">02</div>
+        <div class="body">
+          <div class="t">10년 경력 강사진</div>
+          <div class="d">재활·산전산후 지도 자격을 갖춘 전문 강사. 무리한 동작 대신 안전한 정렬부터.</div>
         </div>
       </div>
-      <div class="rev rise">
-        <div class="mark fr">"</div>
-        <p class="q">프라이빗이라 눈치 안 보고 제 페이스대로 할 수 있어서 좋아요. 딱딱한 헬스는 못 다녔는데 여기는 재밌어서 계속 오게 되네요.</p>
-        <div class="who">
-          <span class="av">박</span>
-          <div><div class="nm">박서준 회원님</div><div class="mt">4개월째 · 코어 강화</div></div>
+      <div class="pt stg s4">
+        <div class="n">03</div>
+        <div class="body">
+          <div class="t">조용하고 편안한 공간</div>
+          <div class="d">성수역 3분, 프라이빗 룸. 눈치 볼 사람도, 기다릴 필요도 없이 온전히 나에게 집중합니다.</div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== LOCATION ===== -->
-<section class="pad loc-wrap" id="location">
-  <div class="wrap loc-grid">
-    <div class="loc-info rise">
-      <span class="sec-index">04 — Visit</span>
-      <h3 class="gb">성수역 3번 출구,<br>도보 3분.</h3>
-      <div class="loc-row"><span class="k">주소</span><span class="v">서울 성동구 성수이로 00, 3층 (지도는 데모용 표시)</span></div>
-      <div class="loc-row"><span class="k">운영</span><span class="v">평일 07:00–22:00 · 주말 09:00–18:00</span></div>
-      <div class="loc-row"><span class="k">전화</span><span class="v">02-000-0000</span></div>
-      <div class="loc-row"><span class="k">주차</span><span class="v">건물 지하 주차 2시간 무료</span></div>
-      <div class="loc-actions">
-        <a href="tel:0200000000" class="btn-fill">
-          전화로 예약
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.4-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg>
+  <!-- ===== 04 PRICING ===== -->
+  <section class="panel p-price" id="p4">
+    <div class="price-wrap">
+      <span class="eyebrow idx stg s1">Programs</span>
+      <h2 class="stg s2">부담 없이, 첫 한 시간부터.</h2>
+      <div class="seg stg s3" id="seg" role="tablist" aria-label="프로그램 선택">
+        <span class="thumb" id="thumb"></span>
+        <button class="on" data-i="0" role="tab" aria-selected="true">체험</button>
+        <button data-i="1" role="tab" aria-selected="false">10회</button>
+        <button data-i="2" role="tab" aria-selected="false">20회</button>
+      </div>
+      <div class="card stg s4" id="card">
+        <span class="pill" id="c-pill">인기</span>
+        <div class="swap">
+          <div class="tier" id="c-tier">체험</div>
+          <div class="amount"><span class="p fr" id="c-price">30,000</span><span class="per" id="c-per">원 / 1회</span></div>
+          <ul id="c-items"></ul>
+        </div>
+        <a href="#p5" class="go" id="c-cta" data-goto="4">
+          <span id="c-cta-t">체험 예약하기</span>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <a href="#" class="btn-line">카카오톡 상담</a>
       </div>
     </div>
-    <div class="map rise" aria-label="스튜디오 위치 (데모용 지도)">
-      <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <rect width="400" height="500" fill="#EDEAE2"/>
-        <g fill="none" stroke="#D8D2C4" stroke-width="1">
-          <path d="M-20 120 C120 90 260 150 440 110"/>
-          <path d="M-20 150 C120 120 260 180 440 140"/>
-          <path d="M-20 300 C110 280 250 340 440 300"/>
-          <path d="M-20 330 C110 310 250 370 440 330"/>
-          <path d="M-20 430 C120 410 250 460 440 420"/>
-        </g>
-        <g stroke="#CFC8B8" stroke-width="10" stroke-linecap="round" opacity=".7">
-          <path d="M60 -20 L150 520"/>
-          <path d="M-20 260 L440 210"/>
-        </g>
-        <g stroke="#DCD6C8" stroke-width="4" opacity=".8">
-          <path d="M260 -20 L320 520"/>
-          <path d="M-20 400 L440 370"/>
-        </g>
-        <g fill="#E4DECF">
-          <rect x="180" y="200" width="70" height="60" rx="3"/>
-          <rect x="90" y="330" width="54" height="48" rx="3"/>
-          <rect x="290" y="120" width="46" height="52" rx="3"/>
-          <rect x="150" y="420" width="60" height="40" rx="3"/>
-        </g>
-      </svg>
-      <span class="pin"></span>
-      <span class="tag">Goyo Studio · Seongsu</span>
+  </section>
+
+  <!-- ===== 05 REVIEWS + VISIT ===== -->
+  <section class="panel p-visit" id="p5">
+    <div class="visit">
+      <div class="quotebox stg s1">
+        <span class="eyebrow idx">회원님들의 진짜 이야기</span>
+        <span class="qmark fr">"</span>
+        <div class="qslot" id="qslot">
+          <div class="qitem on">
+            <p class="q">거북목 때문에 늘 어깨가 아팠는데, 두 달 만에 자세가 확 달라졌어요. 선생님이 제 몸 상태를 매번 기억하고 봐주셔서 믿음이 갑니다.</p>
+            <div class="who"><span class="av">김</span><div><div class="nm">김민서 회원님</div><div class="mt">3개월째 · 자세 교정</div></div></div>
+          </div>
+          <div class="qitem">
+            <p class="q">출산 후 무너진 코어를 안전하게 되살렸어요. 산후 회원 지도를 정말 잘하십니다. 성수 근처라면 무조건 추천!</p>
+            <div class="who"><span class="av">이</span><div><div class="nm">이지현 회원님</div><div class="mt">6개월째 · 산후 재활</div></div></div>
+          </div>
+          <div class="qitem">
+            <p class="q">프라이빗이라 눈치 안 보고 제 페이스대로 할 수 있어서 좋아요. 딱딱한 헬스는 못 다녔는데 여기는 재밌어서 계속 오게 되네요.</p>
+            <div class="who"><span class="av">박</span><div><div class="nm">박서준 회원님</div><div class="mt">4개월째 · 코어 강화</div></div></div>
+          </div>
+        </div>
+        <div class="qdots" id="qdots">
+          <button class="on" data-q="0" aria-label="후기 1"></button>
+          <button data-q="1" aria-label="후기 2"></button>
+          <button data-q="2" aria-label="후기 3"></button>
+        </div>
+      </div>
+
+      <div class="visit-foot stg s2">
+        <div>
+          <h3>성수역 3번 출구, 도보 3분.</h3>
+          <div class="lrows lrows">
+            <div class="lrow"><div class="k">주소</div><div class="v">서울 성동구 성수이로 00, 3층<br>(지도는 데모용 표시)</div></div>
+            <div class="lrow"><div class="k">운영</div><div class="v">평일 07:00–22:00<br>주말 09:00–18:00</div></div>
+            <div class="lrow"><div class="k">전화</div><div class="v">02-000-0000</div></div>
+            <div class="lrow"><div class="k">주차</div><div class="v">건물 지하 주차<br>2시간 무료</div></div>
+          </div>
+        </div>
+        <div class="visit-cta">
+          <a href="tel:0200000000" class="big">
+            전화로 예약
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.4-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg>
+          </a>
+          <a href="#" class="sub">카카오톡 채널 @고요필라테스</a>
+        </div>
+      </div>
+
+      <p class="demo-note stg s3">
+        © 2026 고요 필라테스<span class="sep">·</span>랜딩페이지 데모<span class="sep">·</span>데모용 가상 업체입니다
+        <br>Made by Jason's Consulting
+      </p>
     </div>
-  </div>
-</section>
+  </section>
 
 </main>
 
-<!-- ===== FOOTER ===== -->
-<footer>
-  <div class="wrap">
-    <div class="foot-cta rise">
-      <span class="k">The one hour that is yours</span>
-      <h3>오늘의 몸에 맞춘<br>한 시간을 시작하세요.</h3>
-      <a href="#price" class="btn-fill">
-        첫 체험 3만원 예약
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-    </div>
-    <div class="foot-grid">
-      <div class="foot-brand">
-        <div class="b"><span class="mark">高</span><span class="bn">고요 필라테스</span></div>
-        <p>성수동 프라이빗 필라테스 스튜디오. 오늘의 몸에 맞춘 한 시간을 선물하세요.</p>
-      </div>
-      <div class="fcol">
-        <h4>바로가기</h4>
-        <a href="#why">스튜디오</a>
-        <a href="#price">프로그램</a>
-        <a href="#review">후기</a>
-        <a href="#location">오시는 길</a>
-      </div>
-      <div class="fcol">
-        <h4>예약 · 문의</h4>
-        <a href="tel:0200000000">02-000-0000</a>
-        <p>카카오톡 채널 @고요필라테스</p>
-        <p>평일 07–22 · 주말 09–18</p>
-      </div>
-    </div>
-    <div class="copyr">
-      <span>© 2026 고요 필라테스 · 데모용 가상 업체입니다.</span>
-      <span>랜딩페이지 데모 · Made by Jason's Consulting</span>
-    </div>
-  </div>
-</footer>
-
-<!-- ===== STICKY MOBILE BAR ===== -->
+<!-- sticky mobile bar -->
 <div class="cta-bar">
   <a class="cb-call" href="tel:0200000000">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.4-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg>
     전화
   </a>
-  <a class="cb-book" href="#price">
+  <a class="cb-book" href="#p4" data-goto="3">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
     첫 체험 3만원 예약
   </a>
 </div>
 
 <script>
-  const hdr=document.getElementById('hdr');
-  const onScroll=()=>hdr.classList.toggle('scrolled',scrollY>24);
-  addEventListener('scroll',onScroll,{passive:true});onScroll();
+(function(){
+  const deck=document.getElementById('deck');
+  const panels=[...deck.querySelectorAll('.panel')];
+  const railBtns=[...document.querySelectorAll('.rail button')];
 
+  /* ---- goto navigation ---- */
+  function goto(i){
+    if(panels[i]) panels[i].scrollIntoView({behavior:'smooth'});
+  }
+  document.querySelectorAll('[data-goto]').forEach(el=>{
+    el.addEventListener('click',e=>{e.preventDefault();goto(+el.dataset.goto);});
+  });
+
+  /* ---- active panel via IntersectionObserver ---- */
   const io=new IntersectionObserver((entries)=>{
     entries.forEach(e=>{
-      if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+      if(e.isIntersecting && e.intersectionRatio>=.55){
+        const idx=panels.indexOf(e.target);
+        panels.forEach(p=>p.classList.remove('active'));
+        e.target.classList.add('active');
+        railBtns.forEach((b,i)=>b.classList.toggle('on',i===idx));
+      }
     });
-  },{threshold:.16,rootMargin:'0px 0px -8% 0px'});
-  document.querySelectorAll('.rise').forEach(el=>io.observe(el));
+  },{root:deck,threshold:[.55]});
+  panels.forEach(p=>io.observe(p));
+
+  /* ---- pricing toggle ---- */
+  const PLANS=[
+    {tier:'체험',price:'30,000',per:'원 / 1회',
+     items:['체형 분석 상담 포함','1:1 프라이빗 50분','기구·소도구 전체 이용'],
+     cta:'체험 예약하기',pill:false},
+    {tier:'10회 정기권',price:'450,000',per:'원 / 10회',
+     items:['회당 45,000원 (10% 할인)','담당 강사 고정 배정','운동 기록·컨디션 관리','유효기간 3개월'],
+     cta:'정기권 시작하기',pill:'인기'},
+    {tier:'20회 정기권',price:'800,000',per:'원 / 20회',
+     items:['회당 40,000원 (최대 할인)','담당 강사 고정 배정','월 1회 체형 재측정','유효기간 6개월'],
+     cta:'상담 후 결정하기',pill:false}
+  ];
+  const seg=document.getElementById('seg');
+  const segBtns=[...seg.querySelectorAll('button')];
+  const thumb=document.getElementById('thumb');
+  const card=document.getElementById('card');
+  const cTier=document.getElementById('c-tier');
+  const cPrice=document.getElementById('c-price');
+  const cPer=document.getElementById('c-per');
+  const cItems=document.getElementById('c-items');
+  const cCtaT=document.getElementById('c-cta-t');
+  const CHK='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg>';
+
+  function moveThumb(i){
+    const b=segBtns[i];
+    thumb.style.width=b.offsetWidth+'px';
+    thumb.style.transform='translateX('+(b.offsetLeft-5)+'px)';
+  }
+  function render(i){
+    const p=PLANS[i];
+    card.classList.add('switching');
+    setTimeout(()=>{
+      cTier.textContent=p.tier;
+      cPrice.textContent=p.price;
+      cPer.textContent=p.per;
+      cItems.innerHTML=p.items.map(t=>'<li>'+CHK+'<span>'+t+'</span></li>').join('');
+      cCtaT.textContent=p.cta;
+      card.classList.toggle('has-pill',!!p.pill);
+      card.classList.remove('switching');
+    },200);
+  }
+  function select(i){
+    segBtns.forEach((b,j)=>{b.classList.toggle('on',j===i);b.setAttribute('aria-selected',j===i);});
+    moveThumb(i);render(i);
+  }
+  segBtns.forEach((b,i)=>b.addEventListener('click',()=>select(i)));
+  // init (default to popular tier 1)
+  function initPricing(){moveThumb(0);
+    cItems.innerHTML=PLANS[0].items.map(t=>'<li>'+CHK+'<span>'+t+'</span></li>').join('');}
+  window.addEventListener('load',()=>{select(1);});
+  window.addEventListener('resize',()=>{
+    const cur=segBtns.findIndex(b=>b.classList.contains('on'));moveThumb(cur<0?0:cur);
+  });
+  initPricing();
+
+  /* ---- reviews rotation ---- */
+  const qItems=[...document.querySelectorAll('#qslot .qitem')];
+  const qDots=[...document.querySelectorAll('#qdots button')];
+  let qi=0,qTimer;
+  function showQ(n){
+    qi=(n+qItems.length)%qItems.length;
+    qItems.forEach((el,i)=>el.classList.toggle('on',i===qi));
+    qDots.forEach((d,i)=>d.classList.toggle('on',i===qi));
+  }
+  function startQ(){clearInterval(qTimer);qTimer=setInterval(()=>showQ(qi+1),5200);}
+  qDots.forEach((d,i)=>d.addEventListener('click',()=>{showQ(i);startQ();}));
+  startQ();
+})();
 </script>
 </body>
 </html>
