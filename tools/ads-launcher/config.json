@@ -1,7 +1,7 @@
 {
   "_설명": "광고 런처 설정. 값을 바꾸고 generate.py를 실행하면 launch/ 폴더의 실행 문서가 다시 만들어진다.",
   "brand": "Jason's Consulting",
-  "landing_url": "https://jasons-consulting.com/",
+  "landing_url": "https://jasonsjo.github.io/AI-business/",
   "video_file": "tools/video-ad/jasons-ad-15s.mp4",
   "youtube_video_url": "https://youtu.be/1Lo8lC88MwU",
   "daily_budget_krw": 10000,

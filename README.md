@@ -20,7 +20,7 @@ python3 pipeline.py --leads tools/cold-email-generator/leads.sample.csv --sender
 
 `git push` 하면 GitHub Actions가 데모 4종 + 포트폴리오 허브를 GitHub Pages에 자동 배포한다
 (최초 1회 저장소 Settings → Pages → Source를 **GitHub Actions**로 설정).
-배포 URL: `https://jasons-consulting.com/`
+배포 URL: `https://jasonsjo.github.io/AI-business/`
 
 **매일 루틴 (자동화 후 남는 일):**
 1. 리드 CSV에 오늘 연락할 업체 추가 (개인화 한 줄 필수)

@@ -60,15 +60,15 @@ python3 tools/set-domain.py <new-domain>
 
 - Codex로 제작한 별도 사이트(원본 호스팅, 삭제 금지):
   https://jasons-consulting-ai.rsr8f9vz55.chatgpt.site/
-  — 과거 jasons-consulting.com 루트가 이 주소로 URL 포워딩되고 있었다.
-  현재 루트는 GitHub Pages 신규 사이트로 전환됐으며, 필요시 서브도메인
-  (예: ai.jasons-consulting.com) 포워딩으로 다시 연결한다.
+  — 사용자 결정(2026-07-23)으로 jasons-consulting.com 루트는 이 주소로
+  **URL 포워딩**된다(Porkbun). 이 저장소의 사이트는 github.io 주소로 서비스하며
+  `CUSTOM_DOMAIN`은 빈 문자열로 유지한다 — 사용자 지시 없이 되돌리지 마라.
 
 ## 현재 상태 (2026-07-23)
 
-- 새 3개 국어 사이트(영어 루트 + /ja/ + /kr/, 데모 6종)가 github.io에 배포됨.
-- `jasons-consulting.com` DNS는 Porkbun에서 GitHub Pages로 전환 대기 중.
-  전환 확인 후 `CUSTOM_DOMAIN` 복원 → 푸시가 마지막 단계다.
+- 새 3개 국어 사이트(영어 루트 + /ja/ + /kr/, 데모 6종)는
+  https://jasonsjo.github.io/AI-business 로 서비스한다.
+- `jasons-consulting.com` 루트는 Codex 사이트로 URL 포워딩(위 참고).
 - 아웃바운드: 국내 인스타 DM 진행 중, 미국·일본 이메일은 리드 12건 생성 완료(발송 전).
 
 ## 디자인 시스템
