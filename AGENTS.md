@@ -41,8 +41,10 @@ python3 tools/set-domain.py <new-domain>
 ```
 
 - `tools/landing-generator/` — `template.html`의 `{{PLACEHOLDER}}`를 config 값으로 치환.
-  **치환되지 않은 플레이스홀더가 남으면 생성기가 에러로 멈춘다** — 템플릿에 플레이스홀더를
-  추가하면 `generate.py`의 mapping과 모든 config에 함께 추가할 것.
+  **(2026-07-23부터) demo/ 11개는 전부 매장별 맞춤 손수 HTML로 재작성됨** — 더 이상 이 템플릿으로
+  자동 생성하지 않는다. 원본 콘텐츠는 `configs/_bespoke/*.json.bak` 에 보존. **generate.py 로
+  이 데모들을 재생성하지 마라(맞춤 디자인이 덮인다).** 새 고객 페이지는 업종이 가까운 demo/ 페이지를
+  복사해 상호·가격·사진만 교체. 자세한 건 `tools/landing-generator/configs/README.md`.
 - `tools/build-site.py` — `DEMOS`(데모 목록)와 `LOCALES`(en/ja/kr 허브 문자열).
   데모 추가 시 두 곳 모두 갱신. ja 로케일은 `d.get("ja") or d["en"]` 폴백을 쓴다.
 - `demo/` — 생성 결과물. **직접 수정하지 말고** config를 고쳐 재생성하라.

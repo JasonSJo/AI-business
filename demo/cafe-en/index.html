@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,265 +10,318 @@
 <meta property="og:description" content="A neighborhood coffee shop in East Austin. Single-origin roasts, real mugs, room to stay." />
 <meta property="og:image" content="https://jasonsjo.github.io/AI-business/assets/og-1200x630.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Space+Mono:wght@400;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
   :root{
-    --cream:#F4EFE6;
-    --cream-deep:#EAE0D0;
-    --ink:#241C15;
-    --ink-soft:#4E4237;
-    --pine:#4E342A;
-    --pine-light:#6B4A3B;
-    --clay:#C0784F;
-    --clay-deep:#A5603A;
-    --muted:#8A7D6E;
-    --line:rgba(35,40,31,.12);
-    --shadow:0 20px 60px -24px rgba(35,40,31,.35);
-    --r:18px;
+    --kraft:#E7DCC7;
+    --kraft-deep:#DBCDB2;
+    --kraft-card:#EFE7D6;
+    --paper:#F3ECDD;
+    --espresso:#2A211A;
+    --espresso-soft:#4A3C30;
+    --terra:#B5623A;
+    --terra-deep:#9A4E2C;
+    --sage:#7C8060;
+    --sage-deep:#636848;
+    --ink-mute:#7A6E5C;
+    --line:rgba(42,33,26,.18);
+    --line-soft:rgba(42,33,26,.10);
+    --stamp:0 2px 0 rgba(42,33,26,.12);
+    --lift:0 24px 50px -30px rgba(42,33,26,.55);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{
-    font-family:'Pretendard',sans-serif;
-    color:var(--ink);
-    background:var(--cream);
+    font-family:'Archivo',sans-serif;
+    color:var(--espresso);
+    background:var(--kraft);
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
   }
-  .serif{font-family:'Gowun Batang',serif}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
   a{color:inherit;text-decoration:none}
-  img{max-width:100%;display:block}
+  img,svg{max-width:100%;display:block}
+  .serif{font-family:'Fraunces',serif}
+  .mono{font-family:'Space Mono',monospace}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
 
-  /* grain overlay */
+  /* kraft paper grain */
   body::before{
-    content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.035;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.05;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
+
+  /* mono spec label */
+  .spec{
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--terra-deep);font-weight:700;
+  }
+  .spec-line{display:inline-flex;align-items:center;gap:10px}
+  .spec-line::before{content:"";width:22px;height:2px;background:var(--terra)}
 
   /* ---------- header ---------- */
   header{
-    position:fixed;top:0;left:0;right:0;z-index:100;
-    padding:18px 0;transition:.4s ease;
+    position:fixed;top:0;left:0;right:0;z-index:100;transition:.4s ease;
+    border-bottom:1.5px solid transparent;
   }
   header.scrolled{
-    background:color-mix(in srgb, var(--cream) 82%, transparent);
-    backdrop-filter:blur(14px);
-    box-shadow:0 1px 0 var(--line);
-    padding:12px 0;
+    background:color-mix(in srgb, var(--kraft) 90%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1.5px solid var(--line);
   }
-  .nav{display:flex;align-items:center;justify-content:space-between}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.02em}
-  .brand .mark{
-    width:34px;height:34px;border-radius:50%;
-    background:conic-gradient(from 210deg,var(--pine),var(--pine-light),var(--clay),var(--pine));
-    display:grid;place-items:center;color:#fff;font-family:'Gowun Batang',serif;font-size:15px;
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0;transition:.4s}
+  header.scrolled .nav{padding:11px 0}
+  .brand{display:flex;align-items:center;gap:11px;font-family:'Fraunces',serif;font-weight:600;font-size:19px;letter-spacing:-.01em}
+  .brand .seal{
+    width:38px;height:38px;flex-shrink:0;
   }
-  .nav-links{display:flex;gap:32px;font-size:14px;color:var(--ink-soft);font-weight:500}
-  .nav-links a{position:relative}
-  .nav-links a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:1.5px;background:var(--clay);transition:.3s}
+  .nav-links{display:flex;gap:30px;align-items:center}
+  .nav-links a{font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.04em;color:var(--espresso-soft);position:relative}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:2px;background:var(--terra);transition:.3s}
   .nav-links a:hover::after{width:100%}
   .nav-cta{
-    background:var(--ink);color:var(--cream);padding:10px 20px;border-radius:100px;
-    font-size:13.5px;font-weight:600;transition:.25s;
+    display:inline-flex;align-items:center;gap:8px;background:var(--espresso);color:var(--kraft);
+    padding:10px 18px;border-radius:2px;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;
+    letter-spacing:.04em;transition:.25s;
   }
-  .nav-cta:hover{background:var(--pine);transform:translateY(-1px)}
-  @media(max-width:820px){.nav-links{display:none}}
+  .nav-cta:hover{background:var(--terra-deep);transform:translateY(-1px)}
+  @media(max-width:860px){.nav-links{display:none}}
 
   /* ---------- hero ---------- */
-  .hero{
-    position:relative;padding:170px 0 110px;overflow:hidden;
-    background:
-      radial-gradient(120% 90% at 85% -10%, color-mix(in srgb, var(--clay) 16%, transparent), transparent 55%),
-      radial-gradient(90% 80% at -10% 110%, color-mix(in srgb, var(--pine) 18%, transparent), transparent 55%),
-      var(--cream);
+  .hero{position:relative;padding:132px 0 70px;overflow:hidden}
+  .hero::after{
+    content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.5;
+    background-image:
+      repeating-linear-gradient(90deg, transparent 0 39px, var(--line-soft) 39px 40px);
+    mask-image:linear-gradient(180deg,transparent,#000 40%,#000 70%,transparent);
   }
-  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:9px;font-size:12.5px;letter-spacing:.16em;
-    text-transform:uppercase;color:var(--pine);font-weight:600;margin-bottom:26px;
-  }
-  .eyebrow::before{content:"";width:26px;height:1.5px;background:var(--clay)}
+  .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.08fr .92fr;gap:52px;align-items:center}
+  .hero-eyebrow{margin-bottom:26px}
   h1.title{
-    font-size:clamp(38px,5.6vw,68px);line-height:1.08;letter-spacing:-.01em;font-weight:700;
-    color:var(--ink);
+    font-family:'Fraunces',serif;font-weight:600;font-size:clamp(44px,7.2vw,86px);line-height:.98;
+    letter-spacing:-.02em;color:var(--espresso);
   }
-  h1.title em{font-style:normal;color:var(--clay);position:relative;white-space:nowrap}
-  .lede{margin-top:26px;font-size:clamp(16px,2vw,18.5px);color:var(--ink-soft);max-width:38ch}
-  .hero-actions{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap}
+  h1.title em{font-style:italic;font-weight:500;color:var(--terra-deep)}
+  .lede{margin-top:24px;font-size:clamp(15.5px,1.9vw,18px);color:var(--espresso-soft);max-width:40ch}
+  .hero-actions{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
   .btn{
-    display:inline-flex;align-items:center;gap:9px;padding:15px 28px;border-radius:100px;
-    font-weight:600;font-size:15px;transition:.28s cubic-bezier(.2,.7,.3,1);cursor:pointer;border:none;
+    display:inline-flex;align-items:center;gap:10px;padding:15px 26px;
+    font-family:'Space Mono',monospace;font-weight:700;font-size:13px;letter-spacing:.05em;
+    text-transform:uppercase;cursor:pointer;border:none;transition:.28s cubic-bezier(.2,.7,.3,1);border-radius:2px;
   }
-  .btn-primary{background:var(--clay);color:#fff;box-shadow:0 12px 28px -12px color-mix(in srgb, var(--clay-deep) 70%, transparent)}
-  .btn-primary:hover{background:var(--clay-deep);transform:translateY(-2px)}
-  .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
-  .btn-ghost:hover{border-color:var(--ink);background:rgba(35,40,31,.03)}
-  .hero-trust{margin-top:34px;display:flex;align-items:center;gap:18px;font-size:13.5px;color:var(--muted)}
-  .stars{color:var(--clay);letter-spacing:2px}
+  .btn-primary{background:var(--terra);color:#fff;box-shadow:4px 4px 0 var(--espresso)}
+  .btn-primary:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--espresso)}
+  .btn-ghost{background:transparent;color:var(--espresso);border:2px solid var(--espresso)}
+  .btn-ghost:hover{background:var(--espresso);color:var(--kraft)}
+  .hero-trust{margin-top:32px;display:flex;align-items:center;gap:14px;font-size:13px;color:var(--ink-mute);flex-wrap:wrap}
+  .stars{color:var(--terra);letter-spacing:1px}
+  .hero-trust strong{color:var(--espresso)}
 
-  /* hero visual card */
-  .hero-visual{position:relative}
-  .studio-card{
-    position:relative;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);
-    aspect-ratio:4/5;
+  /* hero coffee bag */
+  .hero-visual{position:relative;display:flex;justify-content:center}
+  .bag{
+    position:relative;width:100%;max-width:360px;aspect-ratio:5/7;
     background:
-      linear-gradient(155deg, color-mix(in srgb, var(--pine) 94%, black), var(--pine-light) 55%, color-mix(in srgb, var(--pine) 96%, black));
+      linear-gradient(178deg, var(--kraft-card), var(--kraft-deep));
+    border:2px solid var(--espresso);
+    box-shadow:var(--lift);
+    padding:26px 24px;display:flex;flex-direction:column;
   }
-  .studio-card svg{position:absolute;inset:0;width:100%;height:100%}
-  .card-glyph{
-    position:absolute;inset:0;display:grid;place-items:center;
-    font-family:'Gowun Batang',serif;font-size:min(46vw,240px);color:rgba(255,255,255,.16);
-    user-select:none;line-height:1;
+  .bag::before{ /* top crimp */
+    content:"";position:absolute;top:-12px;left:-2px;right:-2px;height:14px;
+    background:repeating-linear-gradient(90deg,var(--espresso) 0 6px,var(--kraft-deep) 6px 12px);
+    border:2px solid var(--espresso);
   }
-  .card-label{
-    position:absolute;left:22px;bottom:22px;right:22px;color:#fff;
+  .bag-top{display:flex;justify-content:space-between;align-items:flex-start}
+  .bag-lot{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.14em;line-height:1.7;color:var(--espresso-soft)}
+  .bag-seal{width:66px;height:66px;flex-shrink:0}
+  .bag-mid{flex:1;display:flex;flex-direction:column;justify-content:center;text-align:center;padding:8px 0}
+  .bag-mid .glyph{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(62px,20vw,104px);line-height:1;color:var(--espresso)}
+  .bag-mid .kind{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--terra-deep);margin-top:10px}
+  .bag-mid .kind-lg{font-family:'Fraunces',serif;font-style:italic;font-size:22px;color:var(--espresso-soft);margin-top:14px}
+  .bag-foot{border-top:1.5px dashed var(--line);padding-top:14px;display:flex;justify-content:space-between;align-items:center}
+  .bag-foot .wt{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.14em;color:var(--espresso-soft)}
+  .bag-foot .roast{display:flex;gap:4px;align-items:center}
+  .bag-foot .roast i{width:7px;height:7px;border-radius:50%;background:var(--espresso);display:block}
+  .bag-foot .roast i.off{background:transparent;border:1.5px solid var(--line)}
+  /* floating tags */
+  .tag-badge{
+    position:absolute;z-index:5;background:var(--paper);border:2px solid var(--espresso);
+    padding:10px 14px;box-shadow:3px 3px 0 var(--espresso);
   }
-  .card-label .sm{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.8}
-  .card-label .lg{font-family:'Gowun Batang',serif;font-size:26px;margin-top:6px}
-  .float-badge{
-    position:absolute;top:-18px;left:-22px;z-index:4;background:var(--cream);border:1px solid var(--line);
-    border-radius:14px;padding:14px 18px;box-shadow:var(--shadow);
-  }
-  .float-badge .n{font-family:'Gowun Batang',serif;font-size:26px;color:var(--pine);line-height:1}
-  .float-badge .t{font-size:12px;color:var(--muted);margin-top:3px}
-  .float-badge2{
-    position:absolute;bottom:26px;right:-24px;z-index:4;background:var(--cream);border:1px solid var(--line);
-    border-radius:14px;padding:12px 16px;box-shadow:var(--shadow);display:flex;gap:10px;align-items:center;
-  }
-  .float-badge2 .dot{width:9px;height:9px;border-radius:50%;background:#5aa469;box-shadow:0 0 0 4px rgba(90,164,105,.2)}
-  .float-badge2 .t{font-size:13px;font-weight:600}
+  .tag-open{top:6px;left:-26px;transform:rotate(-5deg)}
+  .tag-open .n{font-family:'Fraunces',serif;font-weight:600;font-size:26px;line-height:1;color:var(--terra-deep)}
+  .tag-open .t{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--espresso-soft);margin-top:3px}
+  .tag-book{bottom:38px;right:-30px;transform:rotate(4deg);display:flex;align-items:center;gap:8px}
+  .tag-book .dot{width:9px;height:9px;border-radius:50%;background:var(--sage-deep);box-shadow:0 0 0 4px rgba(99,104,72,.22)}
+  .tag-book .t{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.02em}
 
   @media(max-width:860px){
-    .hero{padding:132px 0 80px}
+    .hero{padding:112px 0 50px}
     .hero-grid{grid-template-columns:1fr;gap:44px}
-    .hero-visual{max-width:340px;margin:6px auto 0}
-    .float-badge,.float-badge2{display:none}
+    .hero-visual{max-width:320px;margin:0 auto}
+    .tag-open{left:-14px}.tag-book{right:-14px}
   }
 
   /* ---------- marquee ---------- */
-  .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;overflow:hidden;background:var(--cream-deep)}
-  .marquee-track{display:flex;gap:56px;white-space:nowrap;animation:slide 26s linear infinite;font-family:'Gowun Batang',serif;font-size:19px;color:var(--pine)}
-  .marquee-track span{opacity:.75}
+  .marquee{border-top:2px solid var(--espresso);border-bottom:2px solid var(--espresso);padding:14px 0;overflow:hidden;background:var(--espresso)}
+  .marquee-track{display:flex;gap:0;white-space:nowrap;animation:slide 30s linear infinite;will-change:transform}
+  .marquee-track span{
+    font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--kraft);
+    padding:0 26px;display:inline-flex;align-items:center;gap:26px;
+  }
+  .marquee-track span::after{content:"✦";color:var(--terra)}
   @keyframes slide{to{transform:translateX(-50%)}}
 
   /* ---------- section base ---------- */
-  section.pad{padding:96px 0}
-  .sec-head{max-width:620px;margin-bottom:56px}
-  .sec-tag{font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--clay);font-weight:600}
-  .sec-title{font-size:clamp(28px,4vw,42px);line-height:1.16;margin-top:14px;font-weight:700;letter-spacing:-.01em}
-  .sec-sub{margin-top:16px;color:var(--ink-soft);font-size:16.5px}
+  section.pad{padding:90px 0}
+  .sec-head{max-width:660px;margin-bottom:52px}
+  .sec-tag{margin-bottom:16px}
+  .sec-title{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(30px,4.4vw,50px);line-height:1.05;letter-spacing:-.02em}
+  .sec-title em{font-style:italic;font-weight:500;color:var(--terra-deep)}
+  .sec-sub{margin-top:16px;color:var(--espresso-soft);font-size:16px;max-width:52ch}
 
-  /* why cards */
-  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  /* why — coffee tiles grid */
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2px solid var(--espresso);background:var(--espresso)}
   .why-card{
-    background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:34px 28px;
-    transition:.35s;position:relative;overflow:hidden;
+    background:var(--kraft-card);padding:36px 30px 34px;position:relative;transition:.35s;
   }
-  .why-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
-  .why-card .ico{
-    width:52px;height:52px;border-radius:14px;background:var(--cream);display:grid;place-items:center;
-    margin-bottom:22px;color:var(--pine);
+  .why-card:not(:last-child){border-right:2px solid var(--espresso)}
+  .why-card:hover{background:var(--paper)}
+  .why-card .idx{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--terra-deep);font-weight:700}
+  .why-card .stamp{width:58px;height:58px;margin:20px 0 22px}
+  .why-card h3{font-family:'Fraunces',serif;font-weight:600;font-size:22px;line-height:1.15;margin-bottom:10px}
+  .why-card p{color:var(--espresso-soft);font-size:14.5px}
+  @media(max-width:820px){
+    .why-grid{grid-template-columns:1fr}
+    .why-card:not(:last-child){border-right:none;border-bottom:2px solid var(--espresso)}
   }
-  .why-card h3{font-family:'Gowun Batang',serif;font-size:22px;margin-bottom:10px}
-  .why-card p{color:var(--ink-soft);font-size:15px}
-  .why-card .num{position:absolute;top:20px;right:24px;font-family:'Gowun Batang',serif;font-size:15px;color:var(--line)}
-  @media(max-width:820px){.why-grid{grid-template-columns:1fr}}
 
-  /* pricing */
-  .price{background:var(--pine);color:var(--cream);border-radius:28px}
-  .price-inner{padding:70px 0}
-  .price .sec-title,.price .sec-tag{color:inherit}
-  .price .sec-tag{color:color-mix(in srgb, var(--clay) 55%, white)}
-  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:12px}
-  .plan{
-    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:var(--r);
-    padding:32px 28px;transition:.3s;position:relative;
+  /* pricing — kraft tickets */
+  .price-sec{background:var(--kraft-deep);border-top:2px solid var(--espresso);border-bottom:2px solid var(--espresso)}
+  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
+  .ticket{
+    position:relative;background:var(--paper);border:2px solid var(--espresso);
+    padding:30px 26px 28px;display:flex;flex-direction:column;transition:.3s;
   }
-  .plan.featured{background:var(--cream);color:var(--ink)}
-  .plan.featured .plan-price{color:var(--clay-deep)}
-  .plan:hover{transform:translateY(-4px)}
-  .plan .tier{font-size:14px;letter-spacing:.08em;text-transform:uppercase;opacity:.85;font-weight:600}
-  .plan .plan-price{font-family:'Gowun Batang',serif;font-size:38px;margin:14px 0 4px;color:#fff}
-  .plan .per{font-size:13px;opacity:.7}
-  .plan ul{list-style:none;margin:22px 0 26px;display:flex;flex-direction:column;gap:11px}
-  .plan li{display:flex;gap:10px;font-size:14.5px;align-items:flex-start}
-  .plan li::before{content:"✓";color:var(--clay);font-weight:700}
-  .plan.featured li::before{color:var(--pine)}
-  .plan .pill{position:absolute;top:-12px;right:24px;background:var(--clay);color:#fff;font-size:12px;font-weight:600;padding:5px 13px;border-radius:100px}
-  .plan .btn{width:100%;justify-content:center}
-  .plan .btn-plan{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2)}
-  .plan.featured .btn-plan{background:var(--ink);color:var(--cream);border:none}
-  @media(max-width:820px){.price-grid{grid-template-columns:1fr}}
+  .ticket::before,.ticket::after{ /* punch holes */
+    content:"";position:absolute;width:20px;height:20px;border-radius:50%;background:var(--kraft-deep);
+    border:2px solid var(--espresso);top:74px;
+  }
+  .ticket::before{left:-11px}
+  .ticket::after{right:-11px}
+  .ticket:hover{transform:translateY(-5px);box-shadow:var(--lift)}
+  .ticket.featured{background:var(--espresso);color:var(--kraft)}
+  .ticket.featured::before,.ticket.featured::after{background:var(--kraft-deep)}
+  .ticket .tier{font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra-deep)}
+  .ticket.featured .tier{color:var(--terra)}
+  .ticket .amt{font-family:'Fraunces',serif;font-weight:600;font-size:52px;line-height:1;margin:14px 0 4px}
+  .ticket .per{font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.04em;color:var(--ink-mute)}
+  .ticket.featured .per{color:color-mix(in srgb,var(--kraft) 72%,transparent)}
+  .ticket .dash{border-top:1.5px dashed var(--line);margin:22px 0 20px}
+  .ticket.featured .dash{border-color:rgba(231,220,199,.3)}
+  .ticket ul{list-style:none;display:flex;flex-direction:column;gap:12px;flex:1}
+  .ticket li{display:flex;gap:10px;font-size:14px;align-items:flex-start;line-height:1.45}
+  .ticket li svg{width:16px;height:16px;flex-shrink:0;margin-top:3px;color:var(--terra)}
+  .ticket.featured li svg{color:var(--terra)}
+  .ticket .pill{
+    position:absolute;top:-14px;right:20px;background:var(--terra);color:#fff;
+    font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.08em;
+    padding:5px 12px;border:2px solid var(--espresso);text-transform:uppercase;
+  }
+  .ticket .btn{width:100%;justify-content:center;margin-top:24px}
+  .ticket .btn-tk{background:var(--espresso);color:var(--kraft);box-shadow:none}
+  .ticket .btn-tk:hover{background:var(--terra-deep);transform:translateY(-2px)}
+  .ticket.featured .btn-tk{background:var(--terra);color:#fff}
+  .ticket.featured .btn-tk:hover{background:var(--terra-deep)}
+  @media(max-width:820px){.price-grid{grid-template-columns:1fr;gap:30px}}
 
   /* reviews */
   .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-  .rev{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:30px 28px;display:flex;flex-direction:column}
-  .rev .q{font-family:'Gowun Batang',serif;font-size:17px;line-height:1.55;color:var(--ink);flex:1}
-  .rev .who{margin-top:22px;display:flex;align-items:center;gap:12px}
-  .rev .av{width:42px;height:42px;border-radius:50%;background:conic-gradient(from 140deg,var(--clay),var(--pine-light));display:grid;place-items:center;color:#fff;font-family:'Gowun Batang',serif}
-  .rev .who .nm{font-weight:600;font-size:14.5px}
-  .rev .who .mt{font-size:12.5px;color:var(--muted)}
-  .rev .stars{margin-bottom:16px;font-size:15px}
+  .rev{
+    background:var(--kraft-card);border:2px solid var(--espresso);padding:28px 26px;
+    display:flex;flex-direction:column;position:relative;transition:.3s;
+  }
+  .rev:hover{transform:translateY(-4px);box-shadow:8px 8px 0 var(--espresso)}
+  .rev .quo{font-family:'Fraunces',serif;font-size:64px;line-height:.6;color:var(--terra);opacity:.5;height:34px}
+  .rev .q{font-family:'Fraunces',serif;font-size:17.5px;line-height:1.5;color:var(--espresso);flex:1}
+  .rev .who{margin-top:22px;display:flex;align-items:center;gap:12px;border-top:1.5px dashed var(--line);padding-top:18px}
+  .rev .av{
+    width:42px;height:42px;flex-shrink:0;background:var(--espresso);color:var(--kraft);
+    display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:600;font-size:18px;
+  }
+  .rev .nm{font-weight:700;font-size:14px}
+  .rev .mt{font-family:'Space Mono',monospace;font-size:11px;color:var(--ink-mute);letter-spacing:.02em;margin-top:2px}
   @media(max-width:820px){.rev-grid{grid-template-columns:1fr}}
 
-  /* location / CTA */
-  .loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
-  .loc-info h3{font-family:'Gowun Batang',serif;font-size:clamp(26px,3.5vw,36px);margin-bottom:22px}
-  .loc-row{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);align-items:flex-start}
-  .loc-row .k{width:64px;color:var(--pine);font-weight:600;font-size:14px;flex-shrink:0}
-  .loc-row .v{color:var(--ink-soft);font-size:15px}
+  /* location */
+  .loc-sec{background:var(--espresso);color:var(--kraft);border-top:2px solid var(--espresso)}
+  .loc-sec .spec{color:var(--terra)}
+  .loc-sec .spec-line::before{background:var(--terra)}
+  .loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  .loc-info h3{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(28px,3.8vw,40px);line-height:1.06;margin:16px 0 26px;letter-spacing:-.01em}
+  .loc-info h3 em{font-style:italic;color:var(--terra)}
+  .loc-row{display:flex;gap:18px;padding:15px 0;border-bottom:1.5px dashed rgba(231,220,199,.22);align-items:baseline}
+  .loc-row .k{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);width:82px;flex-shrink:0}
+  .loc-row .v{font-size:15px;color:color-mix(in srgb,var(--kraft) 92%,transparent)}
+  .loc-actions{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+  .loc-actions .btn-primary{box-shadow:4px 4px 0 var(--terra-deep)}
+  .loc-actions .btn-primary:hover{box-shadow:6px 6px 0 var(--terra-deep)}
+  .loc-actions .btn-line{background:transparent;color:var(--kraft);border:2px solid var(--kraft)}
+  .loc-actions .btn-line:hover{background:var(--kraft);color:var(--espresso)}
   .map{
-    border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);aspect-ratio:1/1;position:relative;
-    background:linear-gradient(135deg,#e7e0d2,#d6cdb9);
+    border:2px solid var(--kraft);aspect-ratio:1/1;position:relative;overflow:hidden;
+    background:#241d16;
   }
   .map svg{width:100%;height:100%}
-  .map .pin{position:absolute;top:46%;left:50%;width:44px;height:44px;transform:translate(-50%,-100%);color:var(--clay);filter:drop-shadow(0 6px 8px rgba(0,0,0,.25))}
-  @media(max-width:820px){.loc-grid{grid-template-columns:1fr;gap:30px}}
+  .map .pin{position:absolute;top:44%;left:50%;width:46px;height:46px;transform:translate(-50%,-100%);color:var(--terra);filter:drop-shadow(0 6px 6px rgba(0,0,0,.5))}
+  .map-tag{position:absolute;bottom:14px;left:14px;background:var(--paper);color:var(--espresso);font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px;border:1.5px solid var(--espresso)}
+  @media(max-width:820px){.loc-grid{grid-template-columns:1fr;gap:32px}}
 
   /* footer */
-  footer{background:var(--ink);color:color-mix(in srgb, var(--cream) 72%, transparent);padding:60px 0 120px}
-  .foot-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px}
-  footer .brand{color:var(--cream)}
-  footer .fnote{font-size:13.5px;max-width:34ch;margin-top:14px}
-  footer .fcol h4{color:var(--cream);font-size:14px;margin-bottom:14px;font-weight:600}
-  footer .fcol a,footer .fcol p{display:block;font-size:14px;padding:4px 0;transition:.2s}
-  footer .fcol a:hover{color:var(--clay)}
-  .copyr{margin-top:44px;padding-top:24px;border-top:1px solid color-mix(in srgb, var(--cream) 14%, transparent);font-size:12.5px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer{background:var(--kraft-deep);color:var(--espresso-soft);padding:60px 0 120px;border-top:2px solid var(--espresso)}
+  .foot-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:34px}
+  .foot-brand{max-width:30ch}
+  .foot-brand .brand{color:var(--espresso);margin-bottom:12px}
+  .foot-brand .fnote{font-size:14px}
+  .fcol h4{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--terra-deep);margin-bottom:14px;font-weight:700}
+  .fcol a,.fcol p{display:block;font-size:14px;padding:4px 0;transition:.2s}
+  .fcol a:hover{color:var(--terra-deep)}
+  .copyr{margin-top:44px;padding-top:22px;border-top:1.5px dashed var(--line);font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.03em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;color:var(--ink-mute)}
 
-  /* sticky mobile CTA bar */
+  /* sticky mobile bar */
   .cta-bar{
     position:fixed;left:0;right:0;bottom:0;z-index:200;
-    background:color-mix(in srgb, var(--cream) 90%, transparent);backdrop-filter:blur(16px);
-    border-top:1px solid var(--line);padding:11px 14px;
-    display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:9px;
-    box-shadow:0 -8px 30px -12px rgba(35,40,31,.25);
+    background:var(--espresso);border-top:2px solid var(--terra);
+    padding:10px 12px;display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:9px;
   }
   .cta-bar a{
     display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
-    padding:9px 4px;border-radius:13px;font-size:12px;font-weight:600;transition:.2s;
+    padding:9px 4px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;transition:.2s;border-radius:2px;
   }
-  .cta-bar .c-call{background:#fff;color:var(--ink);border:1px solid var(--line)}
-  .cta-bar .c-kko{background:#FEE500;color:#3A2A00}
-  .cta-bar .c-book{background:var(--clay);color:#fff}
+  .cta-bar .c-call{background:transparent;color:var(--kraft);border:1.5px solid rgba(231,220,199,.35)}
+  .cta-bar .c-txt{background:var(--sage);color:#fff}
+  .cta-bar .c-book{background:var(--terra);color:#fff}
   .cta-bar a:active{transform:scale(.96)}
-  .cta-bar svg{width:19px;height:19px}
+  .cta-bar svg{width:18px;height:18px}
   @media(min-width:900px){.cta-bar{display:none}}
+  @media(max-width:899px){footer{padding-bottom:120px}}
 
-  /* reveal animation */
-  .reveal{opacity:0;transform:translateY(26px);transition:.8s cubic-bezier(.2,.7,.2,1)}
+  /* reveal / stamp animation */
+  .reveal{opacity:0;transform:translateY(24px);transition:.75s cubic-bezier(.2,.7,.2,1)}
   .reveal.in{opacity:1;transform:none}
-  .hero .eyebrow,.hero h1,.hero .lede,.hero-actions,.hero-trust{opacity:0;animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
-  .hero h1{animation-delay:.08s}.hero .lede{animation-delay:.18s}
-  .hero-actions{animation-delay:.28s}.hero-trust{animation-delay:.38s}
-  .hero-visual{opacity:0;animation:rise 1s cubic-bezier(.2,.7,.2,1) .2s forwards}
-  @keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
-  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+  .stampin{opacity:0;transform:scale(.7) rotate(-8deg)}
+  .stampin.in{opacity:1;transform:none;transition:.6s cubic-bezier(.2,1.3,.4,1)}
+  .hero-eyebrow,.hero h1,.hero .lede,.hero-actions,.hero-trust{opacity:0;animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+  .hero h1{animation-delay:.08s}.hero .lede{animation-delay:.2s}
+  .hero-actions{animation-delay:.32s}.hero-trust{animation-delay:.44s}
+  .hero-visual{opacity:0;animation:stampdrop 1s cubic-bezier(.2,1.15,.4,1) .18s forwards}
+  @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+  @keyframes stampdrop{from{opacity:0;transform:scale(.86) rotate(-3deg)}to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal,.stampin{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -276,14 +329,23 @@
 <!-- ===== HEADER ===== -->
 <header id="hdr">
   <div class="wrap nav">
-    <a href="#" class="brand"><span class="mark serif">D</span>Driftwood Coffee</a>
+    <a href="#" class="brand">
+      <svg class="seal" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="50" cy="50" r="47" stroke="#2A211A" stroke-width="2.5"/>
+        <circle cx="50" cy="50" r="38" stroke="#B5623A" stroke-width="1.5"/>
+        <text x="50" y="59" text-anchor="middle" font-family="Fraunces,serif" font-weight="600" font-size="38" fill="#2A211A">D</text>
+      </svg>
+      Driftwood Coffee
+    </a>
     <nav class="nav-links">
       <a href="#why">The shop</a>
-      <a href="#price">Menu & more</a>
+      <a href="#price">Menu &amp; more</a>
       <a href="#review">Reviews</a>
       <a href="#location">Find us</a>
     </nav>
-    <a href="#price" class="nav-cta">Find us</a>
+    <a href="#location" class="nav-cta">Find us
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
   </div>
 </header>
 
@@ -291,14 +353,14 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <span class="eyebrow">East Austin · Neighborhood Coffee</span>
-      <h1 class="title serif">Your third place<br><em>on the east side.</em></h1>
+      <div class="hero-eyebrow spec spec-line">East Austin · Neighborhood Coffee</div>
+      <h1 class="title">Your third place<br><em>on the east side.</em></h1>
       <p class="lede">Single-origin beans roasted weekly, mugs you can hold with two hands, and nobody rushing you off the table by the window.</p>
       <div class="hero-actions">
-        <a href="#price" class="btn btn-primary">See menu & hours
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <a href="#price" class="btn btn-primary">See menu &amp; hours
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <a href="#why" class="btn btn-ghost">Book the back room</a>
+        <a href="#location" class="btn btn-ghost">Book the back room</a>
       </div>
       <div class="hero-trust">
         <span class="stars">★★★★★</span>
@@ -307,24 +369,34 @@
     </div>
 
     <div class="hero-visual">
-      <div class="float-badge">
+      <div class="tag-badge tag-open">
         <div class="n serif">6am</div>
         <div class="t">Open early, every day</div>
       </div>
-      <div class="studio-card">
-        <svg viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="310" cy="84" r="46" fill="var(--clay)" opacity=".5"/>
-          <circle cx="82" cy="428" r="30" fill="#fff" opacity=".14"/>
-          <circle cx="200" cy="250" r="150" stroke="rgba(255,255,255,.28)" stroke-width="1.4"/>
-          <circle cx="200" cy="250" r="112" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
-        </svg>
-        <div class="card-glyph serif" aria-hidden="true">D</div>
-        <div class="card-label">
-          <div class="sm">DRIFTWOOD · EAST AUSTIN, TX</div>
-          <div class="lg serif">Slow coffee, fast wifi</div>
+      <div class="bag">
+        <div class="bag-top">
+          <div class="bag-lot">LOT / 002<br>ORIGIN / ETHIOPIA<br>PROCESS / WASHED</div>
+          <svg class="bag-seal" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="50" cy="50" r="47" stroke="#2A211A" stroke-width="2"/>
+            <circle cx="50" cy="50" r="40" stroke="#2A211A" stroke-width="1" stroke-dasharray="2 3"/>
+            <path id="arc" d="M50 50 m-32 0 a32 32 0 1 1 64 0" fill="none"/>
+            <text font-family="Space Mono,monospace" font-size="8.5" letter-spacing="2.6" fill="#9A4E2C" font-weight="700">
+              <textPath href="#arc" startOffset="4%">ROASTED FRESH · SMALL BATCH ·</textPath>
+            </text>
+            <text x="50" y="56" text-anchor="middle" font-family="Fraunces,serif" font-weight="600" font-size="22" fill="#2A211A">EST</text>
+          </svg>
+        </div>
+        <div class="bag-mid">
+          <div class="glyph">D</div>
+          <div class="kind">Driftwood · East Austin, TX</div>
+          <div class="kind-lg serif">Slow coffee, fast wifi</div>
+        </div>
+        <div class="bag-foot">
+          <div class="wt">NET WT · 12 OZ (340g)</div>
+          <div class="roast" title="Medium roast"><i></i><i></i><i></i><i class="off"></i><i class="off"></i></div>
         </div>
       </div>
-      <div class="float-badge2">
+      <div class="tag-badge tag-book">
         <span class="dot"></span>
         <span class="t">Back room bookable</span>
       </div>
@@ -335,8 +407,8 @@
 <!-- ===== MARQUEE ===== -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    <span>· Single-origin espresso</span><span>· Pour-over bar</span><span>· House-baked pastries</span><span>· Bean subscription</span><span>· Back-room events</span><span>· Oat milk everything</span>
-    <span>· Single-origin espresso</span><span>· Pour-over bar</span><span>· House-baked pastries</span><span>· Bean subscription</span><span>· Back-room events</span><span>· Oat milk everything</span>
+    <span>Single-origin espresso</span><span>Pour-over bar</span><span>House-baked pastries</span><span>Bean subscription</span><span>Back-room events</span><span>Oat milk everything</span>
+    <span>Single-origin espresso</span><span>Pour-over bar</span><span>House-baked pastries</span><span>Bean subscription</span><span>Back-room events</span><span>Oat milk everything</span>
   </div>
 </div>
 
@@ -344,26 +416,41 @@
 <section class="pad" id="why">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-tag">Why Driftwood</span>
-      <h2 class="sec-title serif">A coffee shop that remembers you.</h2>
+      <div class="sec-tag spec spec-line">Why Driftwood</div>
+      <h2 class="sec-title">A coffee shop that <em>remembers you.</em></h2>
       <p class="sec-sub">Chains optimize for lines. We optimize for the second visit — your order, your seat, your name.</p>
     </div>
     <div class="why-grid">
       <div class="why-card reveal">
-        <span class="num serif">01</span>
-        <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8h13v7a5 5 0 01-5 5H9a5 5 0 01-5-5V8z"/><path d="M17 9h2a2.5 2.5 0 010 5h-2M8 2v3M12 2v3"/></svg></div>
+        <span class="idx">/ 01</span>
+        <svg class="stamp stampin" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="50" cy="50" r="47" stroke="#2A211A" stroke-width="2.5"/>
+          <circle cx="50" cy="50" r="39" stroke="#B5623A" stroke-width="1.2" stroke-dasharray="3 3"/>
+          <g stroke="#2A211A" stroke-width="3" stroke-linecap="round">
+            <path d="M36 40h26v14a13 13 0 0 1-13 13h0a13 13 0 0 1-13-13z"/>
+            <path d="M62 43h6a5 5 0 0 1 0 10h-6M43 28v6M50 26v6"/>
+          </g>
+        </svg>
         <h3>Roasted this week</h3>
         <p>We roast small batches every Monday. The bag on the shelf is never older than seven days.</p>
       </div>
       <div class="why-card reveal" style="transition-delay:.08s">
-        <span class="num serif">02</span>
-        <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.35-9.5-8.5C.5 9 2.5 5 6 5c2 0 3.5 1.5 6 4 2.5-2.5 4-4 6-4 3.5 0 5.5 4 3.5 7.5C19 16.65 12 21 12 21z"/></svg></div>
+        <span class="idx">/ 02</span>
+        <svg class="stamp stampin" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="50" cy="50" r="47" stroke="#2A211A" stroke-width="2.5"/>
+          <circle cx="50" cy="50" r="39" stroke="#7C8060" stroke-width="1.2" stroke-dasharray="3 3"/>
+          <path d="M50 68s-16-10-16-22a9 9 0 0 1 16-5 9 9 0 0 1 16 5c0 12-16 22-16 22z" stroke="#2A211A" stroke-width="3" stroke-linejoin="round"/>
+        </svg>
         <h3>Stay as long as you like</h3>
         <p>Real mugs, wide tables, outlets at every seat. Laptop hours until 3pm, human hours after.</p>
       </div>
       <div class="why-card reveal" style="transition-delay:.16s">
-        <span class="num serif">03</span>
-        <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l2 7 7 3-7 3-2 7-2-7-7-3 7-3 2-7z"/></svg></div>
+        <span class="idx">/ 03</span>
+        <svg class="stamp stampin" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="50" cy="50" r="47" stroke="#2A211A" stroke-width="2.5"/>
+          <circle cx="50" cy="50" r="39" stroke="#B5623A" stroke-width="1.2" stroke-dasharray="3 3"/>
+          <path d="M50 30l5 14 15 1-11.5 9.5L67 68l-17-8-17 8 8.5-13.5L30 45l15-1z" stroke="#2A211A" stroke-width="3" stroke-linejoin="round"/>
+        </svg>
         <h3>A back room for your people</h3>
         <p>Book clubs, team offsites, birthday pour-overs — a 16-seat room you can reserve free with any catering order.</p>
       </div>
@@ -372,47 +459,49 @@
 </section>
 
 <!-- ===== PRICING ===== -->
-<section class="pad" id="price">
+<section class="pad price-sec" id="price">
   <div class="wrap">
-    <div class="price">
-      <div class="wrap price-inner">
-        <div class="sec-head reveal" style="margin-bottom:34px">
-          <span class="sec-tag">Menu & more</span>
-          <h2 class="sec-title serif">Three ways to make it a habit.</h2>
-        </div>
-        <div class="price-grid">
-          <div class="plan reveal">
-            <div class="tier">Tasting flight</div>
-            <div class="plan-price serif">$12<span class="per"> 3 origins, 20 min</span></div>
-            <ul>
-              <li>Three single-origins, brewed side by side</li>
-              <li>Tasting card to take home</li>
-              <li>Any weekday after 1pm</li>
-            </ul>
-            <a href="#location" class="btn btn-plan">Try a flight</a>
-          </div>
-          <div class="plan featured reveal" style="transition-delay:.08s">
-            <span class="pill">300+ members</span>
-            <div class="tier">Bean subscription</div>
-            <div class="plan-price serif">$22<span class="per"> per month</span></div>
-            <ul>
-              <li>Fresh 12oz bag every 2 weeks</li>
-              <li>Free drip refill with pickup</li>
-              <li>Pause or swap anytime</li>
-            </ul>
-            <a href="#location" class="btn btn-plan">Start subscription</a>
-          </div>
-          <div class="plan reveal" style="transition-delay:.16s">
-            <div class="tier">Back-room events</div>
-            <div class="plan-price serif">$150<span class="per"> 2 hrs · up to 16 people</span></div>
-            <ul>
-              <li>Private 16-seat room</li>
-              <li>Coffee &amp; pastry service</li>
-              <li>Free with $200+ catering</li>
-            </ul>
-            <a href="#location" class="btn btn-plan">Check dates</a>
-          </div>
-        </div>
+    <div class="sec-head reveal">
+      <div class="sec-tag spec spec-line">Menu &amp; more</div>
+      <h2 class="sec-title">Three ways to <em>make it a habit.</em></h2>
+    </div>
+    <div class="price-grid">
+      <div class="ticket reveal">
+        <div class="tier">Tasting flight</div>
+        <div class="amt serif">$12</div>
+        <div class="per">3 origins, 20 min</div>
+        <div class="dash"></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Three single-origins, brewed side by side</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Tasting card to take home</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Any weekday after 1pm</li>
+        </ul>
+        <a href="#location" class="btn btn-tk">Try a flight</a>
+      </div>
+      <div class="ticket featured reveal" style="transition-delay:.08s">
+        <span class="pill">300+ members</span>
+        <div class="tier">Bean subscription</div>
+        <div class="amt serif">$22</div>
+        <div class="per">per month</div>
+        <div class="dash"></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Fresh 12oz bag every 2 weeks</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Free drip refill with pickup</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Pause or swap anytime</li>
+        </ul>
+        <a href="#location" class="btn btn-tk">Start subscription</a>
+      </div>
+      <div class="ticket reveal" style="transition-delay:.16s">
+        <div class="tier">Back-room events</div>
+        <div class="amt serif">$150</div>
+        <div class="per">2 hrs · up to 16 people</div>
+        <div class="dash"></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Private 16-seat room</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Coffee &amp; pastry service</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Free with $200+ catering</li>
+        </ul>
+        <a href="#location" class="btn btn-tk">Check dates</a>
       </div>
     </div>
   </div>
@@ -422,29 +511,29 @@
 <section class="pad" id="review">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-tag">Reviews</span>
-      <h2 class="sec-title serif">What the neighborhood says.</h2>
+      <div class="sec-tag spec spec-line">Reviews</div>
+      <h2 class="sec-title">What the <em>neighborhood</em> says.</h2>
       <p class="sec-sub">Pulled straight from Google reviews.</p>
     </div>
     <div class="rev-grid">
       <div class="rev reveal">
-        <div class="stars">★★★★★</div>
-        <p class="q">“They had my order ready when I walked in on visit three. It&#x27;s the only place I actually feel like a regular.”</p>
-        <div class="who"><span class="av serif">A</span>
+        <div class="quo serif">“</div>
+        <p class="q">They had my order ready when I walked in on visit three. It's the only place I actually feel like a regular.</p>
+        <div class="who"><span class="av">A</span>
           <div><div class="nm">Aaron D.</div><div class="mt">regular · 2 years</div></div>
         </div>
       </div>
       <div class="rev reveal" style="transition-delay:.08s">
-        <div class="stars">★★★★★</div>
-        <p class="q">“Booked the back room for our book club every month. They set up the pour-over bar for us without asking.”</p>
-        <div class="who"><span class="av serif">C</span>
+        <div class="quo serif">“</div>
+        <p class="q">Booked the back room for our book club every month. They set up the pour-over bar for us without asking.</p>
+        <div class="who"><span class="av">C</span>
           <div><div class="nm">Carmen S.</div><div class="mt">back-room host</div></div>
         </div>
       </div>
       <div class="rev reveal" style="transition-delay:.16s">
-        <div class="stars">★★★★★</div>
-        <p class="q">“The subscription ruined grocery store coffee for me forever. Worth it.”</p>
-        <div class="who"><span class="av serif">T</span>
+        <div class="quo serif">“</div>
+        <p class="q">The subscription ruined grocery store coffee for me forever. Worth it.</p>
+        <div class="who"><span class="av">T</span>
           <div><div class="nm">Tom W.</div><div class="mt">subscriber · 14 months</div></div>
         </div>
       </div>
@@ -453,34 +542,38 @@
 </section>
 
 <!-- ===== LOCATION / CONTACT ===== -->
-<section class="pad" id="location" style="background:var(--cream-deep)">
+<section class="pad loc-sec" id="location">
   <div class="wrap loc-grid">
     <div class="loc-info reveal">
-      <h3 class="serif">On E 6th, under the big pecan tree.</h3>
+      <div class="spec spec-line">Find us</div>
+      <h3>On E 6th, under the <em>big pecan tree.</em></h3>
       <div class="loc-row"><span class="k">Address</span><span class="v">2900 E 6th St, Austin, TX (map shown for demo)</span></div>
       <div class="loc-row"><span class="k">Hours</span><span class="v">Every day 6am–6pm · kitchen until 2pm</span></div>
       <div class="loc-row"><span class="k">Phone</span><span class="v">(512) 000-0000</span></div>
       <div class="loc-row"><span class="k">Parking</span><span class="v">Lot behind the building + bike racks</span></div>
-      <div class="hero-actions" style="margin-top:30px">
-        <a href="tel:5120000000" class="btn btn-primary">Call us</a>
-        <a href="sms:5120000000" class="btn btn-ghost">Text us</a>
+      <div class="loc-actions">
+        <a href="tel:5120000000" class="btn btn-primary">Call us
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.4-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg>
+        </a>
+        <a href="sms:5120000000" class="btn btn-line">Text us</a>
       </div>
     </div>
     <div class="map reveal">
       <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <rect width="400" height="400" fill="#e7e0d2"/>
-        <g stroke="#cabfa6" stroke-width="8" opacity=".55">
-          <path d="M0 130 H400" stroke="#d3c8b1"/>
-          <path d="M0 270 H400" stroke="#d3c8b1"/>
-          <path d="M140 0 V400" stroke="#d3c8b1"/>
-          <path d="M290 0 V400" stroke="#d3c8b1"/>
+        <rect width="400" height="400" fill="#241d16"/>
+        <g stroke="#3a3025" stroke-width="10">
+          <path d="M0 132 H400"/><path d="M0 272 H400"/>
+          <path d="M138 0 V400"/><path d="M292 0 V400"/>
         </g>
-        <path d="M0 130 H400" stroke="#c9bda3" stroke-width="14" opacity=".4"/>
-        <rect x="150" y="150" width="120" height="100" rx="6" fill="#dcd2bd"/>
-        <rect x="30" y="290" width="90" height="70" rx="6" fill="#dcd2bd"/>
-        <rect x="300" y="40" width="70" height="70" rx="6" fill="#dcd2bd"/>
+        <path d="M0 132 H400" stroke="#B5623A" stroke-width="3" opacity=".6"/>
+        <path d="M138 0 V400" stroke="#7C8060" stroke-width="3" opacity=".5"/>
+        <rect x="150" y="150" width="120" height="102" rx="4" fill="#332a20"/>
+        <rect x="28" y="292" width="92" height="72" rx="4" fill="#332a20"/>
+        <rect x="302" y="38" width="70" height="72" rx="4" fill="#332a20"/>
+        <circle cx="200" cy="200" r="9" fill="#7C8060"/>
       </svg>
       <svg class="pin" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.4 8 12 8 12s8-6.6 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg>
+      <span class="map-tag">Demo map · not to scale</span>
     </div>
   </div>
 </section>
@@ -489,27 +582,34 @@
 <footer>
   <div class="wrap">
     <div class="foot-grid">
-      <div>
-        <div class="brand serif" style="font-size:20px"><span class="mark serif">D</span>Driftwood Coffee</div>
+      <div class="foot-brand">
+        <a href="#" class="brand">
+          <svg class="seal" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="50" cy="50" r="47" stroke="#2A211A" stroke-width="2.5"/>
+            <circle cx="50" cy="50" r="38" stroke="#B5623A" stroke-width="1.5"/>
+            <text x="50" y="59" text-anchor="middle" font-family="Fraunces,serif" font-weight="600" font-size="38" fill="#2A211A">D</text>
+          </svg>
+          Driftwood Coffee
+        </a>
         <p class="fnote">A neighborhood coffee shop in East Austin. Slow coffee, fast wifi.</p>
       </div>
       <div class="fcol">
         <h4>Quick links</h4>
         <a href="#why">The shop</a>
-        <a href="#price">Menu & more</a>
+        <a href="#price">Menu &amp; more</a>
         <a href="#review">Reviews</a>
         <a href="#location">Find us</a>
       </div>
       <div class="fcol">
-        <h4>Visit & contact</h4>
+        <h4>Visit &amp; contact</h4>
         <a href="tel:5120000000">(512) 000-0000</a>
         <p>Text (512) 000-0000</p>
         <p>Every day 6–6</p>
       </div>
     </div>
     <div class="copyr">
-      <span>© 2026 Driftwood Coffee. This is a fictional demo cafe.</span>
-      <span>Made by <strong>Jason's Consulting</strong> · Landing page demo</span>
+      <span>© 2026 Driftwood Coffee · This is a fictional demo cafe.</span>
+      <span>Made by Jason's Consulting · Landing page demo</span>
     </div>
   </div>
 </footer>
@@ -520,25 +620,23 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.4-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg>
     Call
   </a>
-  <a class="c-kko" href="sms:5120000000">
+  <a class="c-txt" href="sms:5120000000">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7-.2.7-.7 2.6-.8 3-.1.5.2.5.4.4.2-.1 2.6-1.8 3.6-2.5.7.1 1.4.2 2.1.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>
     Text
   </a>
-  <a class="c-book" href="#price">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+  <a class="c-book" href="#location">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.4 8 12 8 12s8-6.6 8-12c0-4.4-3.6-8-8-8z"/><circle cx="12" cy="10" r="2.6"/></svg>
     Find us
   </a>
 </div>
 
 <script>
-  // header shrink
   const hdr=document.getElementById('hdr');
-  addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>20));
-  // reveal on scroll
+  addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>20),{passive:true});
   const io=new IntersectionObserver((es)=>{
     es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
-  },{threshold:.14});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  },{threshold:.16});
+  document.querySelectorAll('.reveal,.stampin').forEach(el=>io.observe(el));
 </script>
 </body>
 </html>

@@ -10,265 +10,313 @@
 <meta property="og:description" content="연남동 프라이빗 헤어살롱. 1:1 얼굴형 진단 커트, 손상 최소 시술. 첫 방문 20% 할인. 지금 예약하세요." />
 <meta property="og:image" content="https://jasonsjo.github.io/AI-business/assets/og-1200x630.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet" />
 <style>
   :root{
-    --cream:#F7F1EE;
-    --cream-deep:#EFE2DB;
-    --ink:#2B2026;
-    --ink-soft:#55424C;
-    --pine:#6E3B4F;
-    --pine-light:#8A5468;
-    --clay:#C98A5B;
-    --clay-deep:#A96F3E;
-    --muted:#93808A;
-    --line:rgba(35,40,31,.12);
-    --shadow:0 20px 60px -24px rgba(35,40,31,.35);
-    --r:18px;
+    --ink:#16130F;          /* near-black */
+    --ink-2:#1F1B16;        /* raised black */
+    --cream:#F4EFE6;        /* cream */
+    --cream-2:#EAE2D3;      /* deeper cream */
+    --clay:#C0784F;         /* single hot accent */
+    --clay-soft:#D69A72;
+    --muted-d:rgba(244,239,230,.58);  /* muted text on dark */
+    --muted-l:rgba(22,19,15,.56);     /* muted text on light */
+    --line-d:rgba(244,239,230,.18);
+    --line-l:rgba(22,19,15,.16);
+    --maxw:1240px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{
     font-family:'Pretendard',sans-serif;
-    color:var(--ink);
-    background:var(--cream);
-    line-height:1.6;
+    background:var(--ink);
+    color:var(--cream);
+    line-height:1.62;
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
   }
-  .serif{font-family:'Gowun Batang',serif}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
   a{color:inherit;text-decoration:none}
   img{max-width:100%;display:block}
+  .pf{font-family:'Playfair Display',serif}
+  .gb{font-family:'Gowun Batang',serif}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,4vw,56px)}
 
-  /* grain overlay */
-  body::before{
-    content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.035;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* film grain */
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:.05;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  /* ---------- header ---------- */
+  /* ============ HEADER ============ */
   header{
     position:fixed;top:0;left:0;right:0;z-index:100;
-    padding:18px 0;transition:.4s ease;
+    transition:background .4s ease, padding .4s ease, border-color .4s ease;
+    border-bottom:1px solid transparent;
+    padding:22px 0;
   }
   header.scrolled{
-    background:color-mix(in srgb, var(--cream) 82%, transparent);
-    backdrop-filter:blur(14px);
-    box-shadow:0 1px 0 var(--line);
-    padding:12px 0;
+    background:color-mix(in srgb, var(--ink) 86%, transparent);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line-d);
+    padding:13px 0;
   }
-  .nav{display:flex;align-items:center;justify-content:space-between}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.02em}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:600}
   .brand .mark{
-    width:34px;height:34px;border-radius:50%;
-    background:conic-gradient(from 210deg,var(--pine),var(--pine-light),var(--clay),var(--pine));
-    display:grid;place-items:center;color:#fff;font-family:'Gowun Batang',serif;font-size:15px;
+    width:34px;height:34px;border:1px solid var(--clay);color:var(--clay);
+    display:grid;place-items:center;font-family:'Gowun Batang',serif;font-size:16px;flex-shrink:0;
   }
-  .nav-links{display:flex;gap:32px;font-size:14px;color:var(--ink-soft);font-weight:500}
-  .nav-links a{position:relative}
-  .nav-links a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:1.5px;background:var(--clay);transition:.3s}
+  .brand .bn{font-family:'Playfair Display',serif;font-size:19px;letter-spacing:.02em}
+  .nav-links{display:flex;gap:34px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-d);font-weight:500}
+  .nav-links a{position:relative;transition:color .25s}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--clay);transition:width .3s}
+  .nav-links a:hover{color:var(--cream)}
   .nav-links a:hover::after{width:100%}
   .nav-cta{
-    background:var(--ink);color:var(--cream);padding:10px 20px;border-radius:100px;
-    font-size:13.5px;font-weight:600;transition:.25s;
+    border:1px solid var(--clay);color:var(--clay);padding:9px 20px;
+    font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;transition:.3s;
   }
-  .nav-cta:hover{background:var(--pine);transform:translateY(-1px)}
-  @media(max-width:820px){.nav-links{display:none}}
+  .nav-cta:hover{background:var(--clay);color:var(--ink)}
+  @media(max-width:880px){.nav-links{display:none}}
 
-  /* ---------- hero ---------- */
-  .hero{
-    position:relative;padding:170px 0 110px;overflow:hidden;
-    background:
-      radial-gradient(120% 90% at 85% -10%, color-mix(in srgb, var(--clay) 16%, transparent), transparent 55%),
-      radial-gradient(90% 80% at -10% 110%, color-mix(in srgb, var(--pine) 18%, transparent), transparent 55%),
-      var(--cream);
+  /* ============ HERO ============ */
+  .hero{position:relative;padding:132px 0 56px;overflow:hidden}
+  .hero-top{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    padding-bottom:20px;border-bottom:1px solid var(--line-d);
+    font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted-d);
   }
-  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:9px;font-size:12.5px;letter-spacing:.16em;
-    text-transform:uppercase;color:var(--pine);font-weight:600;margin-bottom:26px;
+  .hero-top .r{text-align:right;color:var(--clay)}
+  .hero-grid{
+    display:grid;grid-template-columns:1.32fr .9fr;gap:clamp(24px,4vw,60px);
+    align-items:end;padding-top:clamp(26px,5vw,54px);
   }
-  .eyebrow::before{content:"";width:26px;height:1.5px;background:var(--clay)}
-  h1.title{
-    font-size:clamp(38px,5.6vw,68px);line-height:1.08;letter-spacing:-.01em;font-weight:700;
-    color:var(--ink);
+  .kicker{
+    display:inline-flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--clay);font-weight:600;margin-bottom:26px;
   }
-  h1.title em{font-style:normal;color:var(--clay);position:relative;white-space:nowrap}
-  .lede{margin-top:26px;font-size:clamp(16px,2vw,18.5px);color:var(--ink-soft);max-width:38ch}
-  .hero-actions{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap}
+  .kicker::before{content:"";width:38px;height:1px;background:var(--clay)}
+
+  h1.headline{
+    font-family:'Playfair Display',serif;font-weight:800;color:var(--cream);
+    font-size:clamp(64px,15vw,168px);line-height:.86;letter-spacing:-.02em;
+    text-transform:uppercase;position:relative;
+  }
+  h1.headline .l2{display:block;padding-left:.28em}
+  h1.headline em{font-style:italic;font-weight:500;color:var(--clay)}
+  .headline-kr{
+    font-family:'Gowun Batang',serif;font-size:clamp(22px,3.4vw,34px);line-height:1.4;
+    margin-top:32px;color:var(--cream);font-weight:400;max-width:20ch;
+  }
+  .headline-kr em{font-style:normal;color:var(--clay);border-bottom:2px solid var(--clay);padding-bottom:2px}
+  .lede{margin-top:22px;font-size:clamp(15px,2vw,17px);color:var(--muted-d);max-width:40ch}
+
+  .hero-actions{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap}
   .btn{
-    display:inline-flex;align-items:center;gap:9px;padding:15px 28px;border-radius:100px;
-    font-weight:600;font-size:15px;transition:.28s cubic-bezier(.2,.7,.3,1);cursor:pointer;border:none;
+    display:inline-flex;align-items:center;gap:11px;padding:16px 30px;
+    font-size:13px;letter-spacing:.06em;font-weight:600;cursor:pointer;border:none;
+    transition:transform .3s cubic-bezier(.2,.7,.3,1), background .3s, color .3s;
   }
-  .btn-primary{background:var(--clay);color:#fff;box-shadow:0 12px 28px -12px color-mix(in srgb, var(--clay-deep) 70%, transparent)}
-  .btn-primary:hover{background:var(--clay-deep);transform:translateY(-2px)}
-  .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
-  .btn-ghost:hover{border-color:var(--ink);background:rgba(35,40,31,.03)}
-  .hero-trust{margin-top:34px;display:flex;align-items:center;gap:18px;font-size:13.5px;color:var(--muted)}
-  .stars{color:var(--clay);letter-spacing:2px}
+  .btn-primary{background:var(--clay);color:var(--ink)}
+  .btn-primary:hover{background:var(--clay-soft);transform:translateY(-3px)}
+  .btn-ghost{background:transparent;color:var(--cream);border:1px solid var(--line-d)}
+  .btn-ghost:hover{border-color:var(--cream);transform:translateY(-3px)}
+  .hero-trust{margin-top:30px;display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--muted-d);letter-spacing:.02em}
+  .hero-trust .stars{color:var(--clay);letter-spacing:3px;font-size:13px}
+  .hero-trust strong{color:var(--cream);font-weight:700}
 
-  /* hero visual card */
-  .hero-visual{position:relative}
-  .studio-card{
-    position:relative;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);
-    aspect-ratio:4/5;
+  /* portrait editorial panel */
+  .plate{position:relative;align-self:stretch}
+  .plate-inner{
+    position:relative;aspect-ratio:3/4;overflow:hidden;
     background:
-      linear-gradient(155deg, color-mix(in srgb, var(--pine) 94%, black), var(--pine-light) 55%, color-mix(in srgb, var(--pine) 96%, black));
+      radial-gradient(120% 90% at 80% 8%, color-mix(in srgb,var(--clay) 40%, transparent), transparent 55%),
+      linear-gradient(160deg,#241d16,#171310 70%);
+    border:1px solid var(--line-d);
   }
-  .studio-card svg{position:absolute;inset:0;width:100%;height:100%}
-  .card-glyph{
-    position:absolute;inset:0;display:grid;place-items:center;
-    font-family:'Gowun Batang',serif;font-size:min(46vw,240px);color:rgba(255,255,255,.16);
-    user-select:none;line-height:1;
+  .plate-inner svg.rings{position:absolute;inset:0;width:100%;height:100%}
+  .plate-glyph{
+    position:absolute;inset:0;display:grid;place-items:center;line-height:1;
+    font-family:'Gowun Batang',serif;font-size:min(52vw,300px);
+    color:transparent;-webkit-text-stroke:1px rgba(214,154,114,.5);user-select:none;
   }
-  .card-label{
-    position:absolute;left:22px;bottom:22px;right:22px;color:#fff;
+  .plate-cap{position:absolute;left:20px;right:20px;bottom:20px}
+  .plate-cap .sm{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--clay)}
+  .plate-cap .lg{font-family:'Gowun Batang',serif;font-size:22px;margin-top:8px;color:var(--cream)}
+  .plate-no{
+    position:absolute;top:16px;left:18px;font-family:'Playfair Display',serif;font-style:italic;
+    font-size:15px;color:var(--muted-d);
   }
-  .card-label .sm{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.8}
-  .card-label .lg{font-family:'Gowun Batang',serif;font-size:26px;margin-top:6px}
-  .float-badge{
-    position:absolute;top:-18px;left:-22px;z-index:4;background:var(--cream);border:1px solid var(--line);
-    border-radius:14px;padding:14px 18px;box-shadow:var(--shadow);
+  .badge{
+    position:absolute;z-index:5;background:var(--cream);color:var(--ink);
+    padding:12px 16px;box-shadow:0 24px 50px -20px rgba(0,0,0,.7);
   }
-  .float-badge .n{font-family:'Gowun Batang',serif;font-size:26px;color:var(--pine);line-height:1}
-  .float-badge .t{font-size:12px;color:var(--muted);margin-top:3px}
-  .float-badge2{
-    position:absolute;bottom:26px;right:-24px;z-index:4;background:var(--cream);border:1px solid var(--line);
-    border-radius:14px;padding:12px 16px;box-shadow:var(--shadow);display:flex;gap:10px;align-items:center;
+  .badge.b1{top:-16px;left:-18px}
+  .badge.b1 .n{font-family:'Playfair Display',serif;font-weight:700;font-size:26px;line-height:1;color:var(--clay)}
+  .badge.b1 .t{font-size:11px;letter-spacing:.04em;color:var(--muted-l);margin-top:3px}
+  .badge.b2{bottom:30px;right:-18px;display:flex;align-items:center;gap:9px}
+  .badge.b2 .dot{width:8px;height:8px;border-radius:50%;background:#3f7d4f;box-shadow:0 0 0 4px rgba(63,125,79,.22)}
+  .badge.b2 .t{font-size:12px;font-weight:600}
+  @media(max-width:900px){
+    .hero-grid{grid-template-columns:1fr;gap:44px;align-items:start}
+    .plate{max-width:360px;margin:8px auto 0;width:100%}
+    .badge.b1,.badge.b2{display:none}
   }
-  .float-badge2 .dot{width:9px;height:9px;border-radius:50%;background:#5aa469;box-shadow:0 0 0 4px rgba(90,164,105,.2)}
-  .float-badge2 .t{font-size:13px;font-weight:600}
 
-  @media(max-width:860px){
-    .hero{padding:132px 0 80px}
-    .hero-grid{grid-template-columns:1fr;gap:44px}
-    .hero-visual{max-width:340px;margin:6px auto 0}
-    .float-badge,.float-badge2{display:none}
+  /* ============ MARQUEE ============ */
+  .marquee{
+    border-top:1px solid var(--line-d);border-bottom:1px solid var(--line-d);
+    padding:16px 0;overflow:hidden;background:var(--ink-2);
   }
-
-  /* ---------- marquee ---------- */
-  .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;overflow:hidden;background:var(--cream-deep)}
-  .marquee-track{display:flex;gap:56px;white-space:nowrap;animation:slide 26s linear infinite;font-family:'Gowun Batang',serif;font-size:19px;color:var(--pine)}
-  .marquee-track span{opacity:.75}
+  .mq-track{display:flex;gap:0;white-space:nowrap;width:max-content;animation:slide 32s linear infinite}
+  .mq-track .it{
+    font-family:'Playfair Display',serif;font-style:italic;font-size:20px;
+    color:var(--cream);padding:0 30px;position:relative;
+  }
+  .mq-track .it::before{content:"✦";color:var(--clay);font-style:normal;margin-right:34px;font-size:12px;vertical-align:middle}
   @keyframes slide{to{transform:translateX(-50%)}}
 
-  /* ---------- section base ---------- */
-  section.pad{padding:96px 0}
-  .sec-head{max-width:620px;margin-bottom:56px}
-  .sec-tag{font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--clay);font-weight:600}
-  .sec-title{font-size:clamp(28px,4vw,42px);line-height:1.16;margin-top:14px;font-weight:700;letter-spacing:-.01em}
-  .sec-sub{margin-top:16px;color:var(--ink-soft);font-size:16.5px}
+  /* ============ SECTION SCAFFOLD ============ */
+  section.blk{padding:clamp(72px,11vw,138px) 0}
+  .light{background:var(--cream);color:var(--ink)}
+  .dark{background:var(--ink);color:var(--cream)}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(44px,7vw,72px)}
+  .sec-head .hl{max-width:22ch}
+  .sec-tag{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--clay);font-weight:600;display:block;margin-bottom:20px}
+  .sec-title{font-family:'Gowun Batang',serif;font-size:clamp(28px,4.8vw,52px);line-height:1.18;letter-spacing:-.01em;font-weight:700}
+  .sec-sub{color:inherit;opacity:.62;font-size:15.5px;max-width:40ch;padding-bottom:6px}
+  .idx-big{font-family:'Playfair Display',serif;font-size:clamp(60px,10vw,120px);font-weight:800;line-height:.8;color:transparent;-webkit-text-stroke:1px currentColor;opacity:.2}
 
-  /* why cards */
-  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-  .why-card{
-    background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:34px 28px;
-    transition:.35s;position:relative;overflow:hidden;
+  /* ============ WHY (light) ============ */
+  .why-list{display:grid;gap:0;border-top:1px solid var(--line-l)}
+  .why-row{
+    display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,5vw,64px);align-items:baseline;
+    padding:clamp(30px,5vw,52px) 0;border-bottom:1px solid var(--line-l);
+    transition:padding-left .5s cubic-bezier(.2,.7,.3,1);
   }
-  .why-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
-  .why-card .ico{
-    width:52px;height:52px;border-radius:14px;background:var(--cream);display:grid;place-items:center;
-    margin-bottom:22px;color:var(--pine);
+  .why-row:hover{padding-left:14px}
+  .why-no{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(44px,8vw,92px);line-height:.8;color:var(--clay)}
+  .why-body{display:grid;grid-template-columns:1fr 1.35fr;gap:clamp(14px,4vw,48px);align-items:baseline}
+  .why-body h3{font-family:'Gowun Batang',serif;font-size:clamp(21px,2.8vw,28px);font-weight:700;line-height:1.3}
+  .why-body p{font-size:15px;color:var(--muted-l);line-height:1.7}
+  @media(max-width:760px){
+    .why-row{grid-template-columns:1fr;gap:16px}
+    .why-body{grid-template-columns:1fr;gap:10px}
   }
-  .why-card h3{font-family:'Gowun Batang',serif;font-size:22px;margin-bottom:10px}
-  .why-card p{color:var(--ink-soft);font-size:15px}
-  .why-card .num{position:absolute;top:20px;right:24px;font-family:'Gowun Batang',serif;font-size:15px;color:var(--line)}
-  @media(max-width:820px){.why-grid{grid-template-columns:1fr}}
 
-  /* pricing */
-  .price{background:var(--pine);color:var(--cream);border-radius:28px}
-  .price-inner{padding:70px 0}
-  .price .sec-title,.price .sec-tag{color:inherit}
-  .price .sec-tag{color:color-mix(in srgb, var(--clay) 55%, white)}
-  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:12px}
+  /* ============ PRICING (dark) ============ */
+  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line-d)}
   .plan{
-    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:var(--r);
-    padding:32px 28px;transition:.3s;position:relative;
+    padding:clamp(30px,3vw,44px) clamp(20px,2.4vw,34px);
+    border-bottom:1px solid var(--line-d);border-right:1px solid var(--line-d);
+    position:relative;transition:background .4s;display:flex;flex-direction:column;
   }
-  .plan.featured{background:var(--cream);color:var(--ink)}
-  .plan.featured .plan-price{color:var(--clay-deep)}
-  .plan:hover{transform:translateY(-4px)}
-  .plan .tier{font-size:14px;letter-spacing:.08em;text-transform:uppercase;opacity:.85;font-weight:600}
-  .plan .plan-price{font-family:'Gowun Batang',serif;font-size:38px;margin:14px 0 4px;color:#fff}
-  .plan .per{font-size:13px;opacity:.7}
-  .plan ul{list-style:none;margin:22px 0 26px;display:flex;flex-direction:column;gap:11px}
-  .plan li{display:flex;gap:10px;font-size:14.5px;align-items:flex-start}
-  .plan li::before{content:"✓";color:var(--clay);font-weight:700}
-  .plan.featured li::before{color:var(--pine)}
-  .plan .pill{position:absolute;top:-12px;right:24px;background:var(--clay);color:#fff;font-size:12px;font-weight:600;padding:5px 13px;border-radius:100px}
-  .plan .btn{width:100%;justify-content:center}
-  .plan .btn-plan{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2)}
-  .plan.featured .btn-plan{background:var(--ink);color:var(--cream);border:none}
-  @media(max-width:820px){.price-grid{grid-template-columns:1fr}}
-
-  /* reviews */
-  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-  .rev{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:30px 28px;display:flex;flex-direction:column}
-  .rev .q{font-family:'Gowun Batang',serif;font-size:17px;line-height:1.55;color:var(--ink);flex:1}
-  .rev .who{margin-top:22px;display:flex;align-items:center;gap:12px}
-  .rev .av{width:42px;height:42px;border-radius:50%;background:conic-gradient(from 140deg,var(--clay),var(--pine-light));display:grid;place-items:center;color:#fff;font-family:'Gowun Batang',serif}
-  .rev .who .nm{font-weight:600;font-size:14.5px}
-  .rev .who .mt{font-size:12.5px;color:var(--muted)}
-  .rev .stars{margin-bottom:16px;font-size:15px}
-  @media(max-width:820px){.rev-grid{grid-template-columns:1fr}}
-
-  /* location / CTA */
-  .loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
-  .loc-info h3{font-family:'Gowun Batang',serif;font-size:clamp(26px,3.5vw,36px);margin-bottom:22px}
-  .loc-row{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);align-items:flex-start}
-  .loc-row .k{width:64px;color:var(--pine);font-weight:600;font-size:14px;flex-shrink:0}
-  .loc-row .v{color:var(--ink-soft);font-size:15px}
-  .map{
-    border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);aspect-ratio:1/1;position:relative;
-    background:linear-gradient(135deg,#e7e0d2,#d6cdb9);
+  .plan:first-child{border-left:1px solid var(--line-d)}
+  .plan:hover{background:var(--ink-2)}
+  .plan.feat{background:var(--clay);color:var(--ink)}
+  .plan.feat:hover{background:var(--clay)}
+  .plan-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px}
+  .plan .pno{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;opacity:.55}
+  .plan .tier{font-family:'Gowun Batang',serif;font-size:24px;font-weight:700}
+  .plan .pill{font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;background:var(--ink);color:var(--clay);padding:5px 11px}
+  .plan-price{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(38px,5vw,54px);line-height:1;letter-spacing:-.01em}
+  .plan.feat .plan-price{color:var(--ink)}
+  .plan:not(.feat) .plan-price{color:var(--cream)}
+  .plan .per{display:block;font-family:'Pretendard',sans-serif;font-size:12.5px;letter-spacing:.02em;opacity:.62;margin-top:10px;font-weight:400}
+  .plan ul{list-style:none;margin:26px 0 30px;display:flex;flex-direction:column;gap:13px;flex:1}
+  .plan li{display:flex;gap:11px;font-size:14px;align-items:flex-start;line-height:1.5}
+  .plan li::before{content:"—";color:var(--clay);flex-shrink:0}
+  .plan.feat li::before{color:var(--ink)}
+  .plan .btn-plan{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 18px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+    border:1px solid var(--line-d);transition:.3s;
   }
-  .map svg{width:100%;height:100%}
-  .map .pin{position:absolute;top:46%;left:50%;width:44px;height:44px;transform:translate(-50%,-100%);color:var(--clay);filter:drop-shadow(0 6px 8px rgba(0,0,0,.25))}
-  @media(max-width:820px){.loc-grid{grid-template-columns:1fr;gap:30px}}
+  .plan:not(.feat) .btn-plan:hover{background:var(--clay);color:var(--ink);border-color:var(--clay)}
+  .plan.feat .btn-plan{border-color:rgba(22,19,15,.35)}
+  .plan.feat .btn-plan:hover{background:var(--ink);color:var(--clay)}
+  @media(max-width:820px){
+    .price-grid{grid-template-columns:1fr}
+    .plan{border-left:1px solid var(--line-d)}
+  }
 
-  /* footer */
-  footer{background:var(--ink);color:color-mix(in srgb, var(--cream) 72%, transparent);padding:60px 0 120px}
-  .foot-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px}
-  footer .brand{color:var(--cream)}
-  footer .fnote{font-size:13.5px;max-width:34ch;margin-top:14px}
-  footer .fcol h4{color:var(--cream);font-size:14px;margin-bottom:14px;font-weight:600}
-  footer .fcol a,footer .fcol p{display:block;font-size:14px;padding:4px 0;transition:.2s}
-  footer .fcol a:hover{color:var(--clay)}
-  .copyr{margin-top:44px;padding-top:24px;border-top:1px solid color-mix(in srgb, var(--cream) 14%, transparent);font-size:12.5px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  /* ============ REVIEWS (light) ============ */
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,2.4vw,34px)}
+  .rev{border-top:2px solid var(--ink);padding-top:26px;display:flex;flex-direction:column}
+  .rev .qno{font-family:'Playfair Display',serif;font-weight:800;font-size:60px;line-height:.6;color:var(--clay);margin-bottom:20px}
+  .rev .q{font-family:'Gowun Batang',serif;font-size:17px;line-height:1.66;color:var(--ink);flex:1}
+  .rev .stars{color:var(--clay);letter-spacing:2px;font-size:13px;margin-top:22px}
+  .rev .who{margin-top:14px;display:flex;align-items:center;gap:12px}
+  .rev .av{width:40px;height:40px;border:1px solid var(--line-l);display:grid;place-items:center;font-family:'Gowun Batang',serif;color:var(--clay);flex-shrink:0}
+  .rev .nm{font-weight:700;font-size:14px}
+  .rev .mt{font-size:12px;color:var(--muted-l)}
+  @media(max-width:820px){.rev-grid{grid-template-columns:1fr;gap:0}
+    .rev{padding:26px 0 30px;border-bottom:0}
+    .rev+.rev{border-top:1px solid var(--line-l)}
+  }
 
-  /* sticky mobile CTA bar */
+  /* ============ LOCATION (dark) ============ */
+  .loc-grid{display:grid;grid-template-columns:1fr .82fr;gap:clamp(30px,5vw,64px);align-items:center}
+  .loc-info h3{font-family:'Gowun Batang',serif;font-size:clamp(26px,4vw,40px);line-height:1.25;margin-bottom:30px;font-weight:700}
+  .loc-row{display:grid;grid-template-columns:80px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--line-d);align-items:baseline}
+  .loc-row .k{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--clay);font-weight:600}
+  .loc-row .v{color:var(--muted-d);font-size:14.5px}
+  .loc-actions{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap}
+  .map{position:relative;aspect-ratio:4/5;overflow:hidden;border:1px solid var(--line-d)}
+  .map svg{width:100%;height:100%;display:block}
+  .map .pin{position:absolute;top:44%;left:52%;width:40px;height:40px;transform:translate(-50%,-100%);color:var(--clay);filter:drop-shadow(0 8px 10px rgba(0,0,0,.5))}
+  .map .mtag{position:absolute;left:16px;bottom:16px;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--clay)}
+  @media(max-width:820px){.loc-grid{grid-template-columns:1fr;gap:36px}
+    .map{aspect-ratio:5/4}
+  }
+
+  /* ============ FOOTER ============ */
+  footer{background:var(--ink-2);color:var(--muted-d);padding:clamp(64px,8vw,96px) 0 130px;border-top:1px solid var(--line-d)}
+  .foot-word{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(48px,13vw,150px);line-height:.86;text-transform:uppercase;letter-spacing:-.02em;color:var(--cream);margin-bottom:44px}
+  .foot-word em{font-style:italic;font-weight:500;color:var(--clay)}
+  .foot-cols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px;padding-top:40px;border-top:1px solid var(--line-d)}
+  .foot-cols .fnote{max-width:30ch;font-size:14px;line-height:1.7}
+  .foot-cols h4{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--clay);margin-bottom:16px;font-weight:600}
+  .foot-cols a,.foot-cols p{display:block;font-size:14px;padding:5px 0;transition:color .25s}
+  .foot-cols a:hover{color:var(--cream)}
+  .copyr{margin-top:48px;padding-top:22px;border-top:1px solid var(--line-d);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:11.5px;letter-spacing:.04em;color:var(--muted-d)}
+  @media(max-width:760px){.foot-cols{grid-template-columns:1fr 1fr;gap:26px}.foot-cols .fnote-col{grid-column:1/-1}}
+
+  /* ============ STICKY MOBILE BAR ============ */
   .cta-bar{
     position:fixed;left:0;right:0;bottom:0;z-index:200;
-    background:color-mix(in srgb, var(--cream) 90%, transparent);backdrop-filter:blur(16px);
-    border-top:1px solid var(--line);padding:11px 14px;
-    display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:9px;
-    box-shadow:0 -8px 30px -12px rgba(35,40,31,.25);
+    background:color-mix(in srgb,var(--ink) 92%, transparent);backdrop-filter:blur(14px);
+    border-top:1px solid var(--line-d);padding:10px 12px;
+    display:grid;grid-template-columns:1fr 1.4fr;gap:10px;
   }
   .cta-bar a{
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
-    padding:9px 4px;border-radius:13px;font-size:12px;font-weight:600;transition:.2s;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    padding:14px 8px;font-size:13px;font-weight:600;letter-spacing:.04em;transition:.2s;
   }
-  .cta-bar .c-call{background:#fff;color:var(--ink);border:1px solid var(--line)}
-  .cta-bar .c-kko{background:#FEE500;color:#3A2A00}
-  .cta-bar .c-book{background:var(--clay);color:#fff}
-  .cta-bar a:active{transform:scale(.96)}
-  .cta-bar svg{width:19px;height:19px}
+  .cta-bar .c-call{background:transparent;color:var(--cream);border:1px solid var(--line-d)}
+  .cta-bar .c-book{background:var(--clay);color:var(--ink)}
+  .cta-bar a:active{transform:scale(.97)}
+  .cta-bar svg{width:17px;height:17px}
   @media(min-width:900px){.cta-bar{display:none}}
 
-  /* reveal animation */
-  .reveal{opacity:0;transform:translateY(26px);transition:.8s cubic-bezier(.2,.7,.2,1)}
+  /* ============ MOTION ============ */
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1)}
   .reveal.in{opacity:1;transform:none}
-  .hero .eyebrow,.hero h1,.hero .lede,.hero-actions,.hero-trust{opacity:0;animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
-  .hero h1{animation-delay:.08s}.hero .lede{animation-delay:.18s}
-  .hero-actions{animation-delay:.28s}.hero-trust{animation-delay:.38s}
-  .hero-visual{opacity:0;animation:rise 1s cubic-bezier(.2,.7,.2,1) .2s forwards}
-  @keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
-  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+  /* hero staggered load */
+  .anim{opacity:0;animation:rise 1s cubic-bezier(.2,.75,.25,1) forwards}
+  .d1{animation-delay:.05s}.d2{animation-delay:.16s}.d3{animation-delay:.28s}
+  .d4{animation-delay:.40s}.d5{animation-delay:.52s}.d6{animation-delay:.64s}.d7{animation-delay:.30s}
+  @keyframes rise{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+  .clip{overflow:hidden}
+  .line-up{display:block;opacity:0;animation:lineUp 1s cubic-bezier(.2,.8,.2,1) forwards}
+  @keyframes lineUp{from{opacity:0;transform:translateY(105%)}to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .reveal,.anim,.line-up{opacity:1!important;transform:none!important}
+  }
 </style>
 </head>
 <body>
@@ -276,7 +324,7 @@
 <!-- ===== HEADER ===== -->
 <header id="hdr">
   <div class="wrap nav">
-    <a href="#" class="brand"><span class="mark serif">溫</span>살롱 드 온</a>
+    <a href="#" class="brand"><span class="mark">溫</span><span class="bn">Salon de On</span></a>
     <nav class="nav-links">
       <a href="#why">살롱 소개</a>
       <a href="#price">시술 안내</a>
@@ -289,44 +337,54 @@
 
 <!-- ===== HERO ===== -->
 <section class="hero">
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <span class="eyebrow">연남동 · 프라이빗 헤어살롱</span>
-      <h1 class="title serif">유행 말고,<br><em>나에게 어울리는</em> 머리.</h1>
-      <p class="lede">사진 속 연예인 머리가 아니라, 당신의 얼굴형·모질·라이프스타일에 맞는 스타일을 찾아드립니다.</p>
-      <div class="hero-actions">
-        <a href="#price" class="btn btn-primary">첫 방문 20% 할인 예약
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <a href="#why" class="btn btn-ghost">살롱 둘러보기</a>
-      </div>
-      <div class="hero-trust">
-        <span class="stars">★★★★★</span>
-        <span>네이버 리뷰 <strong>4.9</strong> · 재방문율 <strong>89%</strong></span>
-      </div>
+  <div class="wrap">
+    <div class="hero-top anim d1">
+      <span>Issue Nº 01 — 연남동 · 프라이빗 헤어살롱</span>
+      <span class="r">Seoul · Yeonnam Lookbook</span>
     </div>
-
-    <div class="hero-visual">
-      <div class="float-badge">
-        <div class="n serif">1:1</div>
-        <div class="t">디자이너 전담제</div>
-      </div>
-      <div class="studio-card">
-        <svg viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="310" cy="84" r="46" fill="var(--clay)" opacity=".5"/>
-          <circle cx="82" cy="428" r="30" fill="#fff" opacity=".14"/>
-          <circle cx="200" cy="250" r="150" stroke="rgba(255,255,255,.28)" stroke-width="1.4"/>
-          <circle cx="200" cy="250" r="112" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
-        </svg>
-        <div class="card-glyph serif" aria-hidden="true">溫</div>
-        <div class="card-label">
-          <div class="sm">SALON DE ON · YEONNAM</div>
-          <div class="lg serif">온기가 머무는 살롱</div>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="kicker anim d2">연남동 · 프라이빗 헤어살롱</span>
+        <h1 class="headline">
+          <span class="clip"><span class="line-up d2">Salon</span></span>
+          <span class="clip"><span class="line-up l2 d3">de <em>On</em></span></span>
+        </h1>
+        <p class="headline-kr anim d4">유행 말고,<br><em>나에게 어울리는</em> 머리.</p>
+        <p class="lede anim d5">사진 속 연예인 머리가 아니라, 당신의 얼굴형·모질·라이프스타일에 맞는 스타일을 찾아드립니다.</p>
+        <div class="hero-actions anim d6">
+          <a href="#price" class="btn btn-primary">첫 방문 20% 할인 예약
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#why" class="btn btn-ghost">살롱 둘러보기</a>
+        </div>
+        <div class="hero-trust anim d6">
+          <span class="stars">★★★★★</span>
+          <span>네이버 리뷰 <strong>4.9</strong> · 재방문율 <strong>89%</strong></span>
         </div>
       </div>
-      <div class="float-badge2">
-        <span class="dot"></span>
-        <span class="t">오늘 예약 가능</span>
+
+      <div class="plate anim d7">
+        <div class="badge b1">
+          <div class="n">1:1</div>
+          <div class="t">디자이너 전담제</div>
+        </div>
+        <div class="plate-inner">
+          <svg class="rings" viewBox="0 0 400 533" fill="none" aria-hidden="true">
+            <circle cx="200" cy="255" r="168" stroke="rgba(214,154,114,.28)" stroke-width="1"/>
+            <circle cx="200" cy="255" r="120" stroke="rgba(214,154,114,.18)" stroke-width="1"/>
+            <circle cx="320" cy="90" r="40" fill="rgba(192,120,79,.35)"/>
+          </svg>
+          <div class="plate-glyph" aria-hidden="true">溫</div>
+          <div class="plate-no pf">Nº 01</div>
+          <div class="plate-cap">
+            <div class="sm">SALON DE ON · YEONNAM</div>
+            <div class="lg">온기가 머무는 살롱</div>
+          </div>
+        </div>
+        <div class="badge b2">
+          <span class="dot"></span>
+          <span class="t">오늘 예약 가능</span>
+        </div>
       </div>
     </div>
   </div>
@@ -334,117 +392,149 @@
 
 <!-- ===== MARQUEE ===== -->
 <div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    <span>· 얼굴형 진단 커트</span><span>· 손상 최소 염색</span><span>· 클리닉 펌</span><span>· 두피 케어</span><span>· 남성 커트</span><span>· 웨딩 스타일링</span>
-    <span>· 얼굴형 진단 커트</span><span>· 손상 최소 염색</span><span>· 클리닉 펌</span><span>· 두피 케어</span><span>· 남성 커트</span><span>· 웨딩 스타일링</span>
+  <div class="mq-track">
+    <span class="it">얼굴형 진단 커트</span><span class="it">손상 최소 염색</span><span class="it">클리닉 펌</span><span class="it">두피 케어</span><span class="it">남성 커트</span><span class="it">웨딩 스타일링</span>
+    <span class="it">얼굴형 진단 커트</span><span class="it">손상 최소 염색</span><span class="it">클리닉 펌</span><span class="it">두피 케어</span><span class="it">남성 커트</span><span class="it">웨딩 스타일링</span>
   </div>
 </div>
 
-<!-- ===== WHY ===== -->
-<section class="pad" id="why">
+<!-- ===== WHY (light) ===== -->
+<section class="blk light" id="why">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-tag">Why 살롱 드 온</span>
-      <h2 class="sec-title serif">머리 망치고 우는 날, 없게 해드릴게요.</h2>
+      <div class="hl">
+        <span class="sec-tag">Why 살롱 드 온</span>
+        <h2 class="sec-title">머리 망치고 우는 날,<br>없게 해드릴게요.</h2>
+      </div>
       <p class="sec-sub">시술 전 상담 20분. 원하는 것과 어울리는 것 사이에서 가장 좋은 답을 함께 찾습니다.</p>
     </div>
-    <div class="why-grid">
-      <div class="why-card reveal">
-        <span class="num serif">01</span>
-        <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div>
-        <h3>얼굴형 진단 커트</h3>
-        <p>얼굴형·두상·모류를 진단하고 어울리는 라인을 제안합니다. 자르고 후회하는 일이 없도록.</p>
-      </div>
-      <div class="why-card reveal" style="transition-delay:.08s">
-        <span class="num serif">02</span>
-        <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20C4 9 10 4 21 4c0 11-5 17-16 17"/><path d="M4 20c4-6 8-9 13-11"/></svg></div>
-        <h3>손상 최소 시술</h3>
-        <p>저자극 약제와 전처리 케어로 모발 손상을 최소화합니다. 시술 후 홈케어 루틴까지 안내.</p>
-      </div>
-      <div class="why-card reveal" style="transition-delay:.16s">
-        <span class="num serif">03</span>
-        <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
-        <h3>100% 예약제</h3>
-        <p>기다림 없이, 옆자리 눈치 없이. 예약 시간은 온전히 당신만을 위한 시간입니다.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== PRICING ===== -->
-<section class="pad" id="price">
-  <div class="wrap">
-    <div class="price">
-      <div class="wrap price-inner">
-        <div class="sec-head reveal" style="margin-bottom:34px">
-          <span class="sec-tag">Menu</span>
-          <h2 class="sec-title serif">첫 방문은 20% 할인됩니다.</h2>
+    <div class="why-list">
+      <div class="why-row reveal">
+        <span class="why-no">01</span>
+        <div class="why-body">
+          <h3>얼굴형 진단 커트</h3>
+          <p>얼굴형·두상·모류를 진단하고 어울리는 라인을 제안합니다. 자르고 후회하는 일이 없도록.</p>
         </div>
-        <div class="price-grid">
-          <div class="plan reveal">
-            <div class="tier">커트</div>
-            <div class="plan-price serif">35,000<span class="per"> 원 / 진단 상담 포함</span></div>
-            <ul>
-              <li>얼굴형 진단 20분 포함</li>
-              <li>샴푸·스타일링 포함</li>
-              <li>남성 커트 28,000원</li>
-            </ul>
-            <a href="#location" class="btn btn-plan">커트 예약하기</a>
-          </div>
-          <div class="plan featured reveal" style="transition-delay:.08s">
-            <span class="pill">인기</span>
-            <div class="tier">염색</div>
-            <div class="plan-price serif">88,000<span class="per"> 원 부터 / 기장별 상이</span></div>
-            <ul>
-              <li>저자극 약제 사용</li>
-              <li>전처리 케어 포함</li>
-              <li>뿌리 염색 55,000원</li>
-            </ul>
-            <a href="#location" class="btn btn-plan">염색 예약하기</a>
-          </div>
-          <div class="plan reveal" style="transition-delay:.16s">
-            <div class="tier">클리닉 펌</div>
-            <div class="plan-price serif">130,000<span class="per"> 원 부터 / 기장별 상이</span></div>
-            <ul>
-              <li>모발 진단 후 약제 선택</li>
-              <li>열손상 최소 시스템</li>
-              <li>홈케어 가이드 제공</li>
-            </ul>
-            <a href="#location" class="btn btn-plan">상담 후 예약하기</a>
-          </div>
+      </div>
+      <div class="why-row reveal">
+        <span class="why-no">02</span>
+        <div class="why-body">
+          <h3>손상 최소 시술</h3>
+          <p>저자극 약제와 전처리 케어로 모발 손상을 최소화합니다. 시술 후 홈케어 루틴까지 안내.</p>
+        </div>
+      </div>
+      <div class="why-row reveal">
+        <span class="why-no">03</span>
+        <div class="why-body">
+          <h3>100% 예약제</h3>
+          <p>기다림 없이, 옆자리 눈치 없이. 예약 시간은 온전히 당신만을 위한 시간입니다.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== REVIEWS ===== -->
-<section class="pad" id="review">
+<!-- ===== PRICING (dark) ===== -->
+<section class="blk dark" id="price">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-tag">Reviews</span>
-      <h2 class="sec-title serif">단골이 많은 데는 이유가 있어요.</h2>
+      <div class="hl">
+        <span class="sec-tag">Menu</span>
+        <h2 class="sec-title">첫 방문은 20% 할인됩니다.</h2>
+      </div>
+      <p class="sec-sub">디자이너 전담 · 진단 상담 포함. 기장·모발 상태에 따라 상담 후 확정됩니다.</p>
+    </div>
+    <div class="price-grid">
+      <div class="plan reveal">
+        <div class="plan-top">
+          <div>
+            <span class="pno pf">Nº 01</span>
+            <div class="tier">커트</div>
+          </div>
+        </div>
+        <div class="plan-price">35,000<span class="per">원 / 진단 상담 포함</span></div>
+        <ul>
+          <li>얼굴형 진단 20분 포함</li>
+          <li>샴푸·스타일링 포함</li>
+          <li>남성 커트 28,000원</li>
+        </ul>
+        <a href="#location" class="btn-plan">커트 예약하기
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <div class="plan feat reveal">
+        <div class="plan-top">
+          <div>
+            <span class="pno pf">Nº 02</span>
+            <div class="tier">염색</div>
+          </div>
+          <span class="pill">인기</span>
+        </div>
+        <div class="plan-price">88,000<span class="per">원 부터 / 기장별 상이</span></div>
+        <ul>
+          <li>저자극 약제 사용</li>
+          <li>전처리 케어 포함</li>
+          <li>뿌리 염색 55,000원</li>
+        </ul>
+        <a href="#location" class="btn-plan">염색 예약하기
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <div class="plan reveal">
+        <div class="plan-top">
+          <div>
+            <span class="pno pf">Nº 03</span>
+            <div class="tier">클리닉 펌</div>
+          </div>
+        </div>
+        <div class="plan-price">130,000<span class="per">원 부터 / 기장별 상이</span></div>
+        <ul>
+          <li>모발 진단 후 약제 선택</li>
+          <li>열손상 최소 시스템</li>
+          <li>홈케어 가이드 제공</li>
+        </ul>
+        <a href="#location" class="btn-plan">상담 후 예약하기
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== REVIEWS (light) ===== -->
+<section class="blk light" id="review">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="hl">
+        <span class="sec-tag">Reviews</span>
+        <h2 class="sec-title">단골이 많은 데는<br>이유가 있어요.</h2>
+      </div>
       <p class="sec-sub">네이버 예약 · 방문자 리뷰에서 그대로 옮겨왔습니다.</p>
     </div>
     <div class="rev-grid">
       <div class="rev reveal">
+        <div class="qno">“</div>
+        <p class="q">머리 자를 때마다 복불복이었는데, 여기는 상담부터 다르네요. 얼굴형 보고 제안해주신 스타일이 인생 머리가 됐어요.</p>
         <div class="stars">★★★★★</div>
-        <p class="q">“머리 자를 때마다 복불복이었는데, 여기는 상담부터 다르네요. 얼굴형 보고 제안해주신 스타일이 인생 머리가 됐어요.”</p>
-        <div class="who"><span class="av serif">정</span>
+        <div class="who"><span class="av">정</span>
           <div><div class="nm">정하윤 고객님</div><div class="mt">커트 · 6개월째 단골</div></div>
         </div>
       </div>
-      <div class="rev reveal" style="transition-delay:.08s">
+      <div class="rev reveal">
+        <div class="qno">“</div>
+        <p class="q">탈색으로 다 망가진 머리였는데 결이 살아났어요. 무리한 시술은 말려주시는 것도 신뢰가 갑니다.</p>
         <div class="stars">★★★★★</div>
-        <p class="q">“탈색으로 다 망가진 머리였는데 결이 살아났어요. 무리한 시술은 말려주시는 것도 신뢰가 갑니다.”</p>
-        <div class="who"><span class="av serif">최</span>
+        <div class="who"><span class="av">최</span>
           <div><div class="nm">최유나 고객님</div><div class="mt">클리닉 펌 · 재방문</div></div>
         </div>
       </div>
-      <div class="rev reveal" style="transition-delay:.16s">
+      <div class="rev reveal">
+        <div class="qno">“</div>
+        <p class="q">예약제라 기다림이 없어서 좋아요. 조용하고 프라이빗해서 머리하는 시간이 힐링이 됩니다.</p>
         <div class="stars">★★★★★</div>
-        <p class="q">“예약제라 기다림이 없어서 좋아요. 조용하고 프라이빗해서 머리하는 시간이 힐링이 됩니다.”</p>
-        <div class="who"><span class="av serif">한</span>
+        <div class="who"><span class="av">한</span>
           <div><div class="nm">한지민 고객님</div><div class="mt">염색 · 3회차 방문</div></div>
         </div>
       </div>
@@ -452,35 +542,35 @@
   </div>
 </section>
 
-<!-- ===== LOCATION / CONTACT ===== -->
-<section class="pad" id="location" style="background:var(--cream-deep)">
+<!-- ===== LOCATION (dark) ===== -->
+<section class="blk dark" id="location">
   <div class="wrap loc-grid">
     <div class="loc-info reveal">
-      <h3 class="serif">연남동 골목, 초록 문을 찾으세요.</h3>
+      <span class="sec-tag">Visit</span>
+      <h3>연남동 골목,<br>초록 문을 찾으세요.</h3>
       <div class="loc-row"><span class="k">주소</span><span class="v">서울 마포구 연남로 00, 1층 (지도는 데모용 표시)</span></div>
       <div class="loc-row"><span class="k">운영</span><span class="v">화–일 10:30–20:30 (월 정기휴무)</span></div>
       <div class="loc-row"><span class="k">전화</span><span class="v">02-000-0000</span></div>
       <div class="loc-row"><span class="k">예약</span><span class="v">100% 예약제 · 네이버예약 / 카카오톡</span></div>
-      <div class="hero-actions" style="margin-top:30px">
+      <div class="loc-actions">
         <a href="tel:0200000000" class="btn btn-primary">전화로 예약</a>
         <a href="#" class="btn btn-ghost">카카오톡 상담</a>
       </div>
     </div>
     <div class="map reveal">
-      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <rect width="400" height="400" fill="#e7e0d2"/>
-        <g stroke="#cabfa6" stroke-width="8" opacity=".55">
-          <path d="M0 130 H400" stroke="#d3c8b1"/>
-          <path d="M0 270 H400" stroke="#d3c8b1"/>
-          <path d="M140 0 V400" stroke="#d3c8b1"/>
-          <path d="M290 0 V400" stroke="#d3c8b1"/>
+      <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="400" height="500" fill="#1b1712"/>
+        <g stroke="#2c251c" stroke-width="10">
+          <path d="M0 170 H400"/><path d="M0 330 H400"/>
+          <path d="M150 0 V500"/><path d="M300 0 V500"/>
         </g>
-        <path d="M0 130 H400" stroke="#c9bda3" stroke-width="14" opacity=".4"/>
-        <rect x="150" y="150" width="120" height="100" rx="6" fill="#dcd2bd"/>
-        <rect x="30" y="290" width="90" height="70" rx="6" fill="#dcd2bd"/>
-        <rect x="300" y="40" width="70" height="70" rx="6" fill="#dcd2bd"/>
+        <path d="M0 170 H400" stroke="#3a2f22" stroke-width="16" opacity=".6"/>
+        <rect x="160" y="190" width="120" height="120" rx="4" fill="#241d15"/>
+        <rect x="30" y="360" width="90" height="90" rx="4" fill="#241d15"/>
+        <rect x="310" y="50" width="70" height="90" rx="4" fill="#241d15"/>
       </svg>
       <svg class="pin" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.4 8 12 8 12s8-6.6 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg>
+      <span class="mtag">Yeonnam-dong · Map (demo)</span>
     </div>
   </div>
 </section>
@@ -488,28 +578,29 @@
 <!-- ===== FOOTER ===== -->
 <footer>
   <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <div class="brand serif" style="font-size:20px"><span class="mark serif">溫</span>살롱 드 온</div>
+    <div class="foot-word reveal">Salon <em>de</em> On</div>
+    <div class="foot-cols">
+      <div class="fnote-col">
+        <div class="brand" style="margin-bottom:14px"><span class="mark">溫</span><span class="bn" style="color:var(--cream)">Salon de On</span></div>
         <p class="fnote">연남동 프라이빗 헤어살롱. 나에게 어울리는 머리를 찾는 곳.</p>
       </div>
-      <div class="fcol">
+      <div>
         <h4>바로가기</h4>
         <a href="#why">살롱 소개</a>
         <a href="#price">시술 안내</a>
         <a href="#review">후기</a>
         <a href="#location">오시는 길</a>
       </div>
-      <div class="fcol">
-        <h4>예약·문의</h4>
+      <div>
+        <h4>예약 · 문의</h4>
         <a href="tel:0200000000">02-000-0000</a>
         <p>카카오톡 채널 @살롱드온</p>
         <p>화–일 10:30–20:30 · 월 휴무</p>
       </div>
     </div>
     <div class="copyr">
-      <span>© 2026 살롱 드 온. 데모용 가상 업체입니다.</span>
-      <span>Made by <strong>Jason's Consulting</strong> · 랜딩페이지 데모</span>
+      <span>© 2026 살롱 드 온 · 랜딩페이지 데모 · 데모용 가상 업체입니다.</span>
+      <span>Made by Jason's Consulting</span>
     </div>
   </div>
 </footer>
@@ -520,10 +611,6 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.4-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg>
     전화
   </a>
-  <a class="c-kko" href="#">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7-.2.7-.7 2.6-.8 3-.1.5.2.5.4.4.2-.1 2.6-1.8 3.6-2.5.7.1 1.4.2 2.1.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>
-    카톡
-  </a>
   <a class="c-book" href="#price">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
     예약하기
@@ -531,13 +618,11 @@
 </div>
 
 <script>
-  // header shrink
   const hdr=document.getElementById('hdr');
-  addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>20));
-  // reveal on scroll
+  addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>24),{passive:true});
   const io=new IntersectionObserver((es)=>{
     es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
-  },{threshold:.14});
+  },{threshold:.16});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
 </body>
