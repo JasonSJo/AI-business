@@ -42,6 +42,7 @@ DEMO_PATHS = {
     "us": "studio-en/",
     "us-salon": "salon-en/",
     "us-cafe": "cafe-en/",
+    "us-medspa": "medspa-en/",
     "jp": "studio-ja/",
     "jp-salon": "salon-ja/",
     "jp-cafe": "cafe-ja/",
@@ -67,6 +68,15 @@ def pick_template(templates: dict, channel: str, industry: str) -> dict:
             or ch.get("default") or templates["email"]["default"])
 
 
+def default_greeting(industry: str) -> str:
+    """호칭을 비웠을 때의 로케일별 기본값 (영어권/일본어권 이메일에 한글 호칭이 섞이지 않도록)."""
+    if industry.startswith("us"):
+        return "there"
+    if industry.startswith("jp"):
+        return "ご担当者様"
+    return "대표님"
+
+
 def fill(text: str, lead: dict, sender: str, demo_url: str) -> str:
     biz = lead["business"]
     mapping = {
@@ -74,7 +84,7 @@ def fill(text: str, lead: dict, sender: str, demo_url: str) -> str:
         "업체명이": biz + josa(biz, "이", "가"),
         "업체명은": biz + josa(biz, "은", "는"),
         "업체명": biz,
-        "대표님": lead.get("owner") or "대표님",
+        "대표님": lead.get("owner") or default_greeting(lead.get("industry") or "default"),
         "관찰": lead.get("observation") or "",
         "데모링크": lead.get("demo_url") or demo_url,
         "이름": sender,

@@ -28,6 +28,10 @@
     "jp": {
       "subject": "{업체명}様 ご予約ページのご提案（2分で読めます）",
       "body": "{업체명}様\n\n突然のご連絡失礼いたします。Jason's Consulting（ソウル）の{이름}と申します。\n{관찰}\n\n地域ビジネス向けに、ご予約につながるランディングページを48時間で制作しております。\nサンプルはこちらです: {데모링크}\n\nよろしければ、{업체명}様のお名前入りの無料サンプルをお作りいたします。\nご覧いただき、ご不要であれば費用は一切かかりません。\n\n何卒ご検討のほどよろしくお願いいたします。\n\n{이름} / Jason's Consulting（韓国・ソウル）\n※本メールが不要な場合は、その旨ご返信いただければ以後お送りいたしません。"
+    },
+    "us-medspa": {
+      "subject": "A landing page for {업체명}'s next promo",
+      "body": "Hi {대표님},\n\nI came across {업체명} — {관찰}\n\nYou already have a great website. The gap I usually see with med spas is the promos: when you run a Botox special or launch a new treatment on Instagram or ads, that traffic lands on the homepage and scatters. A dedicated campaign landing page — one offer, one booking button, built to convert that specific click — turns more of those ad clicks into booked visits.\n\nHere's a sample I built for a fictional Austin med spa (a $99 intro-Botox campaign): {데모링크}\n\nWant one built around {업체명}'s next promotion? I'll make a free sample with your offer on it — if it doesn't beat your homepage, no charge and you keep it.\n\nBest,\n{이름} · Jason's Consulting · Seoul, South Korea\n—\nThis is a one-time note to your public business address. Reply \"unsubscribe\" and I won't email again."
     }
   },
   "dm": {

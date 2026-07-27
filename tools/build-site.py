@@ -58,6 +58,9 @@ DEMOS = [
     {"slug": "nail-salon", "glyph": "달", "grad": "linear-gradient(150deg,#9C5B63,#B47880)",
      "en": ("Dal Nail", "Nail salon · Seoul", "Korean-market sample — private nail studio"),
      "kr": ("달네일", "네일샵 · 합정", "손 톤 진단 — 1인 예약제 프라이빗")},
+    {"slug": "medspa-en", "glyph": "美", "grad": "linear-gradient(150deg,#A96A63,#4A2E33)",
+     "en": ("Lumière Aesthetics", "Med spa · Austin, TX", "US B2B sample — promo campaign landing ($99 offer)"),
+     "kr": ("Lumière Aesthetics", "메디스파 · 오스틴(미국형)", "미국 B2B — 프로모션 캠페인 랜딩(특가 오퍼형)")},
 ]
 
 LOCALES = {
