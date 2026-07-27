@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>喫茶こもれび · 下北沢 | 急がない一杯を</title>
+<meta name="description" content="下北沢の小さな喫茶店。自家焙煎の一杯とモーニング。窓際の席で、どうぞごゆっくり。" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="喫茶こもれび · 下北沢 | 急がない一杯を" />
+<meta property="og:description" content="下北沢の小さな喫茶店。自家焙煎の一杯とモーニング。窓際の席で、どうぞごゆっくり。" />
+<meta property="og:image" content="https://jasonsjo.github.io/AI-business/assets/og-1200x630.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Cormorant:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#EFE7D5;
+    --paper-2:#E7DCC5;
+    --paper-3:#DED0B4;
+    --paper-edge:#D3C4A5;
+    --sepia:#6B4A2E;
+    --sepia-soft:#8A6845;
+    --brown:#2E211A;
+    --brown-soft:#4A3A2C;
+    --moss:#7A7A4E;
+    --moss-deep:#5F5F3A;
+    --seal:#A8443A;
+    --seal-deep:#8A342C;
+    --ink:#241C15;
+    --rule:#2E211A;
+    --line:rgba(46,33,26,.28);
+    --line-soft:rgba(46,33,26,.14);
+    --hair:rgba(46,33,26,.5);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    font-family:'Shippori Mincho',serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.9;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    letter-spacing:.015em;
+    font-feature-settings:"palt" 1;
+  }
+  .cormorant{font-family:'Cormorant',serif}
+  a{color:inherit;text-decoration:none}
+  em{font-style:normal}
+
+  /* ===== paper texture layers ===== */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:.09;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:9997;
+    background:
+      radial-gradient(120% 90% at 12% 0%, rgba(255,250,238,.55), transparent 46%),
+      radial-gradient(120% 120% at 92% 6%, rgba(120,90,55,.14), transparent 40%),
+      radial-gradient(140% 120% at 88% 100%, rgba(107,74,46,.20), transparent 55%),
+      radial-gradient(140% 120% at 4% 96%, rgba(107,74,46,.14), transparent 55%);
+  }
+
+  /* ===== the newspaper sheet ===== */
+  .sheet{
+    max-width:1080px;margin:0 auto;position:relative;z-index:1;
+    padding:0 clamp(14px,4vw,40px) 0;
+  }
+  .paper-block{background:transparent}
+
+  /* rules */
+  .rule-thick{height:4px;background:var(--rule);width:100%}
+  .rule-thin{height:1px;background:var(--rule);width:100%}
+  .rule-double{border-top:3px solid var(--rule);border-bottom:1px solid var(--rule);height:6px}
+  .gap{height:6px}
+
+  /* vertical japanese */
+  .tate{writing-mode:vertical-rl;text-orientation:upright}
+  .tate-mixed{writing-mode:vertical-rl}
+
+  /* ================= MASTHEAD ================= */
+  .masthead{padding:22px 0 0}
+  .mast-topline{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    font-size:11.5px;letter-spacing:.14em;color:var(--sepia);
+    padding-bottom:7px;
+  }
+  .mast-topline .edt{font-family:'Cormorant',serif;font-style:italic;font-size:13px;letter-spacing:.2em}
+  .nameplate{
+    display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:14px;
+    padding:16px 0 12px;
+  }
+  .np-flank{font-size:11.5px;color:var(--sepia);line-height:1.8;letter-spacing:.08em}
+  .np-flank.left{text-align:left}
+  .np-flank.right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+  .np-flank .box{border:1px solid var(--line);padding:6px 10px;display:inline-block}
+  .np-center{text-align:center;position:relative}
+  .np-title{
+    font-family:'Shippori Mincho',serif;font-weight:800;
+    font-size:clamp(40px,10.5vw,88px);line-height:1;letter-spacing:.04em;color:var(--ink);
+    white-space:nowrap;
+  }
+  .np-sub{
+    font-family:'Cormorant',serif;font-style:italic;letter-spacing:.32em;
+    font-size:clamp(10px,2.4vw,15px);color:var(--sepia);text-transform:uppercase;margin-top:8px;
+  }
+  .hanko{width:74px;height:74px;flex-shrink:0;filter:drop-shadow(0 3px 5px rgba(46,33,26,.28)) sepia(.12);transform:rotate(-4deg)}
+  .hanko.sm{width:56px;height:56px}
+  .mast-index{
+    display:flex;flex-wrap:wrap;justify-content:center;gap:0;
+    font-size:13px;letter-spacing:.12em;color:var(--ink);
+    padding:9px 0;
+  }
+  .mast-index a{padding:2px 20px;position:relative;transition:.25s;font-weight:500}
+  .mast-index a+a{border-left:1px solid var(--line)}
+  .mast-index a:hover{color:var(--seal)}
+  @media(max-width:620px){
+    .nameplate{grid-template-columns:1fr;gap:8px;text-align:center}
+    .np-flank{display:none}
+    .mast-index a{padding:2px 12px;font-size:12px}
+  }
+
+  /* ================= LEAD ARTICLE (hero) ================= */
+  .lead{padding:8px 0 0;position:relative}
+  .lead-inner{
+    display:grid;grid-template-columns:64px 1fr;gap:0;
+    border:2px solid var(--rule);position:relative;background:linear-gradient(180deg,rgba(255,250,238,.4),transparent 30%)}
+  /* vertical headline strip */
+  .lead-tate{
+    border-right:1px solid var(--rule);padding:20px 0;
+    display:flex;justify-content:center;align-items:flex-start;
+    background:repeating-linear-gradient(90deg,transparent 0 6px,rgba(46,33,26,.03) 6px 7px);
+  }
+  .lead-tate .hl{
+    writing-mode:vertical-rl;font-family:'Shippori Mincho',serif;font-weight:800;
+    font-size:clamp(24px,4.6vw,34px);line-height:1.5;letter-spacing:.14em;color:var(--ink);
+  }
+  .lead-tate .hl em{color:var(--seal)}
+  .lead-body{padding:26px clamp(18px,3vw,34px) 30px}
+  .kicker{
+    display:inline-block;font-size:12px;letter-spacing:.22em;color:var(--paper);
+    background:var(--seal);padding:4px 13px;margin-bottom:18px;font-weight:600;
+  }
+  .lead-head{
+    font-family:'Shippori Mincho',serif;font-weight:800;
+    font-size:clamp(30px,6.2vw,52px);line-height:1.28;letter-spacing:.02em;color:var(--ink);
+    padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:2px;
+  }
+  .lead-head em{color:var(--seal);position:relative;white-space:nowrap}
+  .lead-columns{
+    columns:2;column-gap:30px;column-rule:1px solid var(--line);
+    padding-top:20px;font-size:14.5px;line-height:1.95;color:var(--brown-soft);text-align:justify;
+  }
+  .lead-columns p{margin-bottom:12px;break-inside:avoid}
+  .lead-columns .dropcap::first-letter{
+    font-family:'Shippori Mincho',serif;font-weight:800;font-size:52px;line-height:.82;
+    float:left;margin:5px 8px 0 0;color:var(--seal);
+  }
+  .lead-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+  .lead-foot{
+    display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center;
+    margin-top:22px;padding-top:16px;border-top:1px solid var(--line);
+    font-size:12.5px;color:var(--sepia);letter-spacing:.04em;
+  }
+  .lead-foot .stars{color:var(--seal);letter-spacing:3px}
+  .lead-foot strong{color:var(--ink);font-weight:700}
+  /* sepia photo plate spanning bottom */
+  .lead-plate{
+    margin-top:0;border-top:2px solid var(--rule);
+    display:grid;grid-template-columns:1fr 1fr 1fr;
+  }
+  .plate-cell{
+    position:relative;min-height:132px;overflow:hidden;border-right:1px solid var(--rule);
+  }
+  .plate-cell:last-child{border-right:none}
+  .plate-cell .cap{
+    position:absolute;left:0;right:0;bottom:0;padding:7px 11px;font-size:11px;letter-spacing:.06em;
+    color:#f3e6d2;background:linear-gradient(transparent,rgba(30,20,14,.72));z-index:2;
+  }
+  .plate-cell .cap em{color:#e8c9a4;font-family:'Cormorant',serif;font-style:italic}
+  .pc1{background:radial-gradient(80% 70% at 30% 25%,rgba(255,236,205,.4),transparent 60%),linear-gradient(150deg,#7a5636,#4e3826 60%,#33251a)}
+  .pc2{background:radial-gradient(90% 80% at 60% 30%,rgba(255,240,214,.34),transparent 55%),linear-gradient(160deg,#6a4c30,#3f2d1e)}
+  .pc3{background:radial-gradient(70% 60% at 40% 30%,rgba(255,236,205,.36),transparent 60%),linear-gradient(140deg,#8a6340,#5a3f28 55%,#3a2a1c)}
+  .plate-cell .grain{position:absolute;inset:0;opacity:.14;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
+  .plate-glyph{position:absolute;inset:0;display:grid;place-items:center;font-family:'Shippori Mincho',serif;font-weight:500;font-size:120px;color:rgba(255,240,220,.1);line-height:1}
+  .steam{position:absolute;left:50%;top:16%;transform:translateX(-50%);opacity:.5}
+  @media(max-width:720px){
+    .lead-inner{grid-template-columns:44px 1fr}
+    .lead-tate .hl{font-size:20px}
+    .lead-columns{columns:1;column-rule:none}
+    .lead-plate{grid-template-columns:1fr}
+    .plate-cell{border-right:none;border-bottom:1px solid var(--rule);min-height:120px}
+    .plate-cell:last-child{border-bottom:none}
+  }
+
+  /* ===== shared buttons ===== */
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;padding:12px 22px;
+    font-family:'Shippori Mincho',serif;font-weight:600;font-size:14px;letter-spacing:.08em;
+    border:1.5px solid var(--rule);transition:.28s cubic-bezier(.2,.7,.3,1);cursor:pointer;background:transparent;color:var(--ink);
+  }
+  .btn:hover{transform:translateY(-1px)}
+  .btn-fill{background:var(--seal);color:#f6ead6;border-color:var(--seal)}
+  .btn-fill:hover{background:var(--seal-deep);border-color:var(--seal-deep)}
+  .btn-ink{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .btn-ink:hover{background:var(--sepia);border-color:var(--sepia)}
+  .btn-ghost:hover{background:rgba(46,33,26,.05)}
+
+  /* ===== section title bar (newspaper section header) ===== */
+  .sec{padding:34px 0 0}
+  .sec-bar{
+    display:flex;align-items:center;gap:14px;margin-bottom:4px;
+    border-top:3px solid var(--rule);border-bottom:1px solid var(--rule);padding:9px 2px;
+  }
+  .sec-no{font-family:'Cormorant',serif;font-style:italic;font-size:15px;letter-spacing:.16em;color:var(--seal);white-space:nowrap}
+  .sec-name{
+    font-family:'Shippori Mincho',serif;font-weight:800;font-size:clamp(19px,3.4vw,26px);
+    letter-spacing:.14em;color:var(--ink);white-space:nowrap;
+  }
+  .sec-en{font-family:'Cormorant',serif;font-style:italic;font-size:13px;letter-spacing:.2em;color:var(--sepia);text-transform:uppercase;margin-left:auto;white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}
+  @media(max-width:520px){
+    .sec-bar{gap:8px}
+    .sec-name{letter-spacing:.05em}
+    .sec-en{font-size:10.5px;letter-spacing:.06em}
+  }
+  .sec-lede{font-size:14px;line-height:1.9;color:var(--brown-soft);max-width:56ch;padding:16px 2px 0}
+
+  /* ================= WHY : three newspaper columns ================= */
+  .articles{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    border:2px solid var(--rule);border-top:none;margin-top:14px;
+  }
+  .art{padding:24px 20px 26px;border-right:1px solid var(--rule);position:relative}
+  .art:last-child{border-right:none}
+  .art-kicker{
+    font-size:11px;letter-spacing:.2em;color:var(--seal);font-weight:600;
+    display:flex;align-items:center;gap:8px;margin-bottom:12px;
+  }
+  .art-kicker .no{font-family:'Cormorant',serif;font-style:italic;font-size:16px;color:var(--moss-deep);letter-spacing:.05em}
+  .art-kicker .ln{flex:1;height:1px;background:var(--line)}
+  .art .ico{width:40px;height:40px;color:var(--sepia);margin-bottom:10px}
+  .art .ico svg{width:100%;height:100%}
+  .art h3{
+    font-family:'Shippori Mincho',serif;font-weight:700;font-size:18px;line-height:1.45;
+    margin-bottom:11px;color:var(--ink);padding-bottom:9px;border-bottom:1px dotted var(--hair);
+  }
+  .art p{font-size:13.5px;line-height:1.95;color:var(--brown-soft);text-align:justify}
+  @media(max-width:720px){
+    .articles{grid-template-columns:1fr}
+    .art{border-right:none;border-bottom:1px solid var(--rule)}
+    .art:last-child{border-bottom:none}
+  }
+
+  /* ================= MENU : お品書き ticket ================= */
+  .oshina{
+    margin-top:14px;border:2px solid var(--rule);position:relative;
+    background:
+      repeating-linear-gradient(0deg,transparent 0 30px,rgba(46,33,26,.02) 30px 31px),
+      var(--paper-2);
+    padding:8px;
+  }
+  .oshina::before{content:"";position:absolute;inset:6px;border:1px solid var(--line);pointer-events:none}
+  .oshina-head{
+    display:flex;align-items:center;justify-content:center;gap:16px;
+    padding:16px 10px 14px;position:relative;
+  }
+  .oshina-head .tate-title{
+    writing-mode:vertical-rl;font-family:'Shippori Mincho',serif;font-weight:800;
+    font-size:clamp(26px,5vw,36px);letter-spacing:.28em;color:var(--ink);
+    padding:6px 10px;border-left:1px solid var(--rule);border-right:1px solid var(--rule);
+  }
+  .oshina-head .sub{font-size:12px;letter-spacing:.16em;color:var(--sepia);text-align:center;line-height:1.9}
+  .oshina-head .sub .en{font-family:'Cormorant',serif;font-style:italic;font-size:14px;letter-spacing:.2em;display:block;color:var(--moss-deep);margin-bottom:4px}
+  .oshina-list{border-top:1px solid var(--rule);margin:4px 8px 8px}
+  .tier-row{
+    display:grid;grid-template-columns:52px 1fr auto;gap:0;
+    border-bottom:1px solid var(--rule);position:relative;
+  }
+  .tier-row:last-child{border-bottom:none}
+  .tier-row.feat{background:linear-gradient(90deg,rgba(168,68,58,.06),transparent 40%)}
+  .tr-mark{
+    border-right:1px solid var(--rule);display:flex;align-items:center;justify-content:center;
+    padding:16px 0;background:repeating-linear-gradient(180deg,transparent 0 5px,rgba(46,33,26,.03) 5px 6px);
+  }
+  .tr-mark .tate{font-family:'Shippori Mincho',serif;font-weight:700;font-size:19px;letter-spacing:.18em;color:var(--ink)}
+  .tier-row.feat .tr-mark .tate{color:var(--seal)}
+  .tr-body{padding:18px 18px 20px}
+  .tr-body .tag{
+    display:inline-block;font-size:10.5px;letter-spacing:.14em;color:var(--paper);background:var(--seal);
+    padding:3px 10px;margin-bottom:10px;font-weight:600;
+  }
+  .tr-items{list-style:none;display:flex;flex-direction:column;gap:8px}
+  .tr-items li{
+    display:flex;gap:11px;align-items:baseline;font-size:14px;line-height:1.6;color:var(--brown-soft);
+  }
+  .tr-items li::before{content:"一";font-family:'Shippori Mincho',serif;color:var(--seal);font-size:12px;opacity:.8;flex-shrink:0}
+  .tr-price{
+    border-left:1px dashed var(--hair);padding:18px 20px;text-align:center;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:150px;
+    background:repeating-linear-gradient(180deg,transparent 0 5px,rgba(46,33,26,.02) 5px 6px);
+  }
+  .tr-price .amt{font-family:'Shippori Mincho',serif;font-weight:800;font-size:34px;line-height:1;color:var(--ink);letter-spacing:.01em}
+  .tier-row.feat .tr-price .amt{color:var(--seal)}
+  .tr-price .per{font-family:'Cormorant',serif;font-size:14px;letter-spacing:.05em;color:var(--sepia);margin-top:8px;line-height:1.4}
+  .tr-price .go{
+    margin-top:14px;font-size:12px;letter-spacing:.1em;color:var(--ink);font-weight:600;
+    border-bottom:1.5px solid var(--seal);padding-bottom:2px;transition:.25s;
+  }
+  .tr-price .go:hover{color:var(--seal)}
+  @media(max-width:720px){
+    .oshina-head{flex-direction:column;gap:12px}
+    .oshina-head .tate-title{writing-mode:horizontal-tb;border-left:none;border-right:none;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);letter-spacing:.5em;padding:8px 0}
+    .tier-row{grid-template-columns:40px 1fr}
+    .tr-mark .tate{font-size:15px}
+    .tr-price{grid-column:1 / -1;border-left:none;border-top:1px dashed var(--hair);flex-direction:row;gap:16px;padding:14px 18px;justify-content:space-between}
+    .tr-price .go{margin-top:0}
+  }
+
+  /* ================= REVIEWS : reader letters 投書 ================= */
+  .letters{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2px solid var(--rule);border-top:none;margin-top:14px}
+  .letter{padding:26px 22px 24px;border-right:1px solid var(--rule);position:relative;display:flex;flex-direction:column}
+  .letter:last-child{border-right:none}
+  .letter .quo{font-family:'Cormorant',serif;font-size:60px;line-height:.5;color:var(--seal);opacity:.4;height:24px}
+  .letter .q{font-family:'Shippori Mincho',serif;font-weight:500;font-size:15.5px;line-height:2;color:var(--ink);flex:1;margin-top:12px;text-align:justify}
+  .letter .sign{
+    margin-top:20px;padding-top:14px;border-top:1px solid var(--line);
+    display:flex;align-items:center;gap:12px;
+  }
+  .letter .seal-sm{
+    width:38px;height:38px;flex-shrink:0;display:grid;place-items:center;
+    font-family:'Shippori Mincho',serif;font-weight:700;font-size:17px;color:#f3e6d2;
+    background:var(--seal);border-radius:3px;position:relative;transform:rotate(-3deg);
+  }
+  .letter .seal-sm::after{content:"";position:absolute;inset:2px;border:1px solid rgba(246,234,214,.6);border-radius:2px}
+  .letter .nm{font-family:'Shippori Mincho',serif;font-weight:700;font-size:14.5px;color:var(--ink)}
+  .letter .mt{font-size:11.5px;color:var(--sepia);margin-top:1px;letter-spacing:.04em}
+  @media(max-width:720px){
+    .letters{grid-template-columns:1fr}
+    .letter{border-right:none;border-bottom:1px solid var(--rule)}
+    .letter:last-child{border-bottom:none}
+  }
+
+  /* ================= NOTICE + MAP ================= */
+  .notice-wrap{display:grid;grid-template-columns:1fr 1fr;gap:0;border:2px solid var(--rule);border-top:none;margin-top:14px}
+  .notice{padding:28px clamp(18px,3vw,30px);position:relative;border-right:1px solid var(--rule)}
+  .notice .stamp{
+    position:absolute;top:18px;right:18px;width:78px;height:78px;
+    border:2.5px solid var(--seal);border-radius:50%;color:var(--seal);
+    display:grid;place-items:center;text-align:center;transform:rotate(-9deg);
+    font-family:'Shippori Mincho',serif;font-weight:700;font-size:15px;line-height:1.25;letter-spacing:.08em;
+    opacity:.85;
+  }
+  .notice .stamp::before{content:"";position:absolute;inset:5px;border:1px solid var(--seal);border-radius:50%}
+  .notice h3{
+    font-family:'Shippori Mincho',serif;font-weight:800;font-size:clamp(20px,3.6vw,27px);
+    line-height:1.5;color:var(--ink);margin-bottom:20px;max-width:14ch;
+  }
+  .n-row{display:grid;grid-template-columns:74px 1fr;gap:14px;padding:12px 0;border-bottom:1px dotted var(--hair);align-items:baseline}
+  .n-row:first-of-type{border-top:1px solid var(--rule)}
+  .n-row .k{font-family:'Shippori Mincho',serif;font-weight:700;font-size:13px;letter-spacing:.12em;color:var(--seal)}
+  .n-row .v{font-size:14px;line-height:1.7;color:var(--brown-soft)}
+  .notice-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+  /* map plate */
+  .mapcell{position:relative;padding:14px}
+  .map{position:relative;height:100%;min-height:300px;border:1px solid var(--rule);overflow:hidden;background:linear-gradient(135deg,#e4d8bf,#d1c1a2)}
+  .map::before{content:"";position:absolute;inset:5px;border:1px solid var(--line-soft);z-index:3;pointer-events:none}
+  .map svg{width:100%;height:100%;display:block}
+  .map .pin{position:absolute;top:43%;left:50%;width:38px;height:38px;transform:translate(-50%,-100%);color:var(--seal);filter:drop-shadow(0 5px 5px rgba(46,33,26,.3));z-index:2}
+  .map .maplabel{position:absolute;left:12px;bottom:12px;font-family:'Cormorant',serif;font-style:italic;font-size:12px;letter-spacing:.12em;color:var(--sepia);z-index:2;background:rgba(239,231,213,.7);padding:3px 9px}
+  @media(max-width:760px){
+    .notice-wrap{grid-template-columns:1fr}
+    .notice{border-right:none;border-bottom:1px solid var(--rule)}
+    .map{min-height:240px}
+  }
+
+  /* ================= FOOTER (colophon) ================= */
+  .colophon{margin-top:34px;border-top:3px solid var(--rule);border-bottom:1px solid var(--rule);padding:28px 0}
+  .colo-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px}
+  .colo-brand{display:flex;flex-direction:column;gap:12px}
+  .colo-brand .name{display:flex;align-items:center;gap:12px;font-family:'Shippori Mincho',serif;font-weight:800;font-size:22px;letter-spacing:.08em;color:var(--ink)}
+  .colo-brand p{font-size:13px;line-height:1.85;color:var(--brown-soft);max-width:34ch}
+  .colo-col h4{font-family:'Shippori Mincho',serif;font-weight:700;font-size:13px;letter-spacing:.14em;color:var(--ink);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .colo-col a,.colo-col p{display:block;font-size:13px;padding:4px 0;color:var(--brown-soft);transition:.22s;line-height:1.6}
+  .colo-col a:hover{color:var(--seal)}
+  .colo-foot{padding:18px 0 28px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:11.5px;color:var(--sepia);letter-spacing:.04em}
+  .colo-foot .demo{color:var(--seal);font-weight:600}
+  @media(max-width:720px){.colo-grid{grid-template-columns:1fr;gap:22px}}
+  @media(max-width:900px){.colophon{padding-bottom:30px}body{padding-bottom:64px}}
+
+  /* ================= STICKY BAR ================= */
+  .bar{
+    position:fixed;left:0;right:0;bottom:0;z-index:200;
+    background:color-mix(in srgb,var(--paper) 95%,transparent);backdrop-filter:blur(12px);
+    border-top:2px solid var(--rule);padding:9px 12px;
+    display:grid;grid-template-columns:1fr 1.25fr;gap:10px;
+    box-shadow:0 -10px 28px -16px rgba(46,33,26,.4);
+  }
+  .bar a{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 6px;font-family:'Shippori Mincho',serif;font-weight:700;font-size:14px;letter-spacing:.08em;border:1.5px solid var(--rule);transition:.2s}
+  .bar .b-call{background:var(--paper);color:var(--ink)}
+  .bar .b-map{background:var(--seal);color:#f6ead6;border-color:var(--seal)}
+  .bar a:active{transform:scale(.97)}
+  .bar svg{width:17px;height:17px;flex-shrink:0}
+  @media(min-width:900px){.bar{display:none}}
+
+  /* ===== reveal / motion ===== */
+  .reveal{opacity:0;transform:translateY(18px);transition:.9s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .masthead,.lead-inner{animation:fadein 1s cubic-bezier(.2,.7,.2,1) both}
+  .lead-inner{animation-delay:.12s}
+  @keyframes fadein{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @keyframes steam{0%{opacity:0;transform:translateY(6px) scaleY(.9)}40%{opacity:.5}100%{opacity:0;transform:translateY(-20px) scaleY(1.15)}}
+  .steam path{animation:steam 4.6s ease-in-out infinite}
+  .steam path:nth-child(2){animation-delay:1.5s}
+  .steam path:nth-child(3){animation-delay:2.9s}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div class="sheet">
+
+  <!-- ============ MASTHEAD ============ -->
+  <div class="masthead">
+    <div class="mast-topline">
+      <span>令和八年 七月二十三日 · 水曜定休</span>
+      <span class="edt">No.1 &mdash; Morning Edition</span>
+    </div>
+    <div class="rule-thick"></div>
+
+    <div class="nameplate">
+      <div class="np-flank left">
+        <span class="box">第 壱 号</span><br>
+        自家焙煎<br>下北沢・路地の奥
+      </div>
+      <div class="np-center">
+        <div class="np-title">喫茶こもれび</div>
+        <div class="np-sub">Kissa Komorebi &mdash; Shimokitazawa</div>
+      </div>
+      <div class="np-flank right">
+        <svg class="hanko" viewBox="0 0 100 100" aria-hidden="true">
+          <circle cx="50" cy="50" r="46" fill="#A8443A"/>
+          <circle cx="50" cy="50" r="40" fill="none" stroke="#f6ead6" stroke-width="2" opacity=".85"/>
+          <text x="50" y="38" font-family="'Shippori Mincho',serif" font-size="27" font-weight="700" fill="#f6ead6" text-anchor="middle">こも</text>
+          <text x="50" y="72" font-family="'Shippori Mincho',serif" font-size="27" font-weight="700" fill="#f6ead6" text-anchor="middle">れび</text>
+        </svg>
+        <span class="box">一部 無料</span>
+      </div>
+    </div>
+
+    <div class="rule-double"></div>
+    <nav class="mast-index">
+      <a href="#why">お店のこと</a>
+      <a href="#menu">お品書き</a>
+      <a href="#voices">投書</a>
+      <a href="#access">営業案内</a>
+    </nav>
+    <div class="rule-thin"></div>
+    <div class="gap"></div>
+  </div>
+
+  <!-- ============ LEAD ARTICLE ============ -->
+  <section class="lead">
+    <div class="lead-inner">
+      <div class="lead-tate">
+        <span class="hl">急がない一杯を、<em>窓際の席で</em></span>
+      </div>
+      <div class="lead-body">
+        <span class="kicker">下北沢 · 自家焙煎喫茶</span>
+        <h2 class="lead-head">毎週月曜、<em>朝いちばんの</em>焙煎から。</h2>
+        <div class="lead-columns">
+          <p class="dropcap">毎週月曜に焙煎する豆、厚手のカップ、席を急かされない時間。チェーン店にない「もう一杯」のための喫茶店です。</p>
+          <p>棚に並ぶのは焙煎から七日以内の豆だけ。窓際の席では、読書も考えごとも、おかわりのタイミングも、すべてあなた次第。奥の間は読書会や句会に貸切もできます。</p>
+        </div>
+        <div class="lead-actions">
+          <a href="#menu" class="btn btn-fill">お品書きを見る
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#access" class="btn btn-ghost">奥の間を予約</a>
+        </div>
+        <div class="lead-foot">
+          <span><span class="stars">★★★★★</span> Google口コミ <strong>4.8</strong></span>
+          <span>豆の定期便 <strong>200名</strong></span>
+          <span>モーニング 毎朝 <strong>7時</strong>より</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- sepia photo plate strip -->
+    <div class="lead-plate">
+      <div class="plate-cell pc1">
+        <div class="grain"></div>
+        <div class="plate-glyph">灯</div>
+        <svg class="steam" width="52" height="80" viewBox="0 0 52 80" fill="none" stroke="rgba(255,240,220,.6)" stroke-width="2.2" stroke-linecap="round">
+          <path d="M17 74 C10 58 26 52 19 36 C12 20 26 15 21 3"/>
+          <path d="M33 74 C26 58 42 52 35 36 C28 20 42 15 37 3"/>
+          <path d="M25 74 C18 58 34 52 27 36 C20 20 34 15 29 3"/>
+        </svg>
+        <span class="cap"><em>Hand drip</em> · 一杯ずつ淹れる</span>
+      </div>
+      <div class="plate-cell pc2">
+        <div class="grain"></div>
+        <span class="cap"><em>Morning set</em> · 厚切りトースト</span>
+      </div>
+      <div class="plate-cell pc3">
+        <div class="grain"></div>
+        <span class="cap"><em>Back room</em> · 奥の間 八席</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY : articles ============ -->
+  <section class="sec" id="why">
+    <div class="sec-bar">
+      <span class="sec-no">第一面</span>
+      <span class="sec-name">お店のこと</span>
+      <span class="sec-en">Why Komorebi</span>
+    </div>
+    <p class="sec-lede">チェーン店は行列のために。うちは二度目のご来店のために &mdash; あなたの一杯と、いつもの席のために。覚えていてくれる喫茶店。</p>
+    <div class="articles reveal">
+      <article class="art">
+        <div class="art-kicker"><span class="no">壱</span><span>ROASTED WEEKLY</span><span class="ln"></span></div>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 8h13v7a5 5 0 01-5 5H9a5 5 0 01-5-5V8z"/><path d="M17 9h2a2.5 2.5 0 010 5h-2M8 2v3M12 2v3"/></svg></div>
+        <h3>今週焙煎した豆だけ</h3>
+        <p>毎週月曜の朝に小さく焙煎。棚の豆袋は焙煎から7日以内のものだけです。</p>
+      </article>
+      <article class="art">
+        <div class="art-kicker"><span class="no">弐</span><span>TAKE YOUR TIME</span><span class="ln"></span></div>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21s-7-4.35-9.5-8.5C.5 9 2.5 5 6 5c2 0 3.5 1.5 6 4 2.5-2.5 4-4 6-4 3.5 0 5.5 4 3.5 7.5C19 16.65 12 21 12 21z"/></svg></div>
+        <h3>席を急かしません</h3>
+        <p>厚手のカップでゆっくり。読書も考えごとも、おかわりのタイミングもあなた次第。</p>
+      </article>
+      <article class="art">
+        <div class="art-kicker"><span class="no">参</span><span>THE BACK ROOM</span><span class="ln"></span></div>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2l2 7 7 3-7 3-2 7-2-7-7-3 7-3 2-7z"/></svg></div>
+        <h3>奥の間、貸切できます</h3>
+        <p>読書会・句会・小さなお祝いに。8席の奥の間をご予約いただけます。</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ MENU : お品書き ============ -->
+  <section class="sec" id="menu">
+    <div class="sec-bar">
+      <span class="sec-no">第二面</span>
+      <span class="sec-name">お品書き</span>
+      <span class="sec-en">The Menu</span>
+    </div>
+    <p class="sec-lede">通いたくなる、三つの入口。</p>
+    <div class="oshina reveal">
+      <div class="oshina-head">
+        <span class="tate-title">お品書き</span>
+        <span class="sub"><span class="en">Kissa Komorebi</span>喫茶こもれび 御献立<br>本日もご来店、ありがとうございます</span>
+      </div>
+      <div class="oshina-list">
+        <div class="tier-row">
+          <div class="tr-mark"><span class="tate">壱 · 朝</span></div>
+          <div class="tr-body">
+            <div style="font-family:'Shippori Mincho',serif;font-weight:700;font-size:16px;letter-spacing:.1em;margin-bottom:12px;color:var(--ink)">モーニング</div>
+            <ul class="tr-items">
+              <li>本日のドリップ</li>
+              <li>厚切りトースト＋ゆで卵</li>
+              <li>おかわり ¥200</li>
+            </ul>
+          </div>
+          <div class="tr-price">
+            <span class="amt">¥900</span>
+            <span class="per">7:00–11:00</span>
+            <a href="#access" class="go">朝に来てみる →</a>
+          </div>
+        </div>
+
+        <div class="tier-row feat">
+          <div class="tr-mark"><span class="tate">弐 · 便</span></div>
+          <div class="tr-body">
+            <span class="tag">200名の定期便</span>
+            <div style="font-family:'Shippori Mincho',serif;font-weight:700;font-size:16px;letter-spacing:.1em;margin-bottom:12px;color:var(--seal)">豆の定期便</div>
+            <ul class="tr-items">
+              <li>焙煎したての豆を月2回</li>
+              <li>受け取り時ドリップ1杯無料</li>
+              <li>いつでも一時停止OK</li>
+            </ul>
+          </div>
+          <div class="tr-price">
+            <span class="amt">¥2,400</span>
+            <span class="per">月額 · 200g×2</span>
+            <a href="#access" class="go">定期便をはじめる →</a>
+          </div>
+        </div>
+
+        <div class="tier-row">
+          <div class="tr-mark"><span class="tate">参 · 奥</span></div>
+          <div class="tr-body">
+            <div style="font-family:'Shippori Mincho',serif;font-weight:700;font-size:16px;letter-spacing:.1em;margin-bottom:12px;color:var(--ink)">奥の間 貸切</div>
+            <ul class="tr-items">
+              <li>8席の静かな個室</li>
+              <li>ドリップ＋焼き菓子つき</li>
+              <li>読書会・句会歓迎</li>
+            </ul>
+          </div>
+          <div class="tr-price">
+            <span class="amt">¥6,000</span>
+            <span class="per">2時間 · 8名まで</span>
+            <a href="#access" class="go">空きを確認 →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REVIEWS : 投書 ============ -->
+  <section class="sec" id="voices">
+    <div class="sec-bar">
+      <span class="sec-no">第三面</span>
+      <span class="sec-name">投書 · 常連さんの声</span>
+      <span class="sec-en">Readers' Letters</span>
+    </div>
+    <p class="sec-lede">Googleの口コミより抜粋。読者投稿欄。</p>
+    <div class="letters reveal">
+      <div class="letter">
+        <div class="quo">&ldquo;</div>
+        <p class="q">3回目で「いつもので?」と聞かれました。下北沢でいちばん落ち着く場所です。</p>
+        <div class="sign">
+          <span class="seal-sm">小</span>
+          <div><div class="nm">H・小林</div><div class="mt">常連 · 2年</div></div>
+        </div>
+      </div>
+      <div class="letter">
+        <div class="quo">&ldquo;</div>
+        <p class="q">毎月の読書会で奥の間を借りています。頼まなくてもドリップの準備をしてくれる。</p>
+        <div class="sign">
+          <span class="seal-sm">佐</span>
+          <div><div class="nm">N・佐々木</div><div class="mt">奥の間 利用</div></div>
+        </div>
+      </div>
+      <div class="letter">
+        <div class="quo">&ldquo;</div>
+        <p class="q">定期便を始めてから、家のコーヒーが変わりました。スーパーの豆には戻れません。</p>
+        <div class="sign">
+          <span class="seal-sm">高</span>
+          <div><div class="nm">T・高橋</div><div class="mt">定期便 · 1年</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NOTICE + MAP ============ -->
+  <section class="sec" id="access">
+    <div class="sec-bar">
+      <span class="sec-no">第四面</span>
+      <span class="sec-name">営業案内</span>
+      <span class="sec-en">Access &amp; Hours</span>
+    </div>
+    <div class="notice-wrap reveal">
+      <div class="notice">
+        <div class="stamp">営業<br>案内</div>
+        <h3>下北沢駅から徒歩5分、路地の奥。</h3>
+        <div class="n-row"><span class="k">住所</span><span class="v">東京都世田谷区北沢2-5-6（デモ用の架空住所です）</span></div>
+        <div class="n-row"><span class="k">営業時間</span><span class="v">毎日 7:00–19:00 · 水曜定休</span></div>
+        <div class="n-row"><span class="k">電話</span><span class="v">03-0000-0000</span></div>
+        <div class="n-row"><span class="k">アクセス</span><span class="v">小田急線 下北沢駅 南西口より徒歩5分</span></div>
+        <div class="notice-actions">
+          <a href="tel:0300000000" class="btn btn-fill">電話する</a>
+          <a href="mailto:hello@example.jp" class="btn btn-ghost">メールで相談</a>
+        </div>
+      </div>
+      <div class="mapcell">
+        <div class="map">
+          <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="400" height="400" fill="#e4d8bf"/>
+            <g stroke="#c7b795" stroke-width="11" opacity=".55" fill="none">
+              <path d="M0 130 H400"/><path d="M0 276 H400"/>
+              <path d="M140 0 V400"/><path d="M296 0 V400"/>
+            </g>
+            <path d="M0 204 Q120 184 200 204 T400 194" stroke="#b8a681" stroke-width="6" fill="none" opacity=".5" stroke-dasharray="2 11" stroke-linecap="round"/>
+            <g fill="#d4c5a6" stroke="#c7b795" stroke-width="1.5">
+              <rect x="152" y="152" width="120" height="100" rx="4"/>
+              <rect x="30" y="296" width="90" height="66" rx="4"/>
+              <rect x="306" y="42" width="66" height="66" rx="4"/>
+              <rect x="30" y="42" width="82" height="60" rx="4"/>
+            </g>
+          </svg>
+          <div class="pin">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.4 8 12 8 12s8-6.6 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg>
+          </div>
+          <span class="maplabel">Shimokitazawa · 5 min walk</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COLOPHON / FOOTER ============ -->
+  <footer class="colophon">
+    <div class="colo-grid">
+      <div class="colo-brand">
+        <div class="name">
+          <svg class="hanko sm" viewBox="0 0 100 100" aria-hidden="true" style="transform:none;filter:none">
+            <circle cx="50" cy="50" r="46" fill="#A8443A"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#f6ead6" stroke-width="2.4" opacity=".85"/>
+            <text x="50" y="52" font-family="'Shippori Mincho',serif" font-size="50" font-weight="700" fill="#f6ead6" text-anchor="middle" dominant-baseline="central">灯</text>
+          </svg>
+          喫茶こもれび
+        </div>
+        <p>下北沢の小さな自家焙煎喫茶。急がない一杯を。</p>
+      </div>
+      <div class="colo-col">
+        <h4>お品書き</h4>
+        <a href="#why">お店のこと</a>
+        <a href="#menu">メニュー</a>
+        <a href="#voices">投書</a>
+        <a href="#access">アクセス</a>
+      </div>
+      <div class="colo-col">
+        <h4>営業案内</h4>
+        <a href="tel:0300000000">03-0000-0000</a>
+        <p>メール hello@example.jp（デモ）</p>
+        <p>毎日 7–19時 · 水曜定休</p>
+      </div>
+    </div>
+  </footer>
+  <div class="colo-foot">
+    <span>© 2026 喫茶こもれび. こちらはデモ用の架空店舗です。</span>
+    <span>Made by <strong>Jason's Consulting</strong> · <span class="demo">ランディングページ デモ・架空店舗</span></span>
+  </div>
+
+</div>
+
+<!-- ============ STICKY BAR ============ -->
+<div class="bar">
+  <a class="b-call" href="tel:0300000000">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.4-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg>
+    電話
+  </a>
+  <a class="b-map" href="#access">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 22s7-6.6 7-12a7 7 0 10-14 0c0 5.4 7 12 7 12z"/><circle cx="12" cy="10" r="2.4"/></svg>
+    アクセス
+  </a>
+</div>
+
+<script>
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

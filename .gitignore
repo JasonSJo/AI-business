@@ -1,0 +1,17 @@
+# 콜드 이메일 생성 결과물 (개인 리드 정보 포함 가능 — 커밋 금지)
+tools/cold-email-generator/out/
+
+# 실제 리드 CSV (샘플만 커밋)
+tools/cold-email-generator/*.csv
+!tools/cold-email-generator/leads.sample.csv
+
+# 실제 고객 납품물
+clients/
+_site/
+
+# 영상 녹화 중간 산출물
+tools/video-ad/out/
+
+# 유튜브 업로더 자격증명 (커밋 금지)
+tools/youtube-uploader/client_secret.json
+tools/youtube-uploader/token.json

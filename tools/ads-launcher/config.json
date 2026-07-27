@@ -1,0 +1,27 @@
+{
+  "_설명": "광고 런처 설정. 값을 바꾸고 generate.py를 실행하면 launch/ 폴더의 실행 문서가 다시 만들어진다.",
+  "brand": "Jason's Consulting",
+  "landing_url": "https://jasonsjo.github.io/AI-business/",
+  "video_file": "tools/video-ad/jasons-ad-15s.mp4",
+  "youtube_video_url": "https://youtu.be/1Lo8lC88MwU",
+  "daily_budget_krw": 10000,
+  "targeting": {
+    "location": "대한민국",
+    "age": "25-54",
+    "language": "한국어",
+    "interests": ["소기업", "자영업", "창업", "마케팅"]
+  },
+  "google": {
+    "campaign_name": "JC-유튜브-랜딩페이지-v1",
+    "cta_button": "무료 샘플 받기",
+    "headline": "예약받는 랜딩페이지, 48시간",
+    "long_headline": "사장님 가게, 검색하면 뭐가 나오나요? 예약 버튼 달린 한 페이지 — 무료 샘플 먼저.",
+    "description": "병원·미용실·카페·필라테스 전문. 마음에 안 들면 안 쓰셔도 됩니다."
+  },
+  "meta": {
+    "campaign_name": "JC-인스타-랜딩페이지-v1",
+    "primary_text": "사장님, 아직 인스타 DM으로만 예약 받으세요?\n예약 버튼 달린 한 페이지, 48시간이면 됩니다.\n내 가게 이름으로 무료 샘플부터 받아보세요 👇",
+    "headline": "48시간 완성 · 무료 샘플 먼저",
+    "cta_button": "더 알아보기"
+  }
+}

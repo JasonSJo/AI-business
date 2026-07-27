@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="shared.css" />
+<style>
+  html,body{width:1080px;height:1350px}
+  .head{position:absolute;top:96px;left:96px;right:96px;display:flex;justify-content:space-between;align-items:center}
+  /* 비어있는 원 — 검색의 공백 */
+  .void{position:absolute;left:50%;top:47%;transform:translate(-50%,-50%)}
+  .void svg{display:block}
+  .cursor{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:4px;height:110px;background:var(--ink);opacity:.85;
+  }
+  .zero{
+    position:absolute;left:50%;top:calc(50% + 110px);transform:translateX(-50%);
+    font-family:'DM Mono',monospace;font-size:21px;letter-spacing:.34em;color:var(--muted);
+  }
+  h1{
+    position:absolute;left:96px;right:96px;bottom:210px;
+    font-family:'Gowun Batang',serif;font-size:86px;line-height:1.28;font-weight:700;
+  }
+  h1 em{font-style:normal;color:var(--clay-d)}
+  .foot{position:absolute;left:96px;right:96px;bottom:96px;display:flex;justify-content:space-between;align-items:center}
+  .foot .msg{font-size:28px;color:var(--muted)}
+</style>
+</head>
+<body>
+  <div class="head">
+    <span class="label">FIELD NOTE — 01</span>
+    <span class="label">JASON'S</span>
+  </div>
+
+  <div class="void">
+    <svg width="640" height="640" viewBox="0 0 640 640" fill="none">
+      <circle cx="320" cy="320" r="300" stroke="rgba(35,40,31,.2)" stroke-width="2"/>
+      <circle cx="320" cy="320" r="252" stroke="rgba(35,40,31,.1)" stroke-width="1.5"/>
+      <circle cx="320" cy="320" r="300" stroke="#C0784F" stroke-width="3"
+              stroke-dasharray="52 1833" stroke-linecap="round" transform="rotate(-90 320 320)"/>
+    </svg>
+    <span class="cursor"></span>
+    <span class="zero">0 RESULTS</span>
+  </div>
+
+  <h1>검색하면,<br><em>아무것도</em> 없습니다.</h1>
+  <div class="foot">
+    <span class="msg">혹시 사장님 가게 이야기인가요?</span>
+    <span class="label">01 / 03</span>
+  </div>
+</body>
+</html>

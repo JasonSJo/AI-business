@@ -1,0 +1,22 @@
+/* 온기 기하학 — 공용 캔버스 스타일 */
+@font-face{font-family:'DM Mono';src:url('fonts/DMMono-Regular.ttf');font-display:block}
+/* 한글 세리프는 로컬 파일로 확정 로드 (CDN 서브셋 지연 방지) */
+@font-face{font-family:'Gowun Batang';src:url('fonts/GowunBatang-Regular.ttf');font-weight:400;font-display:block}
+@font-face{font-family:'Gowun Batang';src:url('fonts/GowunBatang-Bold.ttf');font-weight:700;font-display:block}
+:root{
+  --cream:#F4EFE6; --cream-deep:#EBE3D5; --ink:#23281F;
+  --pine:#3F5138; --pine-l:#5E7351; --clay:#C0784F; --clay-d:#A5603A;
+  --muted:#8A8474; --line:rgba(35,40,31,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow:hidden}
+body{background:var(--cream);color:var(--ink);font-family:'Pretendard',sans-serif;position:relative}
+.serif{font-family:'Gowun Batang',serif}
+.mono{font-family:'DM Mono',monospace}
+/* 종이 결 */
+body::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:99;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+/* 측량 눈금 프레임 */
+.frame{position:absolute;inset:0;pointer-events:none}
+.tick{position:absolute;background:var(--line)}
+.label{font-family:'DM Mono',monospace;font-size:15px;letter-spacing:.22em;color:var(--muted);text-transform:uppercase}

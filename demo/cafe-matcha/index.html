@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>미루 말차 · 성수 | 오늘의 초록 한 잔</title>
+<meta name="description" content="성수동 말차·라떼 바 미루. 매일 갈아내는 우스차 말차와 시즌 라떼. 한 잔의 초록으로 쉬어가세요." />
+<meta property="og:title" content="미루 말차 · 성수 | 오늘의 초록 한 잔" />
+<meta property="og:description" content="성수동 말차·라떼 바. 시그니처 말차 라떼 6,500원." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700;800&family=Fraunces:ital,opsz,wght@1,9..144,500;0,9..144,600&family=Gowun+Dodum&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<style>
+  :root{
+    --cream:#F6F4EC; --cream2:#EDEBDD; --matcha:#6B8E5A; --matcha-d:#3E5636; --ink:#25301F;
+    --peach:#E8A87C; --peach-d:#D68A57; --muted:#7C8371; --white:#FCFBF6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--cream);color:var(--ink);font-family:'Pretendard',sans-serif;line-height:1.65;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .g{font-family:'Hanken Grotesk',sans-serif}
+  .fr{font-family:'Fraunces',serif;font-style:italic}
+  .kr{font-family:'Gowun Dodum',sans-serif}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+
+  nav{position:sticky;top:0;z-index:60;background:rgba(246,244,236,.82);backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(37,48,31,.08)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.01em}
+  .leaf{width:26px;height:26px;border-radius:50% 50% 50% 0;background:linear-gradient(140deg,#8FB37A,var(--matcha));
+    transform:rotate(-12deg);box-shadow:inset -3px -3px 6px rgba(0,0,0,.12)}
+  .nav-cta{background:var(--ink);color:var(--white);font-weight:600;font-size:13.5px;padding:10px 20px;border-radius:100px;transition:.25s}
+  .nav-cta:hover{background:var(--matcha-d)}
+
+  /* HERO */
+  header{padding:60px 0 30px;position:relative;overflow:hidden}
+  .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+  @media(max-width:840px){.hero{grid-template-columns:1fr;gap:24px}}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--cream2);color:var(--matcha-d);
+    font-weight:700;font-size:12.5px;letter-spacing:.02em;padding:7px 14px;border-radius:100px;margin-bottom:20px}
+  .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--matcha)}
+  h1{font-family:'Hanken Grotesk',sans-serif;font-weight:800;font-size:clamp(40px,7vw,72px);line-height:1.02;letter-spacing:-.03em}
+  h1 .fr{color:var(--matcha-d);font-weight:600}
+  .lede{margin-top:20px;max-width:40ch;color:var(--muted);font-size:16.5px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px;align-items:center}
+  .btn{background:var(--matcha);color:var(--white);font-weight:700;font-size:15px;padding:15px 28px;border-radius:100px;
+    transition:.25s;box-shadow:0 12px 30px -14px rgba(107,142,90,.8)}
+  .btn:hover{transform:translateY(-2px);background:var(--matcha-d)}
+  .btn-2{color:var(--ink);font-weight:600;border-bottom:2px solid var(--peach);padding-bottom:2px}
+  .trust{margin-top:26px;font-size:13.5px;color:var(--muted)}
+  .trust b{color:var(--ink)}
+  /* hero art: a matcha cup */
+  .cupwrap{position:relative;display:grid;place-items:center;min-height:340px}
+  .blob{position:absolute;width:118%;aspect-ratio:1;border-radius:46% 54% 58% 42%/50% 44% 56% 50%;
+    background:radial-gradient(circle at 40% 34%,#A9C79A,#6B8E5A 62%,#4A6840);filter:blur(2px);
+    animation:spin 22s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .cup{position:relative;width:190px;height:200px;z-index:2}
+  .cup .body{position:absolute;bottom:0;left:15px;right:15px;height:150px;border-radius:16px 16px 26px 26px;
+    background:linear-gradient(180deg,#FFFDF8,#F0EDE0);box-shadow:0 20px 50px -20px rgba(37,48,31,.5)}
+  .cup .foam{position:absolute;top:34px;left:24px;right:24px;height:44px;border-radius:50%;
+    background:radial-gradient(circle at 42% 38%,#CFE0BE,#9CBE86)}
+  .cup .steam{position:absolute;top:6px;left:50%;width:5px;height:34px;border-radius:4px;background:rgba(107,142,90,.4);
+    transform:translateX(-50%);animation:steam 3s ease-in-out infinite}
+  @keyframes steam{0%,100%{opacity:.3;transform:translateX(-50%) translateY(0)}50%{opacity:.7;transform:translateX(-50%) translateY(-6px)}}
+  .cup .badge{position:absolute;bottom:-14px;right:-10px;background:var(--peach);color:#5A2E14;font-weight:800;
+    font-size:12px;padding:8px 13px;border-radius:100px;z-index:3;box-shadow:0 8px 20px -8px rgba(0,0,0,.4)}
+
+  /* MARQUEE */
+  .marq{overflow:hidden;border-top:1px solid rgba(37,48,31,.1);border-bottom:1px solid rgba(37,48,31,.1);
+    padding:14px 0;margin-top:24px;background:var(--white)}
+  .marq div{display:flex;gap:34px;white-space:nowrap;animation:slide 22s linear infinite;font-family:'Hanken Grotesk';
+    font-weight:700;color:var(--matcha-d);font-size:15px}
+  .marq span::before{content:"◍  ";color:var(--peach-d)}
+  @keyframes slide{to{transform:translateX(-50%)}}
+
+  section{padding:76px 0}
+  .tag{display:inline-block;font-family:'Hanken Grotesk';font-weight:800;font-size:12.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--peach-d);margin-bottom:12px}
+  .stitle{font-family:'Hanken Grotesk';font-weight:800;font-size:clamp(28px,4.4vw,42px);letter-spacing:-.02em;line-height:1.12}
+  .ssub{color:var(--muted);margin-top:12px;max-width:52ch}
+
+  /* MENU GRID */
+  .menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px}
+  @media(max-width:840px){.menu-grid{grid-template-columns:1fr}}
+  .mcard{background:var(--white);border:1px solid rgba(37,48,31,.08);border-radius:22px;padding:24px;
+    transition:.3s;position:relative;overflow:hidden}
+  .mcard:hover{transform:translateY(-5px);box-shadow:0 24px 50px -30px rgba(37,48,31,.5)}
+  .mcard.hot{background:linear-gradient(165deg,#F2F6EA,#E5EFD8);border-color:rgba(107,142,90,.35)}
+  .mcard .pill{position:absolute;top:16px;right:16px;background:var(--peach);color:#5A2E14;font-weight:800;
+    font-size:10.5px;letter-spacing:.06em;padding:4px 11px;border-radius:100px}
+  .mdot{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;margin-bottom:16px;font-size:22px}
+  .mcard h3{font-family:'Hanken Grotesk';font-weight:800;font-size:20px;letter-spacing:-.01em}
+  .mcard .price{font-family:'Hanken Grotesk';font-weight:800;font-size:26px;margin:6px 0 10px;color:var(--matcha-d)}
+  .mcard .price small{font-size:13px;color:var(--muted);font-weight:500;font-family:'Pretendard'}
+  .mcard ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .mcard li{font-size:13.5px;color:var(--ink);padding-left:18px;position:relative}
+  .mcard li::before{content:"○";position:absolute;left:0;color:var(--matcha);font-size:9px;top:4px}
+  .mcard .mcta{display:inline-block;margin-top:16px;font-weight:700;font-size:13.5px;color:var(--matcha-d)}
+
+  /* STEPS */
+  .steps-band{background:var(--matcha-d);color:var(--white);border-radius:30px;margin:0 auto;padding:56px 0}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:30px}
+  @media(max-width:840px){.steps{grid-template-columns:1fr;gap:22px}}
+  .step .n{font-family:'Fraunces',serif;font-style:italic;font-size:40px;color:var(--peach)}
+  .step h4{font-family:'Hanken Grotesk';font-weight:800;font-size:19px;margin:6px 0 8px}
+  .step p{font-size:14px;color:rgba(252,251,246,.78)}
+  .steps-band .tag{color:var(--peach)}
+  .steps-band .stitle{color:var(--white)}
+
+  /* SUBSCRIPTION highlight */
+  .sub-card{display:grid;grid-template-columns:1.3fr 1fr;gap:32px;align-items:center;background:var(--white);
+    border:1px solid rgba(37,48,31,.1);border-radius:26px;padding:36px;margin-top:30px}
+  @media(max-width:840px){.sub-card{grid-template-columns:1fr;gap:22px}}
+  .sub-price{font-family:'Hanken Grotesk';font-weight:800;font-size:44px;color:var(--matcha-d)}
+  .sub-price small{font-size:15px;color:var(--muted);font-weight:500;font-family:'Pretendard'}
+
+  /* REVIEWS */
+  .revs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px}
+  @media(max-width:840px){.revs{grid-template-columns:1fr}}
+  .rev{background:var(--white);border-radius:20px;padding:24px;border:1px solid rgba(37,48,31,.07)}
+  .rev .stars{color:var(--peach-d);font-size:14px;letter-spacing:2px}
+  .rev q{display:block;font-size:14.5px;margin:12px 0 16px;line-height:1.7}
+  .rev .who{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted)}
+  .rev .av{width:34px;height:34px;border-radius:50%;background:linear-gradient(140deg,#A9C79A,var(--matcha));
+    display:grid;place-items:center;color:#fff;font-weight:800;font-size:13px}
+
+  /* VISIT */
+  .visit{display:grid;grid-template-columns:1fr 1fr;gap:36px}
+  @media(max-width:840px){.visit{grid-template-columns:1fr;gap:22px}}
+  .vrow{display:flex;justify-content:space-between;gap:16px;padding:15px 0;border-bottom:1px solid rgba(37,48,31,.1);font-size:14.5px}
+  .vrow .k{color:var(--muted)}
+  .map{height:210px;border-radius:20px;background:
+    repeating-linear-gradient(0deg,rgba(107,142,90,.1) 0 1px,transparent 1px 38px),
+    repeating-linear-gradient(90deg,rgba(107,142,90,.1) 0 1px,transparent 1px 38px),var(--cream2);position:relative}
+  .map .pin{position:absolute;left:46%;top:44%;width:16px;height:16px;border-radius:50% 50% 50% 0;
+    background:var(--matcha);transform:rotate(-45deg);box-shadow:0 0 0 8px rgba(107,142,90,.22)}
+
+  footer{background:var(--ink);color:rgba(252,251,246,.7);padding:44px 0 120px;text-align:center}
+  footer .b{color:var(--white);font-family:'Hanken Grotesk';font-weight:800;font-size:22px;margin-bottom:8px}
+  .demo-tag{display:inline-block;margin-bottom:14px;font-family:'Fraunces';font-style:italic;font-size:14px;color:var(--peach)}
+
+  .rv{opacity:0;transform:translateY(22px);transition:opacity .8s,transform .8s cubic-bezier(.2,.7,.2,1)}
+  .rv.in{opacity:1;transform:none}
+
+  .bar{position:fixed;left:0;right:0;bottom:0;z-index:70;display:none;gap:10px;padding:12px 16px;
+    background:rgba(246,244,236,.92);backdrop-filter:blur(12px);border-top:1px solid rgba(37,48,31,.12)}
+  .bar a{flex:1;text-align:center;padding:14px;border-radius:100px;font-weight:700;font-size:14px}
+  .bar .c{background:var(--cream2);color:var(--ink)}
+  .bar .b{background:var(--matcha);color:var(--white)}
+  @media(max-width:840px){.bar{display:flex}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap nav-in">
+    <span class="brand"><span class="leaf"></span> 미루 말차</span>
+    <a href="#menu" class="nav-cta">메뉴 보기</a>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap hero">
+    <div>
+      <span class="eyebrow">성수동 · 말차 &amp; 라떼 바</span>
+      <h1>오늘의 <span class="fr">초록</span><br>한 잔.</h1>
+      <p class="lede">매일 아침 맷돌로 갈아내는 우스차 말차와, 계절을 담은 시즌 라떼. 바쁜 성수동 한가운데에서 딱 한 잔만큼의 쉼을 내어드려요.</p>
+      <div class="hero-cta">
+        <a href="#menu" class="btn">시그니처 말차 라떼 · 6,500원</a>
+        <a href="#visit" class="btn-2">오시는 길</a>
+      </div>
+      <p class="trust">네이버 리뷰 <b>4.9</b> &nbsp;·&nbsp; 매일 <b>당일 제분</b> &nbsp;·&nbsp; 원데이 말차 클래스 운영</p>
+    </div>
+    <div class="cupwrap">
+      <div class="blob"></div>
+      <div class="cup">
+        <span class="steam"></span>
+        <div class="body"><div class="foam"></div></div>
+        <span class="badge">우스차 등급</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="marq"><div>
+  <span>시그니처 말차 라떼</span><span>흑임자 말차</span><span>제주 유기농 말차</span><span>시즌 딸기 라떼</span><span>호지차</span><span>말차 클래스</span>
+  <span>시그니처 말차 라떼</span><span>흑임자 말차</span><span>제주 유기농 말차</span><span>시즌 딸기 라떼</span><span>호지차</span><span>말차 클래스</span>
+</div></div>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="wrap">
+    <span class="tag rv">Today's Menu</span>
+    <h2 class="stitle rv">한 잔, 골라보세요.</h2>
+    <p class="ssub rv">모든 말차는 주문 즉시 갈아 그 자리에서 저어드립니다.</p>
+    <div class="menu-grid">
+      <div class="mcard rv">
+        <div class="mdot" style="background:#E7EFDA">🍵</div>
+        <h3>시그니처 말차 라떼</h3>
+        <div class="price">6,500<small>원</small></div>
+        <ul><li>당일 제분 우스차 말차</li><li>우유 / 오트 선택</li><li>당도 3단계 조절</li></ul>
+        <a href="#visit" class="mcta">주문하러 가기 →</a>
+      </div>
+      <div class="mcard hot rv" style="transition-delay:.06s">
+        <span class="pill">BEST</span>
+        <div class="mdot" style="background:#EAE0CE">⚫</div>
+        <h3>흑임자 말차</h3>
+        <div class="price">7,000<small>원</small></div>
+        <ul><li>국산 흑임자 페이스트</li><li>고소함 + 말차의 균형</li><li>여름엔 아이스로 인기</li></ul>
+        <a href="#visit" class="mcta">주문하러 가기 →</a>
+      </div>
+      <div class="mcard rv" style="transition-delay:.12s">
+        <div class="mdot" style="background:#F3DFD3">🍓</div>
+        <h3>시즌 딸기 라떼</h3>
+        <div class="price">6,800<small>원</small></div>
+        <ul><li>제철 생딸기 수제 퓌레</li><li>말차 한 스푼 토핑 옵션</li><li>기간 한정 메뉴</li></ul>
+        <a href="#visit" class="mcta">주문하러 가기 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section>
+  <div class="wrap">
+    <div class="steps-band">
+      <div class="wrap">
+        <span class="tag rv">How we make it</span>
+        <h2 class="stitle rv">한 잔에 3분,<br>정성은 그대로.</h2>
+        <div class="steps">
+          <div class="step rv"><div class="n">01</div><h4>당일 제분</h4><p>개봉한 지 오래된 가루는 쓰지 않아요. 매일 아침 필요한 만큼만 맷돌로 갈아냅니다.</p></div>
+          <div class="step rv" style="transition-delay:.06s"><div class="n">02</div><h4>70℃ 물</h4><p>끓는 물은 말차를 쓰게 만들어요. 온도를 맞춰 단맛과 감칠맛만 끌어올립니다.</p></div>
+          <div class="step rv" style="transition-delay:.12s"><div class="n">03</div><h4>손으로 격불</h4><p>기계 대신 차선(茶筅)으로 저어 부드러운 거품을 냅니다. 그래서 목넘김이 달라요.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBSCRIPTION -->
+<section>
+  <div class="wrap">
+    <span class="tag rv">Regulars</span>
+    <h2 class="stitle rv">매일 오는 당신을 위해.</h2>
+    <div class="sub-card rv">
+      <div>
+        <h3 style="font-family:'Hanken Grotesk';font-weight:800;font-size:22px;margin-bottom:8px">한 달 말차 정기권</h3>
+        <p style="color:var(--muted);font-size:14.5px">하루 한 잔, 시그니처 말차 라떼를 한 달간. 출근길에 미리 주문해두고 픽업만 하세요.</p>
+        <ul style="list-style:none;margin-top:14px;display:flex;flex-wrap:wrap;gap:8px 18px">
+          <li style="font-size:13.5px">◍ 하루 1잔 × 주 5일</li>
+          <li style="font-size:13.5px">◍ 앱 미리주문 · 대기 0분</li>
+          <li style="font-size:13.5px">◍ 시즌 신메뉴 우선 시음</li>
+        </ul>
+      </div>
+      <div style="text-align:center">
+        <div class="sub-price">99,000<small>원/월</small></div>
+        <p style="font-size:12.5px;color:var(--muted);margin-bottom:16px">잔당 약 4,950원 꼴</p>
+        <a href="#visit" class="btn" style="width:100%">정기권 시작하기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section>
+  <div class="wrap">
+    <span class="tag rv">Reviews</span>
+    <h2 class="stitle rv">단골들의 한 마디.</h2>
+    <p class="ssub rv">네이버 리뷰에서 그대로 가져왔습니다.</p>
+    <div class="revs">
+      <div class="rev rv"><div class="stars">★★★★★</div><q>“말차 특유의 쓴맛을 싫어했는데 여기 건 완전 부드러워요. 당일 제분이 진짜 다르네요.”</q><div class="who"><span class="av">서</span> 서연 님 · 시그니처 · 4개월</div></div>
+      <div class="rev rv" style="transition-delay:.06s"><div class="stars">★★★★★</div><q>“흑임자 말차 처음 먹고 반했어요. 고소하면서 안 느끼하고, 성수 오면 무조건 들러요.”</q><div class="who"><span class="av">준</span> 준호 님 · 흑임자 · 단골</div></div>
+      <div class="rev rv" style="transition-delay:.12s"><div class="stars">★★★★★</div><q>“정기권 끊고 출근길 픽업 중인데 대기 없이 받아서 최고예요. 아침이 달라졌어요.”</q><div class="who"><span class="av">민</span> 민지 님 · 정기권 · 2개월</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section id="visit">
+  <div class="wrap visit">
+    <div class="rv">
+      <span class="tag">Find us</span>
+      <h2 class="stitle" style="margin-bottom:18px">성수역 3번 출구,<br>골목 안 초록 간판.</h2>
+      <div class="vrow"><span class="k">주소</span><span>서울 성동구 연무장길 00, 1층 (데모용 표시)</span></div>
+      <div class="vrow"><span class="k">영업</span><span>매일 08:00–20:00 · 연중무휴</span></div>
+      <div class="vrow"><span class="k">전화</span><span>02-000-0000</span></div>
+      <div class="vrow"><span class="k">주문</span><span>앱 미리주문 · 매장 픽업 / 포장</span></div>
+      <div class="hero-cta" style="margin-top:24px">
+        <a href="tel:0200000000" class="btn">전화로 문의</a>
+        <a href="#" class="btn-2">인스타 @miru.matcha</a>
+      </div>
+    </div>
+    <div class="map rv" style="transition-delay:.08s"><span class="pin"></span></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="demo-tag">랜딩페이지 데모 · 데모용 가상 업체입니다</span>
+    <div class="b">미루 말차</div>
+    <p>성수동 말차·라떼 바. 오늘의 초록 한 잔.</p>
+  </div>
+</footer>
+
+<div class="bar">
+  <a href="tel:0200000000" class="c">전화</a>
+  <a href="#menu" class="b">메뉴 보기</a>
+</div>
+
+<script>
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+  document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

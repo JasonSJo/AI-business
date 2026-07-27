@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jason's Consulting · KPI 대시보드</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --cream:#F4EFE6; --cream-deep:#EBE3D5; --ink:#23281F; --ink-soft:#4B4E42;
+    --muted:#8A8474; --line:rgba(35,40,31,.12); --card:#FFFFFF;
+    /* 차트 팔레트 — dataviz 검증 완료 (surface #F4EFE6, light) */
+    --s1:#00806A;            /* 발송 (teal) */
+    --s2:#CC5E20;            /* 응답 (burnt orange) */
+    --f1:#54B49D; --f2:#2E9A81; --f3:#00806A; --f4:#005B4C; /* 퍼널 서수 램프 */
+    --warn-bg:#FBEAD3; --warn-ink:#8A4B08;                  /* 병목 배지 (아이콘+라벨 동반) */
+    --good-bg:#DFF0E7; --good-ink:#1D5B41;
+    --r:16px; --shadow:0 16px 44px -20px rgba(35,40,31,.28);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Pretendard',sans-serif;background:var(--cream);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;padding-bottom:80px}
+  .serif{font-family:'Gowun Batang',serif}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  a{color:inherit}
+
+  header{padding:34px 0 8px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand .mark{width:38px;height:38px;border-radius:50%;background:conic-gradient(from 210deg,#3F5138,#5E7351,#C0784F,#3F5138);display:grid;place-items:center;color:#fff;font-family:'Gowun Batang',serif;font-size:17px}
+  .brand h1{font-size:20px;letter-spacing:.01em}
+  .brand .sub{font-size:12.5px;color:var(--muted);margin-top:1px}
+  .goalline{margin-top:14px;font-size:13.5px;color:var(--ink-soft);background:var(--cream-deep);border:1px solid var(--line);border-radius:12px;padding:10px 14px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .goalline b{color:var(--ink)}
+
+  h2.sec{font-family:'Gowun Batang',serif;font-size:19px;margin:30px 0 12px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+
+  /* 입력 폼 */
+  .form-grid{display:grid;grid-template-columns:repeat(8,1fr) auto;gap:10px;align-items:end}
+  .fld label{display:block;font-size:11.5px;color:var(--muted);margin-bottom:4px;font-weight:600}
+  .fld input{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:10px;font:inherit;font-size:14px;background:#fff;color:var(--ink)}
+  .fld input:focus{outline:2px solid var(--s1);outline-offset:-1px;border-color:transparent}
+  .btn{border:none;cursor:pointer;font:inherit;font-weight:600;border-radius:100px;transition:.2s}
+  .btn-add{background:var(--ink);color:var(--cream);padding:11px 22px;font-size:14px}
+  .btn-add:hover{background:#3F5138}
+  .btn-sm{background:transparent;border:1px solid var(--line);padding:7px 14px;font-size:12.5px;color:var(--ink-soft)}
+  .btn-sm:hover{border-color:var(--ink);color:var(--ink)}
+  .btn-danger:hover{border-color:#B3402A;color:#B3402A}
+  @media(max-width:900px){.form-grid{grid-template-columns:repeat(4,1fr)}.form-grid .btn-add{grid-column:span 4}}
+
+  /* 스탯 타일 */
+  .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .tile{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px}
+  .tile .k{font-size:12.5px;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:7px}
+  .tile .swatch{width:9px;height:9px;border-radius:3px;display:inline-block}
+  .tile .v{font-family:'Gowun Batang',serif;font-size:34px;line-height:1.15;margin-top:6px}
+  .tile .d{font-size:12.5px;color:var(--muted);margin-top:3px}
+  .tile .d b{color:var(--ink-soft)}
+  @media(max-width:820px){.tiles{grid-template-columns:repeat(2,1fr)}}
+
+  /* 필터 행 */
+  .filters{display:flex;gap:8px;margin:26px 0 10px;align-items:center;flex-wrap:wrap}
+  .filters .lbl{font-size:12.5px;color:var(--muted);font-weight:600;margin-right:2px}
+  .chip{border:1px solid var(--line);background:transparent;padding:7px 15px;border-radius:100px;font:inherit;font-size:13px;cursor:pointer;color:var(--ink-soft)}
+  .chip.on{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+
+  .duo{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;align-items:stretch}
+  @media(max-width:900px){.duo{grid-template-columns:1fr}}
+
+  /* 범례 */
+  .legend{display:flex;gap:16px;font-size:12.5px;color:var(--ink-soft);margin-bottom:10px}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+
+  /* 퍼널 */
+  .fun-row{display:grid;grid-template-columns:74px 1fr 120px;gap:12px;align-items:center;padding:7px 0}
+  .fun-row .nm{font-size:13px;font-weight:600;color:var(--ink-soft)}
+  .fun-bar-track{height:26px;position:relative}
+  .fun-bar{height:100%;border-radius:0 4px 4px 0;min-width:3px;transition:width .5s cubic-bezier(.2,.7,.2,1)}
+  .fun-row .val{font-size:13px;text-align:right;color:var(--ink)}
+  .fun-row .val small{color:var(--muted)}
+  .conv{display:grid;grid-template-columns:74px 1fr;gap:12px;padding:0 0 2px}
+  .conv .c{font-size:11.5px;color:var(--muted);padding-left:2px}
+  .badge{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;padding:8px 14px;border-radius:10px;margin-top:14px}
+  .badge.warn{background:var(--warn-bg);color:var(--warn-ink)}
+  .badge.good{background:var(--good-bg);color:var(--good-ink)}
+
+  /* 매출 */
+  .rev-hero{font-family:'Gowun Batang',serif;font-size:38px;line-height:1.1}
+  .rev-sub{font-size:13px;color:var(--muted);margin-top:4px}
+  .meter{height:12px;background:var(--cream-deep);border-radius:100px;overflow:hidden;margin-top:16px}
+  .meter i{display:block;height:100%;background:var(--s1);border-radius:100px;transition:width .5s}
+  .rev-edit{margin-top:14px;font-size:12.5px;color:var(--muted)}
+  .rev-edit input{width:110px;padding:5px 8px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:13px;margin:0 6px}
+
+  /* 차트 */
+  .chart-box{position:relative}
+  .chart-box svg{width:100%;height:auto;display:block}
+  .tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--cream);font-size:12.5px;line-height:1.5;padding:8px 11px;border-radius:9px;opacity:0;transition:opacity .12s;white-space:nowrap;z-index:5;transform:translate(-50%,-100%)}
+  .tip b{color:#fff}
+  .axis-t{font-size:11px;fill:var(--muted)}
+  .grid-l{stroke:var(--line);stroke-width:1}
+  .dlabel{font-size:11px;font-weight:600}
+  .empty{color:var(--muted);font-size:14px;text-align:center;padding:36px 0}
+
+  /* 테이블 */
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th{font-size:11.5px;color:var(--muted);text-align:right;padding:8px 10px;border-bottom:1px solid var(--line);font-weight:600}
+  th:first-child,td:first-child{text-align:left}
+  td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;color:var(--ink-soft)}
+  td.memo{max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left;color:var(--muted)}
+  td .del{border:none;background:none;cursor:pointer;color:var(--muted);font-size:15px;padding:2px 6px;border-radius:6px}
+  td .del:hover{color:#B3402A;background:var(--cream)}
+  .tbl-wrap{overflow-x:auto}
+
+  .toolbar{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+  footer{margin-top:40px;font-size:12px;color:var(--muted);text-align:center}
+</style>
+</head>
+<body data-palette="#00806A,#CC5E20" data-mode="light">
+<div class="wrap">
+
+  <header>
+    <div class="brand">
+      <span class="mark">J</span>
+      <div>
+        <h1 class="serif">Jason's Consulting · KPI 대시보드</h1>
+        <div class="sub">발송 → 응답 → 미팅 → 계약, 매일 기록하고 병목을 찾는다</div>
+      </div>
+    </div>
+    <div class="goalline" id="goalline"></div>
+  </header>
+
+  <h2 class="sec">오늘 기록</h2>
+  <div class="card">
+    <form class="form-grid" id="entryForm">
+      <div class="fld" style="grid-column:span 2"><label>날짜</label><input type="date" id="fDate" required /></div>
+      <div class="fld"><label>발송</label><input type="number" id="fSent" min="0" placeholder="0" /></div>
+      <div class="fld"><label>응답</label><input type="number" id="fRep" min="0" placeholder="0" /></div>
+      <div class="fld"><label>미팅</label><input type="number" id="fMtg" min="0" placeholder="0" /></div>
+      <div class="fld"><label>계약</label><input type="number" id="fDeal" min="0" placeholder="0" /></div>
+      <div class="fld"><label>매출(원)</label><input type="number" id="fRev" min="0" step="10000" placeholder="0" /></div>
+      <div class="fld"><label>메모</label><input type="text" id="fMemo" placeholder="예: 훅 B버전 테스트" /></div>
+      <button class="btn btn-add" type="submit">기록 추가</button>
+    </form>
+  </div>
+
+  <h2 class="sec">이번 주 (월~일)</h2>
+  <div class="tiles" id="tiles"></div>
+
+  <div class="filters">
+    <span class="lbl">기간</span>
+    <button class="chip" data-range="4">최근 4주</button>
+    <button class="chip" data-range="12">최근 12주</button>
+    <button class="chip" data-range="0">전체</button>
+  </div>
+
+  <div class="duo">
+    <div class="card">
+      <h2 class="sec" style="margin-top:0">주간 추이 — 발송·응답</h2>
+      <div class="legend"><span><i style="background:var(--s1)"></i>발송</span><span><i style="background:var(--s2)"></i>응답</span></div>
+      <div class="chart-box" id="trendBox"></div>
+    </div>
+    <div class="card">
+      <h2 class="sec" style="margin-top:0">퍼널 &amp; 병목</h2>
+      <div id="funnelBox"></div>
+    </div>
+  </div>
+
+  <div class="duo" style="margin-top:14px">
+    <div class="card">
+      <h2 class="sec" style="margin-top:0">이번 달 매출</h2>
+      <div id="revBox"></div>
+    </div>
+    <div class="card">
+      <h2 class="sec" style="margin-top:0">이번 주 병목 처방</h2>
+      <div id="adviceBox" style="font-size:14px;color:var(--ink-soft)"></div>
+    </div>
+  </div>
+
+  <h2 class="sec">기록 (최근순)</h2>
+  <div class="card">
+    <div class="tbl-wrap">
+      <table id="logTable">
+        <thead><tr><th>날짜</th><th>발송</th><th>응답</th><th>미팅</th><th>계약</th><th>매출</th><th style="text-align:left">메모</th><th></th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="toolbar">
+      <button class="btn btn-sm" id="btnExport">JSON 내보내기 (백업)</button>
+      <button class="btn btn-sm" id="btnImport">JSON 가져오기</button>
+      <input type="file" id="importFile" accept=".json" hidden />
+      <button class="btn btn-sm" id="btnSample">샘플 데이터 채우기</button>
+      <button class="btn btn-sm btn-danger" id="btnWipe">전체 삭제</button>
+    </div>
+  </div>
+
+  <footer>데이터는 이 브라우저의 localStorage에만 저장됩니다 · 백업은 JSON 내보내기 · Jason's Consulting</footer>
+</div>
+
+<script>
+'use strict';
+// ───────── 저장소 ─────────
+const KEY = 'jc-kpi-v1';
+const state = load();
+function load(){
+  try{
+    const s = JSON.parse(localStorage.getItem(KEY)) || {};
+    return { entries: s.entries || [], goalRev: s.goalRev || 3000000, goalSent: s.goalSent || 150, range: s.range || 4 };
+  }catch{ return { entries: [], goalRev: 3000000, goalSent: 150, range: 4 }; }
+}
+function save(){ localStorage.setItem(KEY, JSON.stringify(state)); }
+
+// ───────── 유틸 ─────────
+const $ = s => document.querySelector(s);
+const won = n => '₩' + (n||0).toLocaleString('ko-KR');
+const pct = (a,b) => b > 0 ? (100*a/b) : null;
+const fmtPct = v => v === null ? '—' : (v >= 10 ? Math.round(v) : v.toFixed(1)) + '%';
+function esc(t){ const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+// 월요일 시작 주차 키
+function weekStart(dstr){
+  const d = new Date(dstr + 'T00:00:00');
+  const day = (d.getDay() + 6) % 7; // 월=0
+  d.setDate(d.getDate() - day);
+  return d.toISOString().slice(0,10);
+}
+function weekLabel(ws){ const d = new Date(ws); return (d.getMonth()+1) + '/' + d.getDate() + '주'; }
+function sum(rows, k){ return rows.reduce((a,r)=>a+(r[k]||0),0); }
+
+// ───────── 집계 ─────────
+function thisWeekRows(){ const ws = weekStart(new Date().toISOString().slice(0,10)); return state.entries.filter(e => weekStart(e.d) === ws); }
+function lastWeekRows(){
+  const d = new Date(); d.setDate(d.getDate()-7);
+  const ws = weekStart(d.toISOString().slice(0,10));
+  return state.entries.filter(e => weekStart(e.d) === ws);
+}
+function rangeRows(){
+  if(!state.range) return state.entries.slice();
+  const d = new Date(); d.setDate(d.getDate() - state.range*7);
+  const cut = d.toISOString().slice(0,10);
+  return state.entries.filter(e => e.d >= cut);
+}
+function byWeek(rows){
+  const m = new Map();
+  rows.forEach(e => {
+    const ws = weekStart(e.d);
+    if(!m.has(ws)) m.set(ws, {ws, sent:0, rep:0, mtg:0, deal:0, rev:0});
+    const w = m.get(ws);
+    w.sent += e.sent||0; w.rep += e.rep||0; w.mtg += e.mtg||0; w.deal += e.deal||0; w.rev += e.rev||0;
+  });
+  return [...m.values()].sort((a,b)=>a.ws<b.ws?-1:1);
+}
+
+// ───────── 렌더: 목표줄 ─────────
+function renderGoal(){
+  $('#goalline').innerHTML =
+    '주간 목표 — 발송 <b>' + state.goalSent + '건</b> · 응답률 <b>10%↑</b> · 미팅 <b>3건↑</b> · 계약 <b>1건↑</b>' +
+    ' <span style="color:var(--muted)">|</span> 월 매출 목표 <b>' + won(state.goalRev) + '</b>' +
+    ' <span style="color:var(--muted)">(30일 로드맵 기준 · 아래에서 수정 가능)</span>';
+}
+
+// ───────── 렌더: 스탯 타일 ─────────
+function tile(k, v, d, sw){
+  return '<div class="tile"><div class="k">' + (sw ? '<span class="swatch" style="background:'+sw+'"></span>' : '') + k +
+         '</div><div class="v serif">' + v + '</div><div class="d">' + d + '</div></div>';
+}
+function renderTiles(){
+  const tw = thisWeekRows(), lw = lastWeekRows();
+  const s = sum(tw,'sent'), r = sum(tw,'rep'), m = sum(tw,'mtg'), dl = sum(tw,'deal');
+  const ls = sum(lw,'sent');
+  const sentGap = state.goalSent - s;
+  $('#tiles').innerHTML =
+    tile('발송', s, sentGap > 0 ? '목표까지 <b>' + sentGap + '건</b> (지난주 ' + ls + ')' : '<b>주간 목표 달성 ✓</b>', 'var(--s1)') +
+    tile('응답', r, '응답률 <b>' + fmtPct(pct(r,s)) + '</b> · 기준 10%', 'var(--s2)') +
+    tile('미팅', m, '응답→미팅 <b>' + fmtPct(pct(m,r)) + '</b> · 기준 35%') +
+    tile('계약', dl, '미팅→계약 <b>' + fmtPct(pct(dl,m)) + '</b> · 기준 40%');
+}
+
+// ───────── 렌더: 주간 추이 (SVG 그룹 막대) ─────────
+function renderTrend(){
+  const weeks = byWeek(rangeRows());
+  const box = $('#trendBox');
+  if(!weeks.length){ box.innerHTML = '<div class="empty">아직 기록이 없습니다 — 위에서 오늘 발송부터 기록하세요.</div>'; return; }
+  const W = 560, H = 240, padL = 34, padB = 26, padT = 14;
+  const max = Math.max(10, ...weeks.map(w => w.sent));
+  const iw = (W - padL - 8) / weeks.length;
+  const bw = Math.min(22, Math.max(7, iw * 0.32));
+  const y = v => padT + (H - padT - padB) * (1 - v / max);
+  let g = '';
+  // 그리드 (은은하게)
+  for(let i = 0; i <= 4; i++){
+    const gy = padT + (H - padT - padB) * i / 4;
+    g += '<line class="grid-l" x1="' + padL + '" y1="' + gy + '" x2="' + W + '" y2="' + gy + '"/>' +
+         '<text class="axis-t" x="' + (padL-6) + '" y="' + (gy+4) + '" text-anchor="end">' + Math.round(max*(1-i/4)) + '</text>';
+  }
+  const bars = [];
+  weeks.forEach((w,i) => {
+    const cx = padL + iw*i + iw/2;
+    const x1 = cx - bw - 1, x2 = cx + 1; // 2px 표면 간격
+    g += '<rect x="'+x1+'" y="'+y(w.sent)+'" width="'+bw+'" height="'+Math.max(0,(H-padB)-y(w.sent))+'" rx="4" fill="var(--s1)"/>';
+    g += '<rect x="'+x2+'" y="'+y(w.rep)+'"  width="'+bw+'" height="'+Math.max(0,(H-padB)-y(w.rep))+'"  rx="4" fill="var(--s2)"/>';
+    if(i === weeks.length-1){ // 마지막 주만 직접 라벨
+      g += '<text class="dlabel" x="'+(x1+bw/2)+'" y="'+(y(w.sent)-5)+'" text-anchor="middle" fill="var(--s1)">'+w.sent+'</text>';
+      g += '<text class="dlabel" x="'+(x2+bw/2)+'" y="'+(y(w.rep)-5)+'"  text-anchor="middle" fill="var(--s2)">'+w.rep+'</text>';
+    }
+    g += '<text class="axis-t" x="'+cx+'" y="'+(H-8)+'" text-anchor="middle">'+weekLabel(w.ws)+'</text>';
+    bars.push({x: padL + iw*i, w: iw, cx, data: w});
+  });
+  box.innerHTML = '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="주간 발송·응답 추이"></svg><div class="tip" id="trendTip"></div>';
+  const svg = box.querySelector('svg');
+  svg.innerHTML = g + bars.map((b,i) =>
+    '<rect data-i="'+i+'" x="'+b.x+'" y="0" width="'+b.w+'" height="'+H+'" fill="transparent"/>').join('');
+  const tip = $('#trendTip');
+  svg.addEventListener('mousemove', ev => {
+    const t = ev.target.closest('rect[data-i]');
+    if(!t){ tip.style.opacity = 0; return; }
+    const w = bars[+t.dataset.i].data;
+    tip.innerHTML = '<b>' + weekLabel(w.ws) + '</b><br>발송 ' + w.sent + ' · 응답 ' + w.rep +
+                    '<br>미팅 ' + w.mtg + ' · 계약 ' + w.deal;
+    const r = box.getBoundingClientRect();
+    tip.style.left = Math.min(r.width-70, Math.max(70, ev.clientX - r.left)) + 'px';
+    tip.style.top = (ev.clientY - r.top - 12) + 'px';
+    tip.style.opacity = 1;
+  });
+  svg.addEventListener('mouseleave', () => tip.style.opacity = 0);
+}
+
+// ───────── 렌더: 퍼널 + 병목 ─────────
+const BASE = { rep: .10, mtg: .35, deal: .40 }; // 로드맵 기준 전환율
+function bottleneck(f){
+  if(f.sent < 20) return { key:'sent', label:'발송량', why:'데이터가 부족합니다. 먼저 발송부터 쌓으세요 (주 ' + state.goalSent + '건).' };
+  const scores = [
+    { key:'rep',  label:'응답률',       v: pct(f.rep,f.sent)/100 / BASE.rep,  why:'메시지 훅(첫 문장)을 A/B 테스트하고, 개인화 한 줄의 질을 높이세요.' },
+    { key:'mtg',  label:'응답→미팅 전환', v: f.rep ? (pct(f.mtg,f.rep)/100 / BASE.mtg) : 0, why:'응답에 24시간 내 회신하고, "5분 통화" 같은 낮은 허들을 제안하세요.' },
+    { key:'deal', label:'미팅→계약 전환', v: f.mtg ? (pct(f.deal,f.mtg)/100 / BASE.deal) : 0, why:'무료 샘플 선제작으로 리스크를 없애고, 가격 옵션을 단순화하세요.' },
+  ];
+  scores.sort((a,b) => a.v - b.v);
+  return scores[0].v >= 1 ? null : scores[0];
+}
+function renderFunnel(){
+  const rows = rangeRows();
+  const f = { sent: sum(rows,'sent'), rep: sum(rows,'rep'), mtg: sum(rows,'mtg'), deal: sum(rows,'deal') };
+  const box = $('#funnelBox');
+  if(!f.sent){ box.innerHTML = '<div class="empty">발송 기록이 생기면 퍼널이 나타납니다.</div>'; $('#adviceBox').innerHTML = '<div class="empty">아직 처방할 데이터가 없습니다.</div>'; return; }
+  const stages = [
+    { nm:'발송', v:f.sent, c:'var(--f1)' },
+    { nm:'응답', v:f.rep,  c:'var(--f2)', conv: fmtPct(pct(f.rep,f.sent)) + ' 응답률' },
+    { nm:'미팅', v:f.mtg,  c:'var(--f3)', conv: fmtPct(pct(f.mtg,f.rep)) + ' 전환' },
+    { nm:'계약', v:f.deal, c:'var(--f4)', conv: fmtPct(pct(f.deal,f.mtg)) + ' 전환' },
+  ];
+  let html = '';
+  stages.forEach(s => {
+    if(s.conv) html += '<div class="conv"><span></span><span class="c">↓ ' + s.conv + '</span></div>';
+    const w = Math.max(2, 100 * s.v / f.sent);
+    html += '<div class="fun-row"><span class="nm">' + s.nm + '</span>' +
+            '<div class="fun-bar-track"><div class="fun-bar" style="width:' + w + '%;background:' + s.c + '"></div></div>' +
+            '<span class="val"><b>' + s.v + '</b> <small>건</small></span></div>';
+  });
+  const bn = bottleneck(f);
+  html += bn
+    ? '<div class="badge warn">⚠ 이번 병목: ' + bn.label + '</div>'
+    : '<div class="badge good">✓ 모든 구간이 기준 전환율 이상입니다</div>';
+  box.innerHTML = html;
+  $('#adviceBox').innerHTML = bn
+    ? '<p style="margin-bottom:10px"><b style="color:var(--warn-ink)">' + bn.label + '</b>이(가) 기준보다 낮습니다.</p><p>' + bn.why + '</p>' +
+      '<p style="margin-top:12px;font-size:12.5px;color:var(--muted)">기준: 응답률 10% · 응답→미팅 35% · 미팅→계약 40% (30일 로드맵)</p>'
+    : '<p>병목이 없습니다. <b>발송량을 늘려</b> 파이프라인 전체를 키울 타이밍입니다.</p>' +
+      '<p style="margin-top:10px;font-size:12.5px;color:var(--muted)">다음 단계: 주간 발송 목표를 ' + state.goalSent + ' → ' + Math.round(state.goalSent*1.3) + '건으로.</p>';
+}
+
+// ───────── 렌더: 매출 ─────────
+function renderRev(){
+  const now = new Date(), mk = now.toISOString().slice(0,7);
+  const monthRev = sum(state.entries.filter(e => e.d.slice(0,7) === mk), 'rev');
+  const p = Math.min(100, 100 * monthRev / state.goalRev);
+  $('#revBox').innerHTML =
+    '<div class="rev-hero">' + won(monthRev) + '</div>' +
+    '<div class="rev-sub">' + (now.getMonth()+1) + '월 목표 ' + won(state.goalRev) + ' 의 <b>' + Math.round(p) + '%</b></div>' +
+    '<div class="meter"><i style="width:' + p + '%"></i></div>' +
+    '<div class="rev-edit">목표 수정: 월 매출 <input type="number" id="goalRevIn" value="' + state.goalRev + '" step="100000" /> 원 · ' +
+    '주간 발송 <input type="number" id="goalSentIn" value="' + state.goalSent + '" step="10" style="width:70px" /> 건 ' +
+    '<button class="btn btn-sm" id="goalSave">저장</button></div>';
+  $('#goalSave').onclick = () => {
+    state.goalRev = +$('#goalRevIn').value || state.goalRev;
+    state.goalSent = +$('#goalSentIn').value || state.goalSent;
+    save(); renderAll();
+  };
+}
+
+// ───────── 렌더: 테이블 ─────────
+function renderTable(){
+  const tb = $('#logTable tbody');
+  const rows = state.entries.slice().sort((a,b) => b.d < a.d ? -1 : 1).slice(0, 60);
+  tb.innerHTML = rows.length ? rows.map(e =>
+    '<tr><td>' + e.d + '</td><td>' + (e.sent||0) + '</td><td>' + (e.rep||0) + '</td><td>' + (e.mtg||0) +
+    '</td><td>' + (e.deal||0) + '</td><td>' + (e.rev ? won(e.rev) : '—') + '</td><td class="memo" title="' + esc(e.memo||'') + '">' + esc(e.memo||'') +
+    '</td><td><button class="del" data-id="' + e.id + '" title="삭제">×</button></td></tr>').join('')
+    : '<tr><td colspan="8" class="empty">기록이 없습니다</td></tr>';
+  tb.querySelectorAll('.del').forEach(b => b.onclick = () => {
+    state.entries = state.entries.filter(e => e.id !== b.dataset.id);
+    save(); renderAll();
+  });
+}
+
+// ───────── 전체 렌더 ─────────
+function renderAll(){
+  renderGoal(); renderTiles(); renderTrend(); renderFunnel(); renderRev(); renderTable();
+  document.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', +c.dataset.range === state.range));
+}
+
+// ───────── 이벤트 ─────────
+$('#fDate').value = new Date().toISOString().slice(0,10);
+$('#entryForm').addEventListener('submit', ev => {
+  ev.preventDefault();
+  const e = {
+    id: Date.now().toString(36) + Math.random().toString(36).slice(2,6),
+    d: $('#fDate').value,
+    sent: +$('#fSent').value || 0, rep: +$('#fRep').value || 0,
+    mtg: +$('#fMtg').value || 0, deal: +$('#fDeal').value || 0,
+    rev: +$('#fRev').value || 0, memo: $('#fMemo').value.trim(),
+  };
+  if(!e.d) return;
+  state.entries.push(e); save();
+  ['#fSent','#fRep','#fMtg','#fDeal','#fRev','#fMemo'].forEach(s => $(s).value = '');
+  renderAll();
+});
+document.querySelectorAll('.chip').forEach(c => c.onclick = () => { state.range = +c.dataset.range; save(); renderAll(); });
+
+$('#btnExport').onclick = () => {
+  const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'});
+  const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: 'jc-kpi-백업-' + new Date().toISOString().slice(0,10) + '.json' });
+  a.click(); URL.revokeObjectURL(a.href);
+  localStorage.setItem('jc-kpi-last-export', Date.now());
+  const w = document.getElementById('backupWarn'); if(w) w.remove();
+};
+// 백업 리마인더: 기록이 있는데 7일 넘게 내보내기를 안 했으면 경고 (데이터는 이 브라우저에만 있으므로)
+(function(){
+  if(!state.entries.length) return;
+  const last = +localStorage.getItem('jc-kpi-last-export') || 0;
+  if(Date.now() - last < 7*24*3600*1000) return;
+  const bar = document.createElement('div');
+  bar.id = 'backupWarn';
+  bar.style.cssText = 'max-width:1080px;margin:14px auto 0;padding:10px 16px;background:var(--warn-bg);color:var(--warn-ink);border-radius:10px;font-size:13px;font-weight:600';
+  bar.textContent = '⚠ 백업한 지 7일이 지났습니다 — 데이터는 이 브라우저에만 저장되니 아래 "JSON 내보내기"로 백업하세요.';
+  document.querySelector('header').after(bar);
+})();
+$('#btnImport').onclick = () => $('#importFile').click();
+$('#importFile').onchange = ev => {
+  const f = ev.target.files[0]; if(!f) return;
+  f.text().then(t => {
+    try{
+      const s = JSON.parse(t);
+      if(!Array.isArray(s.entries)) throw 0;
+      // 병합: 같은 id는 새 값으로 덮고, 나머지는 유지 (발송센터 KPI JSON도 그대로 합쳐진다)
+      const map = new Map(state.entries.map(e => [e.id, e]));
+      s.entries.forEach(e => { if(e && e.id && e.d) map.set(e.id, e); });
+      state.entries = [...map.values()];
+      if(s.goalRev) state.goalRev = s.goalRev;
+      if(s.goalSent) state.goalSent = s.goalSent;
+      save(); renderAll();
+      alert('가져오기 완료: 현재 ' + state.entries.length + '건 (같은 id는 갱신, 나머지는 유지)');
+    }catch{ alert('올바른 백업 파일이 아닙니다.'); }
+  });
+  ev.target.value = '';
+};
+$('#btnWipe').onclick = () => {
+  if(confirm('모든 기록을 삭제할까요? (내보내기로 백업 먼저 권장)')){ state.entries = []; save(); renderAll(); }
+};
+$('#btnSample').onclick = () => {
+  if(state.entries.length && !confirm('기존 기록에 샘플을 추가합니다. 계속할까요?')) return;
+  const monday = new Date(weekStart(new Date().toISOString().slice(0,10)));
+  const sample = [];
+  for(let w = 5; w >= 0; w--){
+    for(let d = 0; d < 5; d++){ // 월~금
+      const dt = new Date(monday); dt.setDate(dt.getDate() - w*7 + d);
+      if(dt > new Date()) continue;
+      const ramp = (6-w)/6;
+      const sent = Math.round(18 + Math.random()*14 + ramp*8);
+      const rep = Math.round(sent * (0.05 + 0.06*ramp + Math.random()*0.03));
+      const mtg = Math.random() < (0.25 + 0.3*ramp) && rep ? 1 : 0;
+      const deal = mtg && Math.random() < 0.35*ramp + 0.05 ? 1 : 0;
+      sample.push({ id:'s'+w+d+Math.random().toString(36).slice(2,5), d: dt.toISOString().slice(0,10),
+        sent, rep, mtg, deal, rev: deal ? [300000,500000,800000][Math.floor(Math.random()*3)] : 0,
+        memo: deal ? '계약! 후기 요청하기' : '' });
+    }
+  }
+  state.entries.push(...sample); save(); renderAll();
+};
+
+renderAll();
+</script>
+</body>
+</html>

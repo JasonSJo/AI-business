@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>살롱 드 온 · 연남 | 나에게 어울리는 머리를 찾다</title>
+<meta name="description" content="연남동 프라이빗 헤어살롱. 1:1 얼굴형 진단 커트, 손상 최소 시술. 첫 방문 20% 할인." />
+<meta property="og:title" content="살롱 드 온 · 연남 | 나에게 어울리는 머리를 찾다" />
+<meta property="og:description" content="연남동 프라이빗 헤어살롱. 첫 방문 20% 할인." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<style>
+  :root{
+    --cream:#F7F1EE; --cream2:#EFE2DB; --ink:#2B2026; --plum:#6E3B4F; --plum-d:#4A2637;
+    --copper:#C98A5B; --copper-d:#A96F3E; --muted:#93808A;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--cream);color:var(--ink);font-family:'Pretendard',sans-serif;line-height:1.7;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .disp{font-family:'Playfair Display',serif}
+  .kr{font-family:'Gowun Batang',serif}
+  a{color:inherit;text-decoration:none}
+  .num{font-family:'Playfair Display',serif;font-style:italic}
+
+  /* fixed vertical spine (desktop) */
+  .spine{position:fixed;left:0;top:0;bottom:0;width:52px;background:var(--plum);color:var(--cream);z-index:60;
+    display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:22px 0}
+  .spine .up{writing-mode:vertical-rl;transform:rotate(180deg);font-size:12px;letter-spacing:.4em;
+    text-transform:uppercase;font-weight:600}
+  .spine .iss{font-family:'Playfair Display',serif;font-style:italic;font-size:15px}
+  .book-tab{position:fixed;right:0;top:50%;transform:translateY(-50%) rotate(180deg);writing-mode:vertical-rl;
+    z-index:60;background:var(--ink);color:var(--cream);padding:20px 12px;font-size:13px;letter-spacing:.28em;
+    border-radius:8px 0 0 8px;transition:.3s}
+  .book-tab:hover{background:var(--copper);color:var(--ink)}
+  @media(max-width:820px){.spine,.book-tab{display:none}}
+
+  .page{margin-left:52px}
+  @media(max-width:820px){.page{margin-left:0}}
+  .pad{padding-left:clamp(24px,6vw,90px);padding-right:clamp(24px,6vw,90px)}
+
+  /* mobile top strip */
+  .mtop{display:none}
+  @media(max-width:820px){
+    .mtop{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;
+      background:var(--plum);color:var(--cream);position:sticky;top:0;z-index:50}
+    .mtop .b{font-family:'Playfair Display',serif;font-size:18px;letter-spacing:.05em}
+    .mtop .c{font-size:12px;border:1px solid var(--cream);border-radius:100px;padding:6px 14px}
+  }
+
+  /* COVER */
+  .cover{min-height:94vh;background:var(--ink);color:var(--cream);display:flex;flex-direction:column;
+    justify-content:space-between;padding:40px clamp(24px,6vw,90px) 46px;position:relative;overflow:hidden}
+  .cover::before{content:"";position:absolute;right:-10%;top:8%;width:52vw;height:52vw;max-width:620px;max-height:620px;
+    border-radius:50%;background:radial-gradient(circle at 40% 35%,rgba(201,138,91,.34),rgba(110,59,79,.16) 46%,transparent 68%)}
+  .cover-top{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;letter-spacing:.22em;
+    text-transform:uppercase;color:#D9C9CF;position:relative;z-index:2}
+  .cover-top .num{font-style:italic;font-size:16px;letter-spacing:.05em;color:var(--copper)}
+  .masthead{position:relative;z-index:2}
+  .masthead h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(58px,15vw,168px);
+    line-height:.9;letter-spacing:-.02em}
+  .masthead h1 em{font-style:italic;color:var(--copper)}
+  .coverlines{position:relative;z-index:2;display:flex;flex-wrap:wrap;gap:8px 30px;margin-top:26px;max-width:640px}
+  .coverlines span{font-size:13.5px;letter-spacing:.02em;color:#E7DADF}
+  .coverlines span::before{content:"— ";color:var(--copper)}
+  .cover-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;position:relative;z-index:2}
+  .cover-bottom .tag{font-family:'Gowun Batang',serif;font-size:16px;color:#E7DADF;max-width:24ch}
+  .cover-cta{background:var(--copper);color:var(--ink);font-weight:700;font-size:14.5px;padding:15px 26px;
+    border-radius:100px;white-space:nowrap;transition:.3s}
+  .cover-cta:hover{background:var(--cream)}
+
+  /* LOOKBOOK horizontal scroll */
+  .lookbook{padding:64px 0 70px;background:var(--cream2)}
+  .lb-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:26px}
+  .lb-head .l{font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--plum);font-weight:600}
+  .lb-head .r{font-family:'Gowun Batang',serif;font-size:19px}
+  .lb-scroll{display:flex;gap:16px;overflow-x:auto;padding:4px clamp(24px,6vw,90px) 12px;scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch}
+  .lb-scroll::-webkit-scrollbar{height:6px}
+  .lb-scroll::-webkit-scrollbar-thumb{background:var(--muted);border-radius:100px}
+  .frame{scroll-snap-align:start;flex:0 0 clamp(200px,64vw,270px);aspect-ratio:3/4.2;border-radius:12px;
+    position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:20px;color:var(--cream)}
+  .frame b{font-family:'Gowun Batang',serif;font-size:19px;position:relative;z-index:2;font-weight:400}
+  .frame small{position:absolute;top:18px;left:20px;font-family:'Playfair Display',serif;font-style:italic;
+    font-size:18px;color:rgba(255,255,255,.7);z-index:2}
+  .frame::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.5))}
+  .f1{background:linear-gradient(150deg,#6E3B4F,#3A1F2C)}
+  .f2{background:linear-gradient(150deg,#8A5468,#4A2637)}
+  .f3{background:linear-gradient(150deg,#5A3140,#2B2026)}
+  .f4{background:linear-gradient(150deg,#A96F3E,#5A3A22)}
+  .f5{background:linear-gradient(150deg,#7C4A3A,#37211B)}
+  .f6{background:linear-gradient(150deg,#6E3B4F,#8A5468)}
+
+  /* ESSAY */
+  .essay{padding:84px 0}
+  .kicker{font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--copper-d);font-weight:600;margin-bottom:16px}
+  .essay h2{font-family:'Gowun Batang',serif;font-size:clamp(28px,4.6vw,46px);line-height:1.22;max-width:16ch;margin-bottom:34px}
+  .essay-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:48px}
+  @media(max-width:820px){.essay-grid{grid-template-columns:1fr;gap:30px}}
+  .essay-body p{font-size:16px;color:var(--ink-soft,#55424C);margin-bottom:16px}
+  .essay-body p:first-child::first-letter{font-family:'Playfair Display',serif;font-size:64px;float:left;
+    line-height:.8;padding:6px 12px 0 0;color:var(--plum)}
+  .essay-notes{border-top:2px solid var(--ink)}
+  .enote{padding:20px 0;border-bottom:1px solid rgba(43,32,38,.16)}
+  .enote .num{font-size:22px;color:var(--copper-d)}
+  .enote h4{font-family:'Gowun Batang',serif;font-size:18px;margin:4px 0 6px}
+  .enote p{font-size:13.5px;color:var(--muted)}
+
+  /* PRICE LIST */
+  .prices{background:var(--ink);color:var(--cream);padding:84px 0}
+  .prices .kicker{color:var(--copper)}
+  .prices h2{font-family:'Gowun Batang',serif;font-size:clamp(26px,4.2vw,40px);margin-bottom:40px}
+  .plist{border-top:1px solid rgba(247,241,238,.18)}
+  .prow{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:baseline;
+    padding:26px 0;border-bottom:1px solid rgba(247,241,238,.18)}
+  .prow .name{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,40px);display:flex;align-items:baseline;gap:14px}
+  .prow .name .k{font-family:'Gowun Batang',serif;font-size:15px;color:var(--copper)}
+  .prow .pill{font-size:10.5px;letter-spacing:.14em;background:var(--copper);color:var(--ink);
+    padding:3px 10px;border-radius:100px;align-self:center}
+  .prow .dots{border-bottom:1.5px dotted rgba(247,241,238,.3);height:1px;transform:translateY(-6px)}
+  .prow .amt{font-family:'Playfair Display',serif;font-size:clamp(24px,3.6vw,34px);white-space:nowrap}
+  .prow .amt small{font-size:14px;color:var(--muted);font-family:'Pretendard'}
+  .prow-items{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:-6px}
+  .prow-items span{font-size:13px;color:#C9B9BF}
+  .prow-items span::before{content:"· ";color:var(--copper)}
+  .price-note{margin-top:34px;font-family:'Gowun Batang',serif;font-size:16px}
+  .price-note a{color:var(--copper);border-bottom:1px solid var(--copper)}
+
+  /* VOICES pull-quotes */
+  .voice{padding:76px 0;position:relative}
+  .voice .qmark{font-family:'Playfair Display',serif;font-size:120px;line-height:.6;opacity:.24}
+  .voice q{font-family:'Gowun Batang',serif;font-size:clamp(21px,3.4vw,34px);line-height:1.5;display:block;
+    max-width:22ch;margin:8px 0 22px}
+  .voice .by{font-size:13.5px;letter-spacing:.03em}
+  .voice.plum{background:var(--plum);color:var(--cream)}
+  .voice.plum .qmark,.voice.plum q{color:var(--cream)}
+  .voice.cream{background:var(--cream)}
+  .voice.creamd{background:var(--cream2)}
+  .voice .idx{position:absolute;top:40px;right:clamp(24px,6vw,90px);font-family:'Playfair Display',serif;
+    font-style:italic;font-size:17px;opacity:.6}
+
+  /* VISIT */
+  .visit{background:var(--plum-d);color:var(--cream);padding:84px 0 40px}
+  .visit .kicker{color:var(--copper)}
+  .visit h2{font-family:'Gowun Batang',serif;font-size:clamp(28px,4.6vw,46px);margin-bottom:36px;max-width:16ch}
+  .vtable{border-top:1px solid rgba(247,241,238,.2)}
+  .vrow{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:16px 0;
+    border-bottom:1px solid rgba(247,241,238,.2);font-size:15px}
+  .vrow .k{color:var(--copper);letter-spacing:.04em}
+  .vcta{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+  .vcta a{padding:15px 28px;border-radius:100px;font-size:14.5px;font-weight:600}
+  .vcta .call{background:var(--copper);color:var(--ink)}
+  .vcta .kko{border:1px solid var(--cream);color:var(--cream)}
+  .map{margin-top:40px;height:200px;border-radius:14px;
+    background:
+      repeating-linear-gradient(0deg,rgba(247,241,238,.08) 0 1px,transparent 1px 40px),
+      repeating-linear-gradient(90deg,rgba(247,241,238,.08) 0 1px,transparent 1px 40px),
+      var(--ink);position:relative}
+  .map .pin{position:absolute;left:44%;top:46%;width:16px;height:16px;border-radius:50%;background:var(--copper);
+    box-shadow:0 0 0 8px rgba(201,138,91,.25)}
+
+  footer{background:var(--ink);color:var(--muted);padding:40px clamp(24px,6vw,90px) 120px;text-align:center}
+  footer .mh{font-family:'Playfair Display',serif;font-size:26px;color:var(--cream);letter-spacing:.06em;margin-bottom:10px}
+  .demo-tag{display:inline-block;margin-bottom:12px;font-family:'Playfair Display',serif;font-style:italic;
+    font-size:13px;color:var(--copper);letter-spacing:.04em}
+
+  .revealup{opacity:0;transform:translateY(24px);transition:opacity .9s,transform .9s cubic-bezier(.2,.7,.2,1)}
+  .revealup.in{opacity:1;transform:none}
+
+  /* mobile sticky */
+  .msticky{position:fixed;left:0;right:0;bottom:0;z-index:80;display:none;gap:10px;padding:12px 16px;
+    background:rgba(43,32,38,.9);backdrop-filter:blur(12px)}
+  .msticky a{flex:1;text-align:center;padding:14px;border-radius:100px;font-size:14px;font-weight:600}
+  .msticky .c{border:1px solid rgba(247,241,238,.4);color:var(--cream)}
+  .msticky .b{background:var(--copper);color:var(--ink)}
+  @media(max-width:820px){.msticky{display:flex}}
+</style>
+</head>
+<body>
+<div class="spine">
+  <span class="up">Salon de On · Yeonnam</span>
+  <span class="iss">Nº 01</span>
+</div>
+<a href="#price" class="book-tab">첫 방문 20% 예약</a>
+
+<div class="mtop"><span class="b">Salon de On</span><a href="#price" class="c">예약</a></div>
+
+<div class="page">
+
+  <!-- COVER -->
+  <section class="cover">
+    <div class="cover-top">
+      <span>연남 · 프라이빗 헤어살롱</span>
+      <span class="num">Issue Nº 01 — Spring 2026</span>
+    </div>
+    <div class="masthead">
+      <h1 class="disp">SALON<br>DE <em>ON</em></h1>
+      <div class="coverlines">
+        <span>얼굴형 진단 커트, 인생 머리를 찾다</span>
+        <span>손상 최소 염색·클리닉 펌</span>
+        <span>첫 방문 <strong>20%</strong> 할인</span>
+      </div>
+    </div>
+    <div class="cover-bottom">
+      <p class="tag kr">온기가 머무는 살롱 — 유행이 아니라 당신에게 어울리는 머리를.</p>
+      <a href="#price" class="cover-cta">예약하기 →</a>
+    </div>
+  </section>
+
+  <!-- LOOKBOOK -->
+  <section class="lookbook">
+    <div class="lb-head pad">
+      <span class="l">The Lookbook</span>
+      <span class="r kr">이번 시즌의 결</span>
+    </div>
+    <div class="lb-scroll">
+      <div class="frame f1"><small>01</small><b>얼굴형 진단 커트</b></div>
+      <div class="frame f2"><small>02</small><b>손상 최소 염색</b></div>
+      <div class="frame f3"><small>03</small><b>클리닉 펌</b></div>
+      <div class="frame f4"><small>04</small><b>두피 케어</b></div>
+      <div class="frame f5"><small>05</small><b>남성 커트</b></div>
+      <div class="frame f6"><small>06</small><b>웨딩 스타일링</b></div>
+    </div>
+  </section>
+
+  <!-- ESSAY -->
+  <section class="essay pad">
+    <p class="kicker revealup">Nº 01 — 철학</p>
+    <h2 class="revealup">머리 망치고 우는 날, 없게 해드릴게요.</h2>
+    <div class="essay-grid">
+      <div class="essay-body revealup">
+        <p>시술 전 상담 20분. 원하는 것과 어울리는 것 사이에서 가장 좋은 답을 함께 찾습니다. 사진 속 연예인 머리가 아니라, 당신의 얼굴형·모질·라이프스타일에 맞는 스타일이 목표예요.</p>
+        <p>저자극 약제와 전처리 케어로 모발 손상을 최소화하고, 무리한 시술은 오히려 말립니다. 시술 후에도 집에서 유지할 수 있는 홈케어 루틴까지 안내해 드려요. 오래 예뻐야 진짜니까요.</p>
+      </div>
+      <div class="essay-notes revealup">
+        <div class="enote"><span class="num">01</span><h4>얼굴형 진단 커트</h4><p>얼굴형·두상·모류를 진단하고 어울리는 라인을 제안합니다.</p></div>
+        <div class="enote"><span class="num">02</span><h4>손상 최소 시술</h4><p>저자극 약제와 전처리 케어. 홈케어 루틴까지 안내.</p></div>
+        <div class="enote"><span class="num">03</span><h4>100% 예약제</h4><p>기다림 없이, 옆자리 눈치 없이. 온전히 당신만의 시간.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICE LIST -->
+  <section class="prices pad" id="price">
+    <p class="kicker revealup">Nº 02 — 시술 안내</p>
+    <h2 class="revealup">첫 방문은 20% 할인됩니다.</h2>
+    <div class="plist">
+      <div class="prow revealup">
+        <span class="name disp">커트 <span class="k kr">진단 상담 포함</span></span>
+        <span class="dots"></span>
+        <span class="amt">35,000<small>원~</small></span>
+        <div class="prow-items"><span>얼굴형 진단 20분 포함</span><span>샴푸·스타일링 포함</span><span>남성 커트 28,000원</span></div>
+      </div>
+      <div class="prow revealup">
+        <span class="name disp">염색 <span class="pill">인기</span></span>
+        <span class="dots"></span>
+        <span class="amt">88,000<small>원~</small></span>
+        <div class="prow-items"><span>저자극 약제 사용</span><span>전처리 케어 포함</span><span>뿌리 염색 55,000원</span></div>
+      </div>
+      <div class="prow revealup">
+        <span class="name disp">클리닉 펌</span>
+        <span class="dots"></span>
+        <span class="amt">130,000<small>원~</small></span>
+        <div class="prow-items"><span>모발 진단 후 약제 선택</span><span>열손상 최소 시스템</span><span>홈케어 가이드 제공</span></div>
+      </div>
+    </div>
+    <p class="price-note kr">기장·모발 상태에 따라 상이합니다. <a href="#visit">상담 후 정확한 견적</a>을 드려요.</p>
+  </section>
+
+  <!-- VOICES -->
+  <section class="voice plum">
+    <div class="pad"><span class="idx num">Voices Nº 01</span>
+      <div class="qmark disp">“</div>
+      <q class="kr">머리 자를 때마다 복불복이었는데, 여기는 상담부터 다르네요. 얼굴형 보고 제안해주신 스타일이 인생 머리가 됐어요.</q>
+      <div class="by">정하윤 고객님 — 커트 · 6개월째 단골</div>
+    </div>
+  </section>
+  <section class="voice creamd">
+    <div class="pad"><span class="idx num">Voices Nº 02</span>
+      <div class="qmark disp" style="color:var(--plum)">“</div>
+      <q class="kr">탈색으로 다 망가진 머리였는데 결이 살아났어요. 무리한 시술은 말려주시는 것도 신뢰가 갑니다.</q>
+      <div class="by">최유나 고객님 — 클리닉 펌 · 재방문</div>
+    </div>
+  </section>
+  <section class="voice plum">
+    <div class="pad"><span class="idx num">Voices Nº 03</span>
+      <div class="qmark disp">“</div>
+      <q class="kr">예약제라 기다림이 없어서 좋아요. 조용하고 프라이빗해서 머리하는 시간이 힐링이 됩니다.</q>
+      <div class="by">한지민 고객님 — 염색 · 3회차 방문</div>
+    </div>
+  </section>
+
+  <!-- VISIT -->
+  <section class="visit pad" id="visit">
+    <p class="kicker revealup">Nº 03 — 방문 안내</p>
+    <h2 class="revealup">연남동 골목,<br>초록 문을 찾으세요.</h2>
+    <div class="vtable revealup">
+      <div class="vrow"><span class="k">주소</span><span>서울 마포구 연남로 00, 1층 (지도는 데모용 표시)</span></div>
+      <div class="vrow"><span class="k">운영</span><span>화–일 10:30–20:30 (월 정기휴무)</span></div>
+      <div class="vrow"><span class="k">전화</span><span>02-000-0000</span></div>
+      <div class="vrow"><span class="k">예약</span><span>100% 예약제 · 네이버예약 / 카카오톡</span></div>
+    </div>
+    <div class="vcta revealup">
+      <a href="tel:0200000000" class="call">전화로 예약</a>
+      <a href="#" class="kko">카카오톡 채널 @살롱드온</a>
+    </div>
+    <div class="map"><span class="pin"></span></div>
+  </section>
+
+  <footer>
+    <span class="demo-tag">랜딩페이지 데모 · 데모용 가상 업체입니다</span>
+    <div class="mh disp">Salon de On</div>
+    <p>연남동 프라이빗 헤어살롱. 나에게 어울리는 머리를 찾는 곳.</p>
+  </footer>
+</div>
+
+<div class="msticky">
+  <a href="tel:0200000000" class="c">전화</a>
+  <a href="#price" class="b">첫 방문 20% 예약</a>
+</div>
+
+<script>
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+  document.querySelectorAll('.revealup').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

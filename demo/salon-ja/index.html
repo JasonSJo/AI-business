@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>hair atelier 結 · 吉祥寺 | 髪型は、暮らしに合わせて</title>
+<meta name="description" content="吉祥寺の少人数プライベートサロン。カット¥5,500。ワンタップでご予約。" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="hair atelier 結 · 吉祥寺 | 髪型は、暮らしに合わせて" />
+<meta property="og:description" content="吉祥寺の少人数プライベートサロン。カット¥5,500。ワンタップでご予約。" />
+<meta property="og:image" content="https://jasonsjo.github.io/AI-business/assets/og-1200x630.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --greige:#EDE8E1;
+    --greige-deep:#E4DDD3;
+    --paper:#F4EFE8;
+    --plum:#6E4B57;
+    --plum-deep:#5A3B46;
+    --plum-dark:#432B34;
+    --plum-soft:#8A6572;
+    --charcoal:#322C2E;
+    --charcoal-soft:#5A5254;
+    --gold:#B79A6A;
+    --gold-soft:#CBB48D;
+    --hair:rgba(50,44,46,.13);
+    --hair-gold:rgba(183,154,106,.40);
+    --hair-cream:rgba(244,239,232,.16);
+    --ease:cubic-bezier(.19,1,.22,1);
+    --panel-w:44vw;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    font-family:'Zen Kaku Gothic New',sans-serif;font-weight:400;
+    color:var(--charcoal);background:var(--greige);
+    line-height:1.85;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  ::selection{background:var(--plum);color:var(--paper)}
+  .mincho{font-family:'Zen Old Mincho',serif}
+  .latin{font-family:'Cormorant Garamond',serif;letter-spacing:.02em}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+
+  /* fine paper grain */
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.03;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* =================================================================
+     LAYOUT — fixed split screen
+  ================================================================= */
+  .stage{position:relative;min-height:100vh}
+
+  /* ---- LEFT: fixed plum panel ---- */
+  .panel{
+    position:fixed;top:0;left:0;width:var(--panel-w);height:100vh;z-index:20;
+    background:
+      radial-gradient(120% 90% at 20% 0%,#7a5462 0%,transparent 55%),
+      linear-gradient(158deg,var(--plum) 0%,var(--plum-deep) 52%,var(--plum-dark) 100%);
+    color:var(--paper);
+    display:flex;flex-direction:column;
+    padding:clamp(38px,4vw,64px);
+    overflow:hidden;
+  }
+  .panel::before{ /* soft top hairline seam of gold */
+    content:"";position:absolute;top:0;left:0;right:0;height:1px;background:var(--hair-gold);
+  }
+  .panel::after{ /* faint giant glyph watermark */
+    content:"結";position:absolute;right:-8%;bottom:-14%;
+    font-family:'Zen Old Mincho',serif;font-weight:500;
+    font-size:min(46vw,560px);line-height:.7;color:rgba(244,239,232,.045);
+    user-select:none;pointer-events:none;
+  }
+  .panel-top{display:flex;align-items:center;gap:14px;position:relative;z-index:2}
+  .panel-mk{
+    width:52px;height:52px;flex-shrink:0;border:1px solid var(--gold-soft);border-radius:50%;
+    display:grid;place-items:center;font-family:'Zen Old Mincho',serif;font-weight:500;
+    font-size:25px;color:var(--gold-soft);
+  }
+  .panel-name{line-height:1.3}
+  .panel-name .en{font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:.05em;color:var(--paper);display:block}
+  .panel-name .jp{font-size:11px;letter-spacing:.34em;color:rgba(244,239,232,.6);text-transform:uppercase}
+
+  .panel-core{margin-top:auto;margin-bottom:auto;position:relative;z-index:2;padding:44px 0}
+  .panel-eyebrow{
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:19px;
+    color:var(--gold-soft);letter-spacing:.02em;display:inline-flex;align-items:center;gap:13px;margin-bottom:30px;
+  }
+  .panel-eyebrow::before{content:"";width:36px;height:1px;background:var(--gold-soft);opacity:.7}
+  .panel-tagline{
+    font-family:'Zen Old Mincho',serif;font-weight:500;
+    font-size:clamp(30px,3.5vw,52px);line-height:1.5;letter-spacing:.03em;color:var(--paper);
+  }
+  .panel-tagline em{font-style:normal;color:var(--gold-soft);position:relative;white-space:nowrap}
+  .panel-tagline em::after{content:"";position:absolute;left:0;right:0;bottom:.02em;height:1px;background:rgba(203,180,141,.55)}
+  .panel-lede{
+    margin-top:30px;font-weight:300;font-size:14.5px;line-height:2.05;
+    color:rgba(244,239,232,.78);max-width:34ch;
+  }
+
+  /* knot / thread SVG motif */
+  .knot{margin:38px 0 4px;width:132px;height:52px;color:var(--gold-soft);opacity:.9}
+  .knot path{stroke:currentColor;fill:none;stroke-width:1.1;stroke-linecap:round}
+  .knot .draw{stroke-dasharray:340;stroke-dashoffset:340;animation:draw 3.4s var(--ease) .5s forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+
+  .panel-foot{position:relative;z-index:2;display:flex;flex-direction:column;gap:22px}
+  .panel-cta{
+    align-self:flex-start;display:inline-flex;align-items:center;gap:14px;
+    background:var(--paper);color:var(--plum-dark);
+    padding:17px 34px;font-size:14px;letter-spacing:.14em;
+    position:relative;overflow:hidden;transition:.5s var(--ease);
+  }
+  .panel-cta span{position:relative;z-index:1;transition:.4s var(--ease)}
+  .panel-cta .ar{position:relative;z-index:1;transition:.5s var(--ease)}
+  .panel-cta::before{content:"";position:absolute;inset:0;background:var(--gold-soft);transform:translateX(-101%);transition:.5s var(--ease)}
+  .panel-cta:hover::before{transform:translateX(0)}
+  .panel-cta:hover .ar{transform:translateX(5px)}
+  .panel-meta{display:flex;gap:26px;flex-wrap:wrap;font-size:11.5px;letter-spacing:.05em;color:rgba(244,239,232,.62)}
+  .panel-meta b{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--gold-soft);letter-spacing:.03em;font-weight:500}
+  .panel-meta .avail{display:inline-flex;align-items:center;gap:8px}
+  .panel-meta .dot{width:7px;height:7px;border-radius:50%;background:#9db98f;box-shadow:0 0 0 4px rgba(157,185,143,.18)}
+
+  /* ---- RIGHT: scrolling content ---- */
+  .scroll{
+    margin-left:var(--panel-w);width:calc(100% - var(--panel-w));
+    background:var(--greige);position:relative;z-index:10;
+  }
+  .content{padding:clamp(64px,6vw,110px) clamp(40px,5vw,88px) 160px;max-width:760px}
+
+  /* section shared */
+  .block{padding:clamp(56px,6vw,84px) 0;border-top:1px solid var(--hair-gold)}
+  .block:first-child{border-top:none;padding-top:clamp(70px,7vw,96px)}
+  .b-head{display:flex;align-items:baseline;gap:16px;margin-bottom:44px;flex-wrap:wrap}
+  .b-idx{font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);white-space:nowrap}
+  .b-en{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;color:var(--plum);letter-spacing:.02em}
+  .b-title{font-family:'Zen Old Mincho',serif;font-weight:500;font-size:clamp(25px,3.2vw,38px);line-height:1.5;letter-spacing:.03em;color:var(--charcoal);margin-top:12px;flex-basis:100%}
+  .b-sub{margin-top:16px;font-weight:300;font-size:14.5px;color:var(--charcoal-soft);max-width:52ch;flex-basis:100%}
+
+  /* --- philosophy: quiet numbered list --- */
+  .phil{list-style:none;border-top:1px solid var(--hair)}
+  .phil li{
+    display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,3vw,40px);
+    padding:34px 0;border-bottom:1px solid var(--hair);position:relative;transition:.5s var(--ease);
+  }
+  .phil li:hover{padding-left:12px}
+  .phil .n{
+    font-family:'Cormorant Garamond',serif;font-size:15px;letter-spacing:.24em;color:var(--gold);
+    padding-top:8px;position:relative;white-space:nowrap;
+  }
+  .phil .n::before{content:"";display:block;width:22px;height:1px;background:var(--gold);margin-bottom:14px}
+  .phil h3{font-family:'Zen Old Mincho',serif;font-weight:500;font-size:20px;letter-spacing:.02em;color:var(--charcoal);margin-bottom:10px}
+  .phil p{font-weight:300;font-size:14.5px;color:var(--charcoal-soft);line-height:1.95;max-width:50ch}
+
+  /* --- pricing: minimal 2-col table --- */
+  .price-tbl{width:100%;border-collapse:collapse}
+  .price-tbl tr{border-bottom:1px solid var(--hair)}
+  .price-tbl tr:first-child{border-top:1px solid var(--hair-gold)}
+  .price-tbl td{padding:30px 0;vertical-align:top}
+  .price-tbl .c-tier{width:52%;padding-right:24px}
+  .price-tbl .c-price{width:48%;text-align:right;padding-left:14px}
+  .p-tier{font-family:'Zen Old Mincho',serif;font-weight:500;font-size:19px;letter-spacing:.03em;color:var(--charcoal);display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .p-pill{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--plum);letter-spacing:.02em;border:1px solid var(--hair-gold);padding:1px 10px;border-radius:20px;line-height:1.5}
+  .p-items{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:9px}
+  .p-items li{display:flex;gap:11px;font-size:13px;font-weight:300;color:var(--charcoal-soft);line-height:1.55}
+  .p-items li::before{content:"";width:12px;height:1px;background:var(--gold);margin-top:11px;flex-shrink:0}
+  .p-price{font-family:'Zen Old Mincho',serif;font-weight:500;font-size:clamp(26px,3vw,34px);color:var(--plum);line-height:1}
+  .p-per{font-size:11.5px;letter-spacing:.03em;color:var(--charcoal-soft);margin-top:9px;font-weight:300}
+  .p-book{
+    display:inline-block;margin-top:16px;font-family:'Cormorant Garamond',serif;font-size:15px;letter-spacing:.02em;
+    color:var(--charcoal);border-bottom:1px solid var(--gold);padding-bottom:2px;transition:.4s var(--ease);
+  }
+  .p-book:hover{color:var(--plum);border-color:var(--plum)}
+  .p-book .ja{font-family:'Zen Kaku Gothic New',sans-serif;font-size:12px;letter-spacing:.06em}
+
+  /* --- reviews: quiet quotes --- */
+  .quotes{display:flex;flex-direction:column;gap:0}
+  .quote{padding:34px 0;border-bottom:1px solid var(--hair);position:relative}
+  .quote:first-child{border-top:1px solid var(--hair)}
+  .quote .qm{font-family:'Cormorant Garamond',serif;font-size:52px;line-height:.4;color:var(--gold);opacity:.5;display:block;margin-bottom:20px}
+  .quote q{font-family:'Zen Old Mincho',serif;font-size:17px;line-height:2.05;color:var(--charcoal);quotes:none;font-weight:400}
+  .quote q::before,.quote q::after{content:none}
+  .quote .who{margin-top:22px;display:flex;align-items:center;gap:14px}
+  .quote .av{width:38px;height:38px;flex-shrink:0;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;font-family:'Zen Old Mincho',serif;color:var(--plum);font-size:15px}
+  .quote .nm{font-size:13.5px;letter-spacing:.03em;color:var(--charcoal)}
+  .quote .mt{font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--charcoal-soft);letter-spacing:.03em}
+
+  /* --- visit: rows + css map --- */
+  .visit-rows{border-top:1px solid var(--hair-gold);margin-bottom:34px}
+  .v-row{display:grid;grid-template-columns:96px 1fr;gap:18px;padding:16px 0;border-bottom:1px solid var(--hair);align-items:baseline}
+  .v-row .k{color:var(--plum);font-size:12px;letter-spacing:.04em}
+  .v-row .k .en{font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--gold);letter-spacing:.05em;display:block;margin-bottom:2px}
+  .v-row .val{color:var(--charcoal-soft);font-weight:300;font-size:14px;line-height:1.7}
+  .map{position:relative;aspect-ratio:16/10;border:1px solid var(--hair-gold);overflow:hidden;background:#e6ddce}
+  .map svg.mbg{width:100%;height:100%;display:block}
+  .map .pin{position:absolute;top:46%;left:50%;width:34px;height:34px;transform:translate(-50%,-100%);color:var(--plum);filter:drop-shadow(0 5px 6px rgba(50,44,46,.22))}
+  .map .mlab{position:absolute;left:16px;bottom:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.1em;font-size:12px;color:var(--charcoal-soft)}
+  .visit-cta{margin-top:34px;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .vbtn{display:inline-flex;align-items:center;gap:11px;padding:16px 30px;font-size:13.5px;letter-spacing:.08em;transition:.5s var(--ease)}
+  .vbtn-fill{background:var(--plum);color:var(--paper)}
+  .vbtn-fill:hover{background:var(--charcoal)}
+  .vbtn-fill .ar{transition:.5s var(--ease)}
+  .vbtn-fill:hover .ar{transform:translateX(4px)}
+  .vbtn-line{color:var(--charcoal);position:relative;padding:16px 2px}
+  .vbtn-line::after{content:"";position:absolute;left:0;bottom:8px;width:100%;height:1px;background:var(--charcoal);transform:scaleX(.35);transform-origin:left;transition:.5s var(--ease)}
+  .vbtn-line:hover::after{transform:scaleX(1)}
+
+  /* --- footer (inside scroll column) --- */
+  .foot{margin-top:20px;padding-top:44px;border-top:1px solid var(--hair-gold)}
+  .foot-note{font-family:'Zen Old Mincho',serif;font-size:15px;line-height:1.9;color:var(--charcoal);max-width:34ch;margin-bottom:26px}
+  .foot-contact{display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:300;color:var(--charcoal-soft);margin-bottom:30px}
+  .foot-contact a{border-bottom:1px solid transparent;transition:.3s var(--ease)}
+  .foot-contact a:hover{border-color:var(--gold)}
+  .foot-legal{padding-top:22px;border-top:1px solid var(--hair);display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:.03em;color:var(--muted,#8E8078)}
+  .foot-demo{display:inline-block;font-family:'Cormorant Garamond',serif;font-style:italic;letter-spacing:.06em;font-size:13px;color:var(--plum);border:1px solid var(--hair-gold);padding:3px 12px;border-radius:20px;margin-bottom:12px;align-self:flex-start}
+
+  /* =================================================================
+     MOBILE — panel becomes hero, content flows below
+  ================================================================= */
+  @media(max-width:900px){
+    :root{--panel-w:0px}
+    .panel{
+      position:relative;width:100%;height:auto;min-height:88vh;z-index:1;
+      padding:clamp(32px,7vw,52px) clamp(26px,7vw,40px) clamp(44px,9vw,64px);
+    }
+    .panel-core{padding:52px 0}
+    .scroll{margin-left:0;width:100%}
+    .content{padding:clamp(46px,8vw,64px) clamp(26px,7vw,44px) 128px;max-width:none}
+    .panel-cta{align-self:stretch;justify-content:center}
+  }
+  @media(max-width:560px){
+    .price-tbl,.price-tbl tbody,.price-tbl tr,.price-tbl td{display:block;width:auto}
+    .price-tbl tr{padding:8px 0}
+    .price-tbl .c-tier,.price-tbl .c-price{width:auto;text-align:left;padding:0}
+    .price-tbl .c-price{margin-top:16px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+    .p-per{margin-top:0}
+    .p-book{margin-top:12px}
+    .v-row{grid-template-columns:1fr}
+  }
+
+  /* --- sticky mobile bar --- */
+  .cta-bar{
+    position:fixed;left:0;right:0;bottom:0;z-index:200;
+    background:color-mix(in srgb,var(--paper) 93%,transparent);backdrop-filter:blur(18px);
+    border-top:1px solid var(--hair-gold);padding:11px 14px;
+    display:none;grid-template-columns:1fr 1.5fr;gap:11px;
+  }
+  .cta-bar a{display:flex;align-items:center;justify-content:center;gap:9px;padding:14px 6px;font-size:13.5px;letter-spacing:.06em;transition:.3s var(--ease)}
+  .cta-bar .c-call{border:1px solid var(--charcoal);color:var(--charcoal)}
+  .cta-bar .c-book{background:var(--plum);color:var(--paper)}
+  .cta-bar a:active{transform:scale(.97)}
+  .cta-bar svg{width:17px;height:17px}
+  @media(max-width:900px){.cta-bar{display:grid}}
+
+  /* --- reveals --- */
+  .reveal{opacity:0;transform:translateY(26px);transition:1s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  .panel-core>*,.panel-foot>*{opacity:0;animation:rise 1.1s var(--ease) forwards}
+  .panel-eyebrow{animation-delay:.1s}
+  .panel-tagline{animation-delay:.24s}
+  .knot{animation-delay:.36s}
+  .panel-lede{animation-delay:.46s}
+  .panel-cta{animation-delay:.58s}
+  .panel-meta{animation-delay:.68s}
+  @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.knot .draw{stroke-dashoffset:0}}
+</style>
+</head>
+<body>
+
+<div class="stage">
+
+  <!-- ============ LEFT · FIXED PANEL ============ -->
+  <aside class="panel">
+    <div class="panel-top">
+      <span class="panel-mk mincho">結</span>
+      <span class="panel-name">
+        <span class="en">hair atelier</span>
+        <span class="jp">yui · kichijoji</span>
+      </span>
+    </div>
+
+    <div class="panel-core">
+      <span class="panel-eyebrow">kichijoji · private hair salon</span>
+      <h1 class="panel-tagline">髪型は、<br><em>暮らしに</em><br>合わせて。</h1>
+
+      <svg class="knot" viewBox="0 0 132 52" aria-hidden="true">
+        <path class="draw" d="M4 26 C22 6 40 6 52 26 C64 46 82 46 94 26 C102 12 118 12 128 26 C118 40 102 40 94 26 C82 6 64 6 52 26 C40 46 22 46 4 26 Z"/>
+      </svg>
+
+      <p class="panel-lede">流行のコピーではなく、朝のセット時間・髪質・骨格に合わせた一人ひとりの設計。担当スタイリストが最初から最後まで。</p>
+    </div>
+
+    <div class="panel-foot">
+      <a href="#visit" class="panel-cta">
+        <span>ご予約 · カット ¥5,500</span>
+        <svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <div class="panel-meta">
+        <span class="avail"><span class="dot"></span>今週ご予約可</span>
+        <span>Google口コミ <b>4.9</b></span>
+        <span>リピート率 <b>86%</b></span>
+        <span>静かな <b>2</b> 席</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============ RIGHT · SCROLLING CONTENT ============ -->
+  <main class="scroll">
+    <div class="content">
+
+      <!-- philosophy -->
+      <section class="block reveal" id="philosophy">
+        <div class="b-head">
+          <span class="b-idx">01</span>
+          <span class="b-en">why 結</span>
+          <h2 class="b-title">サロンは、どこも同じではありません。</h2>
+          <p class="b-sub">大型店はスピードを売ります。私たちは「伸びてもまとまる髪型」を売ります。</p>
+        </div>
+        <ol class="phil">
+          <li>
+            <span class="n">i</span>
+            <div><h3>骨格と暮らしから設計</h3><p>初回は10分のカウンセリングから。骨格・髪質・朝に使える時間を伺ってから鋏を入れます。</p></div>
+          </li>
+          <li>
+            <span class="n">ii</span>
+            <div><h3>担当制、最初から最後まで</h3><p>シャンプーも仕上げも担当スタイリストが。アシスタントへの引き継ぎはありません。</p></div>
+          </li>
+          <li>
+            <span class="n">iii</span>
+            <div><h3>2席だけの静かな空間</h3><p>吉祥寺駅から徒歩4分。隣の会話が気にならない、あなたのための時間です。</p></div>
+          </li>
+        </ol>
+      </section>
+
+      <!-- pricing table -->
+      <section class="block reveal" id="menu">
+        <div class="b-head">
+          <span class="b-idx">02</span>
+          <span class="b-en">price list</span>
+          <h2 class="b-title">わかりやすい料金で。</h2>
+        </div>
+        <table class="price-tbl">
+          <tbody>
+            <tr>
+              <td class="c-tier">
+                <div class="p-tier">カット</div>
+                <ul class="p-items"><li>カウンセリング込み</li><li>シャンプー・仕上げ込み</li><li>伸びてもまとまる設計</li></ul>
+                <a href="#visit" class="p-book"><span class="ja">カットを予約</span></a>
+              </td>
+              <td class="c-price">
+                <div class="p-price mincho">¥5,500</div>
+                <div class="p-per">60分</div>
+              </td>
+            </tr>
+            <tr>
+              <td class="c-tier">
+                <div class="p-tier">カット＋カラー <span class="p-pill">人気</span></div>
+                <ul class="p-items"><li>肌映えするナチュラルカラー</li><li>ダメージケア込み</li><li>ホームケアアドバイス</li></ul>
+                <a href="#visit" class="p-book"><span class="ja">カット＋カラーを予約</span></a>
+              </td>
+              <td class="c-price">
+                <div class="p-price mincho">¥11,000</div>
+                <div class="p-per">120分</div>
+              </td>
+            </tr>
+            <tr>
+              <td class="c-tier">
+                <div class="p-tier">髪質改善コース</div>
+                <ul class="p-items"><li>クセ・広がりを根本ケア</li><li>トリートメント込み</li><li>2週間後の無料調整</li></ul>
+                <a href="#visit" class="p-book"><span class="ja">まずは相談</span></a>
+              </td>
+              <td class="c-price">
+                <div class="p-price mincho">¥16,500</div>
+                <div class="p-per">150分 · 要カウンセリング</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- reviews -->
+      <section class="block reveal" id="voices">
+        <div class="b-head">
+          <span class="b-idx">03</span>
+          <span class="b-en">customer voices</span>
+          <h2 class="b-title">お客さまの声。</h2>
+          <p class="b-sub">Googleの口コミより抜粋。</p>
+        </div>
+        <div class="quotes">
+          <figure class="quote">
+            <span class="qm">“</span>
+            <q>切って1ヶ月半経ってもまとまるのは初めてです。朝のセットが本当に楽になりました。</q>
+            <figcaption class="who"><span class="av mincho">S</span><div><div class="nm">S・山田</div><div class="mt latin">8 months · cut</div></div></figcaption>
+          </figure>
+          <figure class="quote">
+            <span class="qm">“</span>
+            <q>白髪ぼかしをお願いしました。染めた感が出ない自然な仕上がりで、職場でも好評です。</q>
+            <figcaption class="who"><span class="av mincho">K</span><div><div class="nm">K・伊藤</div><div class="mt latin">1 year · color</div></div></figcaption>
+          </figure>
+          <figure class="quote">
+            <span class="qm">“</span>
+            <q>2席だけなので落ち着きます。カウンセリングが丁寧で、任せて大丈夫だと思えました。</q>
+            <figcaption class="who"><span class="av mincho">A</span><div><div class="nm">A・中村</div><div class="mt latin">6 months · treatment</div></div></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- visit -->
+      <section class="block reveal" id="visit">
+        <div class="b-head">
+          <span class="b-idx">04</span>
+          <span class="b-en">access</span>
+          <h2 class="b-title">吉祥寺駅から徒歩4分。</h2>
+        </div>
+        <div class="visit-rows">
+          <div class="v-row"><span class="k"><span class="en">address</span>住所</span><span class="val">東京都武蔵野市吉祥寺本町2-3-4（デモ用の架空住所です）</span></div>
+          <div class="v-row"><span class="k"><span class="en">hours</span>営業時間</span><span class="val">火–土 10:00–19:00 · 日月定休</span></div>
+          <div class="v-row"><span class="k"><span class="en">tel</span>電話</span><span class="val">0422-00-0000</span></div>
+          <div class="v-row"><span class="k"><span class="en">route</span>アクセス</span><span class="val">JR中央線 吉祥寺駅 北口より徒歩4分</span></div>
+        </div>
+        <div class="map">
+          <svg class="mbg" viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="400" height="250" fill="#e6ddce"/>
+            <g stroke="#d5c9b2" stroke-width="1"><path d="M0 90 H400"/><path d="M0 175 H400"/><path d="M130 0 V250"/><path d="M280 0 V250"/></g>
+            <path d="M0 90 H400" stroke="#cdbfa3" stroke-width="6" opacity=".5"/>
+            <path d="M130 0 V250" stroke="#cdbfa3" stroke-width="6" opacity=".5"/>
+            <rect x="146" y="102" width="120" height="60" fill="#ddd2bd"/>
+            <rect x="30" y="192" width="80" height="44" fill="#ddd2bd"/>
+            <rect x="300" y="24" width="70" height="46" fill="#ddd2bd"/>
+            <rect x="300" y="192" width="70" height="44" fill="#ddd2bd"/>
+          </svg>
+          <svg class="pin" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.4 8 12 8 12s8-6.6 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg>
+          <span class="mlab">kichijoji honcho 2-3-4</span>
+        </div>
+        <div class="visit-cta">
+          <a href="tel:0422000000" class="vbtn vbtn-fill">電話で予約
+            <svg class="ar" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.4-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg>
+          </a>
+          <a href="mailto:hello@example.jp" class="vbtn vbtn-line">メールで相談</a>
+        </div>
+      </section>
+
+      <!-- footer -->
+      <footer class="foot reveal">
+        <span class="foot-demo">landing page demo</span>
+        <p class="foot-note mincho">吉祥寺の2席だけのプライベートサロン。伸びてもまとまる髪を。</p>
+        <div class="foot-contact">
+          <a href="tel:0422000000">0422-00-0000</a>
+          <span>メール hello@example.jp（デモ）</span>
+          <span>火–土 10–19時</span>
+        </div>
+        <div class="foot-legal">
+          <span>© 2026 hair atelier 結 · こちらはデモ用の架空サロンです。</span>
+          <span>Made by Jason's Consulting · ランディングページ デモ・架空店舗</span>
+        </div>
+      </footer>
+
+    </div>
+  </main>
+</div>
+
+<!-- ============ STICKY MOBILE BAR ============ -->
+<nav class="cta-bar">
+  <a class="c-call" href="tel:0422000000">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.4-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg>
+    電話
+  </a>
+  <a class="c-book" href="#visit">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+    ご予約
+  </a>
+</nav>
+
+<script>
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
+  },{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

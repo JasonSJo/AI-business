@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>제작 계약서 · Jason's Consulting</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root{--cream:#F4EFE6;--ink:#23281F;--soft:#4B4E42;--muted:#8A8474;--clay:#C0784F;--clay-d:#A5603A;--pine:#3F5138;--line:rgba(35,40,31,.14)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Pretendard',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;padding:30px 14px 80px}
+  .serif{font-family:'Gowun Batang',serif}
+  .ctrl{max-width:800px;margin:0 auto 16px;display:flex;gap:8px;align-items:center}
+  .btn{border:none;cursor:pointer;font:inherit;font-weight:600;border-radius:100px;padding:10px 20px;font-size:13.5px}
+  .b-print{background:var(--clay);color:#fff}
+  .b-print:hover{background:var(--clay-d)}
+  .ctrl .hint{font-size:12px;color:var(--muted);margin-left:auto}
+  .sheet{max-width:800px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:14px;padding:50px 52px;box-shadow:0 20px 60px -30px rgba(35,40,31,.3);font-size:14px}
+  [contenteditable]{border-bottom:1px dashed transparent;outline:none}
+  [contenteditable]:hover{border-bottom-color:var(--clay)}
+  [contenteditable]:focus{border-bottom-color:var(--clay);background:#FBF6EE}
+  h1{font-family:'Gowun Batang',serif;font-size:28px;text-align:center;letter-spacing:.3em;text-indent:.3em;border-bottom:2px solid var(--ink);padding-bottom:20px}
+  .intro{margin:22px 0;color:var(--soft)}
+  h2{font-size:15px;margin:22px 0 8px;color:var(--pine)}
+  ol{padding-left:20px;color:var(--soft)}
+  li{margin:5px 0}
+  b{color:var(--ink)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:34px;padding-top:24px;border-top:2px solid var(--ink)}
+  .sig .t{font-size:12px;letter-spacing:.12em;color:var(--clay);font-weight:700;margin-bottom:8px}
+  .sig .row{display:flex;gap:8px;padding:4px 0;font-size:13.5px}
+  .sig .k{width:60px;color:var(--muted)}
+  .date{text-align:center;margin-top:28px;font-size:14px;color:var(--soft)}
+  @media print{body{background:#fff;padding:0}.ctrl{display:none}.sheet{border:none;box-shadow:none;border-radius:0;max-width:none;padding:10px 4px}
+    [contenteditable]{border-bottom:none!important;background:none!important}}
+</style>
+</head>
+<body>
+<div class="ctrl">
+  <button class="btn b-print" onclick="window.print()">🖨 인쇄 / PDF 저장</button>
+  <span class="hint">밑줄 부분 클릭해서 수정 후 인쇄하세요 (2부 서명, 1부씩 보관)</span>
+</div>
+
+<div class="sheet">
+  <h1>웹페이지 제작 계약서</h1>
+
+  <p class="intro">
+    <b contenteditable>Jason's Consulting</b> (이하 "공급자")와(과)
+    <b contenteditable>업체명을 입력하세요</b> (이하 "고객")은 아래와 같이 계약을 체결한다.
+  </p>
+
+  <h2>제1조 (작업 범위)</h2>
+  <ol>
+    <li>공급자는 고객에게 <b contenteditable>반응형 랜딩페이지 1페이지</b>를 제작·제공한다.</li>
+    <li>포함: <span contenteditable>모바일 예약/문의 버튼(전화·카카오톡), 업체 소개, 가격 안내, 오시는 길, 무료 호스팅 배포</span></li>
+    <li>불포함: <span contenteditable>로고 디자인, 사진 촬영, 원고 작성 대행, 별도 기능 개발(예약 시스템 등)</span> — 필요 시 별도 견적.</li>
+  </ol>
+
+  <h2>제2조 (대금 및 지급)</h2>
+  <ol>
+    <li>총 제작비: <b contenteditable>500,000</b>원 (부가세 <span contenteditable>별도</span>)</li>
+    <li>계약 시 선금 50%, 최종 납품 확인 후 잔금 50%를 아래 계좌로 지급한다.<br>
+        입금 계좌: <b contenteditable>카카오뱅크 3333-17-4017377 (예금주: 조상래)</b></li>
+    <li>공급자는 입금 확인 후 현금영수증(지출증빙)을 발급한다.</li>
+  </ol>
+
+  <h2>제3조 (일정)</h2>
+  <ol>
+    <li>선금 입금일로부터 <b contenteditable>2영업일(48시간)</b> 이내 첫 시안을 전달한다.</li>
+    <li>고객의 자료(사진·문구·연락처) 제공 지연 시 일정은 그만큼 순연된다.</li>
+  </ol>
+
+  <h2>제4조 (수정)</h2>
+  <ol>
+    <li>시안 수정은 <b contenteditable>2회</b> 포함하며, 추가 수정은 회당 <b contenteditable>30,000</b>원이다.</li>
+    <li>납품 후 <b contenteditable>7일</b> 이내 오탈자·표시 오류 수정은 무상으로 한다.</li>
+  </ol>
+
+  <h2>제5조 (취소 및 환불)</h2>
+  <ol>
+    <li>제작 착수(첫 시안 전달) 전 취소 시 선금 전액을 환불한다.</li>
+    <li>첫 시안 전달 후 고객 사정으로 취소 시 선금은 반환하지 않는다.</li>
+    <li>공급자 귀책으로 납품이 불가한 경우 수령한 금액 전액을 환불한다.</li>
+  </ol>
+
+  <h2>제6조 (소유권 및 자료)</h2>
+  <ol>
+    <li>잔금 완납 시 결과물의 사용 권리는 고객에게 귀속된다.</li>
+    <li>공급자는 결과물을 포트폴리오로 소개할 수 있다 (고객이 서면으로 거부하면 제외).</li>
+    <li>고객이 제공한 사진·문구의 권리 문제는 고객 책임으로 한다. 결과물에는 실제 정보·실제 후기만 게재한다.</li>
+  </ol>
+
+  <h2>제7조 (유지보수 · 선택)</h2>
+  <ol>
+    <li>월 <b contenteditable>33,000</b>원(부가세 포함)으로 문구·이미지 수정 월 2회, 링크·표시 점검, 호스팅 관리를 제공한다.</li>
+    <li>유지보수는 월 단위 자동 연장되며, 어느 쪽이든 1개월 전 통지로 해지할 수 있다. 가입 여부: <b contenteditable>미가입</b></li>
+  </ol>
+
+  <div class="date" contenteditable>2026년 &nbsp;&nbsp; 월 &nbsp;&nbsp; 일</div>
+
+  <div class="grid2">
+    <div class="sig">
+      <div class="t">공급자</div>
+      <div class="row"><span class="k">상호</span><span contenteditable>Jason's Consulting</span></div>
+      <div class="row"><span class="k">대표</span><span contenteditable>조상래</span> <span style="color:var(--muted)">(서명)</span></div>
+      <div class="row"><span class="k">연락처</span><span contenteditable>wheldfo23@gmail.com</span></div>
+    </div>
+    <div class="sig">
+      <div class="t">고객</div>
+      <div class="row"><span class="k">상호</span><span contenteditable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+      <div class="row"><span class="k">대표</span><span contenteditable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <span style="color:var(--muted)">(서명)</span></div>
+      <div class="row"><span class="k">연락처</span><span contenteditable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
